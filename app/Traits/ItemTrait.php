@@ -370,8 +370,15 @@ trait ItemTrait
             });
         }
 
-        if (request('status') && request('status') == 'trashed') {
-            $query->whereNotNull('deleted_at');
+        if(request('status')) {
+            switch(request('status')) {
+                case 'disabled':
+                $query->where('disabled', 1);
+                break;
+                case 'trashed':
+                $query->whereNotNull('deleted_at');
+                break;
+            }
         }
 
         if (request('pricing') ==  'zero') {

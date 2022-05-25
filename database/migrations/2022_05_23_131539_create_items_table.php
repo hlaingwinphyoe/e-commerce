@@ -147,8 +147,9 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->unsignedDouble('amt');
             $table->foreignId('status_id');
-            $table->integer('min_qty');
-            $table->integer('max_qty');
+            $table->integer('min_qty')->default(0);
+            $table->integer('max_qty')->default(0);
+            $table->foreignId('role_id')->nullable();
             $table->timestamps();
 
             $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade')

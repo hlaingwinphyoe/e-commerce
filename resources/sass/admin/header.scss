@@ -1,0 +1,43 @@
+.app-header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    display: flex;
+    background-color: $primary-dark;
+    z-index: 1030;
+    padding: 10px;
+    @include media-breakpoint-up(md) { 
+        .app-header-left {
+            width: 230px;
+        }
+    }
+   
+    .app-header-left-label {
+        display: none;
+    }
+
+    .dropdown-item {
+        padding: .35rem 1.5rem;
+        &:hover {
+            background-color: #e0e0e0;
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+        .app-header-left {
+            .app-header-left-label {
+                display: block;
+            }
+        }
+    }
+}
+
+@media print {
+    .app-header {
+        display: none;
+    }
+}
+
+

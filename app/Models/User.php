@@ -67,6 +67,11 @@ class User extends Authenticatable
         return $this->hasMany(UserPoint::class, 'user_id', 'id');
     }
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
     /**
      * scope functions
      */

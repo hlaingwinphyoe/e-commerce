@@ -1,0 +1,25 @@
+$body-bg: #fafafa;
+
+$primary: #0c2aa0;
+$primary-light:#5653d2;
+$primary-dark: #000670;
+
+$secondary: #D33730;
+$secondary-light:#ff6b5a;
+$secondary-dark: #9a0008;
+
+$sidebar: #e9f8ff;
+$side-bg: #f8f8fb;
+
+$container-max-widths: (sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1200px) !default;
+
+
+@font-face {
+    font-family: 'NotoSans';
+    src: url('../fonts/NotoSansMyanmar-Regular.ttf');
+}
+
+$font: 'NotoSans';

@@ -1,0 +1,13 @@
+@import "~@fortawesome/fontawesome-free/scss/brands";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~bootstrap";
+
+@import './variable.scss';
+
+@import './admin/header.scss';
+@import './admin/sidebar.scss';
+@import './admin/content.scss';
+@import './admin/footer.scss';
+@import './admin/override.scss';

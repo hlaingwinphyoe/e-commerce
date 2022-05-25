@@ -1,0 +1,73 @@
+/* start sidebar */
+.app-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding-top: 45px;
+    width: 230px;
+    overflow: auto;
+    z-index: 10;
+    background-color: $side-bg;
+    @include transition(all .3s ease);
+}
+.app-menu__item {
+    position: relative;
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    @include transition(all .3s ease);
+    color: $primary;
+    font-size: .95rem;
+
+    &:hover,
+    &:focus,
+    &.active {
+        background: $primary-dark;
+        border-left-color: $secondary;
+        color: $white;
+        .app-menu__icon { color: $white;}
+    }
+
+    .app-menu__icon {
+        width: 25px;
+        color: rgba($primary, .75);
+    }
+}
+
+@media print {
+    .app-sidebar {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+	.sidebar-mini.sidenav-toggled {
+		.app-sidebar__user-avatar {
+			width: 30px;
+			height: 30px;
+		}
+        .app-sidebar__user-label {
+            display: none;
+        }
+		.app-content {
+			margin-left: 50px;
+		}
+		.app-sidebar {
+			left: 0;
+			width: 50px;
+			overflow: hidden;
+            
+            .app-menu__label {
+                display: none;
+            }
+		}
+        .app-header .app-header-left {
+            width: 50px;
+            padding-left: 5px !important;
+            .app-header-left-label {
+                display: none;
+            }
+        }		
+	}
+}
+/* end sidebar */
