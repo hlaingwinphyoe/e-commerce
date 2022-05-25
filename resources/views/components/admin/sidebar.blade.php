@@ -28,9 +28,9 @@
         <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark">Create</span>
     </li>
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is('admin') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}" title="Dashboard">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is('admin') ? 'active' : '' }}" href="{{ route('admin.brands') }}" title="Dashboard">
             <i class="app-menu__icon fa fa-tachometer-alt mr-2"></i>
-            <span class="app-menu__label ms-1 sidebar-label">Dashboard</span>
+            <span class="app-menu__label ms-1 sidebar-label">Brand</span>
         </a>
     </li>
 

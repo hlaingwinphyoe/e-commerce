@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserProfileController;
+use App\Http\Controllers\Admin\BrandController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
@@ -23,4 +24,6 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     Route::patch('/item-restore/{item}', [ItemController::class, 'restore'])->name('items.restore');
     Route::resource('/types', TypeController::class);
     Route::resource('/units', UnitController::class);
+
+    Route::resource('/brands', BrandController::class);
 });
