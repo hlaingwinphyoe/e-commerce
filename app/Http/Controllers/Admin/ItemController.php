@@ -90,14 +90,13 @@ class ItemController extends Controller
                 'user_id' => auth()->user()->id,
                 'per_unit' => $request->per_unit,
                 'unit_id' => $request->unit,
+                'brand_id' => $request->brand
             ]);
 
             if ($request->type) {
                 $item->types()->sync($request->type);
             }
-            if ($request->brand) {
-                $item->brands()->sync($request->brand);
-            }
+
             return $item;
         });
 
@@ -155,7 +154,8 @@ class ItemController extends Controller
                 'stock' => $request->stock ?? $item->stock,
                 'user_id' => auth()->user()->role->type == 'technician' ? $item->user_id : auth()->user()->id,
                 'per_unit' => $request->per_unit,
-                'unit_id' => $request->unit
+                'unit_id' => $request->unit,
+                'brand_id' => $request->brand,
             ]);
 
             if ($request->type) {
@@ -167,10 +167,6 @@ class ItemController extends Controller
                 $item->medias()->sync($medias);
             }
 
-            if ($request->brand) {
-                $item->brands()->sync($request->brand);
-            }
-
             if ($request->discounts) {
                 $item->discounts()->sync($request->discounts);
             }
@@ -178,7 +174,9 @@ class ItemController extends Controller
             $attrs = $item->attributes()->whereDoesntHave('values')->delete();
         });
 
-        return redirect($request->session()->get('prev_route'))->with('message', 'Item was successfully updated.');
+        return redirect()->route('admin.items.edit', $item->id)->with('message', 'Item was successfully updated.');
+
+        // return redirect($request->session()->get('prev_route'))->with('message', 'Item was successfully updated.');
     }
 
     public function destroy($id)

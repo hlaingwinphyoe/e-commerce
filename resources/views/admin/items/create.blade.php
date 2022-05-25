@@ -18,143 +18,73 @@
     <form action="{{ route('admin.items.store') }}" method="post">
         @csrf
 
-        <h5 class="text-primary mb-3">Item Information</h5>
-
-        <div class="d-flex flex-wrap">
-
-            <div class="form-group me-2 w-sm-100">
-                <label for="">
-                    Name
-                    <span class="text-danger">**</span>
-                </label>
-                
-                <input type="text" name="name" class="form-control form-control-sm" placeholder="Name" value="{{ old('name') }}">
-                <div class="py-1"><small class="help-text mm-font text-muted">အမည်ထည့်ပါ။ တူ၍မရပါ။</small></div>
-                @error('name')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="form-group me-2 w-sm-100">
-                <label for="">
-                    Unit
-                </label>
-                
-                <select name="unit" class="form-select form-select-sm">
-                    <option value="">Choose Unit</option>
-                    @foreach($units as $unit)
-                    <option value="{{ $unit->id }}" {{ old('unit') == $unit->id ? 'selected' : '' }}>{{ $unit->name }}</option>
-                    @endforeach
-                </select>
-                <div class="py-1"><small class="help-text mm-font text-muted">Unit ရွေးပါ။ ရှိလျှင်ထည့်ပါ။</small></div>
-                @error('unit')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="form-group me-2 w-sm-100">
-                <label for="">
-                    Category
-                    <span class="text-danger">**</span>
-                </label>
-                
-                <input type="text" name="name" class="form-control form-control-sm" placeholder="Name" value="{{ old('name') }}">
-                <div class="py-1"><small class="help-text mm-font text-muted">အမည်ထည့်ပါ။ တူ၍မရပါ။</small></div>
-                @error('name')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="py-2 mb-3">
+        <div class="bg-white shadow rounded py-3 px-2 mb-4">
             <h5 class="text-primary mb-3">Item Information</h5>
-            <div class="form-group">
-                <label for="">
-                    Category
-                    <span class="text-danger">**</span>
-                </label>
-                <small class="help-text text-muted">အမည်ထည့်ပါ။ တူ၍မရပါ။</small>
-                <input type="text" name="name" class="form-control form-control-sm" placeholder="Name" value="{{ old('name') }}">
-                @error('name')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
+
+            <div class="d-flex flex-wrap pb-3">
+
+                <div class="form-group me-2 w-sm-100">
+                    <label for="">
+                        Name
+                        <span class="text-danger">**</span>
+                    </label>
+
+                    <input type="text" name="name" class="form-control form-control-sm" placeholder="Name" value="{{ old('name') }}">
+                    <div class="py-1"><small class="help-text mm-font text-muted">အမည်ထည့်ပါ။ တူ၍မရပါ။</small></div>
+                    @error('name')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group me-2 w-sm-100">
+                    <label for="">
+                        Unit
+                    </label>
+
+                    <select name="unit" class="form-select form-select-sm">
+                        <option value="">Choose Unit</option>
+                        @foreach($units as $unit)
+                        <option value="{{ $unit->id }}" {{ old('unit') == $unit->id ? 'selected' : '' }}>{{ $unit->name }}</option>
+                        @endforeach
+                    </select>
+                    <div class="py-1"><small class="help-text mm-font text-muted">Unit ရှိလျှင်ထည့်ပါ။</small></div>
+                    @error('unit')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group me-2 w-sm-100">
+                    <label for="">
+                        Brand
+                    </label>
+
+                    <select name="brand" class="form-select form-select-sm">
+                        <option value="">Choose Brand</option>
+                        @foreach($brands as $brand)
+                        <option value="{{ $brand->id }}" {{ old('brand') == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
+                        @endforeach
+                    </select>
+                    <div class="py-1"><small class="help-text mm-font text-muted">Brand ရှိလျှင်ထည့်ပါ။</small></div>
+                    @error('brand')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group me-2 w-sm-100">
+                    <label for="">
+                        Category
+                        <span class="text-danger">**</span>
+                    </label>
+                    <search-or-create url="types" name="type"></search-or-create>
+                    <div class="py-1"><small class="help-text mm-font text-muted">အမျိုးအစား ထည့်ပါ။</small></div>
+                    @error('type')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="">
-                    Code
-                </label>
-                <small class="help-text text-muted">ရှိလျှင်ထည့်ပါ။ တူ၍မရပါ။</small>
-                <input type="text" name="code" class="form-control form-control-sm" placeholder="Code" value="{{ old('code') }}">
-                @error('code')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="">
-                    Category
-                    <span class="text-danger">**</span>
-                </label>
-                <small class="help-text text-muted">Category ရွေးပါ။ မဖြစ်မနေထည့်ပါ။</small>
-                <select name="type" class="form-select form-select-sm">
-                    @foreach($types as $type)
-                    <option value="{{ $type->id }}" {{ old('type') == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
-                    @endforeach
-                </select>
-                @error('type')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-
-
-
-            <div class="form-group d-none">
-                <label for="">
-                    Per Unit
-                </label>
-                <small class="help-text text-muted">Unit ရွေးခဲ့လျှင် တယူနစ်တွင် ပါဝင်သော ပမာဏထည့်ပါ။ (ဥပမာ- တဖာလျှင် ၂၄ခု ပါပါက 24 ဟုထည့်ပါ။) </small>
-                <input type="text" class="form-control form-control-sm" placeholder="Per Unit" name="per_unit" value="{{ old('per_unit') }}">
-                @error('per_unit')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="">
-                    Brand
-                </label>
-                <small class="help-text text-muted">Brand ရွေးပါ။ ရှိလျှင်ထည့်ပါ။</small>
-                <select name="brand" class="form-select form-select-sm">
-                    <option value="">Choose Brand</option>
-                    @foreach($brands as $brand)
-                    <option value="{{ $brand->id }}" {{ old('brand') == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
-                    @endforeach
-                </select>
-                @error('brand')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <div class="form-group d-none">
-                <label for="">
-                    Stock
-                </label>
-                <small class="help-text text-muted">အနည်းဆုံးရှိရမည့် ပမာဏထည့်ပါ။ မထည့်လည်းရပါသည်။</small>
-                <input type="text" name="stock" class="form-control form-control-sm" placeholder="Stock" value="{{ old('stock') }}">
-                @error('stock')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="">Description</label>
-                <small class="help-text text-muted">ဖော်ပြချက်ထည့်ပါ။ မထည့်လည်းရပါသည်။ (စာများအား ကော်ပီကူးပြီးလျှင် remove font style လုပ်ပေးပါ)</small>
-                <textarea name="desc" class="form-control form-control-sm text-editor" rows="3" placeholder="Description">{{ old('desc') }}</textarea>
-            </div>
-
         </div>
 
-        <div class="from-group">
-            <button type="submit" class="btn btn-sm btn-secondary">
+        <div class="form-group">
+            <button type="submit" class="btn btn-sm btn-primary">
                 <small class="me-2"><i class="fas fa-save"></i></small>
                 <span>Add Pricing</span>
             </button>
