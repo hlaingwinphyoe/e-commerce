@@ -156,12 +156,10 @@
 
                 <div class="px-3 py-2 mb-3 border-bottom">
                     <h5 class="text-secondary mb-3">Pricing Information</h5>
-                    <sku-price :item_id="{{ $item->id }}" :statuses="{{ $attributes }}" :has_attribute="{{ $item->attributes()->count() }}" :has_sku="{{ $item->skus()->count() }}"></sku-price>
                 </div>
 
                 <div class="px-3 py-2 mb-3">
                     <h5 class="text-secondary mb-3">Discount</h5>
-                    <sku-discount :discounts="{{ $discounts }}" :discountypes="{{ $discountypes }}" :roles="{{ $roles }}" :statuses="{{ $statuses }}" :item_id="{{ $item->id }}"></sku-discount>
                 </div>
 
 

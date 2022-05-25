@@ -22432,3 +22432,16 @@ body {
   background-color: transparent !important;
   padding: 0.2rem 0;
 }
+
+@media (max-width: 575.98px) {
+  .w-sm-100 {
+    width: 100%;
+  }
+}
+.help-text {
+  font-size: 80%;
+}
+
+.help-text.mm-font {
+  font-size: 65%;
+}

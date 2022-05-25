@@ -54,14 +54,9 @@ trait ItemTrait
         return $min_price;
     }
 
-    public function getBrandAttribute()
-    {
-        return $this->brand() ? $this->brand()->slug : '';
-    }
-
     public function getPriceRole()
     {
-        return  auth()->check() && !in_array(auth()->user()->role->slug, ['admin', 'technician', 'manager', 'operator', 'owner']) ? auth()->user()->role : Role::where('slug', 'guest')->first();
+        return  auth()->check() && !in_array(auth()->user()->role->slug, ['admin', 'technician', 'manager', 'operator', 'owner']) ? auth()->user()->role : Role::where('slug', 'customer')->first();
     }
 
     public function getDiscount()

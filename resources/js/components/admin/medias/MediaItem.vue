@@ -13,7 +13,7 @@
       <a
         :href="`#media-title-${media.id}`"
         class="text-muted"
-        data-toggle="modal"
+        data-bs-toggle="modal"
       >
         <span class="mr-2">{{ getTitle }}</span>
         <small><i class="fa fa-pencil-alt text-dark"></i></small>

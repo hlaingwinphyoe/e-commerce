@@ -1,4 +1,14 @@
-import Vue from 'vue';
-import MediaUpload from "./medias/MediaUpload.vue";
+import { createApp } from "vue";
 
-Vue.component("media-upload", MediaUpload);
+
+import MediaUpload from './medias/MediaUpload.vue';
+import SearchOrCreate from './forms/SearchOrCreate.vue';
+
+const app = createApp({
+//
+});
+
+app.component('media-upload', MediaUpload);
+app.component('search-or-create', SearchOrCreate);
+
+app.mount('#fse-admin');

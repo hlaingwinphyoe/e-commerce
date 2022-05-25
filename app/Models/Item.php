@@ -15,7 +15,7 @@ class Item extends Model
 
     protected $guarded = [];
 
-    protected $appends = ['price', 'min_price', 'discount', 'thumbnail', 'images', 'brand'];
+    protected $appends = ['price', 'min_price', 'discount', 'thumbnail', 'images'];
 
     public function skus()
     {
@@ -64,7 +64,7 @@ class Item extends Model
 
     public function brand()
     {
-        return $this->brands()->latest()->first();
+        return $this->belongsTo(Brand::class, 'brand_id');
     }
 
     public function medias()

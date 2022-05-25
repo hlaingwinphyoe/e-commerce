@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ItemController;
 use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\SkuController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserProfileController;
@@ -22,6 +23,7 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     Route::resource('/items', ItemController::class);
     Route::delete('/item-delete/{item}', [ItemController::class, 'delete'])->name('items.delete');
     Route::patch('/item-restore/{item}', [ItemController::class, 'restore'])->name('items.restore');
+    Route::resource('/skus', SkuController::class);
     Route::resource('/types', TypeController::class);
     Route::resource('/units', UnitController::class);
 

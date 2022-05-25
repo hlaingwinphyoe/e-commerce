@@ -23083,7 +23083,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_4), _hoisted_5])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "#media-title-".concat($props.media.id),
     "class": "text-muted",
-    "data-toggle": "modal"
+    "data-bs-toggle": "modal"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getTitle), 1
   /* TEXT */
   ), _hoisted_8], 8
@@ -23456,9 +23456,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _medias_MediaUpload_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./medias/MediaUpload.vue */ "./resources/js/components/admin/medias/MediaUpload.vue");
+/* harmony import */ var _forms_SearchOrCreate_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./forms/SearchOrCreate.vue */ "./resources/js/components/admin/forms/SearchOrCreate.vue");
 
 
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("media-upload", _medias_MediaUpload_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({//
+});
+app.component('media-upload', _medias_MediaUpload_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
+app.component('search-or-create', _forms_SearchOrCreate_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
+app.mount('#fse-admin');
 
 /***/ }),
 
@@ -52245,6 +52251,27 @@ exports["default"] = (sfc, props) => {
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/forms/SearchOrCreate.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/admin/forms/SearchOrCreate.vue ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _var_www_new_theme_backend_qty_pricing_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+const script = {}
+
+;
+const __exports__ = /*#__PURE__*/(0,_var_www_new_theme_backend_qty_pricing_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_0__["default"])(script, [['__file',"resources/js/components/admin/forms/SearchOrCreate.vue"]])
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/components/admin/medias/MediaItem.vue":
 /*!************************************************************!*\
   !*** ./resources/js/components/admin/medias/MediaItem.vue ***!
@@ -52745,18 +52772,12 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Popper = (__webpack_require__(/*! @popperjs/core */ "./node_modules/@popperjs/core/lib/index.js").withDefaults);
 window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js").withDefaults);
 
 __webpack_require__(/*! ./components/admin/index.js */ "./resources/js/components/admin/index.js");
 
-var app = new Vue({
-  el: '#fse-admin'
-});
-
 __webpack_require__(/*! ./admin/sidebar.js */ "./resources/js/admin/sidebar.js");
 
-$(document).ready(function () {
-  "use strict";
+$(document).ready(function () {//
 });
 })();
 

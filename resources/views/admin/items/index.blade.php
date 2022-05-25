@@ -115,7 +115,7 @@ if (request('brand')) {
             @forelse($items as $item)
             <tr id="tr-{{ $item->id }}">
                 <td class="">{{ $item->name }}</td>
-                <td>{{ $item->brand() ? $item->brand()->name : '' }}</td>
+                <td>{{ $item->brand ? $item->brand->name : '' }}</td>
                 <td>{{ $item->type() ? $item->type()->name : '-' }}</td>
                 <td>
                     @if($item->skus->count() > 0)
