@@ -6,7 +6,7 @@
 
 @section('content')
 
-<x-search-box url="{{ route('admin.brands.index') }}"></x-search-box>
+<x-admin.search-box url="{{ route('admin.brands.index') }}"></x-admin.search-box>
 
 
 <div>
@@ -104,7 +104,7 @@
                         <a href="#delete-modal-{{ $brand->id }}" class="btn btn-sm btn-danger mb-1" data-bs-toggle="modal">
                             <small><i class="fas fa-trash"></i></small>
                         </a>
-                        <x-delete id="{{ $brand->id }}" url="{{ route('admin.brands.destroy', $brand->id) }}"></x-delete>
+                        <x-admin.delete id="{{ $brand->id }}" url="{{ route('admin.brands.destroy', $brand->id) }}"></x-admin.delete>
                         @endif
                     </td>
                 </tr>
@@ -122,6 +122,6 @@
     </div>
 </div>
 @if(auth()->user()->role->hasPermission('delete-brand'))
-<x-delete-all url="/wapi/brands"></x-delete-all>
+<x-admin.delete-all url="/wapi/brands"></x-admin.delete-all>
 @endif
 @endsection

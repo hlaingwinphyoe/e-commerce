@@ -1,0 +1,21 @@
+//forms
+.form-control, .form-select { background-color: $light; font-size: .85rem;}
+.form-group {
+    margin-bottom: 10px;
+    label {
+        margin-bottom: .15rem;
+    }
+}
+
+.form-select {
+    padding: 0.25rem 2.25rem 0.25rem 0.75rem;
+}
+
+.help-text {
+    display: block;
+    margin-bottom: .5rem;
+    font-size: .75rem;
+}
+
+.bg-sidebar {background-color: $side-bg;}
+.bg-sidebar-dark {background-color: $side-bg-dark;}

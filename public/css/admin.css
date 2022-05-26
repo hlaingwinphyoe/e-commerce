@@ -22185,6 +22185,36 @@ textarea.form-control-lg {
   font-family: "NotoSans";
   src: url(/fonts/NotoSansMyanmar-Regular.ttf?01e953db832f0723fdc4ad77d5622889);
 }
+.form-control, .form-select {
+  background-color: #f8f9fa;
+  font-size: 0.85rem;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+.form-group label {
+  margin-bottom: 0.15rem;
+}
+
+.form-select {
+  padding: 0.25rem 2.25rem 0.25rem 0.75rem;
+}
+
+.help-text {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.bg-sidebar {
+  background-color: #f8f8fb;
+}
+
+.bg-sidebar-dark {
+  background-color: #f0f0f7;
+}
+
 .app-header {
   position: fixed;
   left: 0;
@@ -22444,4 +22474,8 @@ body {
 
 .help-text.mm-font {
   font-size: 65%;
+}
+
+.page-title {
+  font-weight: bold;
 }

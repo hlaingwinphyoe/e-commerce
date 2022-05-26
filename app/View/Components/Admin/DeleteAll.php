@@ -4,7 +4,7 @@ namespace App\View\Components\Admin;
 
 use Illuminate\View\Component;
 
-class SearchBox extends Component
+class DeleteAll extends Component
 {
     public $url;
 
@@ -20,6 +20,6 @@ class SearchBox extends Component
      */
     public function render()
     {
-        return view('components.admin.search-box');
+        return view('components.admin.delete-all');
     }
 }
