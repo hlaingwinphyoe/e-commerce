@@ -10,6 +10,14 @@ use Illuminate\Support\Str;
 
 class BrandController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permissions:access-brand')->only(['index', 'show']);
+        $this->middleware('permissions:create-brand')->only(['create', 'store']);
+        $this->middleware('permissions:edit-brand')->only(['edit', 'update']);
+        $this->middleware('permissions:delete-brand')->only('destroy');
+    }
+    
     public function index()
     {
         $brands = Brand::filterOn()->orderBy('name')->paginate(20);

@@ -9,6 +9,14 @@ use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserProfileController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\InventoryController;
+use App\Http\Controllers\Admin\DiscountypeController;
+use App\Http\Controllers\Admin\RegionController;
+use App\Http\Controllers\Admin\CountryController;
+use App\Http\Controllers\Admin\TownshipController;
+use App\Http\Controllers\Admin\DeliFeeController;
+use App\Http\Controllers\Admin\DeliveryController;
+
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
@@ -36,6 +44,24 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
 
     Route::resource('/brands', BrandController::class);
     Route::resource('/suppliers', SupplierController::class);
+
+    //sku-history
+    Route::get('/skus', [SkuController::class, 'index'])->name('skus.index');
+    Route::get('/skus/{sku}', [SkuController::class, 'show'])->name('skus.show');
+    Route::patch('/skus/{sku}', [SkuController::class, 'update'])->name('skus.update');
+    Route::delete('/skus/{sku}', [SkuController::class, 'destroy'])->name('skus.destroy');
+
+    Route::resource('/inventories', InventoryController::class);
+
+    //discount
+    Route::resource('/discountypes', DiscountypeController::class);
+
+    //addresses
+    Route::resource('/regions', RegionController::class);
+    Route::resource('/countries', CountryController::class);
+    Route::resource('/townships', TownshipController::class);
+    Route::resource('/delifees', DeliFeeController::class);
+    Route::resource('/deliveries', DeliveryController::class);
 
     Route::resource('/customers', CustomerController::class);
 

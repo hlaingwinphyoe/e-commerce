@@ -9,6 +9,14 @@ use App\Models\Supplier;
 
 class SupplierController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permissions:access-supplier')->only(['index']);
+        $this->middleware('permissions:create-supplier')->only(['create', 'store']);
+        $this->middleware('permissions:edit-supplier')->only(['edit', 'update']);
+        $this->middleware('permissions:delete-supplier')->only(['destroy']);
+    }
+    
     public function index()
     {
         $suppliers = Supplier::filterOn()->latest()->paginate(20);

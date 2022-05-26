@@ -46,6 +46,87 @@
         </a>
     </li>
 
+    <!-- Debts -->
+    @if(auth()->user()->role->hasPermissions(['access-inventory', 'access-stock']))
+    <li class="nav-item w-100">
+        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">Inventory</span>
+    </li>
+    <li class="nav-item w-100 d-none">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/inventories','admin/inventories/*']) ? 'active' : '' }}" href="{{ route('admin.inventories.index') }}" title="Inventories">
+            <i class="app-menu__icon fa fa-dolly-flatbed mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.purchase')}}</span>
+        </a>
+    </li>
+    @if(auth()->user()->role->hasPermission('access-stock'))
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/skus','admin/skus/*']) ? 'active' : '' }}" href="{{ route('admin.skus.index') }}" title="Low Stock Skus">
+            <i class="app-menu__icon fa fa-battery-quarter mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.stocks')}}</span>
+        </a>
+    </li>
+    @endif
+    @endif  
+
+    <!-- Discounts & Coupons -->
+    @if(auth()->user()->role->hasPermissions(['access-discount-type', 'access-gift', 'access-coupon', 'access-bonus-point']))
+    <li class="nav-item w-100">
+        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.discount_setting')}}</span>
+    </li>
+    @endif
+
+    @if(auth()->user()->role->hasPermission('access-discount-type'))
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/discountypes','admin/discountypes/*']) ? 'active' : '' }}" href="{{ route('admin.discountypes.index') }}" title="Discount Type">
+            <i class="app-menu__icon fa fa-tags mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.discounts')}}</span>
+        </a>
+    </li>
+    @endif
+
+    <!-- Delivery -->
+    @if(auth()->user()->role->hasPermissions(['access-delivery', 'access-region']))
+    <li class="nav-item w-100">
+        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.delivery')}}</span>
+    </li>
+    @endif
+
+
+    @if(auth()->user()->role->hasPermission('access-delivery'))
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/deliveries','admin/deliveries/*']) ? 'active' : '' }}" href="{{ route('admin.deliveries.index') }}" title="Deliveries">
+            <i class="app-menu__icon fa fa-truck mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.deliveries')}}</span>
+        </a>
+    </li>
+    @endif
+
+    @if(auth()->user()->role->hasPermission('access-region'))
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/delifees','admin/delifees/*']) ? 'active' : '' }}" href="{{ route('admin.delifees.index') }}">
+            <i class="app-menu__icon fa fa-truck mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.deli_fees')}}</span>
+        </a>
+    </li>
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/countries','admin/countries/*']) ? 'active' : '' }}" href="{{ route('admin.countries.index') }}" title="Regions">
+            <i class="app-menu__icon fa fa-globe mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label">Countries</span>
+        </a>
+    </li>
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/regions','admin/regions/*']) ? 'active' : '' }}" href="{{ route('admin.regions.index') }}" title="Regions">
+            <i class="app-menu__icon fa fa-arrows-alt mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label">Regions</span>
+        </a>
+    </li>
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/townships','admin/townships/*']) ? 'active' : '' }}" href="{{ route('admin.townships.index') }}" title="Townships">
+            <i class="app-menu__icon fa fa-at mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label">Townships</span>
+        </a>
+    </li>
+    @endif
+
     <!-- User Control -->
     @if(auth()->user()->role->hasPermissions(['access-user', 'access-customer']))
     <li class="nav-item w-100">
