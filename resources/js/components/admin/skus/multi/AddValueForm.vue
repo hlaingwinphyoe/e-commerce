@@ -1,5 +1,5 @@
 <template>
-    <div class="add-value-form_container row">
+    <div class="add-value-form_container row mb-2">
         <div class="col-5 col-md-4">{{ attribute.name }}</div>
         <div class="col-5 col-md-6">
             <div class="form-group">

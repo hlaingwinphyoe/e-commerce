@@ -8,9 +8,9 @@
             ></pricing-form>
             <!-- Add Attribute Form -->
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div
-                        class="border py-3 px-4 mb-3 bg-sidebar position-relative mb-3"
+                        class="border py-3 px-4 mb-3 bg-sidebar position-relative mb-3 rounded"
                     >
                         <p class="mb-2 fw-bold text-primary">Attribute နောက်တခုထည့်မည်</p>
                         <ul class="nav mb-2">
@@ -27,7 +27,7 @@
                         <div class="row mb-2">
                             <div class="col-8 col-md-6">
                                 <select
-                                    class="form-select"
+                                    class="form-select form-select-sm"
                                     @change="onChangeNewAttr"
                                     v-model="attr_name"
                                 >

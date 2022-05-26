@@ -1,17 +1,17 @@
 <template>
-    <div class="pricing_form-container mb-2 bg-sidebar px-2 py-1">
+    <div class="pricing_form-container mb-2 bg-sidebar rounded border px-2 py-1">
         <p class="mb-0 py-2 small fw-bold">SKUs အားလုံးအတွက် ဈေးထည့်မည်။ ဈေးမတူလျှင် တခုချင်း၌ ပြန်လည်ပြင်ပါ။</p>
         <div class="row">
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-2 align-self-end">
                 <label for="" class="small text-muted">အနည်းဆုံး အရေအတွက်</label>
                 <input type="number" class="form-control form-control-sm" v-model="form.min_qty" required>
             </div>
 
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-2 align-self-end">
                 <label for="" class="small text-muted">အများဆုံး အရေအတွက်</label>
                 <input type="number" class="form-control form-control-sm" v-model="form.max_qty">
             </div>
-            <div class="col-md-2 form-group">
+            <div class="col-md-2 form-group align-self-end">
                 <label for="" class="small text-muted">ဈေးနှုန်း</label>
                 <input
                     type="text"

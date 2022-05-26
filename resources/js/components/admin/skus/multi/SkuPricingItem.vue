@@ -2,12 +2,12 @@
     <div class="pricing_item-container row">
         <div class="form-group col-md-2">
             <label for="" class="small text-muted">Min</label>
-            <input type="text" class="form-control form-control-sm" v-model="form.min_qty" required>
+            <input type="text" class="qty-input form-control form-control-sm" v-model="form.min_qty" required>
         </div>
 
         <div class="form-group col-md-2">
             <label for="" class="small text-muted">Max</label>
-            <input type="text" class="form-control form-control-sm" v-model="form.max_qty">
+            <input type="text" class="qty-input form-control form-control-sm" v-model="form.max_qty">
         </div>
 
         <div class="form-group col-md-4">

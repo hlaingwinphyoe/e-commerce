@@ -22431,6 +22431,10 @@ body {
     width: 100%;
   }
 }
+.bg-sidebar {
+  background-color: #f8f8fb;
+}
+
 .help-text {
   font-size: 80%;
 }
@@ -22460,4 +22464,8 @@ body {
 }
 .results .nav .nav-item .nav-link:hover {
   background-color: #eeeef3;
+}
+
+.qty-input {
+  min-width: 65px;
 }

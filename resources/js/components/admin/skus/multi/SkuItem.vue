@@ -1,7 +1,7 @@
 <template>
-    <div class="sku_item-container col-md-4 mb-3">
-        <div class="bg-sidebar py-3 px-4 h-100 position-relative">
-            <p class="mb-2 fw-bold text-primary">{{ sku_name }}</p>
+    <div class="sku_item-container col-md-6 mb-3">
+        <div class="bg-sidebar py-3 px-4 h-100 position-relative border rounded">
+            <p class="mb-2 fw-bold text-primary d-none">{{ sku_name }}</p>
             <variant-list v-show="variants.length" :variants="variants" @on-delete-variant="onDeleteVariant"></variant-list>
             <div class="mb-2 text-muted" v-show="attributes.length">
                 <add-attribute-list :attributes="attributes" @on-add-value="onAddValue"></add-attribute-list>
@@ -10,8 +10,8 @@
                 <sku-pricing-item :pricing="pricing" @on-delete-pricing="onDeletePricing"></sku-pricing-item>
             </div>
             <sku-media-upload :sku_id="sku.id" :images="images" @on-destroy-media="onDestroyMedia"></sku-media-upload>
-            <div class="close-buttons shadow">
-                <a href="#" class="text-danger" @click.prevent="onDeleteSku"><i class="fa fa-times fa-lg"></i></a>
+            <div class="close-buttons">
+                <a href="#" class="btn btn-sm btn-danger" @click.prevent="onDeleteSku"><i class="fa fa-times fa-lg"></i></a>
             </div>
         </div>
         

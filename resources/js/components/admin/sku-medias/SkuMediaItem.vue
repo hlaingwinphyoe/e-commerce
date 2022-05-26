@@ -8,8 +8,8 @@
     <div v-if="isImage" class="position-relative d-inline-block">
      <a
         :href="`#media-title-${media.id}`"
-        class="text-muted d-inline-block px-4 py-2 border"
-        data-toggle="modal"
+        class="text-muted d-inline-block px-4 py-2 border rounded"
+        data-bs-toggle="modal"
       >
      
       <img
@@ -43,7 +43,7 @@
             <button
               type="button"
               class="close"
-              data-dismiss="modal"
+              data-bs-dismiss="modal"
               aria-label="Close"
             >
               <span aria-hidden="true">&times;</span>
@@ -62,7 +62,7 @@
             <button
               type="button"
               class="btn btn-sm btn-outline-secondary"
-              data-dismiss="modal"
+              data-bs-dismiss="modal"
             >
               Cancel
             </button>

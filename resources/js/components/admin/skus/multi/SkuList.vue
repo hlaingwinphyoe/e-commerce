@@ -3,7 +3,7 @@
         <sku-item v-for="sku in skus" :key="sku.id" :sku="sku" @on-delete-sku="onDeleteSku" @on-delete-variant="onDeleteVariant"></sku-item>
 
         <div class="col-md-4 mb-3">
-            <div class="border py-3 px-4 h-100 position-relative">
+            <div class="border py-3 px-4 h-100 position-relative rounded border">
                 <p class="mb-2 fw-bold text-primary">SKU နောက်တခုထည့်မည်</p>
                 <div v-for="attribute in attributes" :key="attribute.id">
                     <add-value-form

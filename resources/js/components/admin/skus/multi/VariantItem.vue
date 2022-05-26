@@ -1,6 +1,8 @@
 <template>
-    <div class="variant_item-container border px-1 py-1 mb-2">
-        <div class="row">
+    <div class="variant_item-container bg-white rounded shadow small px-1 py-1 mb-2 me-2">
+        <span class="text-muted">{{ variant.attribute.name }}</span>
+        <span class="fw-bold"> - {{ getValue }}</span>
+        <div class="row d-none">
             <p class="col-4 col-md-5 mb-0 small">{{ variant.attribute.name }}</p>            
             <div class="col-8 col-md-7 mb-0 d-flex align-items-center">
                 <p class="mb-0 mr-2 fw-bold text-primary">{{ getValue }}</p>

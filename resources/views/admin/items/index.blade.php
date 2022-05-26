@@ -35,7 +35,7 @@
 
 <form action="{{ route('admin.items.index') }}" method="get" class="d-flex">
     <div class="me-2 mb-1">
-        <select name="status" class="form-select">
+        <select name="status" class="form-select form-select-sm">
             <option value="">Select Status</option>
             <option value="all">All</option>
             <option value="disabled">Disabled</option>
@@ -54,7 +54,7 @@
     <input type="hidden" name="disabled" value="{{ request('disabled') }}">
 
     <div class="form-group me-2">
-        <select name="type" class="form-select">
+        <select name="type" class="form-select form-select-sm">
             <option value="">Choose Category</option>
             @foreach($types as $type)
             <option value="{{ $type->id }}" {{ $type->id == request()->type? 'selected' : '' }}>{{ $type->name }}</option>

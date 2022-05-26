@@ -25390,7 +25390,7 @@ var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     "class": "close",
-    "data-dismiss": "modal",
+    "data-bs-dismiss": "modal",
     "aria-label": "Close"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "aria-hidden": "true"
@@ -25410,7 +25410,7 @@ var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     "class": "btn btn-sm btn-outline-secondary",
-    "data-dismiss": "modal"
+    "data-bs-dismiss": "modal"
   }, " Cancel ")], -1
   /* HOISTED */
   );
@@ -25427,8 +25427,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , _hoisted_1), $options.isImage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "#media-title-".concat($props.media.id),
-    "class": "text-muted d-inline-block px-4 py-2 border",
-    "data-toggle": "modal"
+    "class": "text-muted d-inline-block px-4 py-2 border rounded",
+    "data-bs-toggle": "modal"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: "/storage/thumbnail/".concat($props.media.slug),
     alt: $props.media.name,
@@ -25677,7 +25677,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "add-value-form_container row"
+  "class": "add-value-form_container row mb-2"
 };
 var _hoisted_2 = {
   "class": "col-5 col-md-4"
@@ -25913,7 +25913,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "pricing_form-container mb-2 bg-sidebar px-2 py-1"
+  "class": "pricing_form-container mb-2 bg-sidebar rounded border px-2 py-1"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
@@ -25926,7 +25926,7 @@ var _hoisted_3 = {
   "class": "row"
 };
 var _hoisted_4 = {
-  "class": "form-group col-md-2"
+  "class": "form-group col-md-2 align-self-end"
 };
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
@@ -25937,7 +25937,7 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_6 = {
-  "class": "form-group col-md-2"
+  "class": "form-group col-md-2 align-self-end"
 };
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
@@ -25948,7 +25948,7 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_8 = {
-  "class": "col-md-2 form-group"
+  "class": "col-md-2 form-group align-self-end"
 };
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
@@ -26032,10 +26032,10 @@ var _hoisted_2 = {
   "class": "row"
 };
 var _hoisted_3 = {
-  "class": "col-md-4"
+  "class": "col-md-6"
 };
 var _hoisted_4 = {
-  "class": "border py-3 px-4 mb-3 bg-sidebar position-relative mb-3"
+  "class": "border py-3 px-4 mb-3 bg-sidebar position-relative mb-3 rounded"
 };
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
@@ -26163,7 +26163,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), 256
   /* UNKEYED_FRAGMENT */
   ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-    "class": "form-select",
+    "class": "form-select form-select-sm",
     onChange: _cache[0] || (_cache[0] = function () {
       return $options.onChangeNewAttr && $options.onChangeNewAttr.apply($options, arguments);
     }),
@@ -26287,19 +26287,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "sku_item-container col-md-4 mb-3"
+  "class": "sku_item-container col-md-6 mb-3"
 };
 var _hoisted_2 = {
-  "class": "bg-sidebar py-3 px-4 h-100 position-relative"
+  "class": "bg-sidebar py-3 px-4 h-100 position-relative border rounded"
 };
 var _hoisted_3 = {
-  "class": "mb-2 fw-bold text-primary"
+  "class": "mb-2 fw-bold text-primary d-none"
 };
 var _hoisted_4 = {
   "class": "mb-2 text-muted"
 };
 var _hoisted_5 = {
-  "class": "close-buttons shadow"
+  "class": "close-buttons"
 };
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
@@ -26351,7 +26351,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["sku_id", "images", "onOnDestroyMedia"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "#",
-    "class": "text-danger",
+    "class": "btn btn-sm btn-danger",
     onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.onDeleteSku && $options.onDeleteSku.apply($options, arguments);
     }, ["prevent"]))
@@ -26380,7 +26380,7 @@ var _hoisted_2 = {
   "class": "col-md-4 mb-3"
 };
 var _hoisted_3 = {
-  "class": "border py-3 px-4 h-100 position-relative"
+  "class": "border py-3 px-4 h-100 position-relative rounded border"
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
@@ -26501,7 +26501,7 @@ var _hoisted_12 = [_hoisted_11];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
-    "class": "form-control form-control-sm",
+    "class": "qty-input form-control form-control-sm",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.form.min_qty = $event;
     }),
@@ -26510,7 +26510,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.min_qty]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
-    "class": "form-control form-control-sm",
+    "class": "qty-input form-control form-control-sm",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.form.max_qty = $event;
     })
@@ -26631,32 +26631,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "variant_item-container border px-1 py-1 mb-2"
+  "class": "variant_item-container bg-white rounded shadow small px-1 py-1 mb-2 me-2"
 };
 var _hoisted_2 = {
-  "class": "row"
+  "class": "text-muted"
 };
 var _hoisted_3 = {
-  "class": "col-4 col-md-5 mb-0 small"
+  "class": "fw-bold"
 };
 var _hoisted_4 = {
-  "class": "col-8 col-md-7 mb-0 d-flex align-items-center"
+  "class": "row d-none"
 };
 var _hoisted_5 = {
+  "class": "col-4 col-md-5 mb-0 small"
+};
+var _hoisted_6 = {
+  "class": "col-8 col-md-7 mb-0 d-flex align-items-center"
+};
+var _hoisted_7 = {
   "class": "mb-0 mr-2 fw-bold text-primary"
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fa fa-times"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_7 = [_hoisted_6];
+var _hoisted_9 = [_hoisted_8];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.variant.attribute.name), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.variant.attribute.name), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getValue), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_3, " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getValue), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.variant.attribute.name), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getValue), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "#",
@@ -26664,7 +26674,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.onDeleteVariant && $options.onDeleteVariant.apply($options, arguments);
     }, ["prevent"]))
-  }, _hoisted_7, 512
+  }, _hoisted_9, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $props.variant.attribute.parent_id]])])])]);
 }
@@ -26685,7 +26695,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "variant_list-container mb-2"
+  "class": "variant_list-container mb-2 d-flex"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_variant_item = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("variant-item");
