@@ -1,5 +1,5 @@
 <template>
-    <div class="sku_form-container bg-sidebar px-2 py-1">
+    <div class="sku_form-container bg-sidebar border rounded px-2 py-3">
         <p class="fw-bold text-primary">ဈေးနှုန်း သတ်မှတ်ရန် Form</p>
         <div class=" row">
             <div class="form-group col-md-2">

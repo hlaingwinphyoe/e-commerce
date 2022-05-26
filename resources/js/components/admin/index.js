@@ -7,6 +7,8 @@ import SearchOrCreate from './forms/SearchOrCreate.vue';
 import SkuPrice from './skus/SkuPrice.vue';
 import SkuDiscount from './sku-discounts/Discount.vue';
 import PermissionBox from "./permissions/PermissionBox.vue";
+import BarcodeGenerate from './barcode/BarcodeGenerate.vue';
+import Stock from './add-stocks/Stock.vue';
 
 const app = createApp({
 //
@@ -18,5 +20,7 @@ app.component('search-or-create', SearchOrCreate);
 app.component('sku-price', SkuPrice);
 app.component('sku-discount', SkuDiscount);
 app.component("permission-box", PermissionBox);
+app.component('barcode-generate', BarcodeGenerate);
+app.component('stock', Stock);
 
 app.mount('#fse-admin');

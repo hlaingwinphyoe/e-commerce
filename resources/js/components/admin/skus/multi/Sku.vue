@@ -94,7 +94,7 @@
             <div class="row">
                 <div class="col-md-2 form-group">
                     <select
-                        class="form-select"
+                        class="form-select form-select-sm"
                         v-model="form.attr_name"
                         @change="onSelectAttributeName"
                     >
@@ -134,7 +134,7 @@
 
             <button
                 type="button"
-                class="btn btn-sm btn-outline-secondary"
+                class="btn btn-sm btn-outline-secondary mt-2"
                 @click.prevent="makeSku"
             >
                 Make SKUs (အမျိုးကွဲ Items များဖန်တီးမည်)

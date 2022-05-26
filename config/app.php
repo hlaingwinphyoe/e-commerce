@@ -182,6 +182,7 @@ return [
          */
         App\Providers\FortifyServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Milon\Barcode\BarcodeServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -247,7 +248,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
-
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
     ],
 
 ];

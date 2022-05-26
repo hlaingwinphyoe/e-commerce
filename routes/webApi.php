@@ -9,6 +9,7 @@ use App\Http\Controllers\WebApi\ItemPricingController;
 use App\Http\Controllers\WebApi\ItemSkuController;
 use App\Http\Controllers\WebApi\MediaController;
 use App\Http\Controllers\WebApi\SingleSkuController;
+use App\Http\Controllers\WebApi\SkuBarcodeController;
 use App\Http\Controllers\WebApi\SkuController;
 use App\Http\Controllers\WebApi\SkuMediaController;
 use App\Http\Controllers\WebApi\SkuPricingController;
@@ -63,3 +64,6 @@ Route::post('/item-pricings/{item}', [ItemPricingController::class, 'store']);
 Route::post('/item-discounts', [ItemDiscountController::class, 'store']);
 Route::patch('/item-discounts/{discount}', [ItemDiscountController::class, 'update']);
 Route::delete('/item-discounts/{discount}', [ItemDiscountController::class, 'destroy']);
+
+//barcodes
+Route::patch('/sku-barcodes/{sku}', [SkuBarcodeController::class, 'update']);
