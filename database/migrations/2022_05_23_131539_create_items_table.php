@@ -45,6 +45,16 @@ class CreateItemsTable extends Migration
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade')->onUpdate('cascade');
         });
 
+        Schema::create('item_brand', function (Blueprint $table) {
+            $table->foreignId('item_id');
+            $table->foreignId('brand_id');
+
+            $table->primary(['item_id', 'brand_id'], 'item_brand_id');
+
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade')->onUpdate('cascade');
+        });
+
         Schema::create('skus', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique()->nullable();

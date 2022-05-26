@@ -6,6 +6,7 @@ import SkuMediaUpload from './sku-medias/SkuMediaUpload.vue';
 import SearchOrCreate from './forms/SearchOrCreate.vue';
 import SkuPrice from './skus/SkuPrice.vue';
 import SkuDiscount from './sku-discounts/Discount.vue';
+import PermissionBox from "./permissions/PermissionBox.vue";
 
 const app = createApp({
 //
@@ -16,5 +17,6 @@ app.component('sku-media-upload', SkuMediaUpload);
 app.component('search-or-create', SearchOrCreate);
 app.component('sku-price', SkuPrice);
 app.component('sku-discount', SkuDiscount);
+app.component("permission-box", PermissionBox);
 
 app.mount('#fse-admin');
