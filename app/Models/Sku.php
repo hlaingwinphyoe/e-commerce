@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use \Milon\Barcode\DNS1D;
 
-use App\Traits\SkuTrait;
-
 class Sku extends Model
 {
     use HasFactory, SkuTrait;
