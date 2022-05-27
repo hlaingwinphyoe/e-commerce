@@ -22,6 +22,7 @@ class SingleSkuController extends Controller
             'item_id' => $item->id
         ], [
             // 'code' => uniqid(),
+            'item_name' => $item->name,
             'pure_price' => 0,
             'currency_id' => $currency ? $currency->id : 1,
             'min_stock' => $item->min_stock

@@ -48,8 +48,7 @@ export default {
         changeAttribute() {
             axios.delete(`/wapi/single-skus/${this.item_id}`).then(resp => {
                 this.$emit('change-attribute', true);
-            });
-            
+            });            
         }
     }
 }

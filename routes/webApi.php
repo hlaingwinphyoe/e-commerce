@@ -3,6 +3,7 @@
 //media
 
 use App\Http\Controllers\WebApi\AttributeController;
+use App\Http\Controllers\WebApi\InventoryController;
 use App\Http\Controllers\WebApi\ItemAttributeController;
 use App\Http\Controllers\WebApi\ItemDiscountController;
 use App\Http\Controllers\WebApi\ItemPricingController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\WebApi\MediaController;
 use App\Http\Controllers\WebApi\SingleSkuController;
 use App\Http\Controllers\WebApi\SkuBarcodeController;
 use App\Http\Controllers\WebApi\SkuController;
+use App\Http\Controllers\WebApi\SkuInventoryController;
 use App\Http\Controllers\WebApi\SkuMediaController;
 use App\Http\Controllers\WebApi\SkuPricingController;
 use App\Http\Controllers\WebApi\ValueController;
@@ -35,6 +37,7 @@ Route::delete('/values/{value}', [ValueController::class, 'destroy']);
 Route::post('/single-skus', [SingleSkuController::class, 'store']);
 Route::delete('/single-skus/{item}', [SingleSkuController::class, 'destroy']);
 
+Route::get('/skus', [SkuController::class, 'index']);
 Route::delete('/skus/{sku}', [SkuController::class, 'destroy']);
 Route::get('/sku-attributes/{sku}', [SkuController::class, 'getAttributes']);
 Route::get('/sku-variants/{sku}', [SkuController::class, 'getVariants']);
@@ -67,3 +70,11 @@ Route::delete('/item-discounts/{discount}', [ItemDiscountController::class, 'des
 
 //barcodes
 Route::patch('/sku-barcodes/{sku}', [SkuBarcodeController::class, 'update']);
+
+//inventory
+Route::get('/inventories/create', [InventoryController::class, 'create']);
+Route::patch('/inventories/{inventory}', [InventoryController::class, 'update']);
+
+//sku-inventory
+Route::post('/sku-inventories/{inventory}', [SkuInventoryController::class, 'store']);
+Route::delete('/sku-inventories/{inventory}/{sku}', [SkuInventoryController::class, 'delete']);

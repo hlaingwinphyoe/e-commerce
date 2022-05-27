@@ -6,4 +6,5 @@ return [
     'item' => 'Item',
     'category' => 'Category',
     'unit' => 'Unit',
+    'purchase' => 'Purchase'
 ];

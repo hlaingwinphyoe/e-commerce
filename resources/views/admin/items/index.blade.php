@@ -30,18 +30,6 @@ if (request('type')) {
     $query .= $query ? '&' : '?';
     $query .= 'type=' . request('type');
 }
-if (request('chemical')) {
-    $query .= $query ? '&' : '?';
-    $query .= 'chemical=' . request('chemical');
-}
-if (request('vendor')) {
-    $query .= $query ? '&' : '?';
-    $query .= 'vendor=' . request('vendor');
-}
-if (request('country')) {
-    $query .= $query ? '&' : '?';
-    $query .= 'country=' . request('country');
-}
 if (request('brand')) {
     $query .= $query ? '&' : '?';
     $query .= 'brand=' . request('brand');
@@ -124,7 +112,7 @@ if (request('brand')) {
                 <td>{{ $item->type() ? $item->type()->name : '-' }}</td>
                 <td>
                     @if($item->skus->count() > 0)
-                    <a href="{{ route('admin.items.show', $item->id) }}" class="btn btn-sm bg-white border shadow mb-1">
+                    <a href="{{ route('admin.items.show', $item->id) }}" class="btn btn-sm btn-outline-primary mb-1">
                         <span>{{ $item->skus->count() }}</span>
                     </a>
                     @else
@@ -137,21 +125,17 @@ if (request('brand')) {
                 <td>
                     <div class="d-flex">
                         @if(auth()->user()->role->hasPermission('edit-item') && !$item->trashed())
-                        <a href="{{ route('admin.items.edit', $item->id) }}" class="action-btn me-2 text-primary">
+                        <a href="{{ route('admin.items.edit', $item->id) }}" class="btn btn-sm btn-outline-primary me-2">
                             <span><i class="fa fa-pencil-alt"></i></span>
-                        </a>
-
-                        <a href="{{ route('admin.skus.index') }}?item={{ $item->id }}" class="action-btn me-2 text-success">
-                            <span><i class="fa fa-plus"></i></span>
                         </a>
                         @endif
                         
-                        <a href="#add-stock-modal-{{ $item->id }}" data-bs-toggle="modal"><i class="fa fa-plus"></i></a>
-                        <stock :item="{{ $item }}"></stock>
+                        <a href="#add-stock-modal-{{ $item->id }}" data-bs-toggle="modal" class="btn btn-sm btn-outline-primary"><i class="fa fa-plus"></i></a>
+                        <stock :item="{{ $item }}" :suppliers="{{ $suppliers }}"></stock>
                 
 
                         @if(auth()->user()->role->hasPermission('delete-item') && !$item->trashed())
-                        <a href="#delete-modal-{{ $item->id }}" class="action-btn me-2 text-danger" data-bs-toggle="modal">
+                        <a href="#delete-modal-{{ $item->id }}" class="action-btn me-2 btn btn-sm btn-outline-danger" data-bs-toggle="modal">
                             <span><i class="fas fa-trash"></i></span>
                         </a>
                         <x-admin.delete id="{{ $item->id }}" url="{{ route('admin.items.destroy', $item->id) }}"></x-admin.delete>

@@ -52,6 +52,18 @@
         </a>
     </li>
 
+     <!-- Purchase -->
+    <li class="nav-item w-100">
+        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark">Purchase</span>
+    </li>
+
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['/admin/inventories/', '/admin/inventories/*']) ? 'active' : '' }}" href="{{ route('admin.inventories.index') }}" title="Inventory">
+            <i class="app-menu__icon fa fa-stream mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label">{{ __('menu.purchase') }}</span>
+        </a>
+    </li>
+
     <!-- User Control -->
     @if(auth()->user()->role->hasPermissions(['access-user', 'access-customer']))
     <li class="nav-item w-100">

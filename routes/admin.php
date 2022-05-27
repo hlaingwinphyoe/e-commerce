@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\UserProfileController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,7 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
 
     Route::resource('/brands', BrandController::class);
     Route::resource('/suppliers', SupplierController::class);
+    Route::resource('/inventories', InventoryController::class);
 
     Route::resource('/customers', CustomerController::class);
 

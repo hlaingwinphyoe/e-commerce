@@ -63,6 +63,7 @@ class ItemSkuController extends Controller
             foreach ($attrs as $attr) {
                 $sku = Sku::create([
                     // 'code' => uniqid(),
+                    'item_name' => $item->name,
                     'pure_price' => 0,
                     'currency_id' => $currency ? $currency->id : 1,
                     'min_stock' => $item->min_stock,

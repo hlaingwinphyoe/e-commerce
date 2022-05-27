@@ -9,6 +9,7 @@ use App\Models\Item;
 use App\Models\Media;
 use App\Models\Role;
 use App\Models\Status;
+use App\Models\Supplier;
 use App\Models\Type;
 use App\Models\Unit;
 use Illuminate\Http\Request;
@@ -40,12 +41,15 @@ class ItemController extends Controller
 
         $item_count = Item::withTrashed()->count();
 
+        $suppliers = Supplier::orderBy('name')->get();
+
         return view('admin.items.index')->with([
             'items' => $items,
             'types' => $types,
             'discountypes' => $discountypes,
             'brands' => $brands,
-            'item_count' => $item_count
+            'item_count' => $item_count,
+            'suppliers' => $suppliers
         ]);
     }
 
@@ -123,6 +127,8 @@ class ItemController extends Controller
 
         $units = Unit::orderBy('name')->get();
 
+        $suppliers = Supplier::orderBy('name')->get();
+
         return view('admin.items.edit')->with([
             'item' => $item,
             'types' => $types,
@@ -132,7 +138,8 @@ class ItemController extends Controller
             'attributes' => $attributes,
             'statuses' => $statuses,
             'discounts' => $discounts,
-            'units' => $units
+            'units' => $units,
+            'suppliers' => $suppliers
         ]);
     }
 

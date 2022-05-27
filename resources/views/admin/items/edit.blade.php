@@ -32,7 +32,7 @@
                     </label>
 
                     <input type="text" name="name" class="form-control form-control-sm" placeholder="Name" value="{{ $item->name }}">
-                    <div class="py-1"><small class="help-text mm-font text-muted">အမည်ထည့်ပါ။ တူ၍မရပါ။</small></div>
+                    <div class="py-1"><small class="help-text mm-font text-muted">အမည်တူ ထည့်၍မရပါ။</small></div>
                     @error('name')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -48,7 +48,7 @@
                         <option value="{{ $unit->id }}" {{ $item->unit_id == $unit->id ? 'selected' : '' }}>{{ $unit->name }}</option>
                         @endforeach
                     </select>
-                    <div class="py-1"><small class="help-text mm-font text-muted">Unit ရှိလျှင်ထည့်ပါ။</small></div>
+                    
                     @error('unit')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -65,7 +65,7 @@
                         <option value="{{ $brand->id }}" {{ $item->brand_id == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
                         @endforeach
                     </select>
-                    <div class="py-1"><small class="help-text mm-font text-muted">Brand ရှိလျှင်ထည့်ပါ။</small></div>
+                   
                     @error('brand')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -77,7 +77,7 @@
                         <span class="text-danger">**</span>
                     </label>
                     <search-or-create url="types" name="type"></search-or-create>
-                    <div class="py-1"><small class="help-text mm-font text-muted">အမျိုးအစား ထည့်ပါ။</small></div>
+            
                     @error('type')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -100,9 +100,13 @@
             <media-upload :images="{{ $item->medias()->pluck('id') }}" type="item" priority="check"></media-upload>
         </div>
 
-        <div class="py-3 px-2">
-            <div class="form-group">
+        <div class="py-3 px-2 d-flex">
+            <div class="form-group me-2">
                 <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-save me-2"></i>Save</button>
+            </div>
+            <div class="form-group me-2">
+                <a href="#add-stock-modal-{{ $item->id }}" class="btn btn-sm btn-secondary" data-bs-toggle="modal"><i class="fa fa-plus me-2"></i>Add Stock</a>
+                <stock :item="{{ $item }}" :suppliers="{{ $suppliers }}"></stock>
             </div>
         </div>
 
