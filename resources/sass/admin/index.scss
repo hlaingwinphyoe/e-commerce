@@ -38,3 +38,24 @@
     max-width: 150px;
     max-height: 75px;
 }
+
+//nav-tabs 
+.site-nav-tabs {
+    border-bottom: 3px solid $side-bg;
+
+    .nav-item .nav-link {
+        position: relative;
+
+        &.active {
+            &::after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 3px;
+                background: $primary-light;
+                left: 0;
+                bottom: -3px;
+            }
+        }
+    }
+}

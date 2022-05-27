@@ -8,13 +8,13 @@
 <ul class="app-menu nav">
     <!-- General -->
     <li class="nav-item w-100">
-        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark">Website Create</span>
+        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark">{{__('menu.website_create')}}</span>
     </li>
 
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is('admin') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}" title="Dashboard">
             <i class="app-menu__icon fa fa-tachometer-alt mr-2"></i>
-            <span class="app-menu__label ms-1 sidebar-label">Dashboard</span>
+            <span class="app-menu__label ms-1 sidebar-label">{{__('menu.dashboard')}}</span>
         </a>
     </li>
     <li class="nav-item w-100">
@@ -23,49 +23,108 @@
             <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.home')}}</span>
         </a>
     </li>
+    @if(auth()->user()->role->hasPermission('access-slide'))
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/slides','admin/slides/*']) || request()->is(['admin/mainfeatures','admin/mainfeatures/*']) ? 'active' : '' }}" href="{{ route('admin.slides.index') }}" title="Home Feature">
+            <i class="app-menu__icon fa fa-image mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label">Home Feature</span>
+        </a>
+    </li>
+    @endif
+    @if(auth()->user()->role->hasPermission('access-faq'))
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/faqs','admin/faqs/*']) ? 'active' : '' }}" href="{{ route('admin.faqs.index') }}" title="FAQs">
+            <i class="app-menu__icon far fa-question-circle mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label">FAQs</span>
+        </a>
+    </li>
+    @endif
+
+    <!-- Web Order -->
+    @if(auth()->user()->role->hasPermissions(['access-order']))
+    <li class="nav-item w-100">
+        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">Web Order</span>
+    </li>
+    @endif
+    @if(auth()->user()->role->hasPermission('access-order'))
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/orders','admin/orders/*']) ? 'active' : '' }}" href="{{ route('admin.orders.index') }}" title="Orders">
+            <i class="app-menu__icon fa fa-clipboard-list mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.orders')}}</span>
+            <?php
+            $noti_count = auth()->user()->unreadNotifications()->count();
+            ?>
+            <span class="ms-2 badge bg-secondary rounded d-inline">{{ $noti_count }}</span>
+        </a>
+    </li>
+    @endif
+
+    <!-- POS -->
+    @if(auth()->user()->role->hasPermissions(['access-order']))
+    <li class="nav-item w-100">
+        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark ">{{__('menu.pos')}}</span>
+    </li>
+    @endif
+
+    @if(auth()->user()->role->hasPermission('access-order'))
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/pos/create']) ? 'active' : '' }}" target="_blank" href="{{ route('admin.pos.create') }}" title="POS">
+            <i class="app-menu__icon fa fa-plus mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.sales')}}</span>
+        </a>
+    </li>
+
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.pos.index') ? 'active' : '' }}" href="{{ route('admin.pos.index') }}" title="Orders">
+            <i class="app-menu__icon fa fa-clipboard-list mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.sale_lists')}}</span>
+        </a>
+    </li>
+    @endif
+
     <!-- Create -->
     <li class="nav-item w-100">
-        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark">Create</span>
+        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark">{{__('menu.create')}}</span>
     </li>
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['/admin/items/', '/admin/items/*']) ? 'active' : '' }}" href="{{ route('admin.items.index') }}" title="Item">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.items.*') ? 'active' : '' }}" href="{{ route('admin.items.index') }}" title="Item">
             <i class="app-menu__icon fa fa-stream mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label">{{ __('menu.item') }}</span>
         </a>
     </li>
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is('admin') ? 'active' : '' }}" href="{{ route('admin.types.index') }}" title="Dashboard">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.types.*') ? 'active' : '' }}" href="{{ route('admin.types.index') }}" title="Dashboard">
             <i class="app-menu__icon fa fa-stream mr-2"></i>
-            <span class="app-menu__label ms-1 sidebar-label">Category</span>
+            <span class="app-menu__label ms-1 sidebar-label">{{__('menu.category')}}</span>
         </a>
     </li>
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is('admin') ? 'active' : '' }}" href="{{ route('admin.brands.index') }}" title="Dashboard">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->RouteIs('admin.brands.*') ? 'active' : '' }}" href="{{ route('admin.brands.index') }}" title="Dashboard">
             <i class="app-menu__icon fa fa-star mr-2"></i>
-            <span class="app-menu__label ms-1 sidebar-label">Brand</span>
+            <span class="app-menu__label ms-1 sidebar-label">{{__('menu.brand')}}</span>
         </a>
     </li>
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is('admin') ? 'active' : '' }}" href="{{ route('admin.suppliers.index') }}" title="Dashboard">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->RouteIs('admin.suppliers.*') ? 'active' : '' }}" href="{{ route('admin.suppliers.index') }}" title="Dashboard">
             <i class="app-menu__icon fa fa-users mr-2"></i>
-            <span class="app-menu__label ms-1 sidebar-label">Suppliers</span>
+            <span class="app-menu__label ms-1 sidebar-label">{{__('menu.suppliers')}}</span>
         </a>
     </li>
 
     <!-- Debts -->
     @if(auth()->user()->role->hasPermissions(['access-inventory', 'access-stock']))
     <li class="nav-item w-100">
-        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">Inventory</span>
+        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.inventory')}}</span>
     </li>
     <li class="nav-item w-100 d-none">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/inventories','admin/inventories/*']) ? 'active' : '' }}" href="{{ route('admin.inventories.index') }}" title="Inventories">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.inventories.*') ? 'active' : '' }}" href="{{ route('admin.inventories.index') }}" title="Inventories">
             <i class="app-menu__icon fa fa-dolly-flatbed mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.purchase')}}</span>
         </a>
     </li>
     @if(auth()->user()->role->hasPermission('access-stock'))
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/skus','admin/skus/*']) ? 'active' : '' }}" href="{{ route('admin.skus.index') }}" title="Low Stock Skus">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.skus.*') ? 'active' : '' }}" href="{{ route('admin.skus.index') }}" title="Low Stock Skus">
             <i class="app-menu__icon fa fa-battery-quarter mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.stocks')}}</span>
         </a>
@@ -96,7 +155,6 @@
     </li>
     @endif
 
-
     @if(auth()->user()->role->hasPermission('access-delivery'))
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/deliveries','admin/deliveries/*']) ? 'active' : '' }}" href="{{ route('admin.deliveries.index') }}" title="Deliveries">
@@ -116,19 +174,19 @@
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/countries','admin/countries/*']) ? 'active' : '' }}" href="{{ route('admin.countries.index') }}" title="Regions">
             <i class="app-menu__icon fa fa-globe mr-2"></i>
-            <span class="app-menu__label ms-1 sidebar-label">Countries</span>
+            <span class="app-menu__label ms-1 sidebar-label">{{__('menu.country')}}</span>
         </a>
     </li>
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/regions','admin/regions/*']) ? 'active' : '' }}" href="{{ route('admin.regions.index') }}" title="Regions">
             <i class="app-menu__icon fa fa-arrows-alt mr-2"></i>
-            <span class="app-menu__label ms-1 sidebar-label">Regions</span>
+            <span class="app-menu__label ms-1 sidebar-label">{{__('menu.region')}}</span>
         </a>
     </li>
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/townships','admin/townships/*']) ? 'active' : '' }}" href="{{ route('admin.townships.index') }}" title="Townships">
             <i class="app-menu__icon fa fa-at mr-2"></i>
-            <span class="app-menu__label ms-1 sidebar-label">Townships</span>
+            <span class="app-menu__label ms-1 sidebar-label">{{__('menu.township')}}</span>
         </a>
     </li>
     @endif
@@ -136,7 +194,7 @@
     <!-- User Control -->
     @if(auth()->user()->role->hasPermissions(['access-user', 'access-customer']))
     <li class="nav-item w-100">
-        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark">User Control</span>
+        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark">{{__('menu.user_control')}}</span>
     </li>
     @endif
 
@@ -152,26 +210,26 @@
     <!-- Profile Setting -->
     @if(auth()->user()->role->hasPermissions(['access-role', 'access-user']))
     <li class="nav-item w-100">
-        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark">Profile Setting</span>
+        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark">{{__('menu.profile_setting')}}</span>
     </li>
     @endif    
 
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is('admin/staffs/*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}" title="Item">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}" title="Item">
             <i class="app-menu__icon fa fa-user-shield mr-2"></i>
-            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">Staff</span>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.staff')}}</span>
         </a>
     </li>
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is('admin/roles/*') ? 'active' : '' }}" href="{{ route('admin.roles.index') }}" title="Type">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}" href="{{ route('admin.roles.index') }}" title="Type">
             <i class="app-menu__icon fa fa-circle-notch mr-2"></i>
-            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">Role</span>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.role')}}</span>
         </a>
     </li>
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is('admin/profiles/*') ? 'active' : '' }}" href="{{ route('admin.profiles.index') }}" title="Unit">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.profiles.*') ? 'active' : '' }}" href="{{ route('admin.profiles.index') }}" title="Unit">
             <i class="app-menu__icon fa fa-user-cog mr-2"></i>
-            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">Profile</span>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.profile')}}</span>
         </a>
     </li>
 
