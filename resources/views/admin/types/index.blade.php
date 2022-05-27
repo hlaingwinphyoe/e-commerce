@@ -44,15 +44,6 @@
         @endif
         <form action="{{ route('admin.types.index') }}" class="d-flex responsive-flex d-none">
             <input type="hidden" name="disabled" value="{{ request('disabled') }}">
-            <div class="form-group me-2">
-                <select name="maintype" class="form-select">
-                    <option value="">Select Main Category</option>
-                    @forelse($maintypes as $maintype)
-                    <option value="{{ $maintype->id }}" {{ request('maintype') == $maintype->id ? 'selected' : '' }}>{{ $maintype->name }}</option>
-                    @empty
-                    @endforelse
-                </select>
-            </div>
             <div class="form-group">
                 <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
                 <a href="{{ route('admin.types.index') }}" class="btn btn-sm btn-primary">

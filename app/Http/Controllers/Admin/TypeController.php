@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\Maintype;
 use App\Models\Type;
 use Illuminate\Support\Str;
 
@@ -25,23 +24,17 @@ class TypeController extends Controller
 
         $categories = Type::where('parent_id', 0)->orderBy('name')->get();
 
-        $maintypes = Maintype::orderBy('name')->get();
-
         return view('admin.types.index')->with([
             'types' => $types,
-            'maintypes' => $maintypes,
             'categories' => $categories
         ]);
     }
 
     public function create()
     {
-        $maintypes = Maintype::orderBy('slug')->get();
-
         $types = Type::where('parent_id', 0)->orderBy('name')->get();
 
         return view('admin.types.create')->with([
-            'maintypes' => $maintypes,
             'types' => $types
         ]);
     }
@@ -50,7 +43,6 @@ class TypeController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:types,name',
-            // 'maintype' => 'required'
         ]);
 
         $type = Type::create([
@@ -60,11 +52,6 @@ class TypeController extends Controller
             'parent_id' => $request->parent_id ?? 0,
             'user_id' => auth()->user()->id
         ]);
-
-        $maintype = Maintype::first();
-        if ($maintype) {
-            $type->maintypes()->sync($maintype->id);
-        }
 
         if ($request->featured) {
             $type->medias()->sync($request->featured);
@@ -85,13 +72,10 @@ class TypeController extends Controller
 
     public function edit(Type $type)
     {
-        $maintypes = Maintype::orderBy('slug')->get();
-
         $types = Type::where('id', '!=', $type->id)->where('parent_id', 0)->orderBy('name')->get();
 
         return view('admin.types.edit')->with([
             'type' => $type,
-            'maintypes' => $maintypes,
             'types' => $types
         ]);
     }
@@ -102,7 +86,6 @@ class TypeController extends Controller
 
         $request->validate([
             'name' => 'required',
-            // 'maintype' => 'required'
         ]);
 
         $type->update([
@@ -112,8 +95,6 @@ class TypeController extends Controller
             'parent_id' => $request->parent_id ?? $type->parent_id,
             'user_id' => auth()->user()->id
         ]);
-
-        // $type->maintypes()->sync($request->maintype);
 
         if ($request->featured) {
             $type->medias()->sync($request->featured);

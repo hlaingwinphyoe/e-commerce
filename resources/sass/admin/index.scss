@@ -1,10 +1,40 @@
 .help-text {
     font-size: 80%;
 }
+
 .help-text.mm-font {
     font-size: 65%;
 }
 
+// serch results
+.absolute-box {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+}
+
+.results {
+    max-height: 150px;
+    overflow: auto;
+    .nav .nav-item .nav-link {
+        @include transition(all .3s linear);
+        color: $color;
+        &:hover {
+            background-color: $sidebar-dark;
+        }
+    }
+}
+
+//input width
+.qty-input {
+    min-width: 65px;
+}
 .page-title {
     font-weight: bold;
+}
+
+//image
+.featured-img {
+    max-width: 150px;
+    max-height: 75px;
 }

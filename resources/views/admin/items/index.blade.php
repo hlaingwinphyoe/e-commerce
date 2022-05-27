@@ -10,7 +10,6 @@
 
 <div>
     <h2 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.item')}}</h2>
-    <p>Showing {{ $items->count() }} of total {{ $items->total() }} results.</p>
 </div>
 
 @include('components.admin.message')
@@ -23,53 +22,6 @@
 </div>
 @endif
 
-<!-- filter -->
-<div class="d-flex flex-wrap mb-2">
-    @if(auth()->user()->role->hasPermission('create-item') && $item_count <= config('app.max_data')) <div class="me-2 mb-1">
-        <a href="{{ route('admin.items.create') }}" class="btn btn-sm btn-primary">
-            <small><i class="fa fa-plus"></i></small>
-            <span>Add New</span>
-        </a>
-</div>
-@endif
-
-<form action="{{ route('admin.items.index') }}" method="get" class="d-flex">
-    <div class="me-2 mb-1">
-        <select name="status" class="form-select">
-            <option value="">Select Status</option>
-            <option value="all">All</option>
-            <option value="disabled">Disabled</option>
-            <option value="trashed">Trashed</option>
-        </select>
-    </div>
-    <div class="me-2 mb-1">
-        <button id="apply-actions" class="btn btn-sm btn-outline-secondary" data-route="item">
-            <i class="fa fa-check me-2"></i>
-            <span>Apply</span>
-        </button>
-    </div>
-</form>
-
-<form action="{{ route('admin.items.index') }}" class="d-flex responsive-flex">
-    <input type="hidden" name="disabled" value="{{ request('disabled') }}">
-
-    <div class="form-group me-2">
-        <select name="type" class="form-select">
-            <option value="">Choose Category</option>
-            @foreach($types as $type)
-            <option value="{{ $type->id }}" {{ $type->id == request()->type? 'selected' : '' }}>{{ $type->name }}</option>
-            @endforeach
-        </select>
-    </div>
-
-    <div class="form-group">
-        <button class="btn btn-sm btn-outline-primary me-2 mb-1">Filter</button>
-        <a href="{{ route('admin.items.index') }}" class="btn btn-sm btn-primary mb-1">
-            <small><i class="fa fa-redo m-0"></i></small>
-        </a>
-    </div>
-</form>
-</div>
 
 <?php
 $query = '';
@@ -96,6 +48,59 @@ if (request('brand')) {
 }
 ?>
 
+<div class="border bg-white rounded px-2 py-4">
+    <p class="me-2"><span class="fw-bold h5">{{ $items->count() }}</span> of total <span class="">{{ $items->total() }}</span></p>
+    <div class="d-flex mb-3">
+        <!-- filter -->
+        <div class="d-flex flex-wrap mb-2">
+            @if(auth()->user()->role->hasPermission('create-item') && $item_count <= config('app.max_data')) <div class="me-2 mb-1">
+                <a href="{{ route('admin.items.create') }}" class="btn btn-sm btn-primary">
+                    <small class="me-2"><i class="fa fa-plus"></i></small>
+                    <span>Add New</span>
+                </a>
+                @endif
+        </div>
+
+
+        <form action="{{ route('admin.items.index') }}" method="get" class="d-flex">
+            <div class="me-2 mb-1">
+                <select name="status" class="form-select form-select-sm">
+                    <option value="">Select Status</option>
+                    <option value="all">All</option>
+                    <option value="disabled">Disabled</option>
+                    <option value="trashed">Trashed</option>
+                </select>
+            </div>
+            <div class="me-2 mb-1">
+                <button id="apply-actions" class="btn btn-sm btn-outline-secondary" data-route="item">
+                    <i class="fa fa-check me-2"></i>
+                    <span>Apply</span>
+                </button>
+            </div>
+        </form>
+
+        <form action="{{ route('admin.items.index') }}" class="d-flex responsive-flex">
+            <input type="hidden" name="disabled" value="{{ request('disabled') }}">
+
+            <div class="form-group me-2">
+                <select name="type" class="form-select form-select-sm">
+                    <option value="">Choose Category</option>
+                    @foreach($types as $type)
+                    <option value="{{ $type->id }}" {{ $type->id == request()->type? 'selected' : '' }}>{{ $type->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-sm btn-outline-primary me-2 mb-1">Filter</button>
+                <a href="{{ route('admin.items.index') }}" class="btn btn-sm btn-primary mb-1">
+                    <small><i class="fa fa-redo m-0"></i></small>
+                </a>
+            </div>
+        </form>
+    </div>
+
+</div>
 
 <div class="table-responsive">
     <table class="table table-borderless">
@@ -119,7 +124,7 @@ if (request('brand')) {
                 <td>{{ $item->type() ? $item->type()->name : '-' }}</td>
                 <td>
                     @if($item->skus->count() > 0)
-                    <a href="{{ route('admin.items.show', $item->id) }}" class="btn btn-sm btn-info mr-2 mb-1">
+                    <a href="{{ route('admin.items.show', $item->id) }}" class="btn btn-sm bg-white border shadow mb-1">
                         <span>{{ $item->skus->count() }}</span>
                     </a>
                     @else
@@ -140,6 +145,11 @@ if (request('brand')) {
                             <span><i class="fa fa-plus"></i></span>
                         </a>
                         @endif
+                        
+                        <a href="#add-stock-modal-{{ $item->id }}" data-bs-toggle="modal"><i class="fa fa-plus"></i></a>
+                        <stock :item="{{ $item }}"></stock>
+                
+
                         @if(auth()->user()->role->hasPermission('delete-item') && !$item->trashed())
                         <a href="#delete-modal-{{ $item->id }}" class="action-btn me-2 text-danger" data-bs-toggle="modal">
                             <span><i class="fas fa-trash"></i></span>
@@ -173,5 +183,9 @@ if (request('brand')) {
 <div class="paginate">
     {{ $items->appends(request()->query->all())->links('components.pagination') }}
 </div>
+</div>
+
+
+
 
 @endsection

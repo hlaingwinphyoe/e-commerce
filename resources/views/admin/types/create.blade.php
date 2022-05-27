@@ -37,25 +37,8 @@
                         @enderror
                     </div>
 
-                    <div class="form-group d-none">
-                        <label for="">
-                            Main Category
-                            <span class="text-danger">**</span>
-                        </label>
-                        <small class="help-text text-muted">Main Category ရွေးပါ။ ဖဖြစ်မနေထည့်ပါ။</small>
-                        <select name="maintype" class="form-select">
-                            <option value="">Select Main Category</option>
-                            @foreach($maintypes as $maintype)
-                            <option value="{{ $maintype->id }}" {{ old('maintype') == $maintype->id ? 'selected' : '' }}>{{ $maintype->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('maintype')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
                     <div class="form-group">
-                        <label for="">Sub Category</label>
+                        <label for="">Main Category</label>
                         <small class="help-text">အထက်တွင် level တဆင့် ရှိပါက ထည့်ပါ။</small>
                         <select name="parent_id" class="form-select">
                             <option value="">Select Sub Category</option>

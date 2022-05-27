@@ -65,7 +65,7 @@
             @endif
             <a href="/admin/inventories" class="btn btn-sm btn-outline-info">မှာယူပါမည်</a>
         </div>
-        <add-sku :inventory="{{ $inventory }}" :skus="{{ $inventory->skus()->with(['item'])->get() }}"></add-sku>
+        <!-- <add-sku :inventory="{{ $inventory }}" :skus="{{ $inventory->skus()->with(['item'])->get() }}"></add-sku> -->
     </div>
 
 

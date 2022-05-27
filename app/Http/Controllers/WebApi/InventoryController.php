@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\WebApi;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MaintypeController extends Controller
+class InventoryController extends Controller
 {
     //
 }

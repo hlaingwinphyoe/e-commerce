@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BarcodeController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ItemController;
 use App\Http\Controllers\Admin\LanguageController;
@@ -74,4 +75,7 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     });
 
     Route::resource('/roles', RoleController::class);
+
+    //barcode
+    Route::get('/print-barcodes/{sku}', [BarcodeController::class, 'show']);
 });

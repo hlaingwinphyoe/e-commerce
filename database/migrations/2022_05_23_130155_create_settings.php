@@ -149,19 +149,6 @@ class CreateSettings extends Migration
             $table->timestamps();
         });
 
-        Schema::create('maintypes', function (Blueprint $table) {
-            $table->id();
-            $table->string('slug')->unique();
-            $table->string('name');
-            $table->text('desc')->nullable();
-            $table->boolean('disabled')->default(0);
-            $table->integer('priority')->default(0);
-            $table->string('type')->nullable()->default('main-type');
-            $table->foreignId('parent_id')->default(0);
-            $table->foreignId('user_id');
-            $table->timestamps();
-        });
-
         Schema::create('types', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();

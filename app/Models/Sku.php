@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Traits\SkuTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use \Milon\Barcode\DNS1D;
 
 use App\Traits\SkuTrait;
 
