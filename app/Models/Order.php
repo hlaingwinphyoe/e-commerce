@@ -19,11 +19,6 @@ class Order extends Model
         return $this->belongsToMany(Sku::class, 'order_sku', 'order_id', 'sku_id')->withPivot(['qty', 'price', 'customized_price', 'buy_price', 'margin', 'status_id']);
     }
 
-    public function stockOrders()
-    {
-        return $this->hasMany(StockOrder::class, 'order_id', 'id');
-    }
-
     public function status()
     {
         return $this->belongsTo(Status::class, 'status_id');
@@ -126,7 +121,7 @@ class Order extends Model
     {
         $cancel = Status::where('slug', 'sku-cancelled')->first();
 
-        $total = $this->stockOrders->sum(function ($sku) use ($cancel) {
+        $total = $this->skus->sum(function ($sku) use ($cancel) {
             return $sku->status_id != $cancel->id ? $sku->price * $sku->qty : 0;
         });
 
@@ -169,7 +164,7 @@ class Order extends Model
 
         $accepted = Status::where('slug', 'order-accepted')->first();
 
-        foreach ($this->stockOrders as $stock) {
+        foreach ($this->skus as $stock) {
             if ($stock->status_id != $status->id) {
                 if ($stock->sku && $status->slug == 'sku-cancelled' && $stock->status_id === $accepted->id) {
                     $stock->sku->update(['stock' => $stock->sku->stock + $stock->qty]);
@@ -195,13 +190,13 @@ class Order extends Model
     public function updateOrderedStock($type = null)
     {
         if ($type && $type == 'add') {
-            foreach ($this->stockOrders as $stock) {
+            foreach ($this->skus as $stock) {
                 if ($stock->sku) {
                     $stock->sku->update(['stock' => $stock->sku->stock + $stock->qty]);
                 }
             }
         } else {
-            foreach ($this->stockOrders as $stock) {
+            foreach ($this->skus as $stock) {
                 if ($stock->sku) {
                     $stock->sku->update(['stock' => $stock->sku->stock - $stock->qty]);
                 }
@@ -227,7 +222,7 @@ class Order extends Model
         $bool = false;
 
         $status = Status::where('slug', 'pre-ordered')->first();
-        foreach ($this->stockOrders as $stock) {
+        foreach ($this->skus as $stock) {
             if ($stock->status_id == $status->id) {
                 $bool = true;
             }
@@ -246,7 +241,7 @@ class Order extends Model
     {
         $status = Status::where('slug', 'pre-ordered')->first();
 
-        return $this->stockOrders()->where('status_id', $status->id)->get();
+        return $this->skus()->where('status_id', $status->id)->get();
     }
 
     public function getPointsAttribute()
@@ -303,7 +298,7 @@ class Order extends Model
     public function getCost()
     {
         $status = Status::where('slug', 'order-accepted')->first();
-        return $this->stockOrders()->where('status_id', $status->id)->get()->reduce(function ($total, $sku) {
+        return $this->skus()->where('status_id', $status->id)->get()->reduce(function ($total, $sku) {
             return $total + ($sku->qty * $sku->buy_price);
         }, 0);
     }
@@ -427,7 +422,7 @@ class Order extends Model
         }
 
         if (request('sku')) {
-            $query->whereHas('stockOrders', function ($query) {
+            $query->whereHas('skus', function ($query) {
                 $query->whereHas('sku', function ($query) {
                     $query->where('id', request('sku'));
                 });
@@ -484,7 +479,7 @@ class Order extends Model
 
     public function getOrgAmountAttribute()
     {
-        return $this->stockOrders->reduce(function ($total, $sku) {
+        return $this->skus->reduce(function ($total, $sku) {
             return $total + $sku->buy_price;
         });
     }

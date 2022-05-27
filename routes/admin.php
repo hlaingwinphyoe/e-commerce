@@ -10,14 +10,33 @@ use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserProfileController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\InventoryController;
+use App\Http\Controllers\Admin\DiscountypeController;
+use App\Http\Controllers\Admin\RegionController;
+use App\Http\Controllers\Admin\CountryController;
+use App\Http\Controllers\Admin\TownshipController;
+use App\Http\Controllers\Admin\DeliFeeController;
+use App\Http\Controllers\Admin\DeliveryController;
+use App\Http\Controllers\Admin\SlideController;
+use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\MainFeatureController;
+
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\POSController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('/slides', SlideController::class);
+    Route::resource('/mainfeatures', MainFeatureController::class);
+    Route::get('/mainfeatures-toggle/{mainfeature}', [MainFeatureController::class, 'toggle'])->name('mainfeatures.toggle');
+    Route::resource('/faqs', FaqController::class);
+
     //switch lang
     Route::get('/langs/{lang}', [LanguageController::class, 'switchLang'])->name('langs.switch');
     //user profile
@@ -40,6 +59,25 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     Route::resource('/suppliers', SupplierController::class);
     Route::resource('/inventories', InventoryController::class);
 
+    //sku-history
+    Route::get('/skus', [SkuController::class, 'index'])->name('skus.index');
+    Route::get('/skus/{sku}', [SkuController::class, 'show'])->name('skus.show');
+    Route::patch('/skus/{sku}', [SkuController::class, 'update'])->name('skus.update');
+    Route::delete('/skus/{sku}', [SkuController::class, 'destroy'])->name('skus.destroy');
+
+    Route::resource('/inventories', InventoryController::class);
+
+    //discount
+    Route::resource('/discountypes', DiscountypeController::class);
+
+    //addresses
+    Route::resource('/regions', RegionController::class);
+    Route::resource('/countries', CountryController::class);
+    Route::resource('/townships', TownshipController::class);
+    Route::resource('/delifees', DeliFeeController::class);
+    Route::resource('/deliveries', DeliveryController::class);
+
+    //user control
     Route::resource('/customers', CustomerController::class);
 
     Route::resource('/users', UserController::class);
@@ -54,4 +92,14 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
 
     //barcode
     Route::get('/print-barcodes/{sku}', [BarcodeController::class, 'show']);
+
+    //order
+    Route::resource('/orders', OrderController::class);
+    Route::post('/update-order-delivery/{order}', [OrderController::class, 'updateDelivery'])->name('update-order-delivery');
+    Route::resource('/pos', POSController::class);
+
+    //sales
+    Route::resource('/sales', SaleController::class);
+    Route::get('/sales-print/{sale}', [SaleController::class, 'print'])->name('sales.print');
+    Route::get('/sales-excel', [SaleController::class, 'excel'])->name('sales.excel');
 });

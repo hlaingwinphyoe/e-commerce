@@ -25,10 +25,10 @@ class Region extends Model
         return $this->belongsTo(Country::class, 'country_id');
     }
 
-    // public function enabled_townships()
-    // {
-    //     return $this->townships()->where('disabled', 0);
-    // }
+    public function enabled_townships()
+    {
+        return $this->townships()->where('disabled', 0);
+    }
 
     //scope functions
     public function scopeFilterOn($query)

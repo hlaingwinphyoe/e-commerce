@@ -31,7 +31,8 @@ class InventoryController extends Controller
     {
         $inventory = Inventory::create([
             'supplier_id' => $request->supplier_id,
-            'date' => $request->date ?? now()
+            'date' => $request->date ?? now(),
+            'user_id' => auth()->user()->id
         ]);
 
         return redirect()->route('admin.inventories.edit', $inventory->id)->with('message', 'Successfully Created.');

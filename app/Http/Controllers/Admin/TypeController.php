@@ -10,6 +10,14 @@ use Illuminate\Support\Str;
 
 class TypeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permissions:access-type')->only(['index', 'show']);
+        $this->middleware('permissions:create-type')->only(['create', 'store']);
+        $this->middleware('permissions:edit-type')->only(['edit', 'update']);
+        $this->middleware('permissions:delete-type')->only('destroy');
+    }
+    
     public function index()
     {
         $types = Type::filterOn()->orderBy('priority')->orderBy('name')->paginate(20);

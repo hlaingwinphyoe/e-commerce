@@ -14,6 +14,14 @@ use Excel;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permissions:access-user')->only(['index', 'show']);
+        $this->middleware('permissions:create-user')->only(['create', 'store']);
+        $this->middleware('permissions:edit-user')->only(['edit', 'update']);
+        $this->middleware('permissions:delete-user')->only('destroy');
+    }
+    
     public function index()
     {
         $users = User::where('id', '!=', auth()->user()->id)->isType('Operation')->filterOn()->latest()->paginate(20);
