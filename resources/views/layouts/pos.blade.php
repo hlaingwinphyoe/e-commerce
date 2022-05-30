@@ -13,7 +13,7 @@
 </head>
 <body class="@yield('classes')">
     
-    <div id="admin" class="app">        
+    <div id="fse-admin" class="app">        
         <main class="app-content">
             <section class="content">
                 @yield('content')

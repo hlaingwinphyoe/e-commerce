@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\DB;
 
 class SkuController extends Controller
 {
+    public function index()
+    {
+        $skus = Sku::filterOn()->orderBy('stock')->get();
+
+        return response()->json($skus);
+    }
+
     public function getAttributes($id)
     {
         $sku = Sku::find($id);

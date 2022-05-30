@@ -24,6 +24,8 @@ return [
     'create' => 'Create',
     'item' => 'Item',
     'category' => 'Category',
+    'unit' => 'Unit',
+    'purchase' => 'Purchase',
     'brand' => 'Brand',
     'suppliers' => 'Suppliers',
 

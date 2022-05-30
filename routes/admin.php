@@ -56,6 +56,7 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
 
     Route::resource('/brands', BrandController::class);
     Route::resource('/suppliers', SupplierController::class);
+    Route::resource('/inventories', InventoryController::class);
 
     //sku-history
     Route::get('/skus', [SkuController::class, 'index'])->name('skus.index');
