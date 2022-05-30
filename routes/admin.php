@@ -22,7 +22,6 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\MainFeatureController;
 
 use App\Http\Controllers\Admin\CustomerController;
-use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\OrderController;

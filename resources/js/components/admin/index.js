@@ -10,6 +10,7 @@ import PermissionBox from "./permissions/PermissionBox.vue";
 import BarcodeGenerate from './barcode/BarcodeGenerate.vue';
 import Stock from './add-stocks/Stock.vue';
 import Purchase from './purchase/Purchase.vue';
+import PosIndex from './pos/PosIndex.vue';
 
 const app = createApp({
 //
@@ -24,5 +25,6 @@ app.component("permission-box", PermissionBox);
 app.component('barcode-generate', BarcodeGenerate);
 app.component('stock', Stock);
 app.component('purchase', Purchase);
+app.component('pos-index', PosIndex);
 
 app.mount('#fse-admin');

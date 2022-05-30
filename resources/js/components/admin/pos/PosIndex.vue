@@ -1,0 +1,508 @@
+<template>
+    <div class="pos-container">
+        
+       
+            <div class="row">
+                <!-- Find and add items -->
+                <div class="col-md-7 col-lg-8">
+                    <div class="px-2 mb-3 mt-2">
+                        <div
+                            class="disabled-container"
+                            :class="isSale ? 'disabled' : ''"
+                        >
+                            <search-bar
+                                :order="data_order"
+                                @on-add-sku="onAddSku"
+                            ></search-bar>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Actions -->
+                <div class="col-md-5 col-lg-4 px-1">
+                    <div class="pos-left">
+                        <!-- Search Order -->
+                        <order-search :order="data_order"></order-search>
+
+                        <!-- Content List -->
+                        <div
+                            class="disabled-container mb-1 pt-3"
+                            :class="isSale ? 'disabled' : ''"
+                        >
+                            <h5 class="fw-bold">
+                                <span>Your Item Lists</span>
+                                <span v-show="cus_name" class="ms-2"
+                                    >( {{ cus_name }} )</span
+                                >
+                            </h5>
+
+                            <div
+                                class="table-responsive"
+                                v-show="data_skus.length"
+                            >
+                                <table class="table mb-0">
+                                    <thead class="">
+                                        <tr>
+                                            <th width="300px">Name</th>
+                                            <th class="">Qty</th>
+                                            <th class="text-end" width="200px">
+                                                Amount
+                                            </th>
+                                            <th width="30px">
+                                                <small
+                                                    ><i class="fa fa-trash"></i
+                                                ></small>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <sku-list :skus="data_skus" @on-update-sku="onUpdateSku" @on-delete-sku="onDeleteSku"></sku-list>
+                                   <tfoot class="tfoot-small">
+                                        <tr>
+                                            <th colspan="" class="text-end">
+                                                Total
+                                            </th>
+                                            <th class="text-center">
+                                                {{
+                                                    Number(
+                                                        getTotalQty
+                                                    ).toLocaleString()
+                                                }}
+                                            </th>
+                                            <th class="text-end text-success">
+                                                {{
+                                                    Number(
+                                                        getTotal
+                                                    ).toLocaleString()
+                                                }}
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="" class="text-end">
+                                                Deli Fee
+                                            </th>
+                                            <th></th>
+                                            <th
+                                                class="text-end text-success"
+                                            >
+                                                <input type="text" class="form-control form-control-sm text-end fw-bold text-success" v-model="deli_fee" @change="onAddDeliFee">
+                                                <span class="d-none">{{ Number(data_order.deli_fee).toLocaleString()}}</span>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="" class="text-end">
+                                                Discount
+                                            </th>
+                                            <th>
+                                                <div class="input-group input-group-sm">
+                                                    <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        v-model="discount_amt"
+                                                        @change="onAddDiscount"
+                                                    />
+                                                    <select
+                                                        class="form-select"
+                                                        v-model="discount_status"
+                                                        @change="onAddDiscount"
+                                                    >
+                                                        <option
+                                                            v-for="status in statuses"
+                                                            :key="status.id"
+                                                            :value="status.id"
+                                                        >
+                                                            {{ status.name }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </th>
+                                            <th
+                                                class="text-end text-success"
+                                            >
+                                                {{
+                                                    Number(
+                                                        getDiscount
+                                                    ).toLocaleString()
+                                                }}
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="" class="text-end">
+                                                Sub Total
+                                            </th>
+                                            <th
+                                                colspan="2"
+                                                class="text-end text-success"
+                                            >
+                                                {{
+                                                    Number(
+                                                        getSubTotal
+                                                    ).toLocaleString()
+                                                }}
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="" class="text-end">
+                                                Pay Amount
+                                            </th>
+                                            <th
+                                                colspan="2"
+                                                class="text-end text-success"
+                                            >
+                                                {{
+                                                    Number(
+                                                        getPayAmount
+                                                    ).toLocaleString()
+                                                }}
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="" class="text-end">
+                                                To Pay
+                                            </th>
+                                            <th></th>
+                                            <th class="text-end text-success">
+                                                <div class="form-group">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Pay Amount"
+                                                        class="form-control form-control-sm text-end text-success fw-bold"
+                                                        v-model="form.amount"
+                                                        @change="onInputChange"
+                                                    />
+                                                    <small
+                                                        class="text-danger"
+                                                        v-show="is_exceed"
+                                                        >Exceed Maximum</small
+                                                    >
+                                                    <a :href="`/admin/pos/create?order_no=${order.id}`" class="small text-success">Calculate</a>
+                                                </div>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+            
+
+                        <!-- Make Payment -->
+                        <div class="border-top border-bottom pt-4 pb-2 mb-3">
+                            <div class="payment-container">
+                                <p class="mb-1">Pay With</p>
+                                <ul class="nav">
+                                    <li
+                                        class="nav-item paymentype-item"
+                                        :class="getClass(paymentype.id)"
+                                        v-for="paymentype in paymentypes"
+                                        :key="paymentype.id"
+                                    >
+                                        <a
+                                            href="#"
+                                            class="nav-link text-dark"
+                                            @click.prevent="
+                                                onSelectPayment(paymentype.id)
+                                            "
+                                            >{{ paymentype.name }}</a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Quick Buttons -->
+                        <div class="py-2 mb-3">
+                            <div>
+                                <a
+                                    href="#"
+                                    class="btn btn-primary me-2 mb-2"
+                                    @click.prevent="onMakeSale"
+                                >
+                                    <i class="fa fa-lock"></i>
+                                    <p class="mb-0">Save Sale</p>
+                                </a>
+
+                                <a
+                                    href="/admin/pos/create"
+                                    target="_blank"
+                                    class="btn btn-success me-2 mb-2 text-white"
+                                >
+                                    <i class="fa fa-plus"></i>
+                                    <p class="mb-0">New Sale</p>
+                                </a>
+
+                                <a
+                                    href="#"
+                                    target="_blank"
+                                    class="btn btn-danger me-2 mb-2 text-white"
+                                    :class="isSale ? 'disabled' : ''"
+                                    @click.prevent="onCancelOrder"
+                                >
+                                    <i class="fa fa-trash"></i>
+                                    <p class="mb-0">Void Order</p>
+                                </a>
+
+                                <a
+                                    :href="`/admin/sales-print/${order.id}`"
+                                    class="btn btn-dark me-2 mb-2"
+                                >
+                                    <i class="fa fa-print"></i>
+                                    <p class="mb-0">Print Slip</p>
+                                </a>
+
+                                <a
+                                    :href="`/save-invoice/${order.id}`"
+                                    class="btn btn-info me-2 mb-2"
+                                >
+                                    <i class="fa fa-receipt"></i>
+                                    <p class="mb-0">Save Invoice</p>
+                                </a>
+
+                                <a
+                                    :href="`/admin/pos/create?order_no=${order.id}`"
+                                    class="btn btn-outline-success me-2 mb-2"
+                                >
+                                    <i class="fa fa-redo"></i>
+                                    <p class="mb-0">Refresh</p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Customer Info -->
+                        <div class="border-top py-4">
+                            <h6 class="text-primary">Customer Information</h6>
+                            <customer-info
+                                :order="data_order"
+                                @on-save-customer="onSaveCustomer"
+                            ></customer-info>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</template>
+
+<script>
+import SearchBar from "./SearchBar.vue";
+import SkuList from "./skus/SkuList.vue";
+import SkuItem from "./skus/SkuItem.vue";
+import CustomerInfo from "./CustomerInfo.vue";
+import OrderSearch from "./OrderSearch.vue";
+export default {
+    components: {
+        "search-bar": SearchBar,
+        "sku-list": SkuList,
+        "sku-item": SkuItem,
+        "customer-info": CustomerInfo,
+        "order-search": OrderSearch,
+    },
+    props: {
+        order: { required: true },
+        skus: { required: true },
+        statuses: { required: true },
+    },
+    data() {
+        return {
+            search: window.location.search,
+            price_by_add_sku: "",
+            data_skus: this.skus,
+            isSale: this.order.status_id == 3,
+
+            data_orders: [],
+            data_order: this.order,
+            deli_fee: this.order.deli_fee,
+            discount_amt: this.order.discount_amt,
+            discount_status: this.statuses.length
+                ? this.statuses[0].id
+                : this.order.discount_status,
+            timeout: "",
+
+            //for payments
+            paymentypes: [],
+            is_exceed: false,
+            form: {
+                order_id: this.order.id,
+                paymentype_id: "",
+                amount: this.getBalance,
+            },
+            cus_name: this.order.customer.name,
+        };
+    },
+    created() {
+        axios
+            .get(`/wapi/statuses`, { params: { type: "payment-type" } })
+            .then((resp) => {
+                this.paymentypes = resp.data;
+                this.form.paymentype_id = this.paymentypes.length
+                    ? this.paymentypes[0].id
+                    : "";
+            });
+        this.form.amount = this.getBalance;
+    },
+    methods: {
+        onAddSku(data) {
+            this.data_skus = data;
+            this.price_by_add_sku = this.getTotal;
+            this.order.price = this.getTotal;
+        },
+        onUpdateSku(data) {
+            this.data_skus = data;
+            this.order.price = this.getTotal;
+        },
+        onDeleteSku(data) {
+            this.data_skus = data;
+            this.order.price = this.getTotal;
+        },
+        onMakeSale() {
+            let form = {
+                status: "completed",
+            };
+            axios.patch(`/wapi/orders/${this.order.id}`, form).then((resp) => {
+                this.isSale = true;
+                window.location = `/admin/sales-print/${this.order.id}`;
+            });
+        },
+        onCancelOrder() {
+            axios.patch(`/wapi/cancel-orders/${this.order.id}`).then((resp) => {
+                window.location = `/admin/pos/create`;
+            });
+        },
+        onAddDiscount() {
+            let data = {
+                amt: this.discount_amt,
+                status_id: this.discount_status,
+            };
+            axios
+                .post(`/wapi/order-discount/${this.order.id}`, data)
+                .then((resp) => {
+                    console.log(resp.data);
+                    this.data_order = resp.data;
+                    this.form.amount = this.getBalance;
+                });
+        },
+        onAddDeliFee() {
+            let data = {
+                deli_fee: this.deli_fee,
+            };
+            axios
+                .patch(`/wapi/order-deli-fee/${this.order.id}`, data)
+                .then((resp) => {
+                    this.deli_fee = resp.data.deli_fee;
+                    this.data_order = resp.data;
+                });
+        },
+        getClass(id) {
+            return this.form.paymentype_id == id ? "selected" : "";
+        },
+        onInputChange() {
+            if (Number(this.form.amount) > this.getBalance) {
+                this.form.amount = this.getBalance;
+                this.is_exceed = true;
+            } else {
+                this.is_exceed = false;
+            }
+        },
+        onSelectPayment(id) {
+            this.form.paymentype_id = id;
+            this.onMakePayment();
+        },
+        onMakePayment() {
+            axios.post(`/wapi/transactions`, this.form).then((resp) => {
+                this.data_order = resp.data;
+                this.form.amount = this.getBalance;
+                this.is_exceed = false;
+                this.isSale = resp.data.status_id == 3 ? true : false;
+                if (resp.data.status_id == 3) {
+                    window.location = `/admin/sales-print/${this.order.id}`;
+                }
+            });
+        },
+        onSaveCustomer(data) {
+            this.cus_name = data.customer.name;
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        },
+    },
+    computed: {
+        getTotalQty() {
+            return this.data_skus.reduce((total, x) => {
+                return total + x.qty;
+            }, 0);
+        },
+        getTotal() {
+            let total = this.data_skus.reduce((total, x) => {
+                return total + x.qty * x.price;
+            }, 0);
+            return total;
+        },
+        getDiscount() {
+            // 9 %, 10 fixed
+            return this.data_order.discount_status == 9
+                ? (this.data_order.price * this.data_order.discount_amt) / 100
+                : this.data_order.discount_amt;
+        },
+        getSubTotal() {
+            return this.getTotal - this.getDiscount + parseFloat(this.deli_fee);
+        },
+        getPayAmount() {
+            return this.data_order.transactions.reduce((total, x) => {
+                return x.status.slug == "in" ? total + x.amount : total;
+            }, 0);
+        },
+        getChange() {
+            return this.data_order.transactions.reduce((total, x) => {
+                return x.status.slug == "out" ? total + x.amount : total;
+            }, 0);
+        },
+        getBalance() {
+            var balance = this.getSubTotal - this.getPayAmount + this.getChange;
+            this.form.amount = balance;
+            return balance.toFixed(2);
+        },
+    },
+};
+</script>
+
+<style>
+.paymentype-item {
+    margin-bottom: 10px;
+    margin-left: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+}
+.paymentype-item .nav-link {
+    padding: 0.15rem 1rem;
+}
+.paymentype-item.selected {
+    border: 2px solid #000;
+    font-weight: bold;
+}
+.pos-container {
+    font-size: 0.85rem;
+}
+.disabled-container {
+    position: relative;
+}
+.disabled-container::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: -1;
+}
+.disabled-container.disabled::after {
+    z-index: 1;
+}
+.result-data {
+    max-height: 200px;
+    overflow: auto;
+    position: absolute;
+    z-index: 1;
+}
+</style>
