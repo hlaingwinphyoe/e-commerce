@@ -74,7 +74,7 @@ class POSController extends Controller
             ]);
         }
 
-        $skus = $order->get();
+        $skus = $order->skus()->get();
 
         $statuses = Status::isType('price')->orderBy('priority')->get();
 

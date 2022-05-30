@@ -1,7 +1,7 @@
 <template>
     <tr>
         <td>
-            <span class="no-overflow">{{ getName }}</span>
+            <span class="no-overflow">{{ sku.item_name }}</span>
             <p class="mb-0 small">{{ Number(sku.price).toLocaleString() }}</p>
         </td>
         <td class="">

@@ -16,15 +16,15 @@ class Type extends Model
     protected $appends = ['thumbnail'];
 
 
-    public function maintypes()
-    {
-        return $this->belongsToMany(Maintype::class,'main_type', 'type_id', 'maintype_id');
-    }
+    // public function maintypes()
+    // {
+    //     return $this->belongsToMany(Maintype::class,'main_type', 'type_id', 'maintype_id');
+    // }
 
-    public function maintype()
-    {
-        return $this->maintypes ? $this->maintypes->first() : '';
-    }
+    // public function maintype()
+    // {
+    //     return $this->maintypes ? $this->maintypes->first() : '';
+    // }
 
    
     public function parent_type()
@@ -64,16 +64,16 @@ class Type extends Model
     }
 
     //helper functions
-    public function hasMaintype($maintype)
-    {
-        $bool = false;
-        foreach($this->maintypes as $main) {
-            if($main->id == $maintype) {
-                $bool = true;
-            }
-        }
-        return $bool;
-    }
+    // public function hasMaintype($maintype)
+    // {
+    //     $bool = false;
+    //     foreach($this->maintypes as $main) {
+    //         if($main->id == $maintype) {
+    //             $bool = true;
+    //         }
+    //     }
+    //     return $bool;
+    // }
 
     public function hasParent($id)
     {

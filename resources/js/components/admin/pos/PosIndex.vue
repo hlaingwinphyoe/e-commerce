@@ -351,6 +351,7 @@ export default {
             this.order.price = this.getTotal;
         },
         onUpdateSku(data) {
+            console.log('here');
             this.data_skus = data;
             this.order.price = this.getTotal;
         },
