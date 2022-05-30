@@ -6,7 +6,7 @@
 
 @section('content')
 
-<x-admin.search-box url="{{ route('admin.skus.index') }}"></x-admin.search-box>
+<x-admin.search-box url="{{ route('admin.suppliers.index') }}"></x-admin.search-box>
 
 <div>
     <div class="d-flex flex-wrap mb-4">
