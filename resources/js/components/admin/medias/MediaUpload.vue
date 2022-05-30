@@ -13,7 +13,7 @@
       <div :class="type == 'category' ? 'col-9' : 'col-12'">
         <div id="feature-box" class="collapse show">
           <div class="box-body upload-btn-wrapper py-2">
-            <button class="upload-btn bg-light border w-auto text-primary">
+            <button class="upload-btn bg-light border w-auto text-primary mb-1">
               <span class="me-2 text-secondary action-btn"><i class="fas fa-images"></i></span>
               <small>ပုံတင်ရန် ဤနေရာကိုနှိပ်ပါ။</small>
             </button>
@@ -24,7 +24,7 @@
               multiple       
               @change="onChange($event.target.files)"
             />
-            <small class="form-text text-muted">jpg,jpeg,png,gif,webp (File Type) များသာလက်ခံပါသည်။</small>         
+            <small class="form-text text-muted">jpg, jpeg, png, gif, webp (File Type) များသာလက်ခံပါသည်။</small>         
             <small class="text-muted" v-if="priority">
               ပုံတစ်ပုံထက် ပို၍တင်ပါက အဓိကပုံအား ရွေးချယ်ပေးခဲ့ပါ။
             </small> 

@@ -1,6 +1,7 @@
 require('./bootstrap');
 window.Popper = require('@popperjs/core').withDefaults;
 window.$ = window.jQuery = require('jquery');
+require('./popper-min.js');
 require('bootstrap');
 window.htmlToImage = require('html-to-image');
 

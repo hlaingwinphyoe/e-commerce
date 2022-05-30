@@ -56,7 +56,7 @@ class SkuInventoryController extends Controller
         ]);
     }
 
-    public function delete($inventory, $sku)
+    public function destroy($inventory, $sku)
     {
         $inventory = Inventory::find($inventory);
 

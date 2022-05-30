@@ -76,7 +76,7 @@
                         Category
                         <span class="text-danger">**</span>
                     </label>
-                    <search-or-create url="types" name="type"></search-or-create>
+                    <search-or-create url="types" name="type" :input_obj="{{ $item->type() ? $item->type() : '' }}"></search-or-create>
             
                     @error('type')
                     <span class="text-danger">{{ $message }}</span>

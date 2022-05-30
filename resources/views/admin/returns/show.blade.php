@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'Inventory')
+@section('title', 'Return')
 
-@section('classes', 'admin admin-items admin-items-edit')
+@section('classes', 'admin admin-returns admin-returns-edit')
 
 @section('content')
 
@@ -13,7 +13,7 @@
         <a href="{{ request()->session()->get('prev_route') }}" class="btn btn-sm btn-primary me-2">
             <i class="fa fa-arrow-left"></i>
         </a>
-        <h4 class="page-title mb-0 me-2">Purchase</h4>
+        <h4 class="page-title mb-0 me-2">Return</h4>
     </div>
 
     <div class="row">
@@ -21,8 +21,8 @@
             <div class="bg-white shadow rounded px-2 py-3">
                 <table class="w-100 mb-3">
                     <tr>
-                        <td>Supplier - <span class="fw-bold">{{ $inventory->supplier ? $inventory->supplier->name : '' }}</span></td>
-                        <td class="text-end">Date - <span class="fw-bold">{{ Carbon\Carbon::parse($inventory->date)->format('M d, Y') }}</span> </td>
+                        <td>Order - <span class="fw-bold">{{ $return->order ? $return->order_id : '' }}</span></td>
+                        <td class="text-end">Date - <span class="fw-bold">{{ Carbon\Carbon::parse($return->date)->format('M d, Y') }}</span> </td>
                     </tr>
                 </table>
 
@@ -38,20 +38,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($inventory->skus as $index => $sku)
+                            @foreach($return->skus as $index => $sku)
                             <tr>
                                 <td>{{ ++$index }}</td>
                                 <td>{{ $sku->item_name }} {{ $sku->data ? "(" . $sku->data . ")" : '' }}</td>
                                 <td>{{ $sku->pivot->qty }}</td>
-                                <td class="text-end">{{ number_format($sku->pivot->amount) }}</td>
-                                <td class="text-end">{{ number_format($sku->pivot->amount  * $sku->pivot->qty) }}</td>
+                                <td class="text-end">{{ number_format($sku->pivot->price) }}</td>
+                                <td class="text-end">{{ number_format($sku->pivot->price  * $sku->pivot->qty) }}</td>
                             </tr>
                             @endforeach
                         </tbody>
                         <thead>
                             <tr>
                                 <th colspan="4" class="text-end">Total</th>
-                                <th class="text-end">{{ number_format($inventory->getAmount()) }}</th>
+                                <th class="text-end">{{ number_format($return->price) }}</th>
                             </tr>
                         </thead>
                     </table>

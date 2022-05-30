@@ -51,4 +51,5 @@ class AppReturn extends Model
             return $total + $sku->pivot->qty;
         },0);
     }
+
 }

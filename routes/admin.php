@@ -26,7 +26,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\POSController;
-
+use App\Http\Controllers\Admin\ReturnController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
@@ -63,6 +63,9 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     Route::get('/skus/{sku}', [SkuController::class, 'show'])->name('skus.show');
     Route::patch('/skus/{sku}', [SkuController::class, 'update'])->name('skus.update');
     Route::delete('/skus/{sku}', [SkuController::class, 'destroy'])->name('skus.destroy');
+
+    //return 
+    Route::resource('/returns', ReturnController::class);
 
     Route::resource('/inventories', InventoryController::class);
 

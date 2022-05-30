@@ -401,6 +401,10 @@ class Order extends Model
             $query->where('order_no', 'like', '%' . request('order_no'));
         }
 
+        if(request('q')) {
+            $query->where('order_no', 'like', '%' . request('q'). '%');
+        }
+
         if (request('from_date')) {
             $from_date = Carbon::parse(request('from_date'));
             $to_date = request('to_date') ? Carbon::parse(request('to_date')) : now();

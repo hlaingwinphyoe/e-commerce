@@ -35,6 +35,7 @@ return [
     'inventory' => 'Inventory',
     'purchase' => 'Purchase',
     'stocks' => 'Stocks',
+    'return' => 'Return',
 
     'discount_setting' => 'Discount Setting',
     'discounts' => 'Discounts',

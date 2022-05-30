@@ -9,6 +9,9 @@ use App\Http\Controllers\WebApi\ItemDiscountController;
 use App\Http\Controllers\WebApi\ItemPricingController;
 use App\Http\Controllers\WebApi\ItemSkuController;
 use App\Http\Controllers\WebApi\MediaController;
+use App\Http\Controllers\WebApi\OrderController;
+use App\Http\Controllers\WebApi\ReturnController;
+use App\Http\Controllers\WebApi\ReturnSkuController;
 use App\Http\Controllers\WebApi\SingleSkuController;
 use App\Http\Controllers\WebApi\SkuBarcodeController;
 use App\Http\Controllers\WebApi\SkuController;
@@ -77,4 +80,12 @@ Route::patch('/inventories/{inventory}', [InventoryController::class, 'update'])
 
 //sku-inventory
 Route::post('/sku-inventories/{inventory}', [SkuInventoryController::class, 'store']);
-Route::delete('/sku-inventories/{inventory}/{sku}', [SkuInventoryController::class, 'delete']);
+Route::delete('/sku-inventories/{inventory}/{sku}', [SkuInventoryController::class, 'destroy']);
+
+//returns
+Route::patch('/returns/{return}', [ReturnController::class, 'update']);
+Route::post('/return-skus/{return}', [ReturnSkuController::class, 'store']);
+Route::delete('/return-skus/{return}/{sku}', [ReturnSkuController::class, 'destroy']);
+
+//orders
+Route::get('/orders', [OrderController::class, 'index']);

@@ -123,7 +123,7 @@
         </a>
     </li>
     <!-- Debts -->
-    @if(auth()->user()->role->hasPermissions(['access-inventory', 'access-stock']))
+    @if(auth()->user()->role->hasPermissions(['access-inventory', 'access-stock', 'access-return']))
     <li class="nav-item w-100">
         <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.inventory')}}</span>
     </li>
@@ -141,6 +141,15 @@
         </a>
     </li>
     @endif
+    @if(auth()->user()->role->hasPermission('access-return'))
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.returns.*') ? 'active' : '' }}" href="{{ route('admin.returns.index') }}" title="Returns">
+            <i class="app-menu__icon fa fa-battery-quarter mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.return')}}</span>
+        </a>
+    </li>
+    @endif
+
     @endif  
 
     <!-- Discounts & Coupons -->

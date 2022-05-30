@@ -3,7 +3,7 @@
         <div id="feature-box" class="collapse show">
             <template v-if="!medias.length">
                 <div class="box-body upload-btn-wrapper py-2">
-                    <button class="upload-btn p-0">
+                    <button class="upload-btn p-0 mb-1">
                         <span class="me-2"
                             ><i class="fas fa-images"></i
                         ></span>
@@ -16,7 +16,7 @@
                         @change="onChange($event.target.files)"
                     />
                     <small class="text-muted mm-font"
-                        >jpg,jpeg,png,gif,webp (File Type) များသာလက်ခံပါသည်။</small
+                        >jpg, jpeg, png, gif, webp (File Type) များသာလက်ခံပါသည်။</small
                     >
                     <p class="mb-0 mm-font small text-danger">
                         Featured image နှင့်ပုံတူလျှင် မထည့်လည်းရပါသည်။

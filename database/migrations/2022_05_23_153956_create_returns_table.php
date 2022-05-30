@@ -15,7 +15,9 @@ class CreateReturnsTable extends Migration
     {
         Schema::create('returns', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id');
+            $table->foreignId('order_id')->nullable();
+            $table->integer('return_no')->nullable();
+            $table->string('return_month')->nullable();
             $table->date('date')->nullable();
             $table->text('remark')->nullable();
             $table->foreignId('user_id')->nullable();

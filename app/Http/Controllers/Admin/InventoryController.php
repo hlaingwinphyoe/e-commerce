@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Inventory;
 use App\Models\Supplier;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class InventoryController extends Controller
@@ -29,7 +30,15 @@ class InventoryController extends Controller
 
     public function store(Request $request)
     {
+        $inventory_month = Carbon::now()->format('ym');
+
+        $latest_inventory = Inventory::where('inventory_month', intval($inventory_month))->orderBy('inventory_no', 'desc')->first();
+
+        $inventory_no = $latest_inventory ? $latest_inventory->inventory_no + 1 : intval($inventory_month . '00001');
+
         $inventory = Inventory::create([
+            'inventory_no' => $inventory_no,
+            'inventory_month' => $inventory_month,
             'supplier_id' => $request->supplier_id,
             'date' => $request->date ?? now(),
             'user_id' => auth()->user()->id
