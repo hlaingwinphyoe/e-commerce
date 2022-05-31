@@ -4,7 +4,13 @@
        
             <div class="row">
                 <!-- Find and add items -->
-                <div class="col-md-7 col-lg-8">
+                <div class="col-md-7 col-lg-7">
+                    <div class="px-2 py-3">
+                        <a href="/admin/pos" class="btn btn-sm btn-primary">
+                            <i class="fa fa-arrow-left"></i>
+                            <span>Return to Sale Lists</span>
+                        </a>
+                    </div>                    
                     <div class="px-2 mb-3 mt-2">
                         <div
                             class="disabled-container"
@@ -19,8 +25,8 @@
                 </div>
 
                 <!-- Payment Actions -->
-                <div class="col-md-5 col-lg-4 px-1">
-                    <div class="pos-left">
+                <div class="col-md-5 col-lg-5 px-1">
+                    <div class="pos-left px-2 py-3 bg-sidebar border rounded">
                         <!-- Search Order -->
                         <order-search :order="data_order"></order-search>
 
@@ -351,6 +357,7 @@ export default {
             this.order.price = this.getTotal;
         },
         onUpdateSku(data) {
+            console.log('here');
             this.data_skus = data;
             this.order.price = this.getTotal;
         },

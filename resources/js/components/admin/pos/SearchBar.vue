@@ -1,6 +1,8 @@
 <template>
     <div class="bg-white">
-        <div class="search-bar-container search-bar bg-sidebar mb-3 px-2 py-3">
+        <div
+            class="search-bar-container search-bar bg-sidebar rounded border mb-3 px-2 py-3"
+        >
             <div class="row">
                 <div class="col-4 col-md-3 pe-1">
                     <div class="me-2 mb-2">
@@ -38,7 +40,7 @@
                         />
                     </div>
                 </div>
-                <div class="col-8 col-md-2">
+                <div class="col-8 col-md-2 d-none">
                     <div class="me-2 mb-2">
                         <label for="" class="text-muted">Qty</label>
                         <input
@@ -69,41 +71,43 @@
         </div>
 
         <!-- Results -->
-        <div class="bg-sidebar smooth-scroll px-1 py-2 position-relative">
+        <div
+            class="bg-sidebar border rounded smooth-scroll px-2 py-3 position-relative"
+        >
             <div v-show="!loaded" class="loading">
                 <span>Loading Data...</span>
             </div>
-            <ul class="nav">
-                <li class="nav-item text-end w-100">
+            <!-- new design -->
+            <div class="row">
+                <div class="col-12 text-end mb-1">
                     <a
                         href="#"
-                        class="text-danger px-2"
+                        class="btn btn-sm btn-outline-danger"
                         @click.prevent="onCloseSearch()"
                         ><i class="fa fa-times"></i
                     ></a>
-                </li>
-
-                <li
-                    class="nav-item w-responsive-25 mb-2"
+                </div>
+                <div
+                    class="col-6 col-md-4"
                     v-for="res in data_skus.data"
                     :key="res.id"
-                    :id="res.id"
+                    :res="res"
                 >
-                    <result-item
+                   <result-item
                         :res="res"
                         :order_id="order.id"
                         @on-selected-sku="onSelectedSku"
                     ></result-item>
-                </li>
-                <li v-if="page < data_skus.last_page" class="w-100 text-center">
+                </div>
+                <div class="col-12 text-center" v-if="page < data_skus.last_page">
                     <a
                         href="#"
                         class="btn btn-sm btn-outline-primary"
                         @click.prevent="onLoadMore"
                         >Load More</a
                     >
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -115,7 +119,7 @@ export default {
         "result-item": ResultItem,
     },
     props: {
-        order: { required: true }
+        order: { required: true },
     },
     data() {
         return {
@@ -150,13 +154,11 @@ export default {
     },
     methods: {
         getPopularData() {
-            axios
-                .get(`/wapi/popular-skus`)
-                .then((resp) => {
-                    this.popular_data = resp.data;
-                    this.data_skus = resp.data;
-                    this.loaded = true;
-                });
+            axios.get(`/wapi/popular-skus`).then((resp) => {
+                this.popular_data = resp.data;
+                this.data_skus = resp.data;
+                this.loaded = true;
+            });
         },
         onSelectCategory() {
             this.loaded = false;
@@ -305,7 +307,8 @@ export default {
     z-index: 1;
 }
 .featured-img {
-    max-height: 50px;
+    max-width: 100%;
+    max-height: 100px;
 }
 .nav-link.disabled {
     background-color: #c9c9c9 !important;

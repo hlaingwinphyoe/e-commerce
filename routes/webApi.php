@@ -9,7 +9,6 @@ use App\Http\Controllers\WebApi\ItemDiscountController;
 use App\Http\Controllers\WebApi\ItemPricingController;
 use App\Http\Controllers\WebApi\ItemSkuController;
 use App\Http\Controllers\WebApi\MediaController;
-use App\Http\Controllers\WebApi\OrderController;
 use App\Http\Controllers\WebApi\ReturnController;
 use App\Http\Controllers\WebApi\ReturnSkuController;
 use App\Http\Controllers\WebApi\SingleSkuController;
@@ -21,6 +20,12 @@ use App\Http\Controllers\WebApi\SkuPricingController;
 use App\Http\Controllers\WebApi\ValueController;
 use App\Http\Controllers\WebApi\TypeController;
 use App\Http\Controllers\WebApi\VariantController;
+use App\Http\Controllers\WebApi\StatusController;
+use App\Http\Controllers\WebApi\OrderController;
+use App\Http\Controllers\WebApi\TransactionController;
+use App\Http\Controllers\WebApi\MaintypeController;
+use App\Http\Controllers\WebApi\UserController;
+use App\Http\Controllers\WebApi\OrderSkuController;
 use Illuminate\Support\Facades\Route;
 
 Route::resource('/medias', MediaController::class);
@@ -45,6 +50,7 @@ Route::delete('/skus/{sku}', [SkuController::class, 'destroy']);
 Route::get('/sku-attributes/{sku}', [SkuController::class, 'getAttributes']);
 Route::get('/sku-variants/{sku}', [SkuController::class, 'getVariants']);
 Route::get('/make-sku/{item}', [SkuController::class, 'makeSku']);
+Route::get('/popular-skus', [SkuController::class, 'getPopular']);
 
 Route::post('/sku-medias/{sku}', [SkuMediaController::class, 'store']);
 
@@ -78,6 +84,8 @@ Route::patch('/sku-barcodes/{sku}', [SkuBarcodeController::class, 'update']);
 Route::get('/inventories/create', [InventoryController::class, 'create']);
 Route::patch('/inventories/{inventory}', [InventoryController::class, 'update']);
 
+
+
 //sku-inventory
 Route::post('/sku-inventories/{inventory}', [SkuInventoryController::class, 'store']);
 Route::delete('/sku-inventories/{inventory}/{sku}', [SkuInventoryController::class, 'destroy']);
@@ -87,5 +95,30 @@ Route::patch('/returns/{return}', [ReturnController::class, 'update']);
 Route::post('/return-skus/{return}', [ReturnSkuController::class, 'store']);
 Route::delete('/return-skus/{return}/{sku}', [ReturnSkuController::class, 'destroy']);
 
+//pos
+Route::get('/statuses', [StatusController::class, 'index']);
+
 //orders
 Route::get('/orders', [OrderController::class, 'index']);
+Route::patch('/orders/{order}', [OrderController::class, 'update']);
+Route::get('/get-balance/{order}', [OrderController::class, 'getBalance']);
+Route::get('/get-orders', [OrderController::class, 'getOrders']);
+Route::patch('/cancel-orders/{order}', [OrderController::class, 'cancelOrder']);
+Route::patch('/save-customer/{order}', [OrderController::class, 'saveCustomer']);
+Route::post('/order-discount/{order}', [OrderController::class, 'addDiscount']);
+Route::patch('/order-deli-fee/{order}', [OrderController::class, 'addDeliFee']);
+
+//transactions
+Route::resource('/transactions', TransactionController::class);
+
+//resource routes
+Route::resource('/types', TypeController::class);
+Route::get('/type-skus/{type}', [TypeController::class, 'getSkus']);
+
+//order-sku
+Route::post('/order-skus/{order}', [OrderSkuController::class, 'store']);
+Route::patch('/order-skus/{order}/{sku}', [OrderSkuController::class, 'update']);
+Route::delete('/order-skus/{order}/{sku}', [OrderSkuController::class, 'destroy']);
+
+//users
+Route::get('/users', [UserController::class, 'index']);

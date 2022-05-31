@@ -20,7 +20,7 @@ class FaqController extends Controller
 
     public function index()
     {
-        $faqs = Faq::latest()->paginate(20);
+        $faqs = Faq::filterOn()->latest()->paginate(20);
         return view('admin.faqs.index', compact('faqs'));
     }
 
