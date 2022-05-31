@@ -9,35 +9,24 @@
 <x-admin.search-box url="{{ route('admin.townships.index') }}"></x-admin.search-box>
 
 <div>
-    <div class="d-flex flex-wrap mb-4">
-        <h4 class="page-title mb-0 me-2">Townships</h4>
-        <span class="text-muted form-text">( Showing {{ $townships->count() }} of total {{ $townships->total() }} records )</span>
-    </div>
+    <h3 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.township')}}</h3>
+</div>
 
-    <div class="d-flex flex-wrap mb-2">
-        <div class="me-2 mb-3">
-            <a href="{{ route('admin.townships.create') }}" class="btn btn-sm btn-primary">
-                <small><i class="fa fa-plus"></i></small>
-                <span>Add New</span>
-            </a>
-        </div>
-        <div class="me-2 mb-3">
-            <select id="actions" name="action" class="form-select">
-                <option value="">Select action</option>
-                <option value="delete">Delete</option>
-                {{-- <option value="disabled">Disabled</option>
-                <option value="enabled">Enabled</option> --}}
-            </select>
-        </div>
-        <div class="me-2 mb-3">
-            <button id="apply-actions" class="btn btn-sm btn-outline-secondary" data-route="township">
-                <i class="fa fa-check me-2"></i>
-                <span>Apply</span>
-            </button>
+@include('components.admin.message')
+
+<div class="border bg-white rounded px-2 py-4">
+    <p class="me-2"><span class="fw-bold h5">{{ $townships->count() }}</span> of total <span class="">{{ $townships->total() }}</span></p>
+
+    <div class="d-flex mb-3">
+        <div class="d-flex flex-wrap mb-2">
+            <div class="me-2 mb-3">
+                <a href="{{ route('admin.townships.create') }}" class="btn btn-sm btn-primary">
+                    <small><i class="fa fa-plus"></i></small>
+                    <span>Add New</span>
+                </a>
+            </div>
         </div>
     </div>
-
-    @include('components.admin.message')
 
     <ul class="nav site-nav-tabs mb-4">
         <li class="nav-item">
@@ -57,9 +46,6 @@
         <table class="table table-borderless">
             <thead class="">
                 <tr>
-                    <th>
-                        <input type="checkbox" id="check-all">
-                    </th>
                     <th>Name</th>
                     <th>MM_Name</th>
                     <th>Regions</th>
@@ -69,7 +55,6 @@
             <tbody>
                 @forelse($townships as $township)
                 <tr id="tr-{{ $township->id }}">
-                    <td><input type="checkbox" id="check-{{ $township->id }}" value="{{ $township->id }}"></td>
                     <td>{{ $township->name }}</td>
                     <td>{{ $township->mm_name ?? '-' }}</td>
                    
@@ -99,5 +84,4 @@
         {{ $townships->appends(request()->query->all())->links('components.pagination') }}
     </div>
 </div>
-<x-admin.delete-all url="/wapi/townships"></x-admin.delete-all>
 @endsection

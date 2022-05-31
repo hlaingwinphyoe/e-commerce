@@ -29,7 +29,13 @@ class Faq extends Model
     //scope functions
     public function scopeFilterOn($query)
     {
-        //
+        if (request('q')) {
+            $query->where('title', 'like', '%' . request('q') . '%');
+        }
+
+        if(request('faq_type')) {
+            $query->where('faq_type_id', request('faq_type'));
+        }
     }
 
     public function scopeIsType($query, $type)

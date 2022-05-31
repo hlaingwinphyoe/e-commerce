@@ -8,42 +8,28 @@
 
 <x-admin.search-box url="{{ route('admin.brands.index') }}"></x-admin.search-box>
 
-
 <div>
-    <div class="d-flex flex-wrap mb-4">
-        <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.brand')}}</h4>
-        <span class="text-muted form-text">( Showing {{ $brands->count() }} of total {{ $brands->total() }} records )</span>
+    <h3 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.brand')}}</h3>
+</div>
+
+@include('components.admin.message')
+
+<div class="border bg-white rounded px-2 py-4">
+    <p class="me-2"><span class="fw-bold h5">{{ $brands->count() }}</span> of total <span class="">{{ $brands->total() }}</span></p>
+
+    <div class="d-flex mb-3">
+        <div class="d-flex flex-wrap mb-2">
+            @if(auth()->user()->role->hasPermission('create-brand'))
+            <div class="me-2 mb-3">
+                <a href="{{ route('admin.brands.create') }}" class="btn btn-sm btn-primary">
+                    <small><i class="fa fa-plus"></i></small>
+                    <span>Add New</span>
+                </a>
+            </div>
+            @endif
+
+        </div>
     </div>
-
-    <div class="d-flex flex-wrap mb-2">
-        @if(auth()->user()->role->hasPermission('create-brand'))
-        <div class="me-2 mb-3">
-            <a href="{{ route('admin.brands.create') }}" class="btn btn-sm btn-primary">
-                <small><i class="fa fa-plus"></i></small>
-                <span>Add New</span>
-            </a>
-        </div>
-        @endif
-
-        @if(auth()->user()->role->hasPermission('delete-brand'))
-        <div class="me-2 mb-3">
-            <select id="actions" name="action" class="form-select">
-                <option value="">Select action</option>
-                <option value="delete">Delete</option>
-                <option value="disabled">Disabled</option>
-                <option value="enabled">Enabled</option>
-            </select>
-        </div>
-        <div class="me-2 mb-3">
-            <button id="apply-actions" class="btn btn-sm btn-outline-secondary" data-route="brand">
-                <i class="fa fa-check me-2"></i>
-                <span>Apply</span>
-            </button>
-        </div>
-        @endif
-    </div>
-
-    @include('components.admin.message')
 
     <ul class="nav site-nav-tabs mb-4 d-none">
         <li class="nav-item">
@@ -63,9 +49,6 @@
         <table class="table table-borderless">
             <thead class="">
                 <tr>
-                    <th>
-                        <input type="checkbox" id="check-all">
-                    </th>
                     <th>Name</th>
                     <th>Items</th>
                     <th>Link</th>
@@ -75,7 +58,6 @@
             <tbody>
                 @forelse($brands as $brand)
                 <tr id="tr-{{ $brand->id }}">
-                    <td><input type="checkbox" id="check-{{ $brand->id }}" value="{{ $brand->id }}"></td>
                     <td>{{ $brand->name }}</td>
                     <td>
                         @if($brand->items()->count())
@@ -121,7 +103,4 @@
         {{ $brands->appends(request()->query->all())->links('components.pagination') }}
     </div>
 </div>
-@if(auth()->user()->role->hasPermission('delete-brand'))
-<x-admin.delete-all url="/wapi/brands"></x-admin.delete-all>
-@endif
 @endsection

@@ -8,47 +8,54 @@
 
 <x-admin.search-box url="{{ route('admin.skus.index') }}"></x-admin.search-box>
 
-
 <div>
-    <div class="d-flex flex-wrap mb-2">
-        <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.stocks')}}</h4>
-        <span class="text-muted form-text">( Showing {{ $skus->count() }} of total {{ $skus->total() }} records )</span>
-    </div>
-    <p class="mb-4 bg-light small px-1 py-2">အနီရောင်ပြထားသော items များမှာ ရှိရမည့်လက်ကျန်ပမာဏထက် နည်းနေသော / stock ထပ်ဖြည့်ရန်လိုအပ်သော items များဖြစ်ပါသည်။</p>
+    <h3 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.stocks')}}</h3>
+</div>
 
-    <div class="d-flex flex-wrap">
-        <form action="{{ route('admin.skus.index') }}" class="d-flex responsive-flex">
-            <div class="form-group me-2">
-                <select name="type" class="form-select">
-                    <option value="">Select Category</option>
-                    @foreach($types as $type)
-                    <option value="{{ $type->id }}" {{ request('type') == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group me-2">
-                <select name="brand" class="form-select">
-                    <option value="">Select Brand</option>
-                    @foreach($brands as $brand)
-                    <option value="{{ $brand->slug }}" {{ request('brand') == $brand->slug ? 'selected' : '' }}>{{ $brand->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group me-2">
-                <select name="status" class="form-select">
-                    <option value="">Select Status</option>
-                    <option value="instock" {{ request()->status == 'instock' ? 'selected' : '' }}>Instock</option>
-                    <option value="outofstock" {{ request()->status == 'outofstock' ? 'selected' : '' }}>Out of Stock</option>
-                </select>
-            </div>
+@include('components.admin.message')
 
-            <div class="form-group">
-                <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
-                <a href="{{ route('admin.skus.index') }}" class="btn btn-sm btn-primary">
-                    <small><i class="fa fa-redo"></i></small>
-                </a>
-            </div>
-        </form>
+@include('components.admin.errors')
+
+<div class="border bg-white rounded px-2 py-4">
+    <p class="me-2"><span class="fw-bold h5">{{ $skus->count() }}</span> of total <span class="">{{ $skus->total() }}</span></p>
+
+    <p class="mb-4 small px-1 pb-2">အနီရောင်ပြထားသော items များမှာ ရှိရမည့်လက်ကျန်ပမာဏထက် နည်းနေသော / stock ထပ်ဖြည့်ရန်လိုအပ်သော items များဖြစ်ပါသည်။</p>
+
+    <div class="d-flex mb-3">
+        <div class="d-flex flex-wrap mb-2">
+            <form action="{{ route('admin.skus.index') }}" class="d-flex responsive-flex">
+                <div class="form-group me-2">
+                    <select name="type" class="form-select">
+                        <option value="">Select Category</option>
+                        @foreach($types as $type)
+                        <option value="{{ $type->id }}" {{ request('type') == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group me-2">
+                    <select name="brand" class="form-select">
+                        <option value="">Select Brand</option>
+                        @foreach($brands as $brand)
+                        <option value="{{ $brand->slug }}" {{ request('brand') == $brand->slug ? 'selected' : '' }}>{{ $brand->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group me-2">
+                    <select name="status" class="form-select">
+                        <option value="">Select Status</option>
+                        <option value="instock" {{ request()->status == 'instock' ? 'selected' : '' }}>Instock</option>
+                        <option value="outofstock" {{ request()->status == 'outofstock' ? 'selected' : '' }}>Out of Stock</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
+                    <a href="{{ route('admin.skus.index') }}" class="btn btn-sm btn-primary">
+                        <small><i class="fa fa-redo"></i></small>
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
 
     <?php
@@ -78,17 +85,10 @@
         </div>
     </nav>
 
-    @include('components.admin.message')
-
-    @include('components.admin.errors')
-
     <div class="table-responsive">
         <table class="table table-borderless">
             <thead class="">
                 <tr>
-                    <th>
-                        <input type="checkbox" id="check-all">
-                    </th>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Cost</th>
@@ -100,7 +100,6 @@
             <tbody>
                 @forelse($skus as $sku)
                 <tr id="tr-{{ $sku->id }}">
-                    <td><input type="checkbox" id="check-{{ $sku->id }}" value="{{ $sku->id }}"></td>
                     <td>
                         <?php $item = $sku->item()->withTrashed()->first(); ?>
                         <p class="mb-0 {{ $sku->stock < $sku->min_stock ? 'text-danger' : '' }}">{{ $item ? $item->name : '-' }}<span class="text-primary">{{ $sku->data ? ' (' . $sku->data . ')' : '' }}</span></p>

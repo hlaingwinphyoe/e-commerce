@@ -9,47 +9,31 @@
 <x-admin.search-box url="{{ route('admin.suppliers.index') }}"></x-admin.search-box>
 
 <div>
-    <div class="d-flex flex-wrap mb-4">
-        <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.suppliers')}}</h4>
-        <span class="text-muted form-text">( Showing {{$suppliers->count()}} of total {{$suppliers->total()}} records )</span>
+    <h3 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.suppliers')}}</h3>
+</div>
+
+@include('components.admin.message')
+
+<div class="border bg-white rounded px-2 py-4">
+    <p class="me-2"><span class="fw-bold h5">{{ $suppliers->count() }}</span> of total <span class="">{{ $suppliers->total() }}</span></p>
+
+    <div class="d-flex mb-3">
+        <div class="d-flex flex-wrap mb-2">
+            @if(auth()->user()->role->hasPermission('create-supplier'))
+            <div class="me-2 mb-3">
+                <a href="{{ route('admin.suppliers.create') }}" class="btn btn-sm btn-primary">
+                    <small><i class="fa fa-plus"></i></small>
+                    <span>Add New</span>
+                </a>
+            </div>
+            @endif
+        </div>
     </div>
-
-    <div class="d-flex flex-wrap mb-2">
-        @if(auth()->user()->role->hasPermission('create-supplier'))
-        <div class="me-2 mb-3">
-            <a href="{{ route('admin.suppliers.create') }}" class="btn btn-sm btn-primary">
-                <small><i class="fa fa-plus"></i></small>
-                <span>Add New</span>
-            </a>
-        </div>
-        @endif
-
-        @if(auth()->user()->role->hasPermission('delete-supplier'))
-        <div class="me-2 mb-3">
-            <select id="actions" name="action" class="form-select">
-                <option value="">Select action</option>
-                <option value="delete">Delete</option>
-
-            </select>
-        </div>
-        <div class="me-2 mb-3">
-            <button id="apply-actions" class="btn btn-sm btn-outline-secondary">
-                <i class="fa fa-check me-2"></i>
-                <span>Apply</span>
-            </button>
-        </div>
-        @endif
-    </div>
-
-    @include('components.admin.message')
 
     <div class="table-responsive">
         <table class="table table-borderless">
             <thead class="">
                 <tr>
-                    <th>
-                        <input type="checkbox" id="check-all">
-                    </th>
                     <th>Supplier Name</th>
                     <th>Phone</th>
 
@@ -59,7 +43,6 @@
             <tbody>
                 @forelse($suppliers as $supplier)
                 <tr id="tr-{{ $supplier->id }}">
-                    <td><input type="checkbox" id="check-{{ $supplier->id }}" value="{{ $supplier->id }}"></td>
                     <td>{{ $supplier->name }}</td>
                     <td>{{ $supplier->phone }}</td>
 

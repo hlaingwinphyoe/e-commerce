@@ -8,52 +8,39 @@
 
 <x-admin.search-box url="{{ route('admin.types.index') }}"></x-admin.search-box>
 
-
 <div>
-    <div class="d-flex flex-wrap mb-2">
-        <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.category')}}</h4>
-        <span class="text-muted form-text">( Showing {{ $types->count() }} of total {{ $types->total() }} records )</span>
-    </div>
-    <p class="small bg-light text-secondary px-3 py-2">Priority စီလျှင် ငယ်ရာမှကြီးရာသို့ စီထားပါသည်။ (Eg. 0,1,2,3,4,... )</p>
+    <h3 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.category')}}</h3>
+</div>
 
-    <div class="d-flex flex-wrap mb-2">
-        @if(auth()->user()->role->hasPermission('create-type'))
-        <div class="me-2 mb-3">
-            <a href="{{ route('admin.types.create') }}" class="btn btn-sm btn-primary">
-                <small><i class="fa fa-plus"></i></small>
-                <span>Add New</span>
-            </a>
-        </div>
-        @endif
+@include('components.admin.message')
 
-        @if(auth()->user()->role->hasPermission('delete-type'))
-        <div class="me-2 mb-3">
-            <select id="actions" name="action" class="form-select">
-                <option value="">Select action</option>
-                <option value="delete">Delete</option>
-                <option value="disabled">Disabled</option>
-                <option value="enabled">Enabled</option>
-            </select>
-        </div>
-        <div class="me-2 mb-3">
-            <button id="apply-actions" class="btn btn-sm btn-outline-secondary" data-route="type">
-                <i class="fa fa-check me-2"></i>
-                <span>Apply</span>
-            </button>
-        </div>
-        @endif
-        <form action="{{ route('admin.types.index') }}" class="d-flex responsive-flex d-none">
-            <input type="hidden" name="disabled" value="{{ request('disabled') }}">
-            <div class="form-group">
-                <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
-                <a href="{{ route('admin.types.index') }}" class="btn btn-sm btn-primary">
-                    <small><i class="fa fa-redo"></i></small>
+<div class="border bg-white rounded px-2 py-4">
+    <p class="me-2"><span class="fw-bold h5">{{ $types->count() }}</span> of total <span class="">{{ $types->total() }}</span></p>
+
+    <p class="small text-secondary py-2">Priority စီလျှင် ငယ်ရာမှကြီးရာသို့ စီထားပါသည်။ (Eg. 0,1,2,3,4,... )</p>
+
+    <div class="d-flex mb-3">
+        <div class="d-flex flex-wrap mb-2">
+            @if(auth()->user()->role->hasPermission('create-type'))
+            <div class="me-2 mb-3">
+                <a href="{{ route('admin.types.create') }}" class="btn btn-sm btn-primary">
+                    <small><i class="fa fa-plus"></i></small>
+                    <span>Add New</span>
                 </a>
             </div>
-        </form>
-    </div>
+            @endif
 
-    @include('components.admin.message')
+            <form action="{{ route('admin.types.index') }}" class="d-flex responsive-flex d-none">
+                <input type="hidden" name="disabled" value="{{ request('disabled') }}">
+                <div class="form-group">
+                    <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
+                    <a href="{{ route('admin.types.index') }}" class="btn btn-sm btn-primary">
+                        <small><i class="fa fa-redo"></i></small>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <ul class="nav site-nav-tabs mb-4">
         <li class="nav-item">
@@ -73,9 +60,6 @@
         <table class="table table-borderless">
             <thead class="">
                 <tr>
-                    <th>
-                        <input type="checkbox" id="check-all">
-                    </th>
                     <th>Name</th>
                     <th>Parent</th>
                     <th>Items</th>
@@ -87,7 +71,6 @@
             <tbody>
                 @forelse($types as $type)
                 <tr id="tr-{{ $type->id }}">
-                    <td><input type="checkbox" id="check-{{ $type->id }}" value="{{ $type->id }}"></td>
                     <td>{{ $type->name }}</td>
                     <td>{{ $type->parent_type ? $type->parent_type->name : ' - ' }}</td>
                     <td>
@@ -142,7 +125,4 @@
         {{ $types->appends(request()->query->all())->links('components.pagination') }}
     </div>
 </div>
-@if(auth()->user()->role->hasPermission('delete-type'))
-<x-admin.delete-all url="/wapi/types"></x-admin.delete-all>
-@endif
 @endsection

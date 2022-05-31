@@ -8,66 +8,50 @@
 
 <x-admin.search-box url="{{ route('admin.customers.index') }}"></x-admin.search-box>
 
-
 <div>
-    <div class="d-flex flex-wrap mb-4">
-        <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.customer')}}</h4>
-        <span class="text-muted form-text">( Showing {{ $users->count() }} of total {{ $users->total() }} records )</span>
-    </div>
+    <h3 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.customer')}}</h3>
+</div>
 
-    <div class="d-flex flex-wrap mb-2">
+@include('components.admin.message')
 
-        @if(auth()->user()->role->hasPermission('create-user'))
-        <div class="me-2 mb-3">
-            <a href="{{ route('admin.customers.create') }}" class="btn btn-sm btn-primary">
-                <small><i class="fa fa-plus"></i></small>
-                <span>Add New</span>
-            </a>
-        </div>
-        @endif
+<div class="border bg-white rounded px-2 py-4">
+    <p class="me-2"><span class="fw-bold h5">{{ $users->count() }}</span> of total <span class="">{{ $users->total() }}</span></p>
 
-        @if(auth()->user()->role->hasPermission('delete-customer'))
-        <div class="me-2 mb-3">
-            <select id="actions" name="action" class="form-select">
-                <option value="">Select action</option>
-                <option value="delete">Delete</option>
+    <div class="d-flex mb-3">
+        <div class="d-flex flex-wrap mb-2">
 
-            </select>
-        </div>
-        <div class="me-2 mb-3">
-            <button id="apply-actions" class="btn btn-sm btn-outline-secondary">
-                <i class="fa fa-check me-2"></i>
-                <span>Apply</span>
-            </button>
-        </div>
-        @endif
-        <form action="{{ route('admin.customers.index') }}" class="d-flex responsive-flex">
-            <div class="form-group me-2">
-                <select name="role" class="form-select">
-                    <option value="">Select Roles</option>
-                    @foreach($roles as $role)
-                    <option value="{{ $role->id }}" {{ request('role') == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
-                <a href="{{ route('admin.customers.index') }}" class="btn btn-sm btn-primary">
-                    <small><i class="fa fa-redo"></i></small>
+            @if(auth()->user()->role->hasPermission('create-user'))
+            <div class="me-2 mb-3">
+                <a href="{{ route('admin.customers.create') }}" class="btn btn-sm btn-primary">
+                    <small><i class="fa fa-plus"></i></small>
+                    <span>Add New</span>
                 </a>
             </div>
-        </form>
-    </div>
+            @endif
 
-    @include('components.admin.message')
+            <form action="{{ route('admin.customers.index') }}" class="d-flex responsive-flex">
+                <div class="form-group me-2">
+                    <select name="role" class="form-select">
+                        <option value="">Select Roles</option>
+                        @foreach($roles as $role)
+                        <option value="{{ $role->id }}" {{ request('role') == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
+                    <a href="{{ route('admin.customers.index') }}" class="btn btn-sm btn-primary">
+                        <small><i class="fa fa-redo"></i></small>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <div class="table-responsive">
         <table class="table table-borderless">
             <thead class="">
                 <tr>
-                    <th>
-                        <input type="checkbox" id="check-all">
-                    </th>
                     <th>Name</th>
                     <th>Phone</th>
                     @if(auth()->user()->role->hasPermission('edit-customer'))
@@ -83,7 +67,6 @@
                 @forelse($users as $user)
                 @if(auth()->user()->hasRole('admin') || $user->role->slug != 'admin')
                 <tr id="tr-{{ $user->id }}">
-                    <td><input type="checkbox" id="check-{{ $user->id }}" value="{{ $user->id }}"></td>
                     <td>
                         <p class="mb-0">{{ $user->name }}</p>
                         <small class="text-primary">{{ $user->email }}</small>
@@ -131,7 +114,4 @@
         {{ $users->appends(request()->query->all())->links('components.pagination') }}
     </div>
 </div>
-@if(auth()->user()->role->hasPermission('delete-customer'))
-<x-admin.delete-all url="/wapi/users"></x-admin.delete-all>
-@endif
 @endsection
