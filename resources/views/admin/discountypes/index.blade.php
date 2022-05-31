@@ -9,45 +9,31 @@
 <x-admin.search-box url="{{ route('admin.discountypes.index') }}"></x-admin.search-box>
 
 <div>
-    <div class="d-flex flex-wrap mb-4">
-        <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.discounts')}}</h4>
-        <span class="text-muted form-text">( Showing {{ $discountypes->count() }} of total {{ $discountypes->total() }} records )</span>
-    </div>
+    <h3 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.discounts')}}</h3>
+</div>
 
-    <div class="d-flex flex-wrap mb-2">
-        @if(auth()->user()->role->hasPermission('create-discount-type'))
-        <div class="me-2 mb-3">
-            <a href="{{ route('admin.discountypes.create') }}" class="btn btn-sm btn-primary">
-                <small><i class="fa fa-plus"></i></small>
-                <span>Add New</span>
-            </a>
-        </div>
-        @endif
-        @if(auth()->user()->role->hasPermission('delete-discount-type'))
-        <div class="me-2 mb-3">
-            <select id="actions" name="action" class="form-select">
-                <option value="">Select action</option>
-                <option value="delete">Delete</option>
-            </select>
-        </div>
-        <div class="me-2 mb-3">
-            <button id="apply-actions" class="btn btn-sm btn-outline-secondary">
-                <i class="fa fa-check me-2"></i>
-                <span>Apply</span>
-            </button>
-        </div>
-        @endif
-    </div>
+@include('components.admin.message')
 
-    @include('components.admin.message')
+<div class="border bg-white rounded px-2 py-4">
+    <p class="me-2"><span class="fw-bold h5">{{ $discountypes->count() }}</span> of total <span class="">{{ $discountypes->total() }}</span></p>
+
+    <div class="d-flex mb-3">
+        <div class="d-flex flex-wrap mb-2">
+            @if(auth()->user()->role->hasPermission('create-discount-type'))
+            <div class="me-2 mb-3">
+                <a href="{{ route('admin.discountypes.create') }}" class="btn btn-sm btn-primary">
+                    <small><i class="fa fa-plus"></i></small>
+                    <span>Add New</span>
+                </a>
+            </div>
+            @endif
+        </div>
+    </div>
 
     <div class="table-responsive">
         <table class="table table-borderless">
             <thead class="">
                 <tr>
-                    <th>
-                        <input type="checkbox" id="check-all">
-                    </th>
                     <th>Name</th>
                     <th>Discounts</th>
                     <th>Amt</th>
@@ -59,7 +45,6 @@
             <tbody>
                 @forelse($discountypes as $discountype)
                 <tr id="tr-{{ $discountype->id }}">
-                    <td><input type="checkbox" id="check-{{ $discountype->id }}" value="{{ $discountype->id }}"></td>
                     <td>{{ $discountype->name }}</td>
                     <td>
                         @if($discountype->discounts()->count())
@@ -113,7 +98,4 @@
     </div>
 
 </div>
-@if(auth()->user()->role->hasPermission('delete-discount-type'))
-<x-admin.delete-all url="/wapi/discountypes"></x-admin.delete-all>
-@endif
 @endsection

@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\POSController;
 use App\Http\Controllers\Admin\ReturnController;
+use App\Http\Controllers\Admin\SkuWasteController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
@@ -63,6 +64,12 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     Route::get('/skus/{sku}', [SkuController::class, 'show'])->name('skus.show');
     Route::patch('/skus/{sku}', [SkuController::class, 'update'])->name('skus.update');
     Route::delete('/skus/{sku}', [SkuController::class, 'destroy'])->name('skus.destroy');
+    Route::post('/add-stock/{sku}', [SkuController::class, 'addStock'])->name('skus.add-stock');
+    Route::get('/reset-stock/{sku}', [SkuController::class, 'resetStock'])->name('skus.reset-stock');
+
+    //wastes
+    Route::post('/sku-wastes', [SkuWasteController::class, 'store'])->name('sku-wastes.store');
+    Route::post('/sku-gifts', [SkuWasteController::class, 'addGift'])->name('sku-gifts.store');
 
     //return 
     Route::resource('/returns', ReturnController::class);

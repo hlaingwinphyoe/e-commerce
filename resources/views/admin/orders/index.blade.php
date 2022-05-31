@@ -9,76 +9,62 @@
 <x-admin.search-box url="{{ route('admin.orders.index') }}"></x-admin.search-box>
 
 <div>
-    <div class="d-flex mb-2">
-        <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.orders')}}</h4>
-        <span class="text-muted form-text">( Showing {{ $orders->count() }} of total {{ $orders->total() }} records )</span>
-    </div>
+    <h3 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.orders')}}</h3>
+</div>
 
-    <div class="d-flex flex-wrap">
-        @if(auth()->user()->role->hasPermission('delete-order'))
-        <div class="me-2 mb-3">
-            <select id="actions" name="action" class="form-select">
-                <option value="">Select action</option>
-                <option value="delete">Delete</option>
-            </select>
+@include('components.admin.message')
+
+@include('components.admin.errors')
+
+<div class="border bg-white rounded px-2 py-4">
+    <p class="me-2"><span class="fw-bold h5">{{ $orders->count() }}</span> of total <span class="">{{ $orders->total() }}</span></p>
+
+    <div class="d-flex mb-3">
+        <div class="d-flex flex-wrap mb-2">
+            <form action="{{ route('admin.orders.index') }}" class="d-flex responsive-flex">
+
+                <div class="form-group me-2">
+                    <select name="delivery" class="form-select">
+                        <option value="">Select Delivery</option>
+                        @foreach($deliveries as $delivery)
+                        <option value="{{ $delivery->id }}" {{ request()->delivery == $delivery->id ? 'selected' : '' }}>{{ $delivery->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group me-2">
+                    <select name="status" class="form-select">
+                        <option value="">Select Status</option>
+                        @foreach($statuses as $status)
+                        @if($status->slug != 'confirmed')
+                        <option value="{{ $status->id }}" {{ request()->status == $status->id ? 'selected' : '' }}>{{ $status->name }}</option>
+                        @endif
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group me-2">
+                    <select name="delivery" class="form-select">
+                        <option value="">Select Delivery</option>
+                        @foreach($deliveries as $delivery)
+                        <option value="{{ $delivery->id }}" {{ request()->delivery == $delivery->id ? 'selected' : '' }}>{{ $delivery->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group me-2">
+                    <input type="date" name="from_date" class="form-control form-control-sm" value="{{ request('from_date') }}">
+                </div>
+                <div class="form-group me-2">
+                    <input type="date" name="to_date" class="form-control form-control-sm" value="{{ request('to_date') }}">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
+                    <a href="{{ route('admin.orders.index') }}" class="btn btn-sm btn-primary">
+                        <small><i class="fa fa-redo"></i></small>
+                    </a>
+                </div>
+            </form>
         </div>
-        <div class="me-2 mb-3">
-            <button id="apply-actions" class="btn btn-sm btn-outline-secondary">
-                <i class="fa fa-check me-2"></i>
-                <span>Apply</span>
-            </button>
-        </div>
-        @endif
-        <form action="{{ route('admin.orders.index') }}" class="d-flex flex-wrap">
-            <div class="form-group me-2">
-                <input type="text" name="customer" value="{{ request('customer') }}" class="form-control form-control-sm" placeholder="Search with name/phone">
-            </div>
-
-            <div class="form-group me-2">
-                <select name="delivery" class="form-select">
-                    <option value="">Select Delivery</option>
-                    @foreach($deliveries as $delivery)
-                    <option value="{{ $delivery->id }}" {{ request()->delivery == $delivery->id ? 'selected' : '' }}>{{ $delivery->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="form-group me-2">
-                <select name="status" class="form-select">
-                    <option value="">Select Status</option>
-                    @foreach($statuses as $status)
-                    @if($status->slug != 'confirmed')
-                    <option value="{{ $status->id }}" {{ request()->status == $status->id ? 'selected' : '' }}>{{ $status->name }}</option>
-                    @endif
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group me-2">
-                <select name="delivery" class="form-select">
-                    <option value="">Select Delivery</option>
-                    @foreach($deliveries as $delivery)
-                    <option value="{{ $delivery->id }}" {{ request()->delivery == $delivery->id ? 'selected' : '' }}>{{ $delivery->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group me-2">
-                <input type="date" name="from_date" class="form-control form-control-sm" value="{{ request('from_date') }}">
-            </div>
-            <div class="form-group me-2">
-                <input type="date" name="to_date" class="form-control form-control-sm" value="{{ request('to_date') }}">
-            </div>
-            <div class="form-group">
-                <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
-                <a href="{{ route('admin.orders.index') }}" class="btn btn-sm btn-primary">
-                    <small><i class="fa fa-redo"></i></small>
-                </a>
-            </div>
-        </form>
     </div>
-
-    @include('components.admin.message')
-
-    @include('components.admin.errors')
 
     <?php
     $query = '?';
@@ -98,9 +84,6 @@
         <table class="table table-borderless">
             <thead class="">
                 <tr>
-                    <th>
-                        <input type="checkbox" id="check-all">
-                    </th>
                     <th>Order No.</th>
                     <th>Customer</th>
                     <th>Price</th>
@@ -119,7 +102,6 @@
                 @forelse($orders as $order)
                 <?php $total = $order->return() ? $order->getSubTotal() - $order->return()->price : $order->getSubTotal(); ?>
                 <tr id="tr-{{ $order->id }}">
-                    <td><input type="checkbox" id="check-{{ $order->id }}" value="{{ $order->id }}"></td>
                     <td>
                         <p class="mb-0">{{ $order->order_number }}</p>
                     </td>
@@ -219,7 +201,4 @@
         {{ $orders->appends(request()->query->all())->links('components.pagination') }}
     </div>
 </div>
-@if(auth()->user()->role->hasPermission('delete-order'))
-<x-admin.delete-all url="/wapi/orders"></x-admin.delete-all>
-@endif
 @endsection
