@@ -7,13 +7,13 @@
         <td class="">
             <div class="d-flex align-items-center">
                 <a href="#" class="me-1 btn btn-sm count-buttons btn-outline-secondary" @click.prevent="onDecreaseQty"><span><i class="fa fa-minus"></i></span></a>
-                <input type="text" class="form-control form-control-sm me-1 text-center qty-input border-0" ref="qty" disabled :value="sku.qty">
+                <input type="text" class="form-control form-control-sm me-1 text-center qty-input border-0" ref="qty" disabled :value="sku.pivot.qty">
                 <a href="#" class="me-1 btn btn-sm count-buttons btn-outline-secondary" @click.prevent="onIncreaseQty"><span><i class="fa fa-plus"></i></span></a>
             </div>
         </td>
-        <td class="text-end">{{ Number(sku.qty * sku.price).toLocaleString() }}</td>
+        <td class="text-end">{{ Number(sku.pivot.qty * sku.pivot.price).toLocaleString() }}</td>
         <td>
-            <a href="#" @click.prevent="onDeleteSku"><small class="text-danger"><i class="fa fa-times"></i></small></a>
+            <a href="#" @click.prevent="onDeleteSku"><small class="btn btn-sm btn-outline-danger"><i class="fa fa-times"></i></small></a>
         </td>
     </tr>
 </template>

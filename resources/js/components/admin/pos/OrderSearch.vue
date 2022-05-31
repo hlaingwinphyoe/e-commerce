@@ -1,5 +1,6 @@
 <template>
     <div class="position-relative">
+        <p class="mb-1">Search Order</p>
         <div class="input-group mb-2">
             <input
                 type="text"

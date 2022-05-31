@@ -1,295 +1,372 @@
 <template>
     <div class="pos-container">
-        
-       
-            <div class="row">
-                <!-- Find and add items -->
-                <div class="col-md-7 col-lg-7">
-                    <div class="px-2 py-3">
-                        <a href="/admin/pos" class="btn btn-sm btn-primary">
-                            <i class="fa fa-arrow-left"></i>
-                            <span>Return to Sale Lists</span>
-                        </a>
-                    </div>                    
-                    <div class="px-2 mb-3 mt-2">
-                        <div
-                            class="disabled-container"
-                            :class="isSale ? 'disabled' : ''"
-                        >
-                            <search-bar
-                                :order="data_order"
-                                @on-add-sku="onAddSku"
-                            ></search-bar>
-                        </div>
+        <div class="row">
+            <!-- Find and add items -->
+            <div class="col-md-7 col-lg-7">
+                <div class="px-2 py-3">
+                    <a href="/admin/pos" class="btn btn-sm btn-primary">
+                        <i class="fa fa-arrow-left"></i>
+                        <span>Return to Sale Lists</span>
+                    </a>
+                </div>
+                <div class="px-2 mb-3 mt-2">
+                    <div
+                        class="disabled-container"
+                        :class="isSale ? 'disabled' : ''"
+                    >
+                        <search-bar
+                            :order="data_order"
+                            @on-add-sku="onAddSku"
+                        ></search-bar>
                     </div>
                 </div>
+            </div>
 
-                <!-- Payment Actions -->
-                <div class="col-md-5 col-lg-5 px-1">
-                    <div class="pos-left px-2 py-3 bg-sidebar border rounded">
-                        <!-- Search Order -->
-                        <order-search :order="data_order"></order-search>
+            <!-- Payment Actions -->
+            <div class="col-md-5 col-lg-5 px-1">
+                <div class="pos-left px-2 py-3 bg-sidebar border rounded">
+                    <div class="position-relative">
+                        <!-- Customer -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <customer :order="data_order"></customer>
+                            </div>
 
-                        <!-- Content List -->
-                        <div
-                            class="disabled-container mb-1 pt-3"
-                            :class="isSale ? 'disabled' : ''"
-                        >
-                            <h5 class="fw-bold">
-                                <span>Your Item Lists</span>
-                                <span v-show="cus_name" class="ms-2"
-                                    >( {{ cus_name }} )</span
-                                >
-                            </h5>
+                            <div class="col-md-6">
+                                <!-- Search Order -->
+                                <order-search
+                                    :order="data_order"
+                                ></order-search>
+                            </div>
+                        </div>
+                    </div>
 
-                            <div
-                                class="table-responsive"
-                                v-show="data_skus.length"
+                    <!-- Content List -->
+                    <div
+                        class="disabled-container mb-1 pt-3"
+                        :class="isSale ? 'disabled' : ''"
+                    >
+                        <h5 class="fw-bold">
+                            <span>Your Item Lists</span>
+                            <span v-show="cus_name" class="ms-2"
+                                >( {{ cus_name }} )</span
                             >
-                                <table class="table mb-0">
-                                    <thead class="">
-                                        <tr>
-                                            <th width="300px">Name</th>
-                                            <th class="">Qty</th>
-                                            <th class="text-end" width="200px">
-                                                Amount
-                                            </th>
-                                            <th width="30px">
-                                                <small
-                                                    ><i class="fa fa-trash"></i
-                                                ></small>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <sku-list :skus="data_skus" @on-update-sku="onUpdateSku" @on-delete-sku="onDeleteSku"></sku-list>
-                                   <tfoot class="tfoot-small">
-                                        <tr>
-                                            <th colspan="" class="text-end">
-                                                Total
-                                            </th>
-                                            <th class="text-center">
-                                                {{
-                                                    Number(
-                                                        getTotalQty
-                                                    ).toLocaleString()
-                                                }}
-                                            </th>
-                                            <th class="text-end text-success">
-                                                {{
-                                                    Number(
-                                                        getTotal
-                                                    ).toLocaleString()
-                                                }}
-                                            </th>
-                                            <th></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="" class="text-end">
-                                                Deli Fee
-                                            </th>
-                                            <th></th>
-                                            <th
-                                                class="text-end text-success"
+                        </h5>
+
+                        <div
+                            class="table-responsive bg-white border rounded"
+                            v-show="data_skus.length"
+                        >
+                            <table class="table mb-0">
+                                <thead class="bg-white">
+                                    <tr>
+                                        <th width="300px">Name</th>
+                                        <th class="">Qty</th>
+                                        <th class="text-end" width="200px">
+                                            Amount
+                                        </th>
+                                        <th width="30px">
+                                            <small
+                                                ><i class="fa fa-trash"></i
+                                            ></small>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <sku-list
+                                    :skus="data_skus"
+                                    @on-update-sku="onUpdateSku"
+                                    @on-delete-sku="onDeleteSku"
+                                ></sku-list>
+                                <tfoot class="tfoot-small">
+                                    <tr>
+                                        <th colspan="" class="text-end">
+                                            Total
+                                        </th>
+                                        <th class="text-center">
+                                            {{
+                                                Number(
+                                                    getTotalQty
+                                                ).toLocaleString()
+                                            }}
+                                        </th>
+                                        <th class="text-end text-success">
+                                            {{
+                                                Number(
+                                                    getTotal
+                                                ).toLocaleString()
+                                            }}
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="" class="text-end">
+                                            Deli Fee
+                                        </th>
+                                        <th></th>
+                                        <th class="text-end text-success">
+                                            <input
+                                                type="text"
+                                                class="form-control form-control-sm text-end fw-bold text-success"
+                                                v-model="deli_fee"
+                                                @change="onAddDeliFee"
+                                            />
+                                            <span class="d-none">{{
+                                                Number(
+                                                    data_order.deli_fee
+                                                ).toLocaleString()
+                                            }}</span>
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="" class="text-end">
+                                            Discount
+                                        </th>
+                                        <th>
+                                            <div
+                                                class="d-flex align-items-center"
                                             >
-                                                <input type="text" class="form-control form-control-sm text-end fw-bold text-success" v-model="deli_fee" @change="onAddDeliFee">
-                                                <span class="d-none">{{ Number(data_order.deli_fee).toLocaleString()}}</span>
-                                            </th>
-                                            <th></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="" class="text-end">
-                                                Discount
-                                            </th>
-                                            <th>
-                                                <div class="input-group input-group-sm">
+                                                <div class="form-group me-2">
                                                     <input
                                                         type="text"
-                                                        class="form-control"
+                                                        class="form-control form-control-sm qty-input"
                                                         v-model="discount_amt"
                                                         @change="onAddDiscount"
                                                     />
-                                                    <select
-                                                        class="form-select"
-                                                        v-model="discount_status"
-                                                        @change="onAddDiscount"
-                                                    >
-                                                        <option
-                                                            v-for="status in statuses"
-                                                            :key="status.id"
-                                                            :value="status.id"
-                                                        >
-                                                            {{ status.name }}
-                                                        </option>
-                                                    </select>
                                                 </div>
-                                            </th>
-                                            <th
-                                                class="text-end text-success"
-                                            >
-                                                {{
-                                                    Number(
-                                                        getDiscount
-                                                    ).toLocaleString()
-                                                }}
-                                            </th>
-                                            <th></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="" class="text-end">
-                                                Sub Total
-                                            </th>
-                                            <th
-                                                colspan="2"
-                                                class="text-end text-success"
-                                            >
-                                                {{
-                                                    Number(
-                                                        getSubTotal
-                                                    ).toLocaleString()
-                                                }}
-                                            </th>
-                                            <th></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="" class="text-end">
-                                                Pay Amount
-                                            </th>
-                                            <th
-                                                colspan="2"
-                                                class="text-end text-success"
-                                            >
-                                                {{
-                                                    Number(
-                                                        getPayAmount
-                                                    ).toLocaleString()
-                                                }}
-                                            </th>
-                                            <th></th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="" class="text-end">
-                                                To Pay
-                                            </th>
-                                            <th></th>
-                                            <th class="text-end text-success">
-                                                <div class="form-group">
+
+                                                <div
+                                                    class="form-check me-2"
+                                                    v-for="status in statuses"
+                                                    :key="status.id"
+                                                >
                                                     <input
-                                                        type="text"
-                                                        placeholder="Pay Amount"
-                                                        class="form-control form-control-sm text-end text-success fw-bold"
-                                                        v-model="form.amount"
-                                                        @change="onInputChange"
+                                                        class="form-check-input"
+                                                        type="radio"
+                                                        name="discount"
+                                                        :id="status.id"
+                                                        :value="status.id"
+                                                        v-model="
+                                                            discount_status
+                                                        "
+                                                        @change="onAddDiscount"
                                                     />
-                                                    <small
-                                                        class="text-danger"
-                                                        v-show="is_exceed"
-                                                        >Exceed Maximum</small
+                                                    <label
+                                                        class="form-check-label"
+                                                        :for="status.id"
                                                     >
-                                                    <a :href="`/admin/pos/create?order_no=${order.id}`" class="small text-success">Calculate</a>
+                                                        {{ status.name }}
+                                                    </label>
                                                 </div>
-                                            </th>
-                                            <th></th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-
-            
-
-                        <!-- Make Payment -->
-                        <div class="border-top border-bottom pt-4 pb-2 mb-3">
-                            <div class="payment-container">
-                                <p class="mb-1">Pay With</p>
-                                <ul class="nav">
-                                    <li
-                                        class="nav-item paymentype-item"
-                                        :class="getClass(paymentype.id)"
-                                        v-for="paymentype in paymentypes"
-                                        :key="paymentype.id"
-                                    >
-                                        <a
-                                            href="#"
-                                            class="nav-link text-dark"
-                                            @click.prevent="
-                                                onSelectPayment(paymentype.id)
-                                            "
-                                            >{{ paymentype.name }}</a
+                                            </div>
+                                        </th>
+                                        <th class="text-end text-success">
+                                            {{
+                                                Number(
+                                                    getDiscount
+                                                ).toLocaleString()
+                                            }}
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="" class="text-end">
+                                            Sub Total
+                                        </th>
+                                        <th
+                                            colspan="2"
+                                            class="text-end text-success"
                                         >
-                                    </li>
-                                </ul>
-                            </div>
+                                            {{
+                                                Number(
+                                                    getSubTotal
+                                                ).toLocaleString()
+                                            }}
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="" class="text-end">
+                                            Pay Amount
+                                        </th>
+                                        <th
+                                            colspan="2"
+                                            class="text-end text-success"
+                                        >
+                                            {{
+                                                Number(
+                                                    getPayAmount
+                                                ).toLocaleString()
+                                            }}
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="" class="text-end">
+                                            To Pay
+                                        </th>
+                                        <th></th>
+                                        <th class="text-end text-success">
+                                            <div class="form-group">
+                                                <input
+                                                    type="text"
+                                                    placeholder="Pay Amount"
+                                                    class="form-control form-control-sm text-end text-success fw-bold"
+                                                    v-model="form.amount"
+                                                    @change="onInputChange"
+                                                />
+                                                <small
+                                                    class="text-danger"
+                                                    v-show="is_exceed"
+                                                    >Exceed Maximum</small
+                                                >
+                                                <a
+                                                    :href="`/admin/pos/create?order_no=${order.id}`"
+                                                    class="small text-success"
+                                                    >Calculate</a
+                                                >
+                                            </div>
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
+                    </div>
 
-                        <!-- Quick Buttons -->
-                        <div class="py-2 mb-3">
-                            <div>
-                                <a
-                                    href="#"
-                                    class="btn btn-primary me-2 mb-2"
-                                    @click.prevent="onMakeSale"
-                                >
-                                    <i class="fa fa-lock"></i>
-                                    <p class="mb-0">Save Sale</p>
-                                </a>
-
-                                <a
-                                    href="/admin/pos/create"
-                                    target="_blank"
-                                    class="btn btn-success me-2 mb-2 text-white"
-                                >
-                                    <i class="fa fa-plus"></i>
-                                    <p class="mb-0">New Sale</p>
-                                </a>
-
-                                <a
-                                    href="#"
-                                    target="_blank"
-                                    class="btn btn-danger me-2 mb-2 text-white"
-                                    :class="isSale ? 'disabled' : ''"
-                                    @click.prevent="onCancelOrder"
-                                >
-                                    <i class="fa fa-trash"></i>
-                                    <p class="mb-0">Void Order</p>
-                                </a>
-
-                                <a
-                                    :href="`/admin/sales-print/${order.id}`"
-                                    class="btn btn-dark me-2 mb-2"
-                                >
-                                    <i class="fa fa-print"></i>
-                                    <p class="mb-0">Print Slip</p>
-                                </a>
-
-                                <a
-                                    :href="`/save-invoice/${order.id}`"
-                                    class="btn btn-info me-2 mb-2"
-                                >
-                                    <i class="fa fa-receipt"></i>
-                                    <p class="mb-0">Save Invoice</p>
-                                </a>
-
-                                <a
-                                    :href="`/admin/pos/create?order_no=${order.id}`"
-                                    class="btn btn-outline-success me-2 mb-2"
-                                >
-                                    <i class="fa fa-redo"></i>
-                                    <p class="mb-0">Refresh</p>
-                                </a>
+                    <!-- Quick Buttons -->
+                    <div class="py-4 mb-3">
+                        <div>
+                            <a
+                                href="#payment-form"
+                                data-bs-toggle="modal"
+                                class="btn btn-outline-primary me-2 mb-2"
+                            >
+                                <i class="fa fa-lock"></i>
+                                <p class="mb-0">Make Pay</p>
+                            </a>
+                            <!-- Pay Form -->
+                            <div class="modal fade" id="payment-form">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5
+                                                class="modal-title"
+                                                id="exampleModalLabel"
+                                            >
+                                                Make Payment
+                                            </h5>
+                                            <button
+                                                type="button"
+                                                class="btn-close"
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close"
+                                            ></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group px-1">
+                                                <label>To Pay Amount</label>
+                                                <input type="text" v-model="form.amount" class="form-control form-control-sm" />
+                                            </div>
+                                            <ul class="nav">
+                                                <li
+                                                    class="nav-item paymentype-item"
+                                                    :class="
+                                                        getClass(paymentype.id)
+                                                    "
+                                                    v-for="paymentype in paymentypes"
+                                                    :key="paymentype.id"
+                                                >
+                                                    <a
+                                                        href="#"
+                                                        class="nav-link text-dark"
+                                                        @click.prevent="
+                                                            onSelectPayment(
+                                                                paymentype.id
+                                                            )
+                                                        "
+                                                        >{{
+                                                            paymentype.name
+                                                        }}</a
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button
+                                                type="button"
+                                                class="btn btn-secondary"
+                                                data-bs-dismiss="modal"
+                                            >
+                                                Close
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="btn btn-primary"
+                                            >
+                                                Save changes
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            <a
+                                href="#"
+                                class="btn btn-primary me-2 mb-2"
+                                @click.prevent="onMakeSale"
+                            >
+                                <i class="fa fa-lock"></i>
+                                <p class="mb-0">Save Sale</p>
+                            </a>
 
-                        <!-- Customer Info -->
-                        <div class="border-top py-4">
-                            <h6 class="text-primary">Customer Information</h6>
-                            <customer-info
-                                :order="data_order"
-                                @on-save-customer="onSaveCustomer"
-                            ></customer-info>
+                            <a
+                                href="/admin/pos/create"
+                                target="_blank"
+                                class="btn btn-success me-2 mb-2 text-white"
+                            >
+                                <i class="fa fa-plus"></i>
+                                <p class="mb-0">New Sale</p>
+                            </a>
+
+                            <a
+                                href="#"
+                                target="_blank"
+                                class="btn btn-danger me-2 mb-2 text-white"
+                                :class="isSale ? 'disabled' : ''"
+                                @click.prevent="onCancelOrder"
+                            >
+                                <i class="fa fa-trash"></i>
+                                <p class="mb-0">Void Order</p>
+                            </a>
+
+                            <a
+                                :href="`/admin/sales-print/${order.id}`"
+                                class="btn btn-dark me-2 mb-2"
+                            >
+                                <i class="fa fa-print"></i>
+                                <p class="mb-0">Print Slip</p>
+                            </a>
+
+                            <a
+                                :href="`/save-invoice/${order.id}`"
+                                class="btn btn-info me-2 mb-2"
+                            >
+                                <i class="fa fa-receipt"></i>
+                                <p class="mb-0">Save Invoice</p>
+                            </a>
+
+                            <a
+                                :href="`/admin/pos/create?order_no=${order.id}`"
+                                class="btn btn-outline-success me-2 mb-2"
+                            >
+                                <i class="fa fa-redo"></i>
+                                <p class="mb-0">Refresh</p>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 </template>
 
@@ -298,6 +375,7 @@ import SearchBar from "./SearchBar.vue";
 import SkuList from "./skus/SkuList.vue";
 import SkuItem from "./skus/SkuItem.vue";
 import CustomerInfo from "./CustomerInfo.vue";
+import Customer from "./Customer.vue";
 import OrderSearch from "./OrderSearch.vue";
 export default {
     components: {
@@ -305,7 +383,8 @@ export default {
         "sku-list": SkuList,
         "sku-item": SkuItem,
         "customer-info": CustomerInfo,
-        "order-search": OrderSearch,
+        "customer": Customer,
+        "order-search": OrderSearch
     },
     props: {
         order: { required: true },
@@ -323,9 +402,7 @@ export default {
             data_order: this.order,
             deli_fee: this.order.deli_fee,
             discount_amt: this.order.discount_amt,
-            discount_status: this.statuses.length
-                ? this.statuses[0].id
-                : this.order.discount_status,
+            discount_status: this.order.discount_status ?? this.statuses[0].id,
             timeout: "",
 
             //for payments
@@ -357,7 +434,7 @@ export default {
             this.order.price = this.getTotal;
         },
         onUpdateSku(data) {
-            console.log('here');
+            console.log("here");
             this.data_skus = data;
             this.order.price = this.getTotal;
         },
@@ -401,6 +478,7 @@ export default {
                 .then((resp) => {
                     this.deli_fee = resp.data.deli_fee;
                     this.data_order = resp.data;
+                    this.form.amount = this.getBalance;
                 });
         },
         getClass(id) {
@@ -437,18 +515,18 @@ export default {
     computed: {
         getTotalQty() {
             return this.data_skus.reduce((total, x) => {
-                return total + x.qty;
+                return total + x.pivot.qty;
             }, 0);
         },
         getTotal() {
             let total = this.data_skus.reduce((total, x) => {
-                return total + x.qty * x.price;
+                return total + x.pivot.qty * x.pivot.price;
             }, 0);
             return total;
         },
         getDiscount() {
-            // 9 %, 10 fixed
-            return this.data_order.discount_status == 9
+            // 23 %, 22 fixed
+            return this.data_order.discount_status == 23
                 ? (this.data_order.price * this.data_order.discount_amt) / 100
                 : this.data_order.discount_amt;
         },
@@ -511,5 +589,14 @@ export default {
     overflow: auto;
     position: absolute;
     z-index: 1;
+}
+.cus-info {
+    display: none;
+}
+.cus-info.show {
+    display: block;
+}
+.pos-left {
+    min-height: 100vh;
 }
 </style>

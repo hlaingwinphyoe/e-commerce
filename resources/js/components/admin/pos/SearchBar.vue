@@ -144,9 +144,6 @@ export default {
         };
     },
     created() {
-        axios.get(`/wapi/maintypes`).then((resp) => {
-            this.maintypes = resp.data;
-        });
         axios.get(`/wapi/types`).then((resp) => {
             this.types = resp.data;
         });

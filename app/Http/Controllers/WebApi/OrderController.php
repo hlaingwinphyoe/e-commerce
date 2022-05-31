@@ -129,17 +129,16 @@ class OrderController extends Controller
         $data->user->address = $request->address;
         $data->user->remark = $request->remark;
 
-        if (!$order->order_no) {
-            $order_month = Carbon::now()->format('ym');
 
-            $latest_order = Order::where('order_month', intval($order_month))->orderBy('order_no', 'desc')->first();
+        $order_month = Carbon::now()->format('ym');
 
-            $order_no = $latest_order ? $latest_order->order_no + 1 : intval($order_month . '00001');
-        }
+        $latest_order = Order::where('order_month', intval($order_month))->orderBy('order_no', 'desc')->first();
+
+        $order_no = $latest_order ? $latest_order->order_no + 1 : intval($order_month . '00001');
 
         $order->update([
             'data' => json_encode($data),
-            'order_month' => $order->order_month ?? $order_month,
+            'order_month' => $order->order_month ? $order->order_month : $order_month,
             'order_no' => $order->order_no ?? $order_no,
             'customer_id' => $request->customer_id ?? $order->customer_id,
         ]);

@@ -14,7 +14,7 @@
 <body class="@yield('classes')">
     
     <div id="fse-admin" class="app">        
-        <main class="app-content">
+        <main class="app-content" style="overflow-x: hidden">
             <section class="content">
                 @yield('content')
             </section>

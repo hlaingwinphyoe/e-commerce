@@ -15,7 +15,8 @@
 
 .results {
     max-height: 150px;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     .nav .nav-item .nav-link {
         @include transition(all .3s linear);
         color: $color;

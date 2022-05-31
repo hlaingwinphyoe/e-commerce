@@ -134,7 +134,7 @@
                     </td>
                     <td>{{ number_format($order->price) }}</td>
                     <td>
-                        {{ number_format($total) }}
+                        {{ number_format($order->getSubTotal()) }}
                     </td>
                     <td>
                         <?php $balance = $order->getBalance() + $order->getChange(); ?>
@@ -182,7 +182,7 @@
                         <a href="#payment-modal-{{ $order->id }}" class="btn btn-sm btn-secondary me-2 mb-1" data-bs-toggle="modal">
                             <small>Payment</small>
                         </a>
-                        @include('admin.sales.payment')
+                        @include('admin.pos.payment')
                         @endif
                         @if(auth()->user()->role->hasPermission('access-order'))
                         <a href="{{ route('admin.pos.show', $order->id) }}" class="btn btn-sm btn-outline-danger me-2">
