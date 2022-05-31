@@ -12,7 +12,7 @@ class InventoryController extends Controller
 {
     public function index()
     {
-        $inventories = Inventory::latest()->paginate(20);
+        $inventories = Inventory::filterOn()->latest()->paginate(20);
 
         return view('admin.inventories.index')->with([
             'inventories' => $inventories

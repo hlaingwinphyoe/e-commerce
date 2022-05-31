@@ -30,4 +30,17 @@ class DeliFee extends Model
         }
         return $bool;
     }
+
+    public function scopeFilterOn($query)
+    {
+        if (request('q')) {
+            $query->where('amt', 'like', '%' . request('q') . '%');
+        }
+
+        if (request('township_id')) {
+            $query->whereHas('townships', function($query) {
+                $query->where('township_id', request('township_id'));
+            });
+        }
+    }
 }

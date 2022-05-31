@@ -27,6 +27,25 @@
                 </a>
             </div>
             @endif
+
+            <form action="{{ route('admin.delifees.index') }}" class="d-flex responsive-flex">
+
+                <div class="form-group me-2">
+                    <select name="township_id" class="form-select form-select-sm">
+                        <option value="">Choose Township</option>
+                        @foreach($townships as $tsp)
+                        <option value="{{ $tsp->id }}" {{ $tsp->id == request()->township_id? 'selected' : '' }}>{{ $tsp->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-sm btn-outline-primary me-2 mb-1">Filter</button>
+                    <a href="{{ route('admin.delifees.index') }}" class="btn btn-sm btn-primary mb-1">
+                        <small><i class="fa fa-redo m-0"></i></small>
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 

@@ -27,6 +27,21 @@
                 </a>
             </div>
             @endif
+
+            <form action="{{ route('admin.discountypes.index') }}" class="d-flex responsive-flex">
+                <div class="form-group me-2">
+                    <input type="date" name="start_date" class="form-control form-control-sm" value="{{ request('start_date') }}">
+                </div>
+                <div class="form-group me-2">
+                    <input type="date" name="end_date" class="form-control form-control-sm" value="{{ request('end_date') }}">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
+                    <a href="{{ route('admin.discountypes.index') }}" class="btn btn-sm btn-primary">
+                        <small><i class="fa fa-redo"></i></small>
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 

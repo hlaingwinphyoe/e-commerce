@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Carbon\Carbon;
+
 class Inventory extends Model
 {
     use HasFactory;
@@ -103,6 +105,12 @@ class Inventory extends Model
 
     public function scopeFilterOn($query)
     {
+        if (request('q')) {
+            $query->whereHas('supplier', function ($query) {
+                $query->where('name', 'like', '%'. request('q'). '%');
+            });
+        }
+
         if (request('item')) {
             $item = request('item');
             $query->whereHas('sku', function ($q) use ($item) {

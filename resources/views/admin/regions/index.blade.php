@@ -25,6 +25,26 @@
                     <span>Add New</span>
                 </a>
             </div>
+
+            <form action="{{ route('admin.regions.index') }}" class="d-flex responsive-flex">
+                <input type="hidden" name="disabled" value="{{ request('disabled') }}">
+
+                <div class="form-group me-2">
+                    <select name="country_id" class="form-select form-select-sm">
+                        <option value="">Choose Country</option>
+                        @foreach($countries as $country)
+                        <option value="{{ $country->id }}" {{ $country->id == request()->country_id? 'selected' : '' }}>{{ $country->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-sm btn-outline-primary me-2 mb-1">Filter</button>
+                    <a href="{{ route('admin.regions.index') }}" class="btn btn-sm btn-primary mb-1">
+                        <small><i class="fa fa-redo m-0"></i></small>
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -61,7 +81,7 @@
                     <td>{{ $region->country->name }}</td>
                     <td>
                         @if($region->townships()->count())
-                        <a href="{{ route('admin.townships.index') }}?region_id={{ $region->id }}" class="badge badge-primary">{{ $region->townships()->count() }}</a>
+                        <a href="{{ route('admin.townships.index') }}?region_id={{ $region->id }}" class="badge bg-primary">{{ $region->townships()->count() }}</a>
                         @else
                         <span>0</span>
                         @endif

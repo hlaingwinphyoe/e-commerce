@@ -52,4 +52,17 @@ class AppReturn extends Model
         },0);
     }
 
+    public function scopeFilterOn($query)
+    {
+        if (request('q')) {
+            $query->where('order_id', 'like', '%' . request('q') . '%');
+        }
+
+        if (request('township_id')) {
+            $query->whereHas('townships', function($query) {
+                $query->where('township_id', request('township_id'));
+            });
+        }
+    }
+
 }

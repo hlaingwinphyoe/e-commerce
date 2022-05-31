@@ -25,6 +25,26 @@
                     <span>Add New</span>
                 </a>
             </div>
+
+            <form action="{{ route('admin.townships.index') }}" class="d-flex responsive-flex">
+                <input type="hidden" name="disabled" value="{{ request('disabled') }}">
+
+                <div class="form-group me-2">
+                    <select name="region_id" class="form-select form-select-sm">
+                        <option value="">Choose Region</option>
+                        @foreach($regions as $region)
+                        <option value="{{ $region->id }}" {{ $region->id == request()->region_id? 'selected' : '' }}>{{ $region->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-sm btn-outline-primary me-2 mb-1">Filter</button>
+                    <a href="{{ route('admin.townships.index') }}" class="btn btn-sm btn-primary mb-1">
+                        <small><i class="fa fa-redo m-0"></i></small>
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 

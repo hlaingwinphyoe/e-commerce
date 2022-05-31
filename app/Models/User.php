@@ -78,8 +78,8 @@ class User extends Authenticatable
      */
     public function scopeFilterOn($query)
     {
-        if (request('name')) {
-            $query->where('name', 'like', '%' . request('name') . '%');
+        if (request('q')) {
+            $query->where('name', 'like', '%' . request('q') . '%');
         }
 
         if(request('role')) {

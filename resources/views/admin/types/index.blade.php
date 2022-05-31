@@ -30,8 +30,17 @@
             </div>
             @endif
 
-            <form action="{{ route('admin.types.index') }}" class="d-flex responsive-flex d-none">
+            <form action="{{ route('admin.types.index') }}" class="d-flex responsive-flex">
                 <input type="hidden" name="disabled" value="{{ request('disabled') }}">
+                <div class="form-group me-2">
+                    <select name="parent_type" class="form-select form-select-sm">
+                        <option value="">Choose Main Category</option>
+                        @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ $category->id == request()->parent_type? 'selected' : '' }}>{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
                     <a href="{{ route('admin.types.index') }}" class="btn btn-sm btn-primary">

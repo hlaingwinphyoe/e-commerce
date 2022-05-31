@@ -23,8 +23,11 @@ class RegionController extends Controller
     {
         $regions = Region::filterOn()->orderBy('name')->paginate(20);
 
+        $countries = Country::get();
+
         return view('admin.regions.index')->with([
-            'regions' => $regions
+            'regions' => $regions,
+            'countries' => $countries,
         ]);
     }
 

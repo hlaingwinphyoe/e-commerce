@@ -117,7 +117,7 @@
     </li>
 
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['/admin/inventories/', '/admin/inventories/*']) ? 'active' : '' }}" href="{{ route('admin.inventories.index') }}" title="Inventory">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.inventories.*') ? 'active' : '' }}" href="{{ route('admin.inventories.index') }}" title="Inventory">
             <i class="app-menu__icon fa fa-stream mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label">{{ __('menu.purchase') }}</span>
         </a>

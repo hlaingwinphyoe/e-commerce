@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\DeliveryController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\MainFeatureController;
+use App\Http\Controllers\Admin\TransactionController;
 
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\UserController;
@@ -111,4 +112,8 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     Route::resource('/sales', SaleController::class);
     Route::get('/sales-print/{sale}', [SaleController::class, 'print'])->name('sales.print');
     Route::get('/sales-excel', [SaleController::class, 'excel'])->name('sales.excel');
+
+    //transactions
+    Route::resource('/transactions', TransactionController::class);
+    Route::get('/transactions/payment/next-payment', [TransactionController::class, 'nextPayment'])->name('transaction.next-payment');
 });

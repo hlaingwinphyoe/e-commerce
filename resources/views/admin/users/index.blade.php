@@ -52,19 +52,6 @@
                     </div>
                 </form>
             </div>
-            <div class="me-2">
-                <select id="actions" name="action" class="form-select">
-                    <option value="">Select action</option>
-                    <option value="delete">Delete</option>
-
-                </select>
-            </div>
-            <div class="me-2">
-                <button id="apply-actions" class="btn btn-sm btn-outline-secondary">
-                    <i class="fa fa-check me-2"></i>
-                    <span>Apply</span>
-                </button>
-            </div>
             <form action="{{ route('admin.users.index') }}" class="d-flex responsive-flex">
                 <div class="form-group me-2">
                     <select name="role" class="form-select">
