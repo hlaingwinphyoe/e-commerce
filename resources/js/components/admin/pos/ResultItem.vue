@@ -1,5 +1,5 @@
 <template>
-     <a class="d-block bg-white p-2 shadow rounded mb-3 text-decoration-none" :class="data_stock > 0 ? '' : 'disabled'" @click.prevent="onSelectedsku(res.id, res.data ? res.data : res.item.name, res.discount ? res.discount : res.price)">
+     <a href="#" class="d-block bg-white p-2 shadow rounded mb-3 text-decoration-none" :class="data_stock > 0 ? '' : 'disabled'" @click.prevent="onSelectedSku(res.id, res.data ? res.data : res.item.name, res.discount ? res.discount : res.price)">
         <div class="box-header text-center">
             <img
                 :src="
@@ -12,7 +12,7 @@
             />
         </div>
         <div class="box-content bg-sidebar py-2 mt-1 px-1">
-            <p class="mb-1 fw-bold">{{ res.item_name }}</p>
+            <p class="mb-1 fw-bold">{{ res.item_name }} {{ res.data ? '('+ res.data +')' : '' }}</p>
             <div>
                 <span>{{ res.code }}</span>
                 <span class="ms-2 btn btn-sm btn-outline-primary">{{ data_stock }}</span>

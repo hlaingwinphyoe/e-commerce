@@ -86,4 +86,13 @@ class POSController extends Controller
             'statuses' => $statuses,
         ]);
     }
+
+    public function print($id) 
+    {
+        $sale = Order::findOrFail($id);
+        
+        return view('admin.print.order')->with([
+            'sale' => $sale
+        ]);
+    }
 }

@@ -100,6 +100,7 @@ Route::get('/statuses', [StatusController::class, 'index']);
 
 //orders
 Route::get('/orders', [OrderController::class, 'index']);
+Route::get('/get-payment-params/{order}', [OrderController::class, 'getPaymentParams']);
 Route::patch('/orders/{order}', [OrderController::class, 'update']);
 Route::get('/get-balance/{order}', [OrderController::class, 'getBalance']);
 Route::get('/get-orders', [OrderController::class, 'getOrders']);

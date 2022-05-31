@@ -21,30 +21,21 @@ class OrderSkuController extends Controller
 
         $sku_status = Status::where('slug', 'order-accepted')->first();
 
-        $stock = $order->skus()->where('sku_id', $request->sku)->first();
+        $sku = $order->skus()->where('sku_id', $request->sku)->with(['item'])->first();
 
         $qty = $request->qty ?? 1;
 
-        if (!$stock && $org_sku->stock >= $qty) {
+        if (!$sku && $org_sku->stock >= $qty) {
             $sku = Sku::find($request->sku);
-            $name = $sku->item ? $sku->item->name : '';
-            $name .= $sku->data ? '(' . $sku->data . ')' : '';
-            $data = [
-                'sku' => [
-                    'name' => $name
-                ]
-            ];
-            $order->skus()->create([
-                'sku_id' => $sku ? $sku->id : '',
-                'data' => json_encode($data),
+            $sku = $order->skus()->attach([$request->sku => [
+                'status_id' => $sku_status ? $sku_status->id : 1,
                 'qty' => $qty,
                 'price' => $sku->getQtyPrice($qty),
                 'customized_price' => $sku->getQtyPrice($qty),
-                'status_id' => $sku_status ? $sku_status->id : 1,
-                'buy_price' => $sku->buy_price,
-            ]);
+                'margin' => 0
+            ]]);
 
-            $sku = Sku::find($request->sku);
+            $sku = $order->skus()->where('sku_id', $request->sku)->with(['item'])->first();
 
             $sku->update(['stock' => $sku->stock - $qty]);
 
@@ -60,52 +51,55 @@ class OrderSkuController extends Controller
                     'order_month' => $order->order_month ?? $order_month,
                 ]);
             }
-        } else if ($stock && $org_sku->stock >= $qty) {
-            $stock->update([
-                'qty' => $stock->qty + $qty,
-                'price' => $stock->sku->getQtyPrice($qty),
-                'customized_price' => $stock->sku->getQtyPrice($qty),
+        } else if ($sku && $org_sku->stock >= $qty) {
+            $sku->pivot->update([
+                'qty' => $sku->pivot->qty + $qty,
+                'price' => $sku->getQtyPrice($qty),
+                'customized_price' => $sku->getQtyPrice($qty),
             ]);
-            $stock->sku->update(['stock' => $stock->sku->stock - $qty]);
+            $sku->update(['stock' => $sku->stock - $qty]);
+        } else {
+            //no stock enough
         }
-        dd('nothing');
 
-        Order::find($id)->updateStockPrice();
+        Order::find($id)->updatePrice();
 
-        $stocks = $order->skus()->get();
+        // $org_sku->update(['stock' => $org_sku->stock - $request->qty]);
 
-        return response()->json($stocks);
+        $skus = $order->skus()->with(['item'])->get();
+
+        return response()->json($skus);
     }
 
     public function update(Request $request, $order, $sku)
     {
         $order = Order::find($order);
 
-        $stock = $order->skus()->where('sku_id', $sku)->first();
+        $sku = $order->skus()->where('sku_id', $sku)->first();
 
-        DB::transaction(function () use ($stock, $request, $order) {
+        DB::transaction(function () use ($sku, $request, $order) {
 
             $status = Status::where('slug', 'order-accepted')->first();
 
-            if ($stock->status_id == $status->id && $stock->sku) {
-                $st = $stock->sku->stock + $stock->qty - $request->qty;
-                $stock->sku->update([
-                    'stock' => $st
+            if ($sku->pivot->status_id == $status->id) {
+                $stock = $sku->stock + $sku->pivot->qty - $request->qty;
+                $sku->update([
+                    'stock' => $stock
                 ]);
             }
 
-            $stock->update([
+            $sku->pivot->update([
                 'qty' => $request->qty,
-                'price' => $stock->sku ? $stock->sku->getQtyPrice($request->qty) : $stock->price,
-                'customized_price' => $stock->sku ? $stock->sku->getQtyPrice($request->qty) : $stock->price,
+                'price' => $sku->getQtyPrice($request->qty),
+                'customized_price' => $sku->getQtyPrice($request->qty),
             ]);
         });
 
-        $stocks = $order->skus()->get();
+        $skus = $order->skus()->with(['item'])->get();
 
-        $order->updateStockPrice();
+        $order->updatePrice();
 
-        return response()->json($stocks);
+        return response()->json($skus);
     }
 
     public function destroy($order, $sku_id)
@@ -115,19 +109,19 @@ class OrderSkuController extends Controller
         DB::transaction(function () use ($order, $sku_id) {
             $status = Status::where('slug', 'order-accepted')->first();
 
-            $stock = $order->skus()->where('sku_id', $sku_id)->first();
+            $sku = $order->skus()->where('sku_id', $sku_id)->first();
 
-            if ($stock->status_id == $status->id && $stock->sku) { //order accepted လုပ်ပြီးသားဆိုရင် stock ပြန်နှုတ်ပေးပါ
-                $stock->sku->update(['stock' => $stock->sku->stock + $stock->qty]);
+            if ($sku->pivot->status_id == $status->id) { //order accepted လုပ်ပြီးသားဆိုရင် stock ပြန်နှုတ်ပေးပါ
+                $sku->update(['stock' => $sku->stock + $sku->pivot->qty]);
             }
 
-            $stock->delete();
+            $order->skus()->detach($sku_id);
 
-            $order->updateStockPrice();
+            $order->updatePrice();
         });
 
-        $stocks = $order->skus()->with(['sku.item'])->get();
+        $skus = $order->skus()->with(['item'])->get();
 
-        return response()->json($stocks);
+        return response()->json($skus);
     }
 }

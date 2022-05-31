@@ -29,7 +29,7 @@
                         <!-- Customer -->
                         <div class="row">
                             <div class="col-md-6">
-                                <customer :order="data_order"></customer>
+                                <customer :order="data_order" @on-save-customer="onSaveCustomer"></customer>
                             </div>
 
                             <div class="col-md-6">
@@ -184,51 +184,7 @@
                                             }}
                                         </th>
                                         <th></th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="" class="text-end">
-                                            Pay Amount
-                                        </th>
-                                        <th
-                                            colspan="2"
-                                            class="text-end text-success"
-                                        >
-                                            {{
-                                                Number(
-                                                    getPayAmount
-                                                ).toLocaleString()
-                                            }}
-                                        </th>
-                                        <th></th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="" class="text-end">
-                                            To Pay
-                                        </th>
-                                        <th></th>
-                                        <th class="text-end text-success">
-                                            <div class="form-group">
-                                                <input
-                                                    type="text"
-                                                    placeholder="Pay Amount"
-                                                    class="form-control form-control-sm text-end text-success fw-bold"
-                                                    v-model="form.amount"
-                                                    @change="onInputChange"
-                                                />
-                                                <small
-                                                    class="text-danger"
-                                                    v-show="is_exceed"
-                                                    >Exceed Maximum</small
-                                                >
-                                                <a
-                                                    :href="`/admin/pos/create?order_no=${order.id}`"
-                                                    class="small text-success"
-                                                    >Calculate</a
-                                                >
-                                            </div>
-                                        </th>
-                                        <th></th>
-                                    </tr>
+                                    </tr>                                    
                                 </tfoot>
                             </table>
                         </div>
@@ -249,7 +205,7 @@
                             <div class="modal fade" id="payment-form">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-                                        <div class="modal-header">
+                                        <div class="modal-header bg-sidebar">
                                             <h5
                                                 class="modal-title"
                                                 id="exampleModalLabel"
@@ -258,19 +214,24 @@
                                             </h5>
                                             <button
                                                 type="button"
-                                                class="btn-close"
+                                                class="btn btn-sm btn-outline-danger"
                                                 data-bs-dismiss="modal"
-                                                aria-label="Close"
-                                            ></button>
+                                            ><i class="fa fa-times"></i></button>
                                         </div>
                                         <div class="modal-body">
+                                            <h5 class="text-primary mb-3">Pay Amount - <span class="fw-bold">{{ getPayAmount }}</span></h5>
                                             <div class="form-group px-1">
                                                 <label>To Pay Amount</label>
-                                                <input type="text" v-model="form.amount" class="form-control form-control-sm" />
+                                                <input type="text" v-model="form.amount" class="form-control form-control-sm" @change="onInputChange" />
+                                                <small
+                                                    class="text-danger"
+                                                    v-show="is_exceed"
+                                                    >Exceed Maximum</small
+                                                >
                                             </div>
-                                            <ul class="nav">
+                                            <ul class="nav mt-3">
                                                 <li
-                                                    class="nav-item paymentype-item"
+                                                    class="nav-item paymentype-item rounded bg-sidebar"
                                                     :class="
                                                         getClass(paymentype.id)
                                                     "
@@ -292,19 +253,13 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer bg-sidebar">
                                             <button
                                                 type="button"
-                                                class="btn btn-secondary"
+                                                class="btn btn-sm btn-outline-secondary"
                                                 data-bs-dismiss="modal"
                                             >
                                                 Close
-                                            </button>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                            >
-                                                Save changes
                                             </button>
                                         </div>
                                     </div>
@@ -340,7 +295,7 @@
                             </a>
 
                             <a
-                                :href="`/admin/sales-print/${order.id}`"
+                                :href="`/admin/pos-print/${order.id}`"
                                 class="btn btn-dark me-2 mb-2"
                             >
                                 <i class="fa fa-print"></i>
@@ -448,7 +403,7 @@ export default {
             };
             axios.patch(`/wapi/orders/${this.order.id}`, form).then((resp) => {
                 this.isSale = true;
-                window.location = `/admin/sales-print/${this.order.id}`;
+                window.location = `/admin/pos-print/${this.order.id}`;
             });
         },
         onCancelOrder() {
@@ -503,7 +458,7 @@ export default {
                 this.is_exceed = false;
                 this.isSale = resp.data.status_id == 3 ? true : false;
                 if (resp.data.status_id == 3) {
-                    window.location = `/admin/sales-print/${this.order.id}`;
+                    window.location = `/admin/pos-print/${this.order.id}`;
                 }
             });
         },
@@ -557,9 +512,6 @@ export default {
     margin-bottom: 10px;
     margin-left: 5px;
     border: 1px solid rgba(0, 0, 0, 0.4);
-}
-.paymentype-item .nav-link {
-    padding: 0.15rem 1rem;
 }
 .paymentype-item.selected {
     border: 2px solid #000;

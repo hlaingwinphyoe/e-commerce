@@ -1,7 +1,7 @@
 <template>
     <tr>
         <td>
-            <span class="no-overflow">{{ sku.item_name }}</span>
+            <span class="no-overflow">{{ sku.item_name }} {{ sku.data ? '('+ sku.data +')' : '' }}</span>
             <p class="mb-0 small">{{ Number(sku.price).toLocaleString() }}</p>
         </td>
         <td class="">
@@ -46,22 +46,17 @@ export default {
             var form = {
                 'qty' : this.$refs.qty.value
             };
-            axios.patch(`/wapi/order-skus/${this.sku.order_id}/${this.sku.sku_id}`, form).then(resp => {
+            axios.patch(`/wapi/order-skus/${this.sku.pivot.order_id}/${this.sku.id}`, form).then(resp => {
                 this.$emit('on-update-sku', resp.data);
             });
         },
         onDeleteSku() {
-            axios.delete(`/wapi/order-skus/${this.sku.order_id}/${this.sku.sku_id}`).then(resp => {
+            axios.delete(`/wapi/order-skus/${this.sku.pivot.order_id}/${this.sku.id}`).then(resp => {
                 this.$emit('on-delete-sku', resp.data);
             });
         }
 
     },
-    computed: {
-        getName() {
-            return this.sku.data ? JSON.parse(this.sku.data).sku.name : '';
-        }
-    }
 
 }
 </script>

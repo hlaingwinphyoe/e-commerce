@@ -175,4 +175,15 @@ class OrderController extends Controller
 
         return response()->json($order);
     }
+
+    public function getPaymentParams($id)
+    {
+        $order = Order::find($id);
+
+        return response()->json([
+            'order' => $order,
+            'pay_amount' => $order->getPayAmount(),
+            'balance' => $order->getBalance()
+        ]);
+    }
 }

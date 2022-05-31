@@ -6,11 +6,6 @@
 
 @section('content')
 
-<?php
-$address = App\Models\Group::isType('address')->first();
-$phone = App\Models\Group::where('type', 'like', 'phone-%')->first();
-?>
-
 <div>
     <div class="d-flex align-items-center">
         <a href="{{ request()->session()->get('prev_route') }}" class="btn btn-sm btn-primary">
@@ -25,11 +20,11 @@ $phone = App\Models\Group::where('type', 'like', 'phone-%')->first();
 
     <div class="row py-4">
         <div class="col-md-6">
-            <div class="slip-container w-100 bg-sidebar py-4 px-4">
+            <div class="slip-container w-100 bg-white border rounded shadow py-4 px-4">
                 <div class="pb-2 text-center">
                     <h6 class="text-uppercase fw-bold mb-0">{{ config('app.name') }}</h6>
                     <p class="mb-0">
-                        {{ $address ? $address->name : '' }} Ph-{{ $phone ? $phone->name : '' }}
+                        Address Ph-Phone
                     </p>
                 </div>
 
@@ -64,7 +59,7 @@ $phone = App\Models\Group::where('type', 'like', 'phone-%')->first();
                             </tr>
                             @endforeach
                         </tbody>
-                        <thead class="">
+                        <tfoot class="">
                             <tr class="small" style="text-align:right">
                                 <th colspan="3" class="" style="text-align:right">Total</th>
                                 <th width="200px" class="" style="text-align:right">{{ number_format($order->price) }}</th>
@@ -81,7 +76,7 @@ $phone = App\Models\Group::where('type', 'like', 'phone-%')->first();
                                 <th colspan="3" class="" style="text-align:right">Net Amount</th>
                                 <th width="200px" class="" style="text-align:right">{{ number_format($order->price - $order->discount + $order->deli_fee) }}</th>
                             </tr>
-                        </thead>
+                        </tfoot>
                     </table>
                 </div>
 
@@ -103,7 +98,7 @@ $phone = App\Models\Group::where('type', 'like', 'phone-%')->first();
             @endif
             @endif
 
-            <form action="{{ route('admin.orders.return', $order->id) }}" method="post">
+            <form action="{{ route('admin.returns.store') }}" method="post">
                 @csrf
 
                 @if(!$order->getBalance())

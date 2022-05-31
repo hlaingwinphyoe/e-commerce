@@ -36,10 +36,10 @@
             </div>
 
         <div
-            class="cus-info absolute-box results px-2 py-3 bg-white border rounded shadow"
+            class="cus-info absolute-box results px-2 py-3 bg-white border rounded shadow" style="max-height: 250px"
         >
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group mb-2">
                         <label class="text-muted">Phone</label>
                         <input
@@ -51,10 +51,10 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-12 mb-2">
                     <label class="text-muted">Address</label>
                     <textarea
-                        rows="1"
+                        rows="3"
                         class="form-control form-control-sm"
                         v-model="form.address"
                         placeholder="Address"
@@ -100,6 +100,7 @@ export default {
                 .patch(`/wapi/save-customer/${this.order.id}`, this.form)
                 .then(resp => {
                     this.$emit("on-save-customer", resp.data);
+                    $('.cus-info').removeClass('show');
                 });
         },
         onSearchCustomer() {

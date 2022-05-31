@@ -106,6 +106,9 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     Route::resource('/orders', OrderController::class);
     Route::post('/update-order-delivery/{order}', [OrderController::class, 'updateDelivery'])->name('update-order-delivery');
     Route::resource('/pos', POSController::class);
+    Route::get('/pos-print/{pos}', [POSController::class, 'print'])->name('pos.print');
+    
+   
 
     //sales
     Route::resource('/sales', SaleController::class);

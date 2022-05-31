@@ -179,7 +179,7 @@
                             data-bs-toggle="modal">
                             <small>Payment</small>
                         </a>
-                        @include('admin.pos.payment')
+                        <payment-form :order="{{ $order }}"></payment-form>
                         @endif
                         @if(auth()->user()->role->hasPermission('access-order'))
                         <a href="{{ route('admin.pos.show', $order->id) }}" class="btn btn-sm btn-outline-danger me-2">
