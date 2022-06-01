@@ -50,21 +50,23 @@ class SkuInventoryController extends Controller
             return $sku;
         });
 
+        $sku = Sku::find($request->sku);
+
         return response()->json([
             'sku' => $sku,
             'skus' => $inventory->skus
         ]);
     }
 
-    public function destroy($inventory, $sku)
+    public function destroy($inventory, $sku_id)
     {
         $inventory = Inventory::find($inventory);
 
-        $sku = DB::transaction(function () use ($inventory, $sku) {            
+        $sku = DB::transaction(function () use ($inventory, $sku_id) {            
 
-            $sku_pivot = $inventory->skus()->where('sku_id', $sku)->first();
+            $sku_pivot = $inventory->skus()->where('sku_id', $sku_id)->first();
 
-            $sku = Sku::find($sku);
+            $sku = Sku::find($sku_id);
 
             $sku->update(['stock' => $sku->stock - $sku_pivot->pivot->qty]);
 
@@ -72,6 +74,8 @@ class SkuInventoryController extends Controller
 
             return $sku;
         });
+
+        $sku = Sku::find($sku_id);
 
         return response()->json([
             'sku' => $sku,

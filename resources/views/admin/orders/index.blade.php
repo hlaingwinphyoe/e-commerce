@@ -153,7 +153,7 @@
                         <a href="#payment-modal-{{ $order->id }}" class="btn btn-sm btn-secondary me-2 mb-1" data-bs-toggle="modal">
                             <small>Payment</small>
                         </a>
-                        @include('admin.sales.payment')
+                        <payment-form :order="{{ $order }}"></payment-form>
                         @endif
                         @if(auth()->user()->role->hasPermission('access-order'))
                         <a href="{{ route('admin.pos.show', $order->id) }}" class="btn btn-sm btn-outline-danger me-2">

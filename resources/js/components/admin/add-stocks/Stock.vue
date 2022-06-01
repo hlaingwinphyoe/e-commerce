@@ -68,7 +68,6 @@ export default {
         onSaveSupplier() {
             axios.patch(`/wapi/inventories/${this.data_inventory.id}`, this.supplier_form).then(resp => {
                 location.reload();
-                // $(`#add-stock-modal-${this.item.id}`).hide();
             });
         }
     }   

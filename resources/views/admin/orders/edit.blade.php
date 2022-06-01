@@ -4,13 +4,7 @@
 
 @section('classes', 'admin admin-orders admin-orders-edit')
 
-@section('content-header')
-<x-admin.content-header :navs="['orders', 'edit']"></x-admin.content-header>
-@endsection
-
 @section('content')
-
-@include('components.admin.errors')
 
 @include('components.admin.message')
 
@@ -26,6 +20,8 @@
             <span class="text-muted form-text">( Edit )</span>
         </div>
     </div>
+
+    <web-order :order="{{ $order->order }}" :skus="{{ $order->skus }}"></web-order>
 
     <div class="mb-2">
         <p class="mb-3">Date - {{ $order->created_at->format('d M, Y (D, H:m A)') }}</p>
@@ -61,36 +57,30 @@
 
             <div class="mb-3 table-responsive">
                 <table class="table border-0">
-                    @foreach($order->stockOrders as $stock)
+                    @foreach($order->skus as $sku)
                     <tr>
                         <td width="150px">
-                            @if($stock->sku && $stock->sku->item)
-                            <img src="{{ strpos($stock->sku->thumbnail, 'default.png')!== false ? $stock->sku->item->thumbnail : $stock->sku->thumbnail }}" alt="{{ $stock->sku->data ?? $stock->sku->item->name }}" style="max-width: 100%; max-height: 100px">
-                            @else
-                            <img src="{{ asset('images/default.png') }}" alt="Default Image" style="max-width: 100%; max-height: 100px">
-                            @endif
+                            <img src="{{ strpos($sku->thumbnail, 'default.png')!== false ? $sku->item->thumbnail : $sku->thumbnail }}" alt="{{ $sku->data ?? $sku->item->name }}" style="max-width: 100%; max-height: 100px">
                         </td>
                         <td>
-                            <p>{{ $stock->getData() ? $stock->getData()->sku->name : '' }}</p>
-                            <span>{{ number_format($stock->price) }} Ks</span>
+                            <p>{{ $sku->item->name }}{{ $sku->data ? '('. $sku->data .')' : '' }}</p>
+                            <span>{{ number_format($sku->pivot->price) }} Ks</span>
+                            <p class="mb-0 text-primary">{{ $sku->item->code }}</p>
                         </td>
                         <td>
-                            @if($stock->sku)
-                            <edit-order :sku="{{ $stock }}" order_status="{{ $order->status->slug }}" :statuses="{{ $sku_statuses }}" qty="{{ $stock->qty }}" stock="{{ $stock->sku->stock }}"></edit-order>
-                            @endif
+                            <edit-order :sku="{{ $sku }}" :statuses="{{ $sku_statuses }}" qty="{{ $sku->pivot->qty }}" stock="{{ $sku->stock }}"></edit-order>
                         </td>
                     </tr>
                     @endforeach
                 </table>
             </div>
 
-            @if($order->status->slug != 'completed' && $order->status->slug != 'cancel')
+
             <div class="border-top py-3 mb-3">
                 <h5>Add More</h5>
                 <order order_id="{{ $order->id }}"></order>
 
             </div>
-            @endif
             <h5 class="">
                 <button class="btn btn-sm btn-dark">
                     Total - <span id="total_price">{{ number_format($order->amount) }}</span> MMK
@@ -101,7 +91,7 @@
         <div class="col-md-4 mb-2">
             <h3 class="mb-2">Billing Information</h3>
             @if($order->data)
-            <form action="{{ route('admin.orders.update-info', $order->id) }}" method="post">
+            <form action="{{ route('admin.orders.update', $order->id) }}" method="post">
                 @csrf
                 @method('patch')
                 <div class="tile table-responsive">

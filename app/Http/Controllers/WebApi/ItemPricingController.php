@@ -18,7 +18,7 @@ class ItemPricingController extends Controller
 
         if($item->skus()->count()) {
             $sku = $item->skus()->first();
-            $pricings = $sku->pricings ? Pricing::whereIn('id', $sku->pricings()->pluck('id'))->get() : [];
+            $pricings = $sku && $sku->pricings ? Pricing::whereIn('id', $sku->pricings()->pluck('id'))->get() : [];
         }
 
         return response()->json($pricings);

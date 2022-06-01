@@ -1,7 +1,7 @@
 <template>
     <div class="puchase-container row">
         <!-- Add Form -->
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
             <!-- inventory-update-form -->
             <div class="bg-white shadow rounded py-3 px-2 mb-4">
                 <h5 class="text-primary mb-3">Supplier Information</h5>
@@ -51,6 +51,7 @@
         <!-- Sku Lists -->
         <div class="col-md-6">
             <div class="bg-white shadow rounded px-2 py-3">
+               <p class="mb-2">Form No. {{ inventory.inventory_no }}</p>
                 <h5 class="text-primary mb-3">Item Lists</h5>
                 <purchase-list :skus="data_skus" @on-update-sku="onUpdateSku" @on-delete-sku="onDeleteSku"></purchase-list>
             </div>

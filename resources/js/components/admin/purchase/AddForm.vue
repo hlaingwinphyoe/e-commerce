@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <div class="form-group mb-3">
                         <label for="">
                             Quantity
@@ -80,18 +80,21 @@
                         />
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <div class="form-group mb-3">
-                        <label for=""> Amount </label>
-                        <small class="help-text text-muted"
-                            >ဝယ်စျေးထည့်ပါ။</small
-                        >
+                        <label for=""> Buy Price </label>
                         <input
                             type="text"
                             class="form-control form-control-sm"
                             placeholder="Amount"
                             v-model="form.amount"
                         />
+                    </div>
+                </div>
+                <div class="col-md-2" v-if="sale_price">
+                    <div class="form-group mb-3">
+                        <label for=""> Sale Price </label>
+                        <div><small class="text-white bg-secondary rounded px-1 py-0">{{ sale_price }}</small></div>
                     </div>
                 </div>
                 <div class="form-group mb-3" v-show="canSave">
@@ -128,6 +131,7 @@ export default {
                 qty: "",
                 remark: "",
             },
+            sale_price: ""
         };
     },
     methods: {
@@ -169,7 +173,8 @@ export default {
                 ? sku.item_name + " (" + sku.data + ")"
                 : sku.item_name;
             this.results = [];
-            this.form.amount = sku.price;
+            this.form.amount = sku.buy_price;
+            this.sale_price = sku.price;
         },
         onAddSku() {
             axios

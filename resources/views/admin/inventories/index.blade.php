@@ -57,6 +57,7 @@ $query .= request('q') ? '?q=' . request('q') : '';
     <table class="table table-borderless">
         <thead>
             <tr>
+                <th>No.</th>
                 <th width="250px">Supplier</th>
                 <th>Items</th>
                 <th>Amount</th>
@@ -68,8 +69,9 @@ $query .= request('q') ? '?q=' . request('q') : '';
         <tbody>
             @forelse($inventories as $inventory)
             <tr id="tr-{{ $inventory->id }}">
+                <td>{{ $inventory->inventory_no }}</td>
                 <td class="">{{ $inventory->supplier ? $inventory->supplier->name : '' }}</td>
-                <td>{{ $inventory->skus->count() }}</td>
+                <td><a href="{{ route('admin.inventories.show', $inventory->id) }}" class="btn btn-sm btn-outline-primary">{{ $inventory->skus->count() }}</a></td>
                 <td>{{ number_format($inventory->getAmount()) }}</td>
                 <td>{{ \Carbon\Carbon::parse($inventory->date)->format('M d, Y') }}</td>
                 <td>{{ $inventory->user ? $inventory->user->name : '' }}</td>
