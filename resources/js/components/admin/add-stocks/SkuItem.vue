@@ -3,7 +3,7 @@
         <div class="mb-2">
             <div class="row">
                 <div class="col-md-3">
-                    <p class="mb-1">{{ sku.data }}</p>
+                    <p class="mb-1">{{ sku.item_name }} {{ sku.data ? '('+ sku.data +')' : '' }}</p>
                     <small>current stock - <span class="btn btn-sm btn-outline-primary">{{ form.current_stock }}</span></small>
                 </div>
                 <div class="col-md-2">
