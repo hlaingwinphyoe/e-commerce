@@ -20,3 +20,20 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/category/{category?}/{type?}', [TypeController::class, 'category'])->name('category');
+//save-invoice
+Route::get('/save-invoice/{order}', function ($id) {
+    $order = Order::find($id);
+
+    if ($order) {
+        $address = App\Models\Status::isType('address')->first();
+        $phone = App\Models\Status::where('type', 'phone')->first();
+
+        return view('components.invoice')->with([
+            'order' => $order,
+            'address' => $address,
+            'phone' => $phone
+        ]);
+    }
+
+    return redirect()->back();
+})->name('save-invoice');

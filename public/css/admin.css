@@ -22364,6 +22364,14 @@ body {
     background-color: #fafafa;
   }
 }
+body::-webkit-scrollbar, .smooth-scroll::-webkit-scrollbar {
+  width: 3px;
+}
+
+body::-webkit-scrollbar-thumb, .smooth-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(33, 37, 41, 0.2);
+}
+
 @keyframes fa-beat {
   0% {
     transform: scale(1);

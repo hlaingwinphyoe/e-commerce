@@ -13,6 +13,7 @@ import Purchase from './purchase/Purchase.vue';
 import PosIndex from './pos/PosIndex.vue';
 import ReturnSku from './returns/ReturnSku.vue';
 import PaymentForm from './payment/PaymentForm.vue';
+import WebOrder from './web-order/WebOrder.vue';
 
 const app = createApp({
 //
@@ -30,5 +31,6 @@ app.component('purchase', Purchase);
 app.component('pos-index', PosIndex);
 app.component('return-sku', ReturnSku);
 app.component('payment-form', PaymentForm);
+app.component('web-order', WebOrder);
 
 app.mount('#fse-admin');
