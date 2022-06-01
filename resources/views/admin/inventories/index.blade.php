@@ -33,7 +33,15 @@ $query .= request('q') ? '?q=' . request('q') : '';
         </div>
 
         <form action="{{ route('admin.inventories.index') }}" class="d-flex responsive-flex">
-
+            <div class="form-group me-2">
+                <input type="date" name="date" class="form-control form-control-sm" value="{{ request('date') }}" placeholder="date">
+            </div>
+            <div class="form-group me-2">
+                <input type="date" name="from_date" class="form-control form-control-sm" value="{{ request('from_date') }}">
+            </div>
+            <div class="form-group me-2">
+                <input type="date" name="to_date" class="form-control form-control-sm" value="{{ request('to_date') }}">
+            </div>
             <div class="form-group">
                 <button class="btn btn-sm btn-outline-primary me-2 mb-1">Filter</button>
                 <a href="{{ route('admin.inventories.index') }}" class="btn btn-sm btn-primary mb-1">

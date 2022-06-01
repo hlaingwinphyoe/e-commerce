@@ -313,7 +313,7 @@ trait SkuTrait
 
         if (request('brand')) {
             $query->whereHas('item', function ($query) {
-                $query->whereHas('brands', function ($query) {
+                $query->whereHas('brand', function ($query) {
                     $query->where('id', request('brand'))->orWhere('slug', request('brand'));
                 });
             });

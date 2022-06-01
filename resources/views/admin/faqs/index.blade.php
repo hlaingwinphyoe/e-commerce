@@ -34,7 +34,7 @@
                     <select name="faq_type" class="form-select form-select-sm">
                         <option value="">Choose FAQ Type</option>
                         @foreach($faq_types as $type)
-                        <option value="{{ $type->id }}" {{ $type->id == request()->type? 'selected' : '' }}>{{ $type->name }}</option>
+                        <option value="{{ $type->id }}" {{ $type->id == request()->faq_type? 'selected' : '' }}>{{ $type->name }}</option>
                         @endforeach
                     </select>
                 </div>

@@ -51,12 +51,10 @@
                                 <span class="nav-link pl-0">{{ $region->name }}</span>
                                 <div class="d-flex flex-wrap">
                                     @foreach($region->enabled_townships()->get() as $township)
-                                    @if($delifee->hasTownship($township->id))
                                     <div class="form-check w-responsive-25">
                                         <input type="checkbox" name="townships[]" value="{{ $township->id }}" class="form-check-input" id="township-{{ $township->id }}" {{ $delifee->hasTownship($township->id) ? 'checked' : '' }}>
                                         <label for="township-{{ $township->id }}" class="form-check-label">{{ $township->name }}</label>
                                     </div>
-                                    @endif
                                     @endforeach
                                 </div>
                             </li>

@@ -34,9 +34,9 @@ class Country extends Model
 
     public function scopeFilterOn($query)
     {
-        if (request('name')) {
-            $query->where('name', 'like', '%' . request('name') . '%')
-                ->orWhere('mm_name', 'like', '%' . request('name'), '%');
+        if (request('q')) {
+            $query->where('name', 'like', '%' . request('q') . '%')
+                ->orWhere('mm_name', 'like', '%' . request('q'), '%');
         }
 
 

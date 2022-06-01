@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Type extends Model
 {
@@ -14,18 +15,6 @@ class Type extends Model
     protected $guarded = [];
 
     protected $appends = ['thumbnail'];
-
-
-    // public function maintypes()
-    // {
-    //     return $this->belongsToMany(Maintype::class,'main_type', 'type_id', 'maintype_id');
-    // }
-
-    // public function maintype()
-    // {
-    //     return $this->maintypes ? $this->maintypes->first() : '';
-    // }
-
    
     public function parent_type()
     {

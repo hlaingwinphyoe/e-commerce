@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Carbon\Carbon;
+
 class DiscountType extends Model
 {
     use HasFactory;
@@ -46,6 +48,14 @@ class DiscountType extends Model
 
     public function scopeFilterOn($query)
     {
-        //
+        if (request('q')) {
+            $query->where('name', 'like', '%' . request('q') . '%');
+        }
+
+        if (request('start_date')) {
+            $start_date = Carbon::parse(request('start_date'))->format('Y-m-d');
+            $end_date = request('end_date') ? Carbon::parse(request('end_date'))->format('Y-m-d') : now()->format('Y-m-d');
+            $query->whereDate('start_date', '>=', $start_date)->whereDate('end_date', '<=', $end_date);
+        }
     }
 }

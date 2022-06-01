@@ -24,15 +24,6 @@
             <form action="{{ route('admin.orders.index') }}" class="d-flex responsive-flex">
 
                 <div class="form-group me-2">
-                    <select name="delivery" class="form-select">
-                        <option value="">Select Delivery</option>
-                        @foreach($deliveries as $delivery)
-                        <option value="{{ $delivery->id }}" {{ request()->delivery == $delivery->id ? 'selected' : '' }}>{{ $delivery->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group me-2">
                     <select name="status" class="form-select">
                         <option value="">Select Status</option>
                         @foreach($statuses as $status)

@@ -33,11 +33,14 @@ class Region extends Model
     //scope functions
     public function scopeFilterOn($query)
     {
-        if(request('name')) {
-            $query->where('name', 'like', '%' . request('name') . '%')
-                ->orWhere('mm_name', 'like', '%' . request('name'), '%');
+        if(request('q')) {
+            $query->where('name', 'like', '%' . request('q') . '%')
+                ->orWhere('mm_name', 'like', '%' . request('q'), '%');
         }
 
+        if(request('country_id')) {
+            $query->where('country_id', request('country_id'));
+        }
 
         if (request('disabled') && request('disabled') == 'disabled') {
             $query->where('disabled', 1);

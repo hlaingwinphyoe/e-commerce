@@ -44,9 +44,9 @@ class Township extends Model
     //scope functions
     public function scopeFilterOn($query)
     {
-        if(request('name')) {
-            $query->where('name', 'like', '%' . request('name') . '%')
-                ->orWhere('mm_name', 'like', '%' . request('name'), '%');
+        if(request('q')) {
+            $query->where('name', 'like', '%' . request('q') . '%')
+                ->orWhere('mm_name', 'like', '%' . request('q'), '%');
         }
 
         if(request('region_id')) {

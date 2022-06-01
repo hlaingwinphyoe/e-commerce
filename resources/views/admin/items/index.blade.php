@@ -81,6 +81,15 @@ if (request('brand')) {
                     </select>
                 </div>
 
+                <div class="form-group me-2">
+                    <select name="brand" class="form-select form-select-sm">
+                        <option value="">Choose Brand</option>
+                        @foreach($brands as $brand)
+                        <option value="{{ $brand->slug }}" {{ $brand->id == request()->brand? 'selected' : '' }}>{{ $brand->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <button class="btn btn-sm btn-outline-primary me-2 mb-1">Filter</button>
                     <a href="{{ route('admin.items.index') }}" class="btn btn-sm btn-primary mb-1">

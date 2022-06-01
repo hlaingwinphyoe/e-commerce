@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\DeliFee;
 use App\Models\Region;
+use App\Models\Township;
 
 class DeliFeeController extends Controller
 {
@@ -20,10 +21,13 @@ class DeliFeeController extends Controller
 
     public function index()
     {
-        $delifees = DeliFee::orderBy('amt')->paginate(20);
+        $delifees = DeliFee::filterOn()->orderBy('amt')->paginate(20);
+
+        $townships = Township::all();
 
         return view('admin.delifees.index')->with([
-            'delifees' => $delifees
+            'delifees' => $delifees,
+            'townships' => $townships,
         ]);
     }
 

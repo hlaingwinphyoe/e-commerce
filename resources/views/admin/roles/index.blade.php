@@ -27,6 +27,22 @@
                 </a>
             </div>
             @endif
+
+            <form action="{{ route('admin.roles.index') }}" class="d-flex responsive-flex">
+                <div class="form-group me-2">
+                    <select name="type" class="form-select">
+                        <option value="">Select Roles</option>
+                        <option value="Operation" {{ request('type') == 'Operation' ? 'selected' : '' }}>Operation Role</option>
+                        <option value="Customer" {{ request('type') == 'Customer' ? 'selected' : '' }}>Customer Role</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
+                    <a href="{{ route('admin.roles.index') }}" class="btn btn-sm btn-primary">
+                        <small><i class="fa fa-redo"></i></small>
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 

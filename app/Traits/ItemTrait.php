@@ -346,7 +346,7 @@ trait ItemTrait
         }
 
         if (request('brand')) {
-            $query->whereHas('brands', function ($query) {
+            $query->whereHas('brand', function ($query) {
                 $query->where('slug', request('brand'));
             });
         }

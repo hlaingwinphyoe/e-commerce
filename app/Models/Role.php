@@ -89,8 +89,12 @@ class Role extends Model
 
     public function scopeFilterOn($query)
     {
-        if (request('name')) {
-            $query->where('name', 'like', '%' . request('name') . '%');
+        if (request('q')) {
+            $query->where('slug', 'like', '%' . request('q') . '%');
+        }
+
+        if (request('type')) {
+            $query->where('type', request('type') );
         }
     }
 }
