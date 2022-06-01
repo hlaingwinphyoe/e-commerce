@@ -13,7 +13,7 @@ use App\Models\Role;
 class POSController extends Controller
 {
     public function index()
-    {       
+    {
         $orders = Order::isType('pos')->filterOn()->orderBy('status_id')->orderBy('order_no', 'desc')->paginate(20);
 
         $deliveries = Delivery::all();
@@ -47,26 +47,33 @@ class POSController extends Controller
 
     public function create()
     {
-        $order = request('order_no') ? Order::where('order_no', request('order_no'))->orWhere('id', request('order_no'))->first() : Order::isType('pos')->where('user_id', auth()->user()->id)->whereDoesntHave('status', function($q) {
+        $order = request('order_no') ? Order::where('order_no', request('order_no'))->orWhere('id', request('order_no'))->first() : Order::isType('pos')->where('user_id', auth()->user()->id)->whereDoesntHave('status', function ($q) {
             $q->where('slug', 'completed');
-        })->first();
+        })->whereDoesntHave('skus')->first();
 
         if (!$order) {
             $data = [
-            'user' => [
-                'name' => '',
-                'email' => '',
-                'phone' => '',
-                'address' => '',
-                'remark' => '',
-                'region' => [
-                    'region_id' => '',
-                    'township_id' => ''
+                'user' => [
+                    'name' => '',
+                    'email' => '',
+                    'phone' => '',
+                    'address' => '',
+                    'remark' => '',
+                    'region' => [
+                        'region_id' => '',
+                        'township_id' => ''
+                    ],
+                    'delifee' => 0
                 ],
-                'delifee' => 0
-            ],
-        ];
+            ];
+            $order_month = Carbon::now()->format('ym');
+            
+            $latest_order = Order::where('order_month', intval($order_month))->orderBy('order_no', 'desc')->first();
+
+            $order_no = $latest_order ? $latest_order->return_no + 1 : intval($order_month . '00001');
             $order = Order::create([
+                'order_no' => $order_no,
+                'order_month' => $order_month,
                 'user_id' => auth()->user()->id,
                 'status_id' => 1,
                 'type' => 'pos',
@@ -87,10 +94,10 @@ class POSController extends Controller
         ]);
     }
 
-    public function print($id) 
+    public function print($id)
     {
         $sale = Order::findOrFail($id);
-        
+
         return view('admin.print.order')->with([
             'sale' => $sale
         ]);

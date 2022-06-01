@@ -94,10 +94,10 @@
 @if(auth()->user()->role->hasPermission('edit-general-information'))
 <div class="row">
     <?php
-    $phone = App\Models\Group::where('type', 'like', 'phone-%')->first();
-    $general = App\Models\Group::isType('general')->first();
-    $delivery = App\Models\Group::isType('delivery')->first();
-    $address = App\Models\Group::isType('address')->first();
+    $phone = App\Models\Status::where('type', 'phone')->first();
+    $general = App\Models\Status::isType('general')->first();
+    $delivery = App\Models\Status::isType('delivery')->first();
+    $address = App\Models\Status::isType('address')->first();
     ?>
     @if($general || $phone || $delivery || $address)
     <div class="col-md-6 mb-4">
@@ -150,10 +150,10 @@
                     </h6>
 
 
-                    <form action="{{ route('admin.change-general') }}" class="row" method="post">
+                    <form action="{{ route('admin.change-hotline', $general->id) }}" class="row" method="post">
                         @csrf
                         <div class="form-group col-md-10">
-                            <input type="text" name="general" value="{{ $general->name }}" class="form-control form-control-sm">
+                            <input type="text" name="phone" value="{{ $general->name }}" class="form-control form-control-sm">
                         </div>
                         <div class="form-group col-md-2">
                             <button type="submit" class="btn btn-sm btn-outline-secondary"><i class="fa fa-check"></i></button>

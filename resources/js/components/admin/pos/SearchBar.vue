@@ -79,14 +79,6 @@
             </div>
             <!-- new design -->
             <div class="row">
-                <div class="col-12 text-end mb-1">
-                    <a
-                        href="#"
-                        class="btn btn-sm btn-outline-danger"
-                        @click.prevent="onCloseSearch()"
-                        ><i class="fa fa-times"></i
-                    ></a>
-                </div>
                 <div
                     class="col-6 col-md-4"
                     v-for="res in data_skus.data"
