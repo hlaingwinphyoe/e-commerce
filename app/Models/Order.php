@@ -98,6 +98,14 @@ class Order extends Model
         return $this->customized_price ?? $this->price;
     }
 
+    public function getTotalQty()
+    {
+        $qty = $this->skus->sum(function ($sku){
+            return $sku->pivot->qty;
+        });
+        return $qty;
+    }
+
     /**
      * helper functions
      */
@@ -429,9 +437,9 @@ class Order extends Model
 
         if (request('sku')) {
             $query->whereHas('skus', function ($query) {
-                $query->whereHas('sku', function ($query) {
+                // $query->whereHas('sku', function ($query) {
                     $query->where('id', request('sku'));
-                });
+                // });
             });
         }
 

@@ -10,6 +10,7 @@ use App\Models\Type;
 use App\Models\Brand;
 use App\Models\Status;
 use App\Models\Inventory;
+use App\Models\Order;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -67,13 +68,15 @@ class SkuController extends Controller
 
         $inventories = $sku->inventories()->where('is_published', 1)->whereDate('date', '>=', $from_date)->whereDate('date', '<=', $to_date)->latest()->get();
 
-        $orders = $sku->stockOrders()->whereHas('order', function ($query) use ($from_date, $to_date) {
-            $query->whereHas('status', function ($query) {
-                $query->where('slug', 'completed');
-            })->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date);
-        })->latest()->get();
+        // $orders = $sku->whereHas('orders', function ($query) use ($from_date, $to_date) {
+        //     $query->whereHas('status', function ($query) {
+        //         $query->where('slug', 'completed');
+        //     })->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date);
+        // })->latest()->get();
 
-        $wait_orders = $sku->stockOrders()->whereHas('order', function ($query) use ($from_date, $to_date) {
+        $orders = Order::saleOrder()->filterOn()->fromTo()->orderBy('order_no', 'desc')->paginate(20);
+
+        $wait_orders = $sku->whereHas('orders', function ($query) use ($from_date, $to_date) {
             $query->whereHas('status', function ($query) {
                 $query->where('slug', 'order-confirmed');
             })->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date);

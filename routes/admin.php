@@ -33,7 +33,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/upload-logo', [DashboardController::class, 'uploadLogo'])->name('upload-logo');
+    
     Route::post('/change-hotline/{group}', [DashboardController::class, 'changeHotline'])->name('change-hotline');
+    Route::post('/change-general', [DashboardController::class, 'changeGeneral'])->name('change-general');
+    
     Route::resource('/slides', SlideController::class);
     Route::resource('/mainfeatures', MainFeatureController::class);
     Route::get('/mainfeatures-toggle/{mainfeature}', [MainFeatureController::class, 'toggle'])->name('mainfeatures.toggle');

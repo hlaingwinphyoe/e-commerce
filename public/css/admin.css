@@ -22522,10 +22522,93 @@ body {
   font-size: 0.75rem;
 }
 
+.text-primary-dark {
+  color: #000670;
+}
+
+.text-secondary-dark {
+  color: #9a0008;
+}
+
+.text-primary-light {
+  color: #5653d2;
+}
+
+.text-secondary-light {
+  color: #ff6b5a;
+}
+
+.bg-orange {
+  background-color: #fd7e14;
+}
+
+.bg-primary-dark {
+  background-color: #000670;
+}
+
+.bg-primary-light {
+  background-color: #5653d2;
+}
+
+.bg-secondary-dark {
+  background-color: #9a0008;
+}
+
+.bg-secondary-light {
+  background-color: #ff6b5a;
+}
+
 .bg-sidebar {
   background-color: #f1f1f5;
 }
 
 .bg-sidebar-dark {
   background-color: #e6e6e9;
+}
+
+.progress {
+  height: 0.5rem;
+}
+
+.feature-box {
+  margin-right: 3px;
+}
+.feature-box .feature-title {
+  font-size: 0.65rem;
+  margin: 0;
+  position: relative;
+  word-break: break-word;
+}
+.feature-box .feature-title:before {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 2px;
+  background: linear-gradient(45deg, #0c2aa0, #D33730);
+  left: 15%;
+  top: -7px;
+}
+.feature-box .feature-text {
+  display: none;
+}
+@media (min-width: 768px) {
+  .feature-box {
+    margin-right: 15px;
+  }
+  .feature-box .feature-icon i {
+    font-size: 1.5rem;
+  }
+  .feature-box .feature-title {
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .feature-box .feature-title::before {
+    top: -3px;
+  }
+  .feature-box .feature-text {
+    display: block;
+    font-size: 0.95rem;
+  }
 }

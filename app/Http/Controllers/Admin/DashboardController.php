@@ -38,4 +38,34 @@ class DashboardController extends Controller
 
         return redirect($request->session()->get('prev_route'));
     }
+
+    public function changeGeneral(Request $request)
+    {
+        $group = Status::isType('general')->first();
+
+        $group->update([            
+            'name' => $request->general ?? ' ',
+        ]);
+
+        return redirect($request->session()->get('prev_route'));
+    }
+
+    public function uploadLogo(Request $request)
+    {
+        $request->validate([
+            'image' => 'required'
+        ]);
+
+        if(File::exists(public_path('images/logo.png'))) {
+            //delete old file
+            File::delete(public_path('images/logo.png'));
+        }
+
+        $file = $request->file('image');
+        $fileNameToStore = 'logo.png';
+        $url = $file->storeAs('public/images', $fileNameToStore);
+
+        return redirect()->back();
+
+    }
 }

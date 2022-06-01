@@ -49,7 +49,7 @@
                 <i class="fa fa-clipboard-list"></i>
             </div>
             <span class="feature-title">Today Order</span>
-            <p class="text-muted h2">{{ \App\Models\Order::where('type', 'order')->todayFilter()->count() }}</p>
+            <p class="text-muted h4">{{ \App\Models\Order::where('type', 'order')->todayFilter()->count() }}</p>
         </a>
     </div>
     @endif
@@ -61,7 +61,7 @@
                 <i class="fa fa-receipt"></i>
             </div>
             <span class="feature-title">Today Sale</span>
-            <p class="text-muted h2">{{ \App\Models\Order::saleOrder()->todayFilter()->count() }}</p>
+            <p class="text-muted h4">{{ \App\Models\Order::saleOrder()->todayFilter()->count() }}</p>
         </a>
     </div>
     @endif
@@ -73,19 +73,19 @@
                 <i class="fa fa-box-open"></i>
             </div>
             <span class="feature-title">Total Items</span>
-            <p class="text-muted h2">{{ \App\Models\Item::count() }}</p>
+            <p class="text-muted h4">{{ \App\Models\Item::count() }}</p>
         </a>
     </div>
     @endif
 
-    @if(auth()->user()->role->hasPermission('access-main-type'))
+    @if(auth()->user()->role->hasPermission('access-type'))
     <div class="col-6 col-md-3 col-lg-3 mb-4">
         <a href="{{ route('admin.types.index') }}" class="d-block px-1 py-2 bg-sidebar shadow text-center rounded feature-box h-100 text-decoration-none">
             <div class="feature-icon py-3 text-primary-dark pb-2">
                 <i class="fa fa-tint"></i>
             </div>
             <span class="feature-title">Total Categories</span>
-            <p class="text-muted h2">{{ \App\Models\Type::count() }}</p>
+            <p class="text-muted h4">{{ \App\Models\Type::count() }}</p>
         </a>
     </div>
     @endif
@@ -186,7 +186,6 @@
         </div>
     </div>
     @endif
-
     <div class="col-md-6 mb-4">
         <x-admin.dashboard.paymentype></x-admin.dashboard.paymentype>
     </div>
@@ -208,7 +207,7 @@
                             ဓာတ်ပုံပြောင်းရန်
                         </label>
                         @if(public_path('images/logo.png'))
-                        <img src="{{ Storage::url('public/images/logo.png') }}" alt="{{ config('app.name') }}" class="user-profile rounded mb-3" width="100px" height="100px">
+                        <img src="{{ Storage::url('public/images/logo.png') }}" alt="{{ config('app.name') }}" class="user-profile rounded mb-3" width="100" height="100">
                         @endif
                         <div class="py-2 w-100">
                             <input type="file" name="image" id="profile">

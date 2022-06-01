@@ -72,11 +72,6 @@ class Sku extends Model
         return $this->belongsToMany(Order::class, 'order_sku', 'sku_id', 'order_id')->withPivot(['qty', 'price', 'customized_price', 'buy_price','margin', 'status_id']);
     }
 
-    public function stockOrders()
-    {
-        return $this->hasMany(StockOrder::class, 'sku_id', 'id');
-    }
-
     public function returns()
     {
         return $this->belongsToMany(ReturnModel::class, 'return_sku', 'sku_id', 'return_id')->withPivot(['qty', 'price', 'remark']);

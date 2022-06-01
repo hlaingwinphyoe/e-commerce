@@ -1,0 +1,48 @@
+.feature-box {
+    margin-right: 3px;
+
+    .feature-title {
+        font-size: .65rem;
+        margin: 0;
+        position: relative;
+        word-break: break-word;
+        &:before {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 2px;
+            background: linear-gradient(45deg, $primary, $secondary);
+            left: 15%;
+            top: -7px;
+        }
+    }
+
+    .feature-text {
+        display: none;
+    }
+
+    @include media-breakpoint-up(md) {
+        margin-right: 15px;
+
+        .feature-icon {
+            i {
+                font-size: 1.5rem;
+            }
+        }
+
+        .feature-title {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            &::before {
+                top: -3px;
+            }
+        }
+
+        .feature-text {
+            display: block;
+            font-size: .95rem;
+        }
+    }
+}

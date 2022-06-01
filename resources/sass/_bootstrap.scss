@@ -17,5 +17,35 @@
     font-size: .75rem;
 }
 
+
+.text-primary-dark {color: $primary-dark;}
+.text-secondary-dark {color: $secondary-dark;}
+.text-primary-light{color: $primary-light;}
+.text-secondary-light{color: $secondary-light;}
+
+.bg-orange {
+    background-color: $orange;
+}
+.bg-primary-dark {
+    background-color: $primary-dark;
+}
+
+.bg-primary-light {
+    background-color: $primary-light;
+}
+
+.bg-secondary-dark {
+    background-color: $secondary-dark;
+}
+
+.bg-secondary-light {
+    background-color: $secondary-light;
+}
+
 .bg-sidebar {background-color: $side-bg;}
 .bg-sidebar-dark {background-color: $side-bg-dark;}
+
+//progress bar
+.progress {
+    height: 0.5rem;
+}

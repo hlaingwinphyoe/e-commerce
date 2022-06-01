@@ -49,7 +49,7 @@
     @if(auth()->user()->role->hasPermission('access-order'))
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/orders','admin/orders/*']) ? 'active' : '' }}" href="{{ route('admin.orders.index') }}" title="Orders">
-            <i class="app-menu__icon fa fa-clipboard-list mr-2"></i>
+            <i class="app-menu__icon fa fa-arrow-down-1-9 mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.orders')}}</span>
             <?php
             $noti_count = auth()->user()->unreadNotifications()->count();
@@ -76,7 +76,7 @@
 
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.pos.index') ? 'active' : '' }}" href="{{ route('admin.pos.index') }}" title="Orders">
-            <i class="app-menu__icon fa fa-clipboard-list mr-2"></i>
+            <i class="app-menu__icon fa fa-list-ol mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.sale_lists')}}</span>
         </a>
     </li>
@@ -88,7 +88,7 @@
     </li>
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.items.*') ? 'active' : '' }}" href="{{ route('admin.items.index') }}" title="Item">
-            <i class="app-menu__icon fa fa-stream mr-2"></i>
+            <i class="app-menu__icon fa fa-store mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label">{{ __('menu.item') }}</span>
         </a>
     </li>
@@ -118,7 +118,7 @@
 
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.inventories.*') ? 'active' : '' }}" href="{{ route('admin.inventories.index') }}" title="Inventory">
-            <i class="app-menu__icon fa fa-stream mr-2"></i>
+            <i class="app-menu__icon fa fa-basket-shopping mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label">{{ __('menu.purchase') }}</span>
         </a>
     </li>
@@ -136,7 +136,7 @@
     @if(auth()->user()->role->hasPermission('access-stock'))
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.skus.*') ? 'active' : '' }}" href="{{ route('admin.skus.index') }}" title="Low Stock Skus">
-            <i class="app-menu__icon fa fa-battery-quarter mr-2"></i>
+            <i class="app-menu__icon fa fa-boxes-stacked mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.stocks')}}</span>
         </a>
     </li>
@@ -144,7 +144,7 @@
     @if(auth()->user()->role->hasPermission('access-return'))
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.returns.*') ? 'active' : '' }}" href="{{ route('admin.returns.index') }}" title="Returns">
-            <i class="app-menu__icon fa fa-battery-quarter mr-2"></i>
+            <i class="app-menu__icon fa fa-rotate-left mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.return')}}</span>
         </a>
     </li>
@@ -187,7 +187,7 @@
     @if(auth()->user()->role->hasPermission('access-region'))
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/delifees','admin/delifees/*']) ? 'active' : '' }}" href="{{ route('admin.delifees.index') }}">
-            <i class="app-menu__icon fa fa-truck mr-2"></i>
+            <i class="app-menu__icon fa fa-hand-holding-dollar mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.deli_fees')}}</span>
         </a>
     </li>
@@ -221,7 +221,7 @@
     @if(auth()->user()->role->hasPermission('access-customer'))
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/customers','admin/customers/*']) ? 'active' : '' }}" href="{{ route('admin.customers.index') }}" title="Customer">
-            <i class="app-menu__icon fa fa-user mr-2"></i>
+            <i class="app-menu__icon fa fa-users-line mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.customer')}}</span>
         </a>
     </li>
@@ -236,13 +236,13 @@
 
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}" title="Item">
-            <i class="app-menu__icon fa fa-user-shield mr-2"></i>
+            <i class="app-menu__icon fa fa-users-gear mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.staff')}}</span>
         </a>
     </li>
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}" href="{{ route('admin.roles.index') }}" title="Type">
-            <i class="app-menu__icon fa fa-circle-notch mr-2"></i>
+            <i class="app-menu__icon fa fa-user-shield mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.role')}}</span>
         </a>
     </li>
