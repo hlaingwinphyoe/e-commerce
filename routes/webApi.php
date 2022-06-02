@@ -26,6 +26,8 @@ use App\Http\Controllers\WebApi\TransactionController;
 use App\Http\Controllers\WebApi\MaintypeController;
 use App\Http\Controllers\WebApi\UserController;
 use App\Http\Controllers\WebApi\OrderSkuController;
+use App\Http\Controllers\WebApi\GiftController;
+use App\Http\Controllers\WebApi\GiftInventoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::resource('/medias', MediaController::class);
@@ -123,3 +125,9 @@ Route::delete('/order-skus/{order}/{sku}', [OrderSkuController::class, 'destroy'
 
 //users
 Route::get('/users', [UserController::class, 'index']);
+
+//gifts
+Route::get('/gifts', [GiftController::class, 'index']);
+Route::post('/gift-inventories', [GiftInventoryController::class, 'store']);
+Route::patch('/gift-inventories/{inventory}', [GiftInventoryController::class, 'update']);
+Route::patch('/gift-inventories-close/{inventory}', [GiftInventoryController::class, 'close']);

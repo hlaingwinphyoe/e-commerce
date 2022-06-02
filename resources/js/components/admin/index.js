@@ -14,6 +14,7 @@ import PosIndex from './pos/PosIndex.vue';
 import ReturnSku from './returns/ReturnSku.vue';
 import PaymentForm from './payment/PaymentForm.vue';
 import WebOrder from './web-order/WebOrder.vue';
+import GiftInventory from  "./gift-inventory/GiftInventory.vue";
 
 const app = createApp({
 //
@@ -32,5 +33,6 @@ app.component('pos-index', PosIndex);
 app.component('return-sku', ReturnSku);
 app.component('payment-form', PaymentForm);
 app.component('web-order', WebOrder);
+app.component("gift-inventory", GiftInventory);
 
 app.mount('#fse-admin');
