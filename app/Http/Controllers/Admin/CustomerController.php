@@ -37,14 +37,15 @@ class CustomerController extends Controller
         $request->validate([
             'name' => 'required',
             'phone' => 'required|unique:users,phone',
-            'password' => 'required'
+            // 'password' => 'required'
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'password' => bcrypt($request->password),
+            // 'password' => bcrypt($request->password),
+            'password' => bcrypt('password-123'),
             'role_id' => $request->role_id,
         ]);
 

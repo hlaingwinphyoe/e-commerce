@@ -16,6 +16,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "milon/barcode": "^9.0",
+        "pusher/pusher-php-server": "^7.0",
         "silviolleite/laravelpwa": "^2.0"
     },
     "require-dev": {

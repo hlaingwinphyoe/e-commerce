@@ -28,6 +28,10 @@ use App\Http\Controllers\WebApi\UserController;
 use App\Http\Controllers\WebApi\OrderSkuController;
 use App\Http\Controllers\WebApi\GiftController;
 use App\Http\Controllers\WebApi\GiftInventoryController;
+use App\Http\Controllers\WebApi\OrderNotificationController;
+use App\Http\Controllers\WebApi\NotificationController;
+use App\Http\Controllers\WebApi\WebPushNotiController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::resource('/medias', MediaController::class);
@@ -131,3 +135,9 @@ Route::get('/gifts', [GiftController::class, 'index']);
 Route::post('/gift-inventories', [GiftInventoryController::class, 'store']);
 Route::patch('/gift-inventories/{inventory}', [GiftInventoryController::class, 'update']);
 Route::patch('/gift-inventories-close/{inventory}', [GiftInventoryController::class, 'close']);
+
+//noti
+Route::get('/get-order-noti', [OrderNotificationController::class, 'getOrderNoti']);
+Route::patch('/mark-as-read/{notification}',[NotificationController::class, 'markAsRead']);
+
+// Route::post('/push-noti',[WebPushNotiController::class ,'store']);

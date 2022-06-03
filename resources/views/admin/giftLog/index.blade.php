@@ -6,7 +6,7 @@
 
 @section('content')
 
-<x-admin.search-box url="{{ route('admin.gifts.index') }}"></x-admin.search-box>
+<x-admin.search-box url="{{ route('admin.gift-logs.index') }}"></x-admin.search-box>
 
 <div>
     <div class="d-flex flex-wrap mb-4">
@@ -29,7 +29,6 @@
                     <th>Gift Name</th>
                     <th>User</th>
                     <th width="250px">Status</th>
-                    <th width="250px" class="d-none">Delivery</th>
                     <th>Date</th>
                 </tr>
             </thead>
@@ -42,30 +41,31 @@
                     <td>{{ $user_gift->gift->name }}</td>
                     <td>{{ $user_gift->user->name }}</td>
                     <td>
+                        <?php
+                        $cancel_gift = App\Models\Status::where('slug', 'cancel-gift')->first();
+                        ?>
+
+                        @if($user_gift->status_id != $cancel_gift->id)
                         <form action="{{ route('admin.gift-logs.update', $user_gift->id) }}" method="post">
                             @csrf
                             @method('patch')
-                            <div class="form-group">
-                                <select class="role-select form-select" name="status_id">
-                                    @foreach($statuses as $status)
-                                    <option value="{{ $status->id }}" {{ $user_gift->status_id == $status->id ? 'selected' : '' }}>{{ $status->name }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="form-group row">
+                                <div class="col-auto">
+                                    <select class="role-select form-select" name="status_id">
+                                        @foreach($statuses as $status)
+                                        <option value="{{ $status->id }}" {{ $user_gift->status_id == $status->id ? 'selected' : '' }}>{{ $status->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                                </div>
                             </div>
                         </form>
-                    </td>
-                    <td class="d-none">
-                        <form action="{{ route('admin.gift-delivery.store', $user_gift->id) }}" method="post">
-                            @csrf
-                            <div class="form-group">
-                                <select name="delivery_id" class="role-select form-select">
-                                    <option value="">Choose Delivery</option>
-                                    @foreach($deliveries as $delivery)
-                                    <option value="{{ $delivery->id }}" {{ $user_gift->delivery() && $user_gift->delivery()->id == $delivery->id ? 'selected' : '' }}>{{ $delivery->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </form>
+                        @else
+                        <span class="text-danger">Cancel Gift</span>
+                        @endif
                     </td>
                     <td>{{ $user_gift->created_at->format('d M, Y') }}</td>
                 </tr>

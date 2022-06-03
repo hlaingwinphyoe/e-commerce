@@ -78,6 +78,7 @@ export default {
                 amount: this.getBalance,
             },
             paymentypes: [],
+            is_exceed: '',
         }
     },
     created() {

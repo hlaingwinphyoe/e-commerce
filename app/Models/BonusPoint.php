@@ -30,5 +30,13 @@ class BonusPoint extends Model
                 $query->where('slug', request('type'));
             });
         }
+
+        if(request('role')) {
+            $query->where('role_id', request('role'));
+        }
+
+        if(request('points')) {
+            $query->where('points', request('points'));
+        }
     }
 }

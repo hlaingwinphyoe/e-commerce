@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="d-flex align-items-center mb-3">
-	<a href="{{ route('admin.giftLog.index') }}" class="btn btn-sm btn-primary me-3">
+	<a href="{{ route('admin.gift-logs.index') }}" class="btn btn-sm btn-primary me-3">
 		<i class="fas fa-arrow-left"></i>
 	</a>
 	<h4 class="mb-0 page-title">Edit gift status</h4>
@@ -29,7 +29,7 @@
 					<p>{{ $log->gift->name }}</p>
 					<p>{{ $log->user->name }} ({{ $log->user->role->name }})</p>
 					<p>{{ \Carbon\Carbon::parse($log->created_at)->format('d M, Y') }}</p>
-					<form action="{{ route('admin.giftLog.update', $log->id) }}" class="d-flex" method="post">
+					<form action="{{ route('admin.gift-logs.update', $log->id) }}" class="d-flex" method="post">
 						@csrf
 						@method('put')
 						<div class="form-group w-50">

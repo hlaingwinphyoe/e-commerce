@@ -25,6 +25,12 @@
         </ul>
     </li>
 
+    <?php
+    $notifications = auth()->user()->unreadNotifications()->latest()->get();
+    $noti_count = auth()->user()->unreadNotifications()->count();
+    ?>
+    <notification-list :user_id="{{ auth()->user()->id }}"></notification-list>
+
     <li class="dropdown">
         <a class="app-nav__item dropdown-toggle p-1 text-white" href="#" data-bs-toggle="dropdown" aria-label="Open Profile Menu">
             <i class="fa fa-user"></i>

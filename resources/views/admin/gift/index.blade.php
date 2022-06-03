@@ -9,41 +9,44 @@
 <x-admin.search-box url="{{ route('admin.gifts.index') }}"></x-admin.search-box>
 
 <div>
-    <div class="d-flex flex-wrap mb-4">
-        <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.gifts')}}</h4>
-        <span class="text-muted form-text">( Showing {{ $gifts->count() }} of total {{ $gifts->total() }} records )</span>
-    </div>
+    <h2 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.gifts')}}</h2>
+</div>
 
-    <div class="d-flex flex-wrap mb-2">
-        @if(auth()->user()->role->hasPermission('create-gift'))
-        <div class="me-2 mb-3">
-            <a href="{{ route('admin.gifts.create') }}" class="btn btn-sm btn-primary">
-                <small><i class="fa fa-plus"></i></small>
-                <span>Add New</span>
-            </a>
+@include('components.admin.message')
+
+@include('components.admin.errors')
+
+<div class="border bg-white rounded px-2 py-4">
+    <p class="me-2"><span class="fw-bold h5">{{ $gifts->count() }}</span> of total <span class="">{{ $gifts->total() }}</span></p>
+
+    <div class="d-flex mb-3">
+        <div class="d-flex flex-wrap mb-2">
+            @if(auth()->user()->role->hasPermission('create-gift'))
+            <div class="me-2 mb-3">
+                <a href="{{ route('admin.gifts.create') }}" class="btn btn-sm btn-primary">
+                    <small><i class="fa fa-plus"></i></small>
+                    <span>Add New</span>
+                </a>
+            </div>
+            @endif
+
+            @if(auth()->user()->role->hasPermission('access-gift-log'))
+            <div class="me-2 mb-3">
+                <a href="{{ route('admin.gift-logs.index') }}" class="btn btn-sm btn-outline-primary">
+                    <span>Gift Log</span>
+                </a>
+            </div>
+            @endif
+
+            @if(auth()->user()->role->hasPermission('access-gift-inventory'))
+            <div class="me-2 mb-3">
+                <a href="{{ route('admin.gift-inventories.index') }}" class="btn btn-sm btn-secondary">
+                    <span>Inventory</span>
+                </a>
+            </div>
+            @endif
         </div>
-        @endif
-
-		@if(auth()->user()->role->hasPermission('access-gift-log'))
-        <div class="me-2 mb-3">
-			<a href="{{ route('admin.gift-logs.index') }}" class="btn btn-sm btn-outline-primary">
-				<span>Gift Log</span>
-			</a>
-		</div>
-        @endif
-
-        @if(auth()->user()->role->hasPermission('access-gift-inventory'))
-        <div class="me-2 mb-3">
-			<a href="{{ route('admin.gift-inventories.index') }}" class="btn btn-sm btn-secondary">
-				<span>Inventory</span>
-			</a>
-		</div>
-        @endif
     </div>
-
-    @include('components.admin.message')
-
-    @include('components.admin.errors')
 
     <ul class="nav site-nav-tabs mb-4 d-none">
         <li class="nav-item">

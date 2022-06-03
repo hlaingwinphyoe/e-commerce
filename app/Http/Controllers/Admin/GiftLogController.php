@@ -18,18 +18,13 @@ class GiftLogController extends Controller
     public function index()
     {
 		
-    	$user_gifts = UserGift::filterOn()->whereHas('status', function($q){
-			$q->where('slug', '!=', 'cancel');
-		})->latest()->paginate(20);
+    	$user_gifts = UserGift::filterOn()->latest()->paginate(20);
 
-    	$statuses = Status::where('type', 'order')->get();
-
-		$deliveries = Delivery::orderBy('name')->get();
+    	$statuses = Status::where('type', 'gift')->get();
 
     	return view('admin.giftLog.index',[
     		'user_gifts' => $user_gifts,
     		'statuses' => $statuses,
-			'deliveries' => $deliveries
     	]);
     }
 
@@ -52,7 +47,7 @@ class GiftLogController extends Controller
     		'status_id' => $request->status_id,
     	]);
 
-		Notification::send($log->user, new GiftAcceptedToUser($log));
+		// Notification::send($log->user, new GiftAcceptedToUser($log));
 
     	return redirect()->back()->with('success', 'Gift status is updated');
     }

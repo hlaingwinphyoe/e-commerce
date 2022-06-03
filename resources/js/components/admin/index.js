@@ -15,6 +15,7 @@ import ReturnSku from './returns/ReturnSku.vue';
 import PaymentForm from './payment/PaymentForm.vue';
 import WebOrder from './web-order/WebOrder.vue';
 import GiftInventory from  "./gift-inventory/GiftInventory.vue";
+import NotificationList from "./notification/NotificationList.vue";
 
 const app = createApp({
 //
@@ -34,5 +35,6 @@ app.component('return-sku', ReturnSku);
 app.component('payment-form', PaymentForm);
 app.component('web-order', WebOrder);
 app.component("gift-inventory", GiftInventory);
+app.component("notification-list", NotificationList);
 
 app.mount('#fse-admin');

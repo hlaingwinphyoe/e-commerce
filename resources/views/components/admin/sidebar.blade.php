@@ -177,7 +177,7 @@
     </li>
     @endif
 
-    @if(auth()->user()->role->hasPermission('access-coupon') && false)
+    @if(auth()->user()->role->hasPermission('access-coupon'))
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/coupons','admin/coupons/*']) ? 'active' : '' }}" href="{{ route('admin.coupons.index') }}" title="Coupons">
             <i class="app-menu__icon fa fa-ticket-alt mr-2"></i>
@@ -186,7 +186,7 @@
     </li>
     @endif
 
-    @if(auth()->user()->role->hasPermission('access-bonus-point') && false)
+    @if(auth()->user()->role->hasPermission('access-bonus-points'))
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/bonuspoints','admin/bonuspoints/*']) ? 'active' : '' }}" href="{{ route('admin.bonuspoints.index') }}" title="Bounuspoints">
             <i class="app-menu__icon fa fa-gem mr-2"></i>
