@@ -76,6 +76,14 @@
                 <th width="200px" style="text-align:right">Net Amount</th>
                 <th width="200px" style="text-align:right">{{ number_format($sale->price - $sale->discount + $sale->deli_fee) }}</th>
             </tr>
+            @if($sale->getPayAmount())
+            <tr class="small" style="text-align:right">
+                <th width="600px"></th>
+                <th></th>
+                <th width="200px" style="text-align:right">Pay Amount</th>
+                <th width="200px" style="text-align:right"><span>{{ $sale->getBalance() <= 0 ? '(Paid) ' : '' }}</span>{{ number_format($sale->getPayAmount()) }}</th>
+            </tr>
+            @endif
         </table>
     </div>
     <p class="text-center small">** Thanks for shopping with us. **</p>

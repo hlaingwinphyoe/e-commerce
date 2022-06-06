@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\Storage;
+
 class Gift extends Model
 {
     use HasFactory;
@@ -30,8 +32,8 @@ class Gift extends Model
 
     public function scopeFilterOn($query)
     {
-        if (request('name')) {
-            $query->where('name', 'like', '%' . request('name') . '%');
+        if (request('q')) {
+            $query->where('name', 'like', '%' . request('q') . '%');
         }
     }
 

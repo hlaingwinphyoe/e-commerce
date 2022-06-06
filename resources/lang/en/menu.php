@@ -39,6 +39,9 @@ return [
 
     'discount_setting' => 'Discount Setting',
     'discounts' => 'Discounts',
+    'gifts' => 'Gifts',
+    'coupon' => 'Coupons',
+    'bonuspoints' => 'Bonuspoints',
 
     'delivery' => 'Delivery',
     'deliveries' => 'Deliveries',

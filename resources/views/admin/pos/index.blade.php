@@ -192,7 +192,7 @@
                             <small><i class="fa fa-pencil-alt"></i></small>
                         </a>
                         @endif
-                        <a href="{{ route('admin.sales.print', $order->id) }}" class="btn btn-sm btn-primary me-2 mb-1">
+                        <a href="{{ route('admin.pos.print', $order->id) }}" class="btn btn-sm btn-primary me-2 mb-1">
                             <small><i class="fa fa-print"></i></small>
                         </a>
                         <?php /*<a href="{{ route('save-invoice', $order->id) }}" class="btn btn-sm btn-info me-2 mb-1">

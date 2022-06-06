@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Site\TypeController;
 
+use App\Models\Order;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

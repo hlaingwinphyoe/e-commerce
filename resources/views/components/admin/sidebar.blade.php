@@ -168,6 +168,33 @@
     </li>
     @endif
 
+    @if(auth()->user()->role->hasPermission('access-gift'))
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/gifts','admin/gifts/*']) ? 'active' : '' }}" href="{{ route('admin.gifts.index') }}" title="Gifts">
+            <i class="app-menu__icon fa fa-gift mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.gifts')}}</span>
+        </a>
+    </li>
+    @endif
+
+    @if(auth()->user()->role->hasPermission('access-coupon'))
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/coupons','admin/coupons/*']) ? 'active' : '' }}" href="{{ route('admin.coupons.index') }}" title="Coupons">
+            <i class="app-menu__icon fa fa-ticket-alt mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.coupon')}}</span>
+        </a>
+    </li>
+    @endif
+
+    @if(auth()->user()->role->hasPermission('access-bonus-points'))
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/bonuspoints','admin/bonuspoints/*']) ? 'active' : '' }}" href="{{ route('admin.bonuspoints.index') }}" title="Bounuspoints">
+            <i class="app-menu__icon fa fa-gem mr-2"></i>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.bonuspoints')}}</span>
+        </a>
+    </li>
+    @endif
+
     <!-- Delivery -->
     @if(auth()->user()->role->hasPermissions(['access-delivery', 'access-region']))
     <li class="nav-item w-100">

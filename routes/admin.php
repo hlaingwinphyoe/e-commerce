@@ -21,6 +21,13 @@ use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\MainFeatureController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\GiftController;
+use App\Http\Controllers\Admin\GiftLogController;
+use App\Http\Controllers\Admin\UserGiftController;
+use App\Http\Controllers\Admin\GiftInventoryController;
+use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\BonusPointController;
+use App\Http\Controllers\Admin\SaleController;
 
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\UserController;
@@ -86,6 +93,20 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     //discount
     Route::resource('/discountypes', DiscountypeController::class);
 
+    //gifts
+    Route::resource('/gifts', GiftController::class);
+    Route::resource('/gift-logs', GiftLogController::class);
+    Route::post('/gift-delivery/{usergift}', [GiftLogController::class, 'giftDelivery'])->name('gift-delivery.store');
+
+    Route::get('/user-gifts', [UserGiftController::class, 'index'])->name('user-gifts.index');
+    Route::post('/user-gifts', [UserGiftController::class, 'store'])->name('user-gifts.store');
+    Route::get('/user-gifts-show', [UserGiftController::class, 'showGift'])->name('show-gifts');
+    Route::patch('/user-gifts/{usergift}', [UserGiftController::class, 'update'])->name('user-gifts.update');
+    Route::delete('/user-gifts/{usergift}', [UserGiftController::class, 'delete'])->name('user-gifts.delete');
+
+    Route::resource('/gift-inventories', GiftInventoryController::class);
+    Route::patch('/gift-inventories-close/{inventory}', [GiftInventoryController::class, 'close'])->name('gift-inventories.close');
+
     //addresses
     Route::resource('/regions', RegionController::class);
     Route::resource('/countries', CountryController::class);
@@ -125,4 +146,12 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     //transactions
     Route::resource('/transactions', TransactionController::class);
     Route::get('/transactions/payment/next-payment', [TransactionController::class, 'nextPayment'])->name('transaction.next-payment');
+
+    //coupon
+    Route::resource('/coupons', CouponController::class);
+    Route::post('/generate-coupons', [CouponController::class, 'generateCoupon'])->name('coupons.generate');
+    Route::post('/coupons-import', [CouponController::class, 'import'])->name('coupons.import');
+
+    //bonuspoint
+    Route::resource('/bonuspoints', BonusPointController::class);
 });
