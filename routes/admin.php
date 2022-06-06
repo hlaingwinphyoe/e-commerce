@@ -81,6 +81,7 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     Route::resource('/returns', ReturnController::class);
 
     Route::resource('/inventories', InventoryController::class);
+    Route::get('/inventories-print/{inventory}', [InventoryController::class, 'print'])->name('inventories.print');
 
     //discount
     Route::resource('/discountypes', DiscountypeController::class);

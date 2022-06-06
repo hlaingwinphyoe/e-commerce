@@ -1,5 +1,5 @@
 <template>
-    <div class="modal fade" :id="`payment-modal-${order.id}`">
+    <div class="modal fade" :ref="`payment-modal-${order.id}`" :id="`payment-modal-${order.id}`">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-sidebar">
@@ -78,6 +78,7 @@ export default {
                 amount: this.getBalance,
             },
             paymentypes: [],
+            is_exceed: false,
         }
     },
     created() {

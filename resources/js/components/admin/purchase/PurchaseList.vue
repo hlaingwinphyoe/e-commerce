@@ -5,7 +5,7 @@
                 <tr>
                     <th>Name</th>
                     <th width="100px">Qty</th>
-                    <th width="100px">Amount</th>
+                    <th width="100px">Buy Price</th>
                     <th>Action</th>
                 </tr>
             </thead>

@@ -81,4 +81,13 @@ class InventoryController extends Controller
         ]);
 
     }
+
+    public function print($id)
+    {
+        $inventory = Inventory::findOrFail($id);
+
+        return view('admin.inventories.print')->with([
+            'inventory' => $inventory
+        ]);
+    }
 }

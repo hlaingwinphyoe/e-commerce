@@ -108,6 +108,7 @@ Route::patch('/cancel-orders/{order}', [OrderController::class, 'cancelOrder']);
 Route::patch('/save-customer/{order}', [OrderController::class, 'saveCustomer']);
 Route::post('/order-discount/{order}', [OrderController::class, 'addDiscount']);
 Route::patch('/order-deli-fee/{order}', [OrderController::class, 'addDeliFee']);
+Route::post('/orders-confirm/{order}', [OrderController::class, 'confirm']);
 
 //transactions
 Route::resource('/transactions', TransactionController::class);

@@ -4,16 +4,20 @@
             <span class="no-overflow">{{ sku.item_name }} {{ sku.data ? '('+ sku.data +')' : '' }}</span>
             <p class="mb-0 small">{{ Number(sku.price).toLocaleString() }}</p>
         </td>
+        <td v-if="order.status_id ==1">
+            <span class="fw-bold" :class="data_stock ? 'text-primary' : 'text-danger'">{{ data_stock }}</span>
+            <div class="small text-muted">{{ data_stock && data_stock >= sku.pivot.qty ? 'Available' : 'Not Enough' }}</div>
+        </td>
         <td class="">
             <div class="d-flex align-items-center">
-                <a href="#" class="me-1 btn btn-sm count-buttons btn-outline-secondary" @click.prevent="onDecreaseQty"><span><i class="fa fa-minus"></i></span></a>
+                <a href="#" v-if="order.status_id ==1" class="me-1 btn btn-sm count-buttons btn-outline-secondary" @click.prevent="onDecreaseQty"><span><i class="fa fa-minus"></i></span></a>
                 <input type="text" class="form-control form-control-sm me-1 text-center qty-input border-0" ref="qty" disabled :value="sku.pivot.qty">
-                <a href="#" class="me-1 btn btn-sm count-buttons btn-outline-secondary" @click.prevent="onIncreaseQty"><span><i class="fa fa-plus"></i></span></a>
+                <a href="#" v-if="order.status_id ==1" class="me-1 btn btn-sm count-buttons btn-outline-secondary" @click.prevent="onIncreaseQty"><span><i class="fa fa-plus"></i></span></a>
             </div>
         </td>
         <td class="text-end">{{ Number(sku.pivot.qty * sku.pivot.price).toLocaleString() }}</td>
-        <td>
-            <a href="#" @click.prevent="onDeleteSku"><small class="btn btn-sm btn-outline-danger"><i class="fa fa-times"></i></small></a>
+        <td class="text-end">
+            <a href="#" v-if="order.status_id ==1" @click.prevent="onDeleteSku"><small class="btn btn-sm btn-outline-danger"><i class="fa fa-times"></i></small></a>
         </td>
     </tr>
 </template>
@@ -22,6 +26,7 @@
 export default {
     props: {
         sku: {required: true},
+        order: {required: true},
     },
     data() {
         return {

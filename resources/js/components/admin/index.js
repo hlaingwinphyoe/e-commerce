@@ -15,6 +15,8 @@ import ReturnSku from './returns/ReturnSku.vue';
 import PaymentForm from './payment/PaymentForm.vue';
 import WebOrder from './web-order/WebOrder.vue';
 
+import VueMobileDetection from "vue-mobile-detection";
+
 const app = createApp({
 //
 });
@@ -33,4 +35,5 @@ app.component('return-sku', ReturnSku);
 app.component('payment-form', PaymentForm);
 app.component('web-order', WebOrder);
 
+app.use(VueMobileDetection);
 app.mount('#fse-admin');
