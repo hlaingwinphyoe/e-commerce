@@ -12,6 +12,7 @@ use App\Models\Status;
 use App\Models\Township;
 use App\Models\Region;
 use App\Models\User;
+use App\Models\Sku;
 use App\Notifications\OrderStatus;
 
 use Carbon\Carbon;
@@ -311,7 +312,7 @@ class OrderController extends Controller
             }
             $order->update(['status_id' => $cancel_status->id]);
 
-            return rredirect()->back()->with('message', 'Order was successfully returned.');
+            return redirect()->back()->with('message', 'Order was successfully returned.');
         });
     }
 }

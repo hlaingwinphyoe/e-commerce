@@ -42,12 +42,12 @@ class GiftLogController extends Controller
     public function update(Request $request, $id)
     {
     	$log = UserGift::findOrFail($id); 
-
+		
     	$log->update([
     		'status_id' => $request->status_id,
     	]);
 
-		// Notification::send($log->user, new GiftAcceptedToUser($log));
+		Notification::send($log->user, new GiftAcceptedToUser($log));
 
     	return redirect()->back()->with('success', 'Gift status is updated');
     }

@@ -109376,6 +109376,21 @@ var __webpack_exports__ = {};
 /*!*******************************!*\
   !*** ./resources/js/admin.js ***!
   \*******************************/
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
+    drop = _require.drop;
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Popper = (__webpack_require__(/*! @popperjs/core */ "./node_modules/@popperjs/core/lib/index.js").withDefaults);
@@ -109394,12 +109409,23 @@ __webpack_require__(/*! ./admin/sidebar.js */ "./resources/js/admin/sidebar.js")
 __webpack_require__(/*! ./components/to-image.js */ "./resources/js/components/to-image.js");
 
 $(document).ready(function () {
+  // nav
   var triggerTabList = document.querySelectorAll('#slide-nav button');
   triggerTabList.forEach(function (triggerEl) {
     var tabTrigger = new bootstrap.Tab(triggerEl);
     triggerEl.addEventListener('click', function (event) {
       event.preventDefault();
       tabTrigger.show();
+    });
+  }); //dropdown toggle
+
+  var dropdownElementList = document.querySelectorAll('.dropdown-toggle');
+
+  var dropdownList = _toConsumableArray(dropdownElementList).map(function (dropdownToggleEl) {
+    var dropdownToggle = new bootstrap.Dropdown(dropdownToggleEl);
+    dropdownToggleEl.addEventListener('click', function (event) {
+      event.preventDefault();
+      dropdownToggle.toggle();
     });
   });
 });
