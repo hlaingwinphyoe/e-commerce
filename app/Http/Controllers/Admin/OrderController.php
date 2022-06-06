@@ -315,4 +315,6 @@ class OrderController extends Controller
             return redirect()->back()->with('message', 'Order was successfully returned.');
         });
     }
+
+    
 }

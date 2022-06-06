@@ -83,7 +83,9 @@ $query .= request('q') ? '?q=' . request('q') : '';
                         </a>
                         @endif
 
-                        <a href="{{ route('admin.inventories.show', $inventory->id) }}" class="btn btn-sm btn-outline-primary"><i class="fa fa-eye"></i></a>
+                        <a href="{{ route('admin.inventories.show', $inventory->id) }}" class="btn btn-sm btn-outline-primary me-2"><i class="fa fa-eye"></i></a>
+
+                        <a href="{{ route('admin.inventories.print', $inventory->id) }}" class="btn btn-sm btn-outline-primary me-2"><i class="fa fa-print"></i></a>
                     </div>
                 </td>
             </tr>

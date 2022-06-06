@@ -109,6 +109,14 @@ trait ItemTrait
         return 0;
     }
 
+    public function getStock()
+    {
+        return $this->skus->reduce(function($total, $sku){
+            return $total + $sku->stock;
+        },0);
+    }
+
+
     public function getSingleDiscount($price)
     {
         $role = $this->getPriceRole();

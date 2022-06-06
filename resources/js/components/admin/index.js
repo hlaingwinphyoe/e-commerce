@@ -17,6 +17,8 @@ import WebOrder from './web-order/WebOrder.vue';
 import GiftInventory from  "./gift-inventory/GiftInventory.vue";
 import NotificationList from "./notification/NotificationList.vue";
 
+import VueMobileDetection from "vue-mobile-detection";
+
 const app = createApp({
 //
 });
@@ -37,4 +39,5 @@ app.component('web-order', WebOrder);
 app.component("gift-inventory", GiftInventory);
 app.component("notification-list", NotificationList);
 
+app.use(VueMobileDetection);
 app.mount('#fse-admin');

@@ -124,11 +124,10 @@ class OrderController extends Controller
         $data = json_decode($order->data);
 
         $data->user->name = $request->name;
-        $data->user->email = $request->email;
+        $data->user->email = $request->email ?? $data->user->email;
         $data->user->phone = $request->phone;
         $data->user->address = $request->address;
         $data->user->remark = $request->remark;
-
 
         $order_month = Carbon::now()->format('ym');
 
@@ -185,5 +184,51 @@ class OrderController extends Controller
             'pay_amount' => $order->getPayAmount(),
             'balance' => $order->getBalance()
         ]);
+    }
+
+    public function confirm(Request $request, $id)
+    {
+        DB::transaction(function () use ($id) {
+            $order = Order::findOrFail($id);
+
+            $complete_status = Status::where('slug', 'completed')->first();
+
+            $confirm_status = Status::where('slug', 'order-confirmed')->first();
+
+            if (($order->status_id !== $complete_status->id && $order->status_id !== $confirm_status)) {
+                
+                $accept_status = Status::where('slug', 'order-accepted')->first();
+
+                $ordered_status = Status::where('slug', 'ordered')->first();
+
+                $total = 0;
+
+                foreach ($order->skus as $sku) {
+                    if ($sku->pivot->status_id == $accept_status->id) {
+                        $total += $sku->pivot->price * $sku->pivot->qty;
+                    } else if ($sku->pivot->status_id == $ordered_status->id) {
+                        if ($sku->stock > 0) {
+                            $sku->pivot->update([
+                                'status_id' => $accept_status->id
+                            ]);
+                            if ($sku->stock >= $sku->pivot->qty) {
+                                $sku->update(['stock' => $sku->stock - $sku->pivot->qty]);
+                            } else if ($sku->stock < $sku->pivot->qty) {
+                                $sku->pivot->update(['qty' => $sku->stock]);
+                                $sku->update(['stock' => 0]);
+                            }
+                            $total += $sku->pivot->price * $sku->pivot->qty;
+                        } else {
+                            $order->skus()->detach($sku->id);
+                        }
+                    }
+                }
+                $order->update(['status_id' => $confirm_status->id, 'price' => $total]);
+            }
+        });
+
+        $order = Order::find($id);
+
+        return response()->json($order);
     }
 }

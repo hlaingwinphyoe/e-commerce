@@ -33,7 +33,7 @@
                                 <th>No.</th>
                                 <th>Name</th>
                                 <th>Qty</th>
-                                <th class="text-end">Amount</th>
+                                <th class="text-end">Buy Price</th>
                                 <th class="text-end">Total</th>
                             </tr>
                         </thead>
@@ -58,6 +58,10 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="py-3">
+        <a href="{{ route('admin.inventories.print', $inventory->id) }}" class="btn btn-sm btn-outline-primary"><i class="fa fa-print me-2"></i> Print</a>
     </div>
 </div>
 

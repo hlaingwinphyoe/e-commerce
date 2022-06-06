@@ -245,7 +245,7 @@ export default {
         //     this.onAddSku();
         // },
         onSelectedSku(data) {
-            this.data_skus = this.popular_data;
+            // this.data_skus = this.popular_data;
             this.form.qty = 1;
             this.$refs.search.focus();
             this.$emit("on-add-sku", data);
