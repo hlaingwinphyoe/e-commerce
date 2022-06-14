@@ -13,3 +13,15 @@
 @import './admin/index.scss';
 @import './bootstrap';
 @import './admin/feature-area.scss';
+
+@media (max-width: 576px){
+    .d-mobile-none {
+        display: none !important;
+    }
+}
+
+@media (min-width: 720px){
+    .d-desktop-none {
+        display: none !important;
+    }
+}

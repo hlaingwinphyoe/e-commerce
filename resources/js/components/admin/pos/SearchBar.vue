@@ -4,15 +4,14 @@
             class="search-bar-container search-bar bg-sidebar rounded border mb-3 px-2 py-3"
         >
             <div class="row">
-                <div class="col-4 col-md-3 pe-1">
+                <div class="col-7 col-md-3 pe-1">
                     <div class="me-2 mb-2">
-                        <label for="" class="text-muted">Sub Category</label>
                         <select
                             class="form-select"
                             v-model="type"
                             @change="onSelectCategory"
                         >
-                            <option value="">Select Sub Category</option>
+                            <option value="">All Items</option>
                             <option
                                 v-for="type in types"
                                 :key="type.id"
@@ -23,20 +22,17 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-8 col-md-5 ps-1">
+                <div class="col-5 col-md-5 ps-1">
                     <div class="me-2 mb-2 position-relative">
-                        <label for="" class="text-muted"
-                            >Search with Code, Name</label
-                        >
                         <input
                             type="text"
                             class="form-control form-control-sm"
-                            placeholder="Search"
+                            placeholder=""
                             v-model="q"
                             ref="search"
                             @keydown="onSearch"
                             @change="onChange"
-                            autofocus
+                            autofocus id="search"
                         />
                     </div>
                 </div>
@@ -51,7 +47,7 @@
                         />
                     </div>
                 </div>
-                <div class="col-4 col-md-2">
+                <div class="col-4 col-md-2 d-none">
                     <div class="me-2 mb-2">
                         <label for="" calss="text-muted">.</label>
                         <div>
@@ -78,7 +74,7 @@
                 <span>Loading Data...</span>
             </div>
             <!-- new design -->
-            <div class="row">
+            <div class="row mobile-scroll">
                 <div
                     class="col-6 col-md-4"
                     v-for="res in data_skus.data"
@@ -151,10 +147,18 @@ export default {
         },
         onSelectCategory() {
             this.loaded = false;
-            axios.get(`/wapi/type-skus/${this.type}`).then((resp) => {
-                this.data_skus = resp.data;
-                this.loaded = true;
-            });
+            if(this.type == ""){
+                axios.get(`/wapi/popular-skus`).then((resp) => {
+                    this.popular_data = resp.data;
+                    this.data_skus = resp.data;
+                    this.loaded = true;
+                });
+            }else{
+                axios.get(`/wapi/type-skus/${this.type}`).then((resp) => {
+                    this.data_skus = resp.data;
+                    this.loaded = true;
+                });
+            }
         },
         onLoadMore() {
             this.loaded = false;
@@ -301,5 +305,30 @@ export default {
 }
 .nav-link.disabled {
     background-color: #c9c9c9 !important;
+}
+
+@media (max-width: 576px){
+    .mobile-scroll{
+        overflow: scroll;
+        max-height: 480px;
+    }
+}
+.empty {
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+}
+#search {
+    background-image: url('https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/search-512.png');
+    background-size: 1.5rem;
+    background-repeat: no-repeat;
+    text-indent: 20px;
+    padding: 5px 5px;
+    transition:0.3s;
+}
+#search:focus {
+    background-image:none;
+    text-indent:0px
 }
 </style>

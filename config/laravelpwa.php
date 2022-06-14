@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'name' => 'LaravelPWA',
+    'name' => env('APP_NAME'),
     'manifest' => [
         'name' => env('APP_NAME'),
         'short_name' => 'Fs eCommerce',

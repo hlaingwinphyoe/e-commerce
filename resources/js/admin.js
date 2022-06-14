@@ -36,4 +36,25 @@ $(document).ready(function(){
       });
 
    });
+
+   // Items Toggle Sidebar
+   $('.items-sidebar-close').hide();
+   $('.items-sidebar-open').click(function (event) {
+       event.preventDefault();
+       $('.items').addClass('items-sidenav-toggled');
+       $('.items-sidebar-open').hide();
+       $('.items-sidebar-close').show();
+   });
+   $('.items-sidebar-close').click(function (event) {
+       event.preventDefault();
+       $('.items').removeClass('items-sidenav-toggled');
+       $('.items-sidebar-open').show();
+       $('.items-sidebar-close').hide();
+   });
+
+   //toggle
+   const collapseFilter = document.getElementById('collapseFilter');
+   collapseFilter.addEventListener('hidden.bs.collapse', event => {
+      toggle: false;
+   })
 });

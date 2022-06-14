@@ -22620,3 +22620,14 @@ body::-webkit-scrollbar-thumb, .smooth-scroll::-webkit-scrollbar-thumb {
     font-size: 0.95rem;
   }
 }
+
+@media (max-width: 576px) {
+  .d-mobile-none {
+    display: none !important;
+  }
+}
+@media (min-width: 720px) {
+  .d-desktop-none {
+    display: none !important;
+  }
+}
