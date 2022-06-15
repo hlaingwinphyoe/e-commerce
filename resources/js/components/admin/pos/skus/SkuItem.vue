@@ -10,6 +10,7 @@
                 <input type="text" class="form-control form-control-sm me-1 text-center qty-input" ref="qty" :value="sku.pivot.qty" @change="onChangeQty">
                 <a href="#" class="me-1 btn btn-sm count-buttons btn-outline-secondary" @click.prevent="onIncreaseQty"><span><i class="fa fa-plus"></i></span></a>
             </div>
+            <p class="small text-danger alert-message fw-bold" v-show="out_of_stock">Out of stock</p>
         </td>
         <td class="text-end">{{ Number(sku.pivot.qty * sku.pivot.price).toLocaleString() }}</td>
         <td>
@@ -25,7 +26,8 @@ export default {
     },
     data() {
         return {
-            data_stock : this.sku.stock
+            data_stock : this.sku.stock,
+            out_of_stock: false,
             // form: {
             //     qty: this.sku.pivot.qty,
             // }
@@ -44,8 +46,12 @@ export default {
         },
         onChangeQty() {
             let quantity = parseInt(this.$refs.qty.value);
-            this.$refs.qty.value = quantity <= this.data_stock ? quantity : this.data_stock;
-            this.onUpdateSku();
+            if(quantity <= this.data_stock) {
+                this.$refs.qty.value = quantity <= this.data_stock ? quantity : this.data_stock;
+                this.onUpdateSku();
+            }else{
+                this.out_of_stock = true;
+            }
         },
         onUpdateSku() {
             var form = {

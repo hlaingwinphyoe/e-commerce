@@ -2,7 +2,7 @@
     <div class="pos-container">
         <div class="row">
             <!-- Find and add items -->
-            <div class="col-md-7 col-lg-7">
+            <div class="col-md-7 col-lg-7 left-sidebar">
                 <div class="px-2 py-3">
                     <a href="/admin/pos" class="btn btn-sm btn-primary">
                         <i class="fa fa-arrow-left"></i>
@@ -23,20 +23,13 @@
             </div>
 
             <!-- Payment Actions -->
-            <div class="col-md-5 col-lg-5 px-1">
+            <div class="col-md-5 col-lg-5 right-sidebar items">
                 <div class="pos-left px-2 py-3 bg-sidebar border rounded">
                     <div class="position-relative">
                         <!-- Customer -->
                         <div class="row">
                             <div class="col-md-6">
                                 <customer :order="data_order" @on-save-customer="onSaveCustomer"></customer>
-                            </div>
-
-                            <div class="col-md-6">
-                                <!-- Search Order -->
-                                <order-search
-                                    :order="data_order"
-                                ></order-search>
                             </div>
                         </div>
                     </div>
@@ -47,7 +40,7 @@
                         :class="isSale ? 'disabled' : ''"
                     >
                         <h5 class="fw-bold">
-                            <span>Your Item Lists</span>
+                            <span>Receipt Lists</span>
                             <span v-show="cus_name" class="ms-2"
                                 >( {{ cus_name }} )</span
                             >
@@ -275,15 +268,6 @@
                             </a>
 
                             <a
-                                href="/admin/pos/create"
-                                target="_blank"
-                                class="btn btn-success me-2 mb-2 text-white"
-                            >
-                                <i class="fa fa-plus"></i>
-                                <p class="mb-0">New Sale</p>
-                            </a>
-
-                            <a
                                 href="#"
                                 target="_blank"
                                 class="btn btn-danger me-2 mb-2 text-white"
@@ -321,6 +305,19 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- added item count & show lists -->
+        <div class="fixed-bottom d-desktop-none">
+            <a href="#" class="btn btn-primary rounded-0 py-3 items-sidebar-btn items-sidebar-open">
+                <span class="pr-2 float-left">{{ Number(getTotalQty).toLocaleString() }} Added</span>
+                <i class="fa fa-eye fa-lg pr-2"></i>
+                <span class="float-right">{{ Number(getTotal).toLocaleString() }} ks</span>
+            </a>
+            <a href="#" class="btn btn-primary items-sidebar-btn items-sidebar-close py-3 rounded-0">
+                <i class="fa fa-arrow-left"></i>
+                <span class="pr-3">Back</span>
+            </a>
         </div>
     </div>
 </template>
@@ -550,5 +547,54 @@ export default {
 }
 .pos-left {
     min-height: 100vh;
+}
+
+/* mobile items sidebar */
+@media (max-width: 576px){
+    .left-sidebar{
+        min-width: 100%;
+        overflow: auto;
+        z-index: 10;
+        transition: all 0.3s ease;
+        min-height: calc(100vh - 50px);
+        background-color: #fff;
+        transition: all 0.3s ease;
+    }
+    .right-sidebar {
+        left: -100%;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        overflow: auto;
+        z-index: 10;
+        background-color: #f8f8fb;
+        transition: all 0.3s ease;
+    }
+    .pos-left{
+        padding: 0.5rem;
+    }
+    .row{
+        --bs-gutter-x: 0;
+    }
+    .items.items-sidenav-toggled {
+        left: 0;
+        padding-bottom: 1rem;
+    }
+}
+
+.items-sidebar-btn{
+    width: 100%;
+}
+
+.float-left{
+    float: left;
+}
+.float-right{
+    float: right;
+}
+.pay-form{
+    margin: 0 auto;
+    float: right;
 }
 </style>

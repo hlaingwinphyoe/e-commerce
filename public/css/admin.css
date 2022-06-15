@@ -22620,3 +22620,29 @@ body::-webkit-scrollbar-thumb, .smooth-scroll::-webkit-scrollbar-thumb {
     font-size: 0.95rem;
   }
 }
+
+@media (max-width: 576px) {
+  .d-mobile-none {
+    display: none !important;
+  }
+}
+@media (min-width: 720px) {
+  .d-desktop-none {
+    display: none !important;
+  }
+}
+@media (max-width: 576px) {
+  .filter-content {
+    margin-left: -900px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear, opacity 0.5s;
+  }
+
+  .filter-content.filter-toggled {
+    margin-left: 0;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear, opacity 0.5s;
+  }
+}
