@@ -22631,3 +22631,18 @@ body::-webkit-scrollbar-thumb, .smooth-scroll::-webkit-scrollbar-thumb {
     display: none !important;
   }
 }
+@media (max-width: 576px) {
+  .filter-content {
+    margin-left: -900px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear, opacity 0.5s;
+  }
+
+  .filter-content.filter-toggled {
+    margin-left: 0;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear, opacity 0.5s;
+  }
+}

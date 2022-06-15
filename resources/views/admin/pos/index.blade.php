@@ -19,7 +19,7 @@
         </div>
     </form>
     <div class="col-2 d-desktop-none">
-        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseFilter" role="button" aria-expanded="false" aria-controls="collapseFilter">
+        <a class="btn btn-primary" data-toggle="filter-toggler" href="#">
             <small><i class="fa fa-filter"></i></small>
         </a>
     </div>
@@ -46,7 +46,7 @@
             </div>
             @endif
 
-            <div class="collapse" id="collapseFilter">
+            <div class="filter-content">
                 <form action="{{ route('admin.pos.index') }}" class="d-flex flex-wrap">
                     <div class="form-group me-2">
                         <select name="delivery" class="form-select">

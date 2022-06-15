@@ -53,8 +53,8 @@ $(document).ready(function(){
    });
 
    //toggle
-   const collapseFilter = document.getElementById('collapseFilter');
-   collapseFilter.addEventListener('hidden.bs.collapse', event => {
-      toggle: false;
-   })
+   $('[data-toggle="filter-toggler"]').click(function(event) {
+      event.preventDefault();
+      $(".filter-content").toggleClass('filter-toggled');
+   });
 });
