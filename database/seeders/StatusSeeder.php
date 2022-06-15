@@ -20,7 +20,7 @@ class StatusSeeder extends Seeder
             'sku-status' => ['Ordered', 'Order Accepted', 'Pre Ordered', 'Sku Cancelled'],
             'transaction' => ['In', 'Out'],
             'payment-type' => ['Cash', 'Bank Transfer', 'KPay', 'CBPay', 'AYAPay', 'WaveMoney'],
-            'waste' => ['Adjust', 'Lost', 'Damage', 'Wrong', 'Expired'],
+            'waste' => ['Adjust', 'Lost', 'Damage', 'Wrong', 'Expired', 'Reset'],
             'gift' => ['Request Gift', 'Approved Gift', 'Cancel Gift']
         ];
 

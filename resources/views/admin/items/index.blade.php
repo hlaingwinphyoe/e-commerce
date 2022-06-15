@@ -128,10 +128,10 @@ if (request('brand')) {
                 </td>
                 <td>{{ $item->type() ? $item->type()->name : '-' }}</td>
                 <td>
-                    <a href="#add-stock-modal-{{ $item->id }}" data-bs-toggle="modal" class="btn btn-sm btn-secondary mb-1">
+                    <a href="#add-stock-modal-{{ $item->id }}" class="btn btn-sm btn-secondary" data-bs-toggle="modal">
                         <span class="">{{ $item->getStock() }}</span>
-
                     </a>
+                    <stock :item="{{ $item }}" :suppliers="{{ $suppliers }}"></stock>
                 </td>
                 <td>{{ $item->price }}</td>
                 <td>{{ $item->discount }}</td>
@@ -140,7 +140,7 @@ if (request('brand')) {
                         @if(auth()->user()->role->hasPermission('edit-item') && !$item->trashed())
                         <a href="{{ route('admin.items.edit', $item->id) }}" class="btn btn-sm btn-outline-primary me-2">
                             <span><i class="fa fa-pencil-alt"></i></span>
-                        </a>
+                        </a>    
                         @endif
 
                         @if(auth()->user()->role->hasPermission('delete-item') && !$item->trashed())
