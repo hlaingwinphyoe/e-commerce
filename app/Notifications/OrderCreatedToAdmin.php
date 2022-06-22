@@ -25,7 +25,7 @@ class OrderCreatedToAdmin extends Notification
 
     public function via($notifiable)
     {
-        return ['database', 'broadcast',WebPushChannel::class];
+        return ['database', 'broadcast', WebPushChannel::class];
     }
 
     public function toBroadcast($notifiable)
@@ -40,7 +40,9 @@ class OrderCreatedToAdmin extends Notification
                 'customer' => [
                     'name' => $this->order->customer->name,
                     'phone' => $this->order->customer->phone,
-                ]
+                ],
+                'message' => $this->order->customer->name . 'မှ Order တင်ထားပါသည်။',
+                'url' => route('admin.orders.edit', $this->order->id),
             ]
         ]);
     }
@@ -65,15 +67,17 @@ class OrderCreatedToAdmin extends Notification
             'customer' => [
                 'name' => $this->order->customer->name,
                 'phone' => $this->order->customer->phone,
-            ]
+            ],
+            'message' => $this->order->customer->name . 'မှ Order တင်ထားပါသည်။',
+            'url' => route('admin.orders.edit', $this->order->id),
         ];
     }
 
     public function toWebPush($notifiable, $notification)
     {
         $url = route('admin.orders.edit', $this->order->id);
-        $body = $this->order->customer->name .' မှ Order တင်ထားပါသည်။' ;
-    
+        $body = $this->order->customer->name . ' မှ Order တင်ထားပါသည်။';
+
         return (new WebPushMessage)
             ->title('Recieved New Order')
             ->icon('/images/default.png')
@@ -84,6 +88,6 @@ class OrderCreatedToAdmin extends Notification
             ->data([
                 'action' => 'view',
                 'url' => $url
-                ]);
+            ]);
     }
 }

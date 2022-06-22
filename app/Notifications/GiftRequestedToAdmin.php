@@ -25,7 +25,7 @@ class GiftRequestedToAdmin extends Notification
 
     public function via($notifiable)
     {
-        return ['database', 'broadcast',WebPushChannel::class];
+        return ['database', 'broadcast', WebPushChannel::class];
     }
 
 
@@ -50,7 +50,9 @@ class GiftRequestedToAdmin extends Notification
                 'user' => [
                     'id' => $this->user_gift->user->id,
                     'name' => $this->user_gift->user->name
-                ]
+                ],
+                'message' => $this->user_gift->user->name . ' ဆီမှ ' . $this->user_gift->gift->name . ' အား လဲလှယ်ရန် request လုပ်လာပါသည်။',
+                'url' => route('admin.gift-logs.index'),
             ]
         ]);
     }
@@ -67,15 +69,17 @@ class GiftRequestedToAdmin extends Notification
             'user' => [
                 'id' => $this->user_gift->user->id,
                 'name' => $this->user_gift->user->name
-            ]
+            ],
+            'message' => $this->user_gift->user->name . ' ဆီမှ ' . $this->user_gift->gift->name . ' အား လဲလှယ်ရန် request လုပ်လာပါသည်။',
+            'url' => route('admin.gift-logs.index'),
         ];
     }
 
     public function toWebPush($notifiable, $notification)
     {
         $url = route('admin.gift-logs.index');
-        $body = $this->user_gift->user->name .' ဆီမှ '.$this->user_gift->gift->name.' အား လဲလှယ်ရန် request လုပ်လာပါသည်။' ;
-    
+        $body = $this->user_gift->user->name . ' ဆီမှ ' . $this->user_gift->gift->name . ' အား လဲလှယ်ရန် request လုပ်လာပါသည်။';
+
         return (new WebPushMessage)
             ->title('Requested Gift')
             ->icon('/images/icons/icon-144x144.png')
@@ -86,6 +90,6 @@ class GiftRequestedToAdmin extends Notification
             ->data([
                 'action' => 'view',
                 'url' => $url
-                ]);
+            ]);
     }
 }

@@ -25,7 +25,7 @@ class OrderNotiToUser extends Notification
 
     public function via($notifiable)
     {
-        return ['database', 'broadcast',WebPushChannel::class];
+        return ['database', 'broadcast', WebPushChannel::class];
     }
 
     public function toBroadcast($notifiable)
@@ -36,7 +36,9 @@ class OrderNotiToUser extends Notification
                 'order' => [
                     'id' => $this->order->id,
                     'order_no' => $this->order->order_no,
-                ]
+                ],
+                'url' => route('admin.user-orders.show', $this->order->id),
+                'message' => 'သင်၏ Order အား လက်ခံရရှိပါသည်။',
             ]
         ]);
     }
@@ -57,20 +59,21 @@ class OrderNotiToUser extends Notification
             'order' => [
                 'id' => $this->order->id,
                 'order_no' => $this->order->order_no,
-            ]
+            ],
+            'url' => route('admin.user-orders.show', $this->order->id),
+            'message' => 'သင်၏ Order အား လက်ခံရရှိပါသည်။',
         ];
     }
 
     public function toWebPush($notifiable, $notification)
-    {    
-        $body = 'သင်၏ Order အား လက်ခံရရှိပါသည်။' ;
-    
+    {
+        $body = 'သင်၏ Order အား လက်ခံရရှိပါသည်။';
+
         return (new WebPushMessage)
             ->title('Success Order')
             ->icon('/images/icons/icon-144x144.png')
             ->badge('/images/noti-badge.png')
             ->vibrate([100, 50, 100])
             ->body($body);
-               
     }
 }

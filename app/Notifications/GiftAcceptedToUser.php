@@ -25,7 +25,7 @@ class GiftAcceptedToUser extends Notification
 
     public function via($notifiable)
     {
-        return ['database', 'broadcast',WebPushChannel::class];
+        return ['database', 'broadcast', WebPushChannel::class];
     }
 
     public function toMail($notifiable)
@@ -46,6 +46,8 @@ class GiftAcceptedToUser extends Notification
                     'name' => $this->user_gift->gift->name,
                 ],
                 'status' => $this->user_gift->status->slug,
+                'message' => $this->user_gift->gift->name . ' အား လဲလှယ်ခွင့် ရပါသည်။',
+                'url' => route('admin.show-gifts'),
             ]
         ]);
     }
@@ -60,18 +62,26 @@ class GiftAcceptedToUser extends Notification
                 'name' => $this->user_gift->gift->name,
             ],
             'status' => $this->user_gift->status->slug,
+            'message' => $this->user_gift->gift->name . ' အား လဲလှယ်ခွင့် ရပါသည်။',
+            'url' => route('admin.show-gifts'),
         ];
     }
 
     public function toWebPush($notifiable, $notification)
     {
-        $body = $this->user_gift->gift->name .' အား လဲလှယ်ခွင့် ရပါသည်။' ;
-    
+        $url = route('admin.show-gifts');
+        $body = $this->user_gift->gift->name . ' အား လဲလှယ်ခွင့် ရပါသည်။';
+
         return (new WebPushMessage)
             ->title('Recieved Gift')
             ->icon('/images/icons/icon-144x144.png')
             ->badge('/images/noti-badge.png')
             ->vibrate([100, 50, 100])
-            ->body($body);
+            ->body($body)
+            ->action('View', 'view')
+            ->data([
+                'action' => 'view',
+                'url' => $url,
+            ]);
     }
 }
