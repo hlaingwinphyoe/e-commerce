@@ -1,6 +1,6 @@
 <template>
-     <a href="#" class="d-block bg-white p-2 shadow rounded mb-3 text-decoration-none" :class="data_stock > 0 ? '' : 'disabled'" @click.prevent="onSelectedSku(res.id, res.data ? res.data : res.item.name, res.discount ? res.discount : res.price)">
-        <div class="box-header text-center">
+     <a href="#" class="d-block bg-white p-2 shadow-sm rounded mb-3 text-decoration-none" :class="data_stock > 0 ? '' : 'disabled'" @click.prevent="onSelectedSku(res.id, res.data ? res.data : res.item.name, res.discount ? res.discount : res.price)">
+        <div class="box-header text-center overflow-hidden">
             <img
                 :src="
                     res.thumbnail.includes('default.png')
@@ -11,13 +11,15 @@
                 :alt="`${res.item_name} - ${res.data}`"
             />
         </div>
-        <div class="box-content bg-sidebar py-2 mt-1 px-1">
-            <p class="mb-1 fw-bold">{{ res.item_name }} {{ res.data ? '('+ res.data +')' : '' }}</p>
-            <div>
-                <span>{{ res.code }}</span>
-                <span class="ms-2 btn btn-sm btn-outline-primary">{{ data_stock }}</span>
+        <div class="box-content bg-sidebar p-2 mt-1">
+            <p class="mb-1 fw-bold text-truncate">{{ res.item_name }} {{ res.data ? '('+ res.data +')' : '' }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <p class="mb-0">
+                    <span>{{ res.code }}</span>
+                    <span class="badge bg-primary p-2">{{ data_stock }}</span>
+                </p>
+                <p class="fw-bold mb-0">{{ res.discount ? res.discount : res.price }} Ks</p>
             </div>
-            <p class="fw-bold">{{ res.discount ? res.discount : res.price }} Ks</p>
         </div>
     </a>
 </template>

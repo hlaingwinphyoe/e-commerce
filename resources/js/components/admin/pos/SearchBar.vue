@@ -1,8 +1,6 @@
 <template>
-    <div class="bg-white">
-        <div
-            class="search-bar-container search-bar bg-sidebar rounded border mb-3 px-2 py-3"
-        >
+    <div>
+        <div class="search-bar-container search-bar bg-sidebar rounded border mb-3 px-2 py-3">
             <div class="row">
                 <div class="col-7 col-md-3 pe-1">
                     <div class="me-2 mb-2">
@@ -23,11 +21,12 @@
                     </div>
                 </div>
                 <div class="col-5 col-md-5 ps-1">
-                    <div class="me-2 mb-2 position-relative">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-search"></i></span>
                         <input
                             type="text"
                             class="form-control form-control-sm"
-                            placeholder=""
+                            placeholder="Type here to search"
                             v-model="q"
                             ref="search"
                             @keydown="onSearch"
@@ -67,9 +66,7 @@
         </div>
 
         <!-- Results -->
-        <div
-            class="bg-sidebar border rounded smooth-scroll px-2 py-3 position-relative"
-        >
+        <div class="rounded smooth-scroll px-2 py-3 position-relative">
             <div v-show="!loaded" class="loading">
                 <span>Loading Data...</span>
             </div>
@@ -116,8 +113,7 @@ export default {
             types: [],
             type: "",
             data_types: [],
-            maintype: "",
-            type: "",
+            // maintype: "",
             q: "",
             isClose: false,
             form: {
@@ -312,23 +308,5 @@ export default {
         overflow: scroll;
         max-height: 480px;
     }
-}
-.empty {
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit;
-}
-#search {
-    background-image: url('https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/search-512.png');
-    background-size: 1.5rem;
-    background-repeat: no-repeat;
-    text-indent: 20px;
-    padding: 5px 5px;
-    transition:0.3s;
-}
-#search:focus {
-    background-image:none;
-    text-indent:0px
 }
 </style>

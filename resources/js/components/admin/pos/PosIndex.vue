@@ -189,7 +189,7 @@
                             <a
                                 href="#payment-form"
                                 data-bs-toggle="modal"
-                                class="btn btn-outline-primary me-2 mb-2"
+                                class="btn btn-outline-dark me-2 mb-2"
                             >
                                 <i class="fa fa-lock"></i>
                                 <p class="mb-0">Make Pay</p>
@@ -271,7 +271,7 @@
                             <a
                                 href="#"
                                 target="_blank"
-                                class="btn btn-danger me-2 mb-2 text-white"
+                                class="btn btn-outline-danger me-2 mb-2"
                                 :class="isSale ? 'disabled' : ''"
                                 @click.prevent="onCancelOrder"
                             >
@@ -528,7 +528,7 @@ export default {
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.1);
+    /*background: rgba(0, 0, 0, 0.1);*/
     z-index: -1;
 }
 .disabled-container.disabled::after {

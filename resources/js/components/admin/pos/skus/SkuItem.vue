@@ -6,9 +6,11 @@
         </td>
         <td class="">
             <div class="d-flex align-items-center">
-                <a href="#" class="me-1 btn btn-sm count-buttons btn-outline-primary" @click.prevent="onDecreaseQty"><span><i class="fa-solid fa-minus"></i></span></a>
-                <input type="text" class="form-control form-control-sm me-1 text-center qty-input" ref="qty" :value="sku.pivot.qty" @change="onChangeQty">
-                <a href="#" class="me-1 btn btn-sm count-buttons btn-outline-primary" @click.prevent="onIncreaseQty"><span><i class="fa-solid fa-plus"></i></span></a>
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+                    <button @click.prevent="onDecreaseQty" class="btn btn-outline-primary count-buttons"><i class="fa-solid fa-minus"></i></button>
+                    <input type="text" class="form-control rounded-0 form-control-sm text-center qty-input" ref="qty" :value="sku.pivot.qty" @change="onChangeQty">
+                    <button @click.prevent="onIncreaseQty" class="btn btn-outline-primary count-buttons"><i class="fa-solid fa-plus"></i></button>
+                </div>
             </div>
             <p class="small text-danger alert-message fw-bold" v-show="out_of_stock">Out of stock</p>
         </td>

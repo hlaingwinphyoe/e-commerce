@@ -38,9 +38,14 @@
 .featured-img {
     max-width: 150px;
     max-height: 75px;
+    transition: 0.4s;
 }
 
-//nav-tabs 
+.featured-img:hover{
+    transform: scale(1.5);
+}
+
+//nav-tabs
 .site-nav-tabs {
     border-bottom: 3px solid $side-bg;
 

@@ -21422,6 +21422,11 @@ body::-webkit-scrollbar-thumb, .smooth-scroll::-webkit-scrollbar-thumb {
 .featured-img {
   max-width: 150px;
   max-height: 75px;
+  transition: 0.4s;
+}
+
+.featured-img:hover {
+  transform: scale(1.5);
 }
 
 .site-nav-tabs {
