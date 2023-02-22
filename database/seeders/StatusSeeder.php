@@ -70,10 +70,10 @@ class StatusSeeder extends Seeder
             'type' => 'delivery'
         ]);
 
-        $status  = Status::create([
-            'slug' => 'reset',
-            'name' => 'Reset',
-            'type' => 'reset'
-        ]);
+//        $status  = Status::create([
+//            'slug' => 'reset',
+//            'name' => 'Reset',
+//            'type' => 'reset'
+//        ]);
     }
 }

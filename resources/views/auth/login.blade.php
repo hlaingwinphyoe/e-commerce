@@ -13,14 +13,14 @@
 
     <title>Login</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ Storage::url('images/logo.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 </head>
 
 <body class="auth" id="home">
-    <div class="container overflow-auto">
+    <div class="container">
         <div class="back-nav container py-4">
             <ul class="nav row">
                 <li class="nav-item">
@@ -39,7 +39,7 @@
                         @csrf
 
                         <div class="text-center mb-3 mt-3">
-                            <span><img src="{{ Storage::url('images/logo.png') }}" alt="{{ config('app.name') }}" style="max-height: 45px"></span>
+                            <span><img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }}" style="max-height: 45px"></span>
                             <h5 class="d-inline text-primary fw-bold">{{ config('app.name') }}</h5>
                         </div>
 
@@ -68,7 +68,7 @@
                         @enderror
 
                         <div class="d-flex">
-                            <div class="form-group w-50">
+                            <div class="form-group w-50 mb-3">
                                 <input type="checkbox" class="custom-checkbox mm-font" name="remember" id="checkbox" {{ old('remember') ? 'checked' : '' }}>
                                 <label for="checkbox" class="mm-font small">အကောင့်မှတ်ထားမည်။</label>
                             </div>
@@ -79,7 +79,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <button class="btn btn-secondary w-100" type="submit">အကောင့်သို့ဝင်မည်</button>
                         </div>
 

@@ -13,7 +13,7 @@
 
     <title>Login</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ Storage::url('images/logo.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
@@ -23,7 +23,7 @@
 
 <body class="auth" id="home">
 
-    <div class="container overflow-auto">
+    <div class="container">
         <div class="back-nav container pt-2">
             <ul class="nav row">
                 <li class="nav-item">
@@ -42,13 +42,13 @@
                         @csrf
 
                         <div class="text-center mb-3 mt-3">
-                            <span><img src="{{ Storage::url('images/logo.png') }}" alt="{{ config('app.name') }}" style="max-height: 45px"></span>
+                            <span><img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }}" style="max-height: 45px"></span>
                             <h5 class="d-inline">{{ config('app.name') }}</h5>
                         </div>
 
                         <p class="text-center mb-4 mm-font small">{{ config('app.name') }} မှကြိုဆိုပါတယ်။ ကျေးဇူးပြု၍အကောင့်သို့၀င်ပါ။</p>
 
-                        <div class="form-group">
+                        <div class="form-group mb-3 ">
                             <input type="text" placeholder="အမည်" class="mm-font form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                             <span class="focus-input100"></span>
                         </div>
@@ -58,7 +58,7 @@
                         </span>
                         @enderror
 
-                        <div class="form-group">
+                        <div class="form-group mb-3 ">
                             <input type="text" placeholder="ဖုန်းနံပါတ်" class="mm-font form-control  @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
                             <span class="focus-input100"></span>
                         </div>
@@ -68,7 +68,7 @@
                         </span>
                         @enderror
 
-                        <div class="form-group">
+                        <div class="form-group mb-3 ">
                             <input type="email" placeholder="အီးမေးလ်" class="mm-font form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
                             <span class="focus-input100"></span>
                         </div>
@@ -78,7 +78,7 @@
                         </span>
                         @enderror
 
-                        <div class="form-group">
+                        <div class="form-group mb-3 ">
                             <input type="password" placeholder="စကားဝှက်" class="mm-font form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="new-password">
                             <span class="focus-input100"></span>
                         </div>
@@ -89,12 +89,12 @@
                         @enderror
 
 
-                        <div class="form-group">
+                        <div class="form-group mb-3 ">
                             <input type="password" name="password_confirmation" placeholder="စကားဝှက် အတည်ပြုရန်" class="mm-font form-control" required autocomplete="new-password">
                             <span class="focus-input100"></span>
                         </div>
 
-                        <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                        <div class="form-group mb-3 {{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
                             <div class="col-md-6">
                                 {!! RecaptchaV3::field('register') !!}
                                 @if ($errors->has('g-recaptcha-response'))

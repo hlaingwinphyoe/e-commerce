@@ -60,7 +60,7 @@
                     <th>Amount</th>
                     <th>Role</th>
                     <th>Points</th>
-                    <th><i class="fas fa-border-style"></i></th>
+                    <th><i class="fa-solid fa-border-style"></i></th>
                 </tr>
             </thead>
             <tbody>

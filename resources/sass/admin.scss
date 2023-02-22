@@ -39,6 +39,45 @@
         margin-left: 0;
         visibility: visible;
         opacity: 1;
-        transition: visibility 0s linear, opacity 0.5s;                                        
+        transition: visibility 0s linear, opacity 0.5s;
     }
+}
+
+.btn-primary,
+.btn-outline-primary:hover{
+    color: #fff !important;
+}
+
+.table tr:hover{
+    box-shadow: none !important;
+}
+
+.table th{
+    padding: 12px 15px !important;
+}
+
+/* toast */
+.toast-container{
+    transition: all 0.3s ease-in-out;
+}
+
+.toast-top-right {
+    top: 65px !important;
+    right: 25px !important;
+}
+
+.toast-success{
+    background-color: #198754 !important;
+}
+
+.toast-message{
+    text-transform: capitalize;
+}
+
+.toast-close-button{
+    top: 0 !important;
+}
+
+#toast-container > div:hover{
+    box-shadow: $box-shadow !important;
 }

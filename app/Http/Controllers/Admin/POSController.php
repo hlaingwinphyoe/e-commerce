@@ -15,7 +15,7 @@ class POSController extends Controller
 {
     public function index()
     {
-        $orders = Order::isType('pos')->filterOn()->orderBy('status_id')->orderBy('order_no', 'desc')->paginate(20);
+        $orders = Order::isType('pos')->filterOn()->whereHas('skus')->orderBy('status_id')->orderBy('order_no', 'desc')->paginate(20);
 
         $deliveries = Delivery::all();
 
@@ -68,10 +68,10 @@ class POSController extends Controller
                 ],
             ];
             $order_month = Carbon::now()->format('ym');
-            
+
             $latest_order = Order::where('order_month', intval($order_month))->orderBy('order_no', 'desc')->first();
 
-            $order_no = $latest_order ? $latest_order->return_no + 1 : intval($order_month . '00001');
+            $order_no = $latest_order ? $latest_order->order_no + 1 : intval($order_month . '00001');
             $order = Order::create([
                 'order_no' => $order_no,
                 'order_month' => $order_month,

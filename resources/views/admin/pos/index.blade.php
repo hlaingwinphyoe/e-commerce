@@ -11,7 +11,7 @@
     <form action="{{ route('admin.pos.index') }}" class="col-md-8 col-10 d-flex align-items-center px-2">
         <div class="input-group mb-2">
             <input type="text" name="q" class="form-control form-control-sm" placeholder="Search with code or name" value="{{ request('q') }}">
-            <div class="input-group-text bg-secondary">
+            <div class="input-group-text bg-primary">
                 <button type="submit" class="p-0 border-0 bg-transparent">
                     <small class="text-white"><i class="fa fa-search"></i></small>
                 </button>
@@ -24,7 +24,6 @@
         </a>
     </div>
 </div>
-
 <div>
     <h3 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.sale_lists')}}</h3>
 </div>
@@ -36,9 +35,9 @@
             class="">{{ $orders->total() }}</span></p>
 
     <div class="d-flex mb-3">
-        <div class="d-flex flex-wrap mb-2">
+        <div class="d-flex flex-wrap mb-2 align-items-end">
             @if(auth()->user()->role->hasPermission('create-order'))
-            <div class="me-2 mb-1">
+            <div class="me-2 mb-2">
                 <a href="{{ route('admin.pos.create') }}" class="btn btn-sm btn-primary">
                     <small><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
@@ -47,7 +46,7 @@
             @endif
 
             <div class="filter-content">
-                <form action="{{ route('admin.pos.index') }}" class="d-flex flex-wrap">
+                <form action="{{ route('admin.pos.index') }}" class="d-flex flex-wrap align-items-end">
                     <div class="form-group me-2">
                         <select name="delivery" class="form-select">
                             <option value="">Select Delivery</option>
@@ -65,34 +64,7 @@
                         <input type="date" name="to_date" class="form-control form-control-sm" value="{{ request('to_date') }}">
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-sm btn-dark me-2">Filter</button>
-                        <a href="{{ route('admin.pos.index') }}" class="btn btn-sm btn-primary">
-                            <small><i class="fa fa-redo"></i></small>
-                        </a>
-                    </div>
-                </form>
-            </div>
-
-            <div class="d-mobile-none">
-                <form action="{{ route('admin.pos.index') }}" class="d-flex responsive-flex">
-                    <div class="form-group me-2">
-                        <select name="delivery" class="form-select">
-                            <option value="">Select Delivery</option>
-                            @foreach($deliveries as $delivery)
-                            <option value="{{ $delivery->id }}" {{ request()->delivery == $delivery->id ? 'selected' : '' }}>
-                                {{ $delivery->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group me-2">
-                        <input type="date" name="from_date" class="form-control form-control-sm"
-                            value="{{ request('from_date') }}">
-                    </div>
-                    <div class="form-group me-2">
-                        <input type="date" name="to_date" class="form-control form-control-sm" value="{{ request('to_date') }}">
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-sm btn-dark me-2">Filter</button>
+                        <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
                         <a href="{{ route('admin.pos.index') }}" class="btn btn-sm btn-primary">
                             <small><i class="fa fa-redo"></i></small>
                         </a>
@@ -125,7 +97,7 @@
                     <th>ငွေရှင်း</th>
                     <th>Delivery</th>
                     <th>Date</th>
-                    <th><i class="fas fa-border-style"></i></th>
+                    <th><i class="fas fa-ellipsis-vertical"></i></th>
                 </tr>
             </thead>
             <tbody>
@@ -148,11 +120,12 @@
                         <span class="text-success">Paid</span>
                         @else
                         <span class="text-danger me-1">{{ number_format($order->getPayAmount() - $order->getReturnAmount() - $order->getChange()  == $total && abs($order->getBalance()) == 0 ? 0 : $order->getBalance() + $order->getChange()) }}</span>
-                        
+
                         @if($order->getPayAmount() - $order->getReturnAmount() - $order->getChange() != $total && abs($order->getBalance()) != 0 && $order->status->slug != 'cancel')
-                        <a href="#payment-modal-{{ $order->id }}" class="btn btn-sm btn-secondary mb-1" data-bs-toggle="modal">
+                        <a href="#" class="btn btn-sm btn-secondary mb-1" data-bs-toggle="modal" data-bs-target="#payment-modal-{{ $order->id }}">
                             <small>Pay</small>
                         </a>
+
                         @include('admin.pos.payment')
                         @endif
 

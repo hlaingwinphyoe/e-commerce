@@ -177,7 +177,7 @@
                                             }}
                                         </th>
                                         <th></th>
-                                    </tr>                                    
+                                    </tr>
                                 </tfoot>
                             </table>
                         </div>
@@ -258,6 +258,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <a
                                 href="#"
                                 class="btn btn-primary me-2 mb-2"

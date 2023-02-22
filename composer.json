@@ -10,6 +10,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.7",
+        "josiasmontag/laravel-recaptchav3": "^1.0",
         "laravel-notification-channels/webpush": "^5.1",
         "laravel/fortify": "^1.13",
         "laravel/framework": "^8.75",

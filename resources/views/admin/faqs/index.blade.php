@@ -56,7 +56,7 @@
                     <th>Title</th>
                     <th>Type</th>
                     <th>Desc</th>
-                    <th><i class="fas fa-border-style"></i></th>
+                    <th><i class="fas fa-ellipsis-vertical"></i></th>
                 </tr>
             </thead>
             <tbody>

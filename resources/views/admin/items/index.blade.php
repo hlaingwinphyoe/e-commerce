@@ -42,7 +42,7 @@ if (request('brand')) {
     <div class="d-flex mb-3">
         <!-- filter -->
         <div class="d-flex flex-wrap mb-2">
-            @if(auth()->user()->role->hasPermission('create-item') && $item_count <= config('app.max_data')) <div class="me-2 mb-1">
+            @if(auth()->user()->role->hasPermission('create-item')) <div class="me-2 mb-1">
                 <a href="{{ route('admin.items.create') }}" class="btn btn-sm btn-primary">
                     <small class="me-2"><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
@@ -140,7 +140,7 @@ if (request('brand')) {
                         @if(auth()->user()->role->hasPermission('edit-item') && !$item->trashed())
                         <a href="{{ route('admin.items.edit', $item->id) }}" class="btn btn-sm btn-outline-primary me-2">
                             <span><i class="fa fa-pencil-alt"></i></span>
-                        </a>    
+                        </a>
                         @endif
 
                         @if(auth()->user()->role->hasPermission('delete-item') && !$item->trashed())

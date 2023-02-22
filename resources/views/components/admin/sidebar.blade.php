@@ -54,7 +54,7 @@
             <?php
             $noti_count = auth()->user()->unreadNotifications()->count();
             ?>
-            <span class="ms-2 badge bg-secondary rounded d-inline">{{ $noti_count }}</span>
+            <span class="ms-2 badge bg-primary rounded d-inline">{{ $noti_count }}</span>
         </a>
     </li>
     @endif
@@ -150,7 +150,7 @@
     </li>
     @endif
 
-    @endif  
+    @endif
 
     <!-- Discounts & Coupons -->
     @if(auth()->user()->role->hasPermissions(['access-discount-type', 'access-gift', 'access-coupon', 'access-bonus-point']))
@@ -259,7 +259,7 @@
     <li class="nav-item w-100">
         <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark">{{__('menu.profile_setting')}}</span>
     </li>
-    @endif    
+    @endif
 
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}" title="Item">

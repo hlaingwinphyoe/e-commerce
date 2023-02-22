@@ -141,4 +141,4 @@ Route::patch('/gift-inventories-close/{inventory}', [GiftInventoryController::cl
 Route::get('/get-order-noti', [OrderNotificationController::class, 'getOrderNoti']);
 Route::patch('/mark-as-read/{notification}',[NotificationController::class, 'markAsRead']);
 
-// Route::post('/push-noti',[WebPushNotiController::class ,'store']);
+// Route::post('/push-noti.js',[WebPushNotiController::class ,'store']);

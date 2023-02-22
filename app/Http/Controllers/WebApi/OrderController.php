@@ -98,13 +98,14 @@ class OrderController extends Controller
         $order = Order::find($id);
 
         $order = DB::transaction(function () use ($order, $request) {
-            foreach ($order->stockOrders as $stock) {
+            foreach ($order->skus as $stock) {
                 if ($stock->sku) {
                     $stock->sku->update([
                         'stock' => $stock->sku->stock + $stock->qty
                     ]);
                 }
-                $stock->delete();
+
+                $order->skus()->detach($stock->id);
             }
 
             $order->updateStockPrice();
@@ -196,7 +197,7 @@ class OrderController extends Controller
             $confirm_status = Status::where('slug', 'order-confirmed')->first();
 
             if (($order->status_id !== $complete_status->id && $order->status_id !== $confirm_status)) {
-                
+
                 $accept_status = Status::where('slug', 'order-accepted')->first();
 
                 $ordered_status = Status::where('slug', 'ordered')->first();

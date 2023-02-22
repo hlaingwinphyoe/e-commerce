@@ -15,7 +15,7 @@ class SkuInventoryController extends Controller
     {
         $inventory = Inventory::find($id);
 
-        $sku = DB::transaction(function () use ($request, $inventory) {            
+        $sku = DB::transaction(function () use ($request, $inventory) {
 
             $currency = Currency::where('slug', 'mmk')->first();
 
@@ -62,7 +62,7 @@ class SkuInventoryController extends Controller
     {
         $inventory = Inventory::find($inventory);
 
-        $sku = DB::transaction(function () use ($inventory, $sku_id) {            
+        $sku = DB::transaction(function () use ($inventory, $sku_id) {
 
             $sku_pivot = $inventory->skus()->where('sku_id', $sku_id)->first();
 

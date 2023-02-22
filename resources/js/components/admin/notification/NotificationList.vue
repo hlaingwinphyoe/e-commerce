@@ -2,7 +2,7 @@
     <li class=" dropdown">
         <a
             href="#"
-            class="nav-link text-white dropdown-toggle app-nav__item"
+            class="nav-link dropdown-toggle text-white app-nav__item"
             data-bs-toggle="dropdown"
         >
             <i class="far fa-bell"></i>

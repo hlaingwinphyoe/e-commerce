@@ -21,7 +21,7 @@
 
     <div class="d-flex mb-3">
         <div class="d-flex flex-wrap mb-2">
-            <form action="{{ route('admin.orders.index') }}" class="d-flex responsive-flex">
+            <form action="{{ route('admin.orders.index') }}" class="d-flex responsive-flex align-items-end">
 
                 <div class="form-group me-2">
                     <select name="status" class="form-select">
@@ -86,7 +86,7 @@
                     <th>Delivery</th>
                     <th>By</th>
                     <th>Date</th>
-                    <th><i class="fas fa-border-style"></i></th>
+                    <th><i class="fas fa-ellipsis-vertical"></i></th>
                 </tr>
             </thead>
             <tbody>
