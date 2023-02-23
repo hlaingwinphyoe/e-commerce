@@ -47,21 +47,6 @@
             </form>
         </div>
     </div>
-
-    <ul class="nav site-nav-tabs mb-4">
-        <li class="nav-item">
-            <a href="{{ route('admin.townships.index') }}?region_id={{ request('region_id') }}" class="nav-link {{ request('disabled') != 'disabled' ? 'active' : ''  }}">
-                <i class="far fa-bell"></i>
-                Active
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('admin.townships.index') }}?region_id={{ request('region_id') }}&disabled=disabled" class="nav-link {{ request('disabled') == 'disabled' ? 'active' : ''  }}">
-                <i class="far fa-bell-slash"></i>
-                Disabled
-            </a>
-        </li>
-    </ul>
     <div class="table-responsive">
         <table class="table table-borderless">
             <thead class="">
@@ -74,19 +59,19 @@
             </thead>
             <tbody>
                 @forelse($townships as $township)
-                <tr id="tr-{{ $township->id }}">
+                <tr id="tr-{{ $township->id }}" class="align-middle">
                     <td>{{ $township->name }}</td>
                     <td>{{ $township->mm_name ?? '-' }}</td>
-                   
+
                     <td>
                         {{ $township->region->name }}
                     </td>
                     <td>
-                        <a href="{{ route('admin.townships.edit', $township->id) }}" class="btn btn-sm btn-primary me-2 mb-1">
-                            <small><i class="fa fa-pencil-alt"></i></small>
+                        <a href="{{ route('admin.townships.edit', $township->id) }}" class="me-2 text-warning">
+                            <i class="fa fa-pencil-alt"></i>
                         </a>
-                        <a href="#delete-modal-{{ $township->id }}" class="btn btn-sm btn-danger mb-1" data-toggle="modal">
-                            <small><i class="fas fa-trash"></i></small>
+                        <a href="#delete-modal-{{ $township->id }}" class="" data-toggle="modal">
+                            <i class="fas fa-trash"></i>
                         </a>
                         <x-admin.delete id="{{ $township->id }}" url="{{ route('admin.townships.destroy', $township->id) }}"></x-admin.delete>
                     </td>

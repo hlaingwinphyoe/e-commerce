@@ -13,7 +13,10 @@
 @include('components.admin.errors')
 
 <div>
-    <div class="d-flex mb-4">
+    <div class="d-flex mb-4 align-items-center">
+        <a href="{{ route('admin.townships.index') }}" class="btn btn-primary btn-sm me-2">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
         <h4 class="page-title mb-0 me-2">Township</h4>
         <span class="text-muted form-text">( Edit )</span>
     </div>
@@ -70,7 +73,7 @@
                         <textarea name="desc" class="form-control form-control-sm" rows="3" placeholder="Description">{{ old('desc') }}</textarea>
                     </div>
 
-                    
+
 
                     {{-- <div class="form-group">
                         <label for="">

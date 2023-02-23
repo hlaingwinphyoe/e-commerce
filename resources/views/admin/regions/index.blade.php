@@ -47,21 +47,6 @@
             </form>
         </div>
     </div>
-
-    <ul class="nav site-nav-tabs mb-4">
-        <li class="nav-item">
-            <a href="{{ route('admin.regions.index') }}" class="nav-link {{ request('disabled') != 'disabled' ? 'active' : ''  }}">
-                <i class="far fa-bell"></i>
-                Active
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('admin.regions.index') }}?disabled=disabled" class="nav-link {{ request('disabled') == 'disabled' ? 'active' : ''  }}">
-                <i class="far fa-bell-slash"></i>
-                Disabled
-            </a>
-        </li>
-    </ul>
     <div class="table-responsive">
         <table class="table table-borderless">
             <thead class="">
@@ -75,7 +60,7 @@
             </thead>
             <tbody>
                 @forelse($regions as $region)
-                <tr id="tr-{{ $region->id }}">
+                <tr id="tr-{{ $region->id }}" class="align-middle">
                     <td>{{ $region->name }}</td>
                     <td>{{ $region->mm_name ?? '-' }}</td>
                     <td>{{ $region->country->name }}</td>
@@ -87,11 +72,11 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('admin.regions.edit', $region->id) }}" class="btn btn-sm btn-primary me-2 mb-1">
-                            <small><i class="fa fa-pencil-alt"></i></small>
+                        <a href="{{ route('admin.regions.edit', $region->id) }}" class="me-2 text-warning">
+                            <i class="fa fa-pencil-alt"></i>
                         </a>
-                        <a href="#delete-modal-{{ $region->id }}" class="btn btn-sm btn-danger mb-1" data-bs-toggle="modal">
-                            <small><i class="fas fa-trash"></i></small>
+                        <a href="#delete-modal-{{ $region->id }}" class="" data-bs-toggle="modal">
+                            <i class="fas fa-trash"></i>
                         </a>
                         <x-admin.delete id="{{ $region->id }}" url="{{ route('admin.regions.destroy', $region->id) }}"></x-admin.delete>
                     </td>

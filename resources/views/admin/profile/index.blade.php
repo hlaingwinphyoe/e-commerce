@@ -28,11 +28,11 @@
                         <label for="phone" class="mb-2">ဖုန်းနံပါတ်</label>
                         <input type="text" name="phone" class="form-control form-control-sm" placeholder="Update Your Phones" value="{{ auth()->user()->phone }}">
                     </div>
-                    <button type="submit" class="btn btn-secondary">Update</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
         </div>
-        <div class="col-md-6 mb-3">           
+        <div class="col-md-6 mb-3">
 
             <div class="bg-sidebar px-4 py-3">
                 <h5 class="mb-3 text-secondary">Profile</h5>
@@ -40,7 +40,7 @@
                     @csrf
                     @method('patch')
                     <div class="form-group">
-                        <label for="profile" class="mb-3 d-block">           
+                        <label for="profile" class="mb-3 d-block">
                             ဓာတ်ပုံပြောင်းရန်
                         </label>
                     <img src="{{ auth()->user()->getImage() }}" alt="{{$user->name}}" class="user-profile rounded mb-3" width="100" height="100">
@@ -51,8 +51,8 @@
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                    
-                    <button type="submit" class="btn btn-secondary">Upload</button>
+
+                    <button type="submit" class="btn btn-primary">Upload</button>
                 </form>
             </div>
         </div>
@@ -81,17 +81,17 @@
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                   
+
 
                     <div class="form-group">
                         <label for="confirm" class="mb-2">စကား၀ှက်အသစ်အားပြန်လည်အတည်ပြုပါ</label>
                         <input type="password" id="confirm" name="new_password_confirmation" class="form-control form-control-sm" placeholder="Confirm New Password" required autocomplete="new-password">
                     </div>
-                   
-                    <button type="submit" class="btn btn-secondary">Change</button>
+
+                    <button type="submit" class="btn btn-primary">Change</button>
                 </form>
             </div>
         </div>
-    </div>   
+    </div>
 
 @endsection

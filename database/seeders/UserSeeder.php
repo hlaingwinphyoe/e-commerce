@@ -21,8 +21,8 @@ class UserSeeder extends Seeder
         ]);
 
         $role = Role::create([
-            'slug' => 'technician',
-            'name' => 'Technician',
+            'slug' => 'developer',
+            'name' => 'Developer',
             'type' => 'Developer'
         ]);
 

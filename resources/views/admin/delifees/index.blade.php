@@ -70,12 +70,12 @@
                     <td>
                         @if(auth()->user()->role->hasPermission('edit-delifee'))
                         <a href="{{ route('admin.delifees.edit', $delifee->id) }}" class="me-2 text-warning">
-                            <small><i class="fa fa-pencil-alt"></i></small>
+                            <i class="fa fa-pencil-alt"></i>
                         </a>
                         @endif
                         @if(auth()->user()->role->hasPermission('delete-delifee'))
                         <a href="#delete-modal-{{ $delifee->id }}" class="" data-bs-toggle="modal">
-                            <small><i class="fas fa-trash"></i></small>
+                            <i class="fas fa-trash"></i>
                         </a>
                         <x-admin.delete id="{{ $delifee->id }}" url="{{ route('admin.delifees.destroy', $delifee->id) }}"></x-admin.delete>
                         @endif

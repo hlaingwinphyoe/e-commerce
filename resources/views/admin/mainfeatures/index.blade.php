@@ -100,7 +100,7 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-sm btn-secondary">
                                 <i class="fa fa-save"></i>
-                                <span class="ml-2">Save</span>
+                                <span class="ms-2">Save</span>
                             </button>
                         </div>
                     </form>

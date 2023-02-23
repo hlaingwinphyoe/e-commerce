@@ -13,7 +13,10 @@
 @include('components.admin.errors')
 
 <div>
-    <div class="d-flex mb-4">
+    <div class="d-flex mb-4 align-items-center">
+        <a href="{{ route('admin.roles.index') }}" class="btn btn-primary btn-sm me-2">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
         <h4 class="page-title mb-0 me-2">Role</h4>
         <span class="text-muted form-text">( Create )</span>
     </div>
@@ -25,14 +28,14 @@
         <div class="row">
             <div class="col-md-12 mb-2">
                 <div class="form-group">
-                    <div class="custom-radio custom-control custom-control-inline">
-                        <input type="radio" name="type" class="custom-control-input" id="operation" value="Operation" checked>
-                        <label for="operation" class="custom-control-label">Operation Role</label>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" name="type" class="form-check-input" id="operation" value="Operation" checked>
+                        <label for="operation" class="form-check-label">Operation Role</label>
                     </div>
 
-                    <div class="custom-radio custom-control custom-control-inline">
-                        <input type="radio" name="type" class="custom-control-input" id="customer" value="Customer">
-                        <label for="customer" class="custom-control-label">Customer Role</label>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" name="type" class="form-check-input" id="customer" value="Customer">
+                        <label for="customer" class="form-check-label">Customer Role</label>
                     </div>
                 </div>
                 <div class="form-group">

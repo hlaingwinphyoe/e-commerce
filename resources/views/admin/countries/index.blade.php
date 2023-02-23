@@ -27,21 +27,6 @@
             </div>
         </div>
     </div>
-
-    <ul class="nav site-nav-tabs mb-4">
-        <li class="nav-item">
-            <a href="{{ route('admin.countries.index') }}" class="nav-link {{ request('disabled') != 'disabled' ? 'active' : ''  }}">
-                <i class="far fa-bell"></i>
-                Active
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('admin.countries.index') }}?disabled=disabled" class="nav-link {{ request('disabled') == 'disabled' ? 'active' : ''  }}">
-                <i class="far fa-bell-slash"></i>
-                Disabled
-            </a>
-        </li>
-    </ul>
     <div class="table-responsive">
         <table class="table table-borderless">
             <thead class="">
@@ -53,24 +38,24 @@
             </thead>
             <tbody>
                 @forelse($countries as $country)
-                <tr id="tr-{{ $country->id }}">
+                <tr id="tr-{{ $country->id }}" class="align-middle">
                     <td>{{ $country->name }}</td>
                     <td>{{ $country->mm_name ?? '-' }}</td>
-                   
-                   
+
+
                     <td>
-                        <a href="{{ route('admin.countries.edit', $country->id) }}" class="btn btn-sm btn-primary me-2 mb-1">
-                            <small><i class="fa fa-pencil-alt"></i></small>
+                        <a href="{{ route('admin.countries.edit', $country->id) }}" class="me-2 text-warning">
+                            <i class="fa fa-pencil-alt"></i>
                         </a>
-                        <a href="#delete-modal-{{ $country->id }}" class="btn btn-sm btn-danger mb-1" data-bs-toggle="modal">
-                            <small><i class="fas fa-trash"></i></small>
+                        <a href="#delete-modal-{{ $country->id }}" class="" data-bs-toggle="modal">
+                            <i class="fas fa-trash"></i>
                         </a>
                         <x-admin.delete id="{{ $country->id }}" url="{{ route('admin.countries.destroy', $country->id) }}"></x-admin.delete>
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center">There is no data still yet!</td>
+                    <td colspan="3" class="text-center">There is no data still yet!</td>
                 </tr>
                 @endforelse
             </tbody>

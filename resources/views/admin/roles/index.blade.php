@@ -64,12 +64,12 @@
                     <td>{{ $role->permissions()->count() }}</td>
                     <td>
                         @if(auth()->user()->role->hasPermission('edit-role'))
-                        <a href="{{ route('admin.roles.edit', $role->id) }}" class="btn btn-sm btn-primary me-2 mb-1">
+                        <a href="{{ route('admin.roles.edit', $role->id) }}" class="me-2 text-warning">
                             <small><i class="fa fa-pencil-alt"></i></small>
                         </a>
                         @endif
                         @if(auth()->user()->role->hasPermission('delete-role'))
-                        <a href="#delete-modal-{{ $role->id }}" class="btn btn-sm btn-danger mb-1" data-bs-toggle="modal">
+                        <a href="#delete-modal-{{ $role->id }}" data-bs-toggle="modal">
                             <small><i class="fas fa-trash"></i></small>
                         </a>
                         <x-admin.delete id="{{ $role->id }}" url="{{ route('admin.roles.destroy', $role->id) }}"></x-admin.delete>

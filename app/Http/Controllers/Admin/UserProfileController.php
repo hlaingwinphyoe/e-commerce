@@ -85,7 +85,7 @@ class UserProfileController extends Controller
 
         $thumbnailPath = public_path('storage/thumbnail/' . $media->slug);
 
-        $img = Image::make($thumbnailPath)->resize(300, 300, function ($constraint) {
+        $img = Image::make($thumbnailPath)->resize(200, 200, function ($constraint) {
             $constraint->aspectRatio();
         });
 

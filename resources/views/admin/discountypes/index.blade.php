@@ -81,19 +81,19 @@
                         <span class="me-2 copy-text">{{ route('discounts', $discountype->slug) }}</span>
                         */ ?>
                         <a href="#" class="copy-button text-success">
-                            <small><i class="fa fa-copy"></i></small>
+                            <i class="fa fa-copy"></i>
                         </a>
                         <small class="text-muted d-none copied-text">Copied</small>
                     </td>
                     <td>
                         @if(auth()->user()->role->hasPermission('edit-discount-type'))
                         <a href="{{ route('admin.discountypes.edit', $discountype->id) }}" class="me-2 text-warning">
-                            <small><i class="fa fa-pencil-alt"></i></small>
+                            <i class="fa fa-pencil-alt"></i>
                         </a>
                         @endif
                         @if(auth()->user()->role->hasPermission('delete-discount-type'))
                         <a href="#delete-modal-{{ $discountype->id }}" class="" data-bs-toggle="modal">
-                            <small><i class="fas fa-trash"></i></small>
+                            <i class="fas fa-trash"></i>
                         </a>
                         <x-admin.delete id="{{ $discountype->id }}" url="{{ route('admin.discountypes.destroy', $discountype->id) }}"></x-admin.delete>
                         @endif

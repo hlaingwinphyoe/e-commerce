@@ -13,7 +13,10 @@
 @include('components.admin.errors')
 
 <div>
-    <div class="d-flex mb-4">
+    <div class="d-flex mb-4 align-items-center">
+        <a href="{{ route('admin.regions.index') }}" class="btn btn-primary btn-sm me-2">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
         <h4 class="page-title mb-0 me-2">Region</h4>
         <span class="text-muted form-text">( Edit )</span>
     </div>

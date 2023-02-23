@@ -83,7 +83,7 @@
             </thead>
             <tbody>
                 @forelse($users as $user)
-                <tr id="tr-{{ $user->id }}">
+                <tr id="tr-{{ $user->id }}" class="align-middle">
                     <td>
                         <p class="mb-0">{{ $user->name }}</p>
                         <small class="text-primary">{{ $user->email }}</small>
@@ -113,11 +113,11 @@
                     </td>
                     <td>
                         @if($user->role->slug != 'admin')
-                        <a href="#user-edit-{{ $user->id }}" data-bs-toggle="modal" class="btn btn-sm btn-dark mr-1 mb-1">
+                        <a href="#user-edit-{{ $user->id }}" data-bs-toggle="modal" class="me-2 text-warning">
                             <span><i class="fa fa-pencil-alt"></i></span>
                         </a>
                         @include('admin.users.edit')
-                        <a href="#delete-modal-{{ $user->id }}" class="btn btn-sm btn-danger mb-1" data-bs-toggle="modal">
+                        <a href="#delete-modal-{{ $user->id }}" class="" data-bs-toggle="modal">
                             <small><i class="fas fa-trash"></i></small>
                         </a>
                         <x-admin.delete id="{{ $user->id }}" url="{{ route('admin.users.destroy', $user->id) }}"></x-admin.delete>

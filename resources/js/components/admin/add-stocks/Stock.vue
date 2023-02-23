@@ -1,12 +1,12 @@
 <template>
     <div class="stock-add-container me-2">
-        
-        <div class="modal" :id="`add-stock-modal-${item.id}`">
+
+        <div class="modal fade" :id="`add-stock-modal-${item.id}`">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">{{ item.name }}</h5>
-                        <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <sku-list v-if="data_skus.length" :skus="data_skus" :inventory="data_inventory"></sku-list>
@@ -70,6 +70,6 @@ export default {
                 location.reload();
             });
         }
-    }   
+    }
 }
 </script>

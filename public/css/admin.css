@@ -21596,6 +21596,12 @@ body::-webkit-scrollbar-thumb, .smooth-scroll::-webkit-scrollbar-thumb {
   padding: 12px 15px !important;
 }
 
+.header-profile {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
 /* toast */
 .toast-container {
   transition: all 0.3s ease-in-out;
