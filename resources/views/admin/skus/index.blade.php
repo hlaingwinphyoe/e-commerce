@@ -94,12 +94,12 @@
                     <th>Cost</th>
                     <th>Current Stock</th>
                     <th>Min Stock</th>
-                    <th><i class="fas fa-border-style"></i></th>
+                    <th><i class="fas fa-ellipsis-vertical"></i></th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($skus as $sku)
-                <tr id="tr-{{ $sku->id }}">
+                <tr id="tr-{{ $sku->id }}" class="align-middle">
                     <td>
                         <?php $item = $sku->item()->withTrashed()->first(); ?>
                         <p class="mb-0 {{ $sku->stock < $sku->min_stock ? 'text-danger' : '' }}">{{ $item ? $item->name : '-' }}<span class="text-primary">{{ $sku->data ? ' (' . $sku->data . ')' : '' }}</span></p>
@@ -113,34 +113,37 @@
                         @endif
                     </td>
                     <td>{{ number_format($sku->buy_price) }}</td>
-                    <td><span title="Stock" class="bg-primary px-2 rounded text-white">{{ $sku->stock }}</span></td>
+                    <td><span title="Stock" class="badge bg-secondary p-2 rounded text-white">{{ $sku->stock }}</span></td>
                     <td>{{ $sku->min_stock }}</td>
                     <td>
-                        <a href="#add-stock-{{ $sku->id }}" class="btn btn-sm btn-outline-primary me-1 mb-1" data-bs-toggle="modal"><i class="fa fa-plus"></i></a>
-                        @include('admin.skus.add-stock')
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+                            <a href="#add-stock-{{ $sku->id }}" class="btn btn-outline-secondary " data-bs-toggle="modal"><i class="fa fa-plus"></i></a>
+                            @include('admin.skus.add-stock')
 
-                        <a href="{{ route('admin.skus.reset-stock', $sku->id) }}" class="btn btn-sm btn-danger me-1 mb-1">Reset</a>
+                            <a href="{{ route('admin.skus.show', $sku->id) }}" class="btn btn-sm btn-outline-secondary">Details</a>
 
-                        <a href="{{ route('admin.skus.show', $sku->id) }}" class="btn btn-sm btn-outline-secondary me-1 mb-1">Details</a>
-                        @if(auth()->user()->role->hasPermission('create-item'))
-                        <button type="button" class="btn btn-sm btn-info me-1 mb-1" data-bs-toggle="modal" data-bs-target="#add-waste-{{ $sku->id }}">Add Waste</button>
-                        @include('admin.skus.waste')
-                        @endif                       
+                            <a href="{{ route('admin.skus.reset-stock', $sku->id) }}" class="btn btn-outline-secondary">Reset</a>
 
-                        @if(auth()->user()->role->type == 'Developer')
-                        <form action="{{ route('admin.skus.update', $sku->id) }}" method="post" class="d-inline-block d-none">
-                            @csrf
-                            @method('patch')
-                            <button type="submit" class="btn btn-sm btn-dark"><i class="fa fa-check"></i></button>
-                        </form>
-                        @endif
+                            @if(auth()->user()->role->hasPermission('create-item'))
+                                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#add-waste-{{ $sku->id }}">Add Waste</button>
+                                @include('admin.skus.waste')
+                            @endif
 
-                        @if(auth()->user()->role->hasPermission('delete-item'))
-                        <a href="#delete-modal-{{ $sku->id }}" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal">
-                            <span><i class="fas fa-trash"></i></span>
-                        </a>
-                        <x-admin.delete id="{{ $sku->id }}" url="{{ route('admin.skus.destroy', $sku->id) }}"></x-admin.delete>
-                        @endif
+                            @if(auth()->user()->role->type === 'Developer')
+                                <form action="{{ route('admin.skus.update', $sku->id) }}" method="post" class="d-inline-block d-none">
+                                    @csrf
+                                    @method('patch')
+                                    <button type="submit" class="btn btn-outline-success"><i class="fa fa-check"></i></button>
+                                </form>
+                            @endif
+
+                            @if(auth()->user()->role->hasPermission('delete-item'))
+                                <a href="#delete-modal-{{ $sku->id }}" class="btn btn-outline-secondary" data-bs-toggle="modal">
+                                    <span><i class="fas fa-trash"></i></span>
+                                </a>
+                                <x-admin.delete id="{{ $sku->id }}" url="{{ route('admin.skus.destroy', $sku->id) }}"></x-admin.delete>
+                            @endif
+                        </div>
                     </td>
                 </tr>
                 @empty

@@ -52,7 +52,7 @@
                     <th>Name</th>
                     <th>Items</th>
                     <th>Link</th>
-                    <th><i class="fas fa-border-style"></i></th>
+                    <th><i class="fas fa-ellipsis-vertical"></i></th>
                 </tr>
             </thead>
             <tbody>
@@ -70,21 +70,21 @@
                     </td>
                     <td>
                         <span class="me-2 copy-text">{{ route('category') }}?brand={{ $brand->slug }}</span>
-                        <a href="#" class="copy-button btn btn-sm btn-dark">
-                            <small><i class="fa fa-copy"></i></small>
+                        <a href="#" class="copy-button text-success">
+                            <i class="fa fa-copy"></i>
                         </a>
                         <small class="text-muted d-none copied-text">Copied</small>
                     </td>
                     <td>
                         @if(auth()->user()->role->hasPermission('edit-brand'))
-                        <a href="{{ route('admin.brands.edit', $brand->id) }}" class="btn btn-sm btn-primary me-2 mb-1">
-                            <small><i class="fa fa-pencil-alt"></i></small>
+                        <a href="{{ route('admin.brands.edit', $brand->id) }}" class="me-2 text-warning">
+                            <i class="fa fa-pencil-alt"></i>
                         </a>
                         @endif
 
                         @if(auth()->user()->role->hasPermission('delete-brand'))
-                        <a href="#delete-modal-{{ $brand->id }}" class="btn btn-sm btn-danger mb-1" data-bs-toggle="modal">
-                            <small><i class="fas fa-trash"></i></small>
+                        <a href="#delete-modal-{{ $brand->id }}" data-bs-toggle="modal">
+                            <i class="fas fa-trash"></i>
                         </a>
                         <x-admin.delete id="{{ $brand->id }}" url="{{ route('admin.brands.destroy', $brand->id) }}"></x-admin.delete>
                         @endif

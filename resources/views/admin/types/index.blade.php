@@ -74,7 +74,7 @@
                     <th>Items</th>
                     <th>Priority</th>
                     <th>Link</th>
-                    <th><i class="fas fa-border-style"></i></th>
+                    <th><i class="fas fa-ellipsis-vertical"></i></th>
                 </tr>
             </thead>
             <tbody>
@@ -84,7 +84,7 @@
                     <td>{{ $type->parent_type ? $type->parent_type->name : ' - ' }}</td>
                     <td>
                         @if($type->items()->count())
-                        <a href="{{ route('admin.items.index') }}?type={{ $type->slug }}" class="badge bg-primary">
+                        <a href="{{ route('admin.items.index') }}?type={{ $type->slug }}" class="badge bg-primary text-decoration-none">
                             {{ $type->items()->count() }}
                         </a>
                         @else
@@ -102,20 +102,20 @@
                     </td>
                     <td>
                         <span class="me-2 copy-text">{{ !empty($maintype) ? route('category', [$maintype->slug,$type->slug]) : "" }}</span>
-                        <a href="#" class="copy-button btn btn-sm btn-dark">
-                            <small><i class="fa fa-copy"></i></small>
+                        <a href="#" class="copy-button text-success">
+                            <i class="fa fa-copy"></i>
                         </a>
                         <small class="text-muted d-none copied-text">Copied</small>
                     </td>
                     <td>
                         @if(auth()->user()->role->hasPermission('edit-type'))
-                        <a href="{{ route('admin.types.edit', $type->slug) }}" class="btn btn-sm btn-primary me-2 mb-1">
-                            <small><i class="fa fa-pencil-alt"></i></small>
+                        <a href="{{ route('admin.types.edit', $type->slug) }}" class="me-2 text-warning">
+                            <i class="fa-solid fa-pencil-alt"></i>
                         </a>
                         @endif
                         @if(auth()->user()->role->hasPermission('delete-type'))
-                        <a href="#delete-modal-{{ $type->id }}" class="btn btn-sm btn-danger mb-1" data-bs-toggle="modal">
-                            <small><i class="fas fa-trash"></i></small>
+                        <a href="#delete-modal-{{ $type->id }}" data-bs-toggle="modal">
+                            <i class="fa-solid fa-trash"></i>
                         </a>
                         <x-admin.delete id="{{ $type->id }}" url="{{ route('admin.types.destroy', $type->id) }}"></x-admin.delete>
                         @endif

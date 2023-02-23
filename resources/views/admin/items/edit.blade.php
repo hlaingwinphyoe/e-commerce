@@ -48,7 +48,7 @@
                         <option value="{{ $unit->id }}" {{ $item->unit_id == $unit->id ? 'selected' : '' }}>{{ $unit->name }}</option>
                         @endforeach
                     </select>
-                    
+
                     @error('unit')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -65,7 +65,7 @@
                         <option value="{{ $brand->id }}" {{ $item->brand_id == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
                         @endforeach
                     </select>
-                   
+
                     @error('brand')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -77,7 +77,7 @@
                         <span class="text-danger">**</span>
                     </label>
                     <search-or-create url="types" name="type" :input_obj="{{ $item->type() ? $item->type() : '' }}"></search-or-create>
-            
+
                     @error('type')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror

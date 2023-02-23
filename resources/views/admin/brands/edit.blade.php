@@ -13,8 +13,11 @@
 @include('components.admin.errors')
 
 <div>
-    <div class="d-flex mb-4">
-        <h4 class="page-title mb-0 mr-2">Brand</h4>
+    <div class="d-flex mb-4 align-items-center">
+        <a href="{{ route('admin.brands.index') }}" class="btn btn-primary btn-sm me-2">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <h4 class="page-title mb-0 me-2">Brand</h4>
         <span class="text-muted form-text">( Edit )</span>
     </div>
 
@@ -50,13 +53,13 @@
                 <div class="px-4 py-3 bg-sidebar">
                     <h5 class="text-secondary">Featured Image</h5>
                     <media-upload :images="{{ $brand->medias()->pluck('id') }}" brand="category" priority="check"></media-upload>
-                </div>                
+                </div>
             </div>
         </div>
 
         <div class="from-group">
             <button type="submit" class="btn btn-sm btn-secondary">
-                <small class="mr-2"><i class="fas fa-save"></i></small>
+                <small class="me-2"><i class="fas fa-save"></i></small>
                 <span>Save</span>
             </button>
         </div>

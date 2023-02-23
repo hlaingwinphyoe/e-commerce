@@ -5,7 +5,7 @@
             <!-- inventory-update-form -->
             <div class="bg-white shadow rounded py-3 px-2 mb-4">
                 <h5 class="text-primary mb-3">Supplier Information</h5>
-                <div class="d-flex flex-wrap pb-3">
+                <div class="d-flex flex-wrap pb-3 align-items-center">
                     <div class="form-group me-2 w-sm-100">
                         <label for="">Supplier</label>
                         <select
@@ -89,7 +89,7 @@ export default {
                     this.supplier_form
                 )
                 .then((resp) => {
-                    console.log("here");
+                    //console.log("here");
                 });
         },
         onAddSku(data) {

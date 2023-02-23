@@ -34,19 +34,18 @@
     <p class="me-2"><span class="fw-bold h5">{{ $orders->count() }}</span> of total <span
             class="">{{ $orders->total() }}</span></p>
 
-    <div class="d-flex mb-3">
-        <div class="d-flex flex-wrap mb-2 align-items-end">
-            @if(auth()->user()->role->hasPermission('create-order'))
-            <div class="me-2 mb-2">
-                <a href="{{ route('admin.pos.create') }}" class="btn btn-sm btn-primary">
-                    <small><i class="fa fa-plus"></i></small>
-                    <span>Add New</span>
-                </a>
-            </div>
-            @endif
-
+    <div class="d-flex mb-3 align-items-end">
+        <div class="d-flex flex-wrap mb-2">
             <div class="filter-content">
                 <form action="{{ route('admin.pos.index') }}" class="d-flex flex-wrap align-items-end">
+                    @if(auth()->user()->role->hasPermission('create-order'))
+                        <div class="form-group me-2">
+                            <a href="{{ route('admin.pos.create') }}" class="btn btn-sm btn-primary">
+                                <small><i class="fa fa-plus"></i></small>
+                                <span>Add New</span>
+                            </a>
+                        </div>
+                    @endif
                     <div class="form-group me-2">
                         <select name="delivery" class="form-select">
                             <option value="">Select Delivery</option>
@@ -95,7 +94,6 @@
                     <th>Order No.</th>
                     <th>သင့်ငွေ</th>
                     <th>ငွေရှင်း</th>
-                    <th>Delivery</th>
                     <th>Date</th>
                     <th><i class="fas fa-ellipsis-vertical"></i></th>
                 </tr>
@@ -103,7 +101,7 @@
             <tbody>
                 @forelse($orders as $order)
                 <?php $total = $order->return() ? $order->getSubTotal() - $order->return()->price : $order->getSubTotal(); ?>
-                <tr id="tr-{{ $order->id }}">
+                <tr id="tr-{{ $order->id }}" class="align-middle">
                     <td>
                         <p class="mb-0">{{ $order->order_no }}</p>
                         @if($order->customer)
@@ -122,7 +120,7 @@
                         <span class="text-danger me-1">{{ number_format($order->getPayAmount() - $order->getReturnAmount() - $order->getChange()  == $total && abs($order->getBalance()) == 0 ? 0 : $order->getBalance() + $order->getChange()) }}</span>
 
                         @if($order->getPayAmount() - $order->getReturnAmount() - $order->getChange() != $total && abs($order->getBalance()) != 0 && $order->status->slug != 'cancel')
-                        <a href="#" class="btn btn-sm btn-secondary mb-1" data-bs-toggle="modal" data-bs-target="#payment-modal-{{ $order->id }}">
+                        <a href="#" class="btn btn-sm btn-primary mb-1" data-bs-toggle="modal" data-bs-target="#payment-modal-{{ $order->id }}">
                             <small>Pay</small>
                         </a>
 
@@ -131,40 +129,13 @@
 
                         @endif
                     </td>
-                    <td width="200">
-                        <form action="{{ route('admin.update-order-delivery', $order->id) }}" method="post">
-                            @csrf
-                            <div class="form-group">
-                                <select name="delivery" id="role-select-{{ $order->id }}"
-                                    class="role-select form-select">
-                                    <option value="0" selected disabled>Choose Delivery</option>
-                                    @foreach($deliveries as $delivery)
-
-                                    <?php
-                                    if ($order->deliveries->count()) {
-                                        $order_delivery = $order->deliveries->first()->id;
-                                    } else {
-                                        $order_delivery = 0;
-                                    }
-
-                                    ?>
-
-                                    <option value="{{ $delivery->id }}"
-                                        {{$order_delivery == $delivery->id ? 'selected' : ''}}>{{ $delivery->name }}
-                                    </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </form>
-                    </td>
                     <td>
                         <small>{{ $order->updated_at ? $order->updated_at->format('m/d/Y') : $order->created_at->format('m/d/Y') }}</small>
                     </td>
                     <td>
                         @if(auth()->user()->role->hasPermission('edit-order') && $order->status->slug != 'cancel')
-                        <a href="{{ route('admin.pos.create') }}?order_no={{ $order->order_no ?? $order->id }}"
-                            class="btn btn-sm btn-primary me-2 mb-1">
-                            <small><i class="fa fa-eye"></i></small>
+                        <a href="{{ route('admin.pos.create') }}?order_no={{ $order->order_no ?? $order->id }}">
+                            <i class="fa fa-eye"></i>
                         </a>
                         @endif
                     </td>

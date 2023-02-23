@@ -13,8 +13,11 @@
 @include('components.admin.errors')
 
 <div>
-    <div class="d-flex mb-4">
-        <h4 class="page-title mb-0 mr-2">Category</h4>
+    <div class="d-flex mb-4 align-items-center">
+        <a href="{{ route('admin.types.index') }}" class="btn btn-sm btn-primary me-2">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <h4 class="page-title mb-0 me-2">Category</h4>
         <span class="text-muted form-text">( Create )</span>
     </div>
 
@@ -56,17 +59,17 @@
                     </div>
             </div>
 
-            <div class="col-md-4 mb-2">                
-                <div class="shadow px-4 py-3">   
-                    <h5 class="text-secondary">Featured Image</h5>                
+            <div class="col-md-4 mb-2">
+                <div class="shadow px-4 py-3">
+                    <h5 class="text-secondary">Featured Image</h5>
                     <media-upload :images="[]" type="category" priority="check"></media-upload>
-                </div>                   
+                </div>
             </div>
         </div>
 
         <div class="from-group">
             <button type="submit" class="btn btn-sm btn-secondary">
-                <small class="mr-2"><i class="fas fa-save"></i></small>
+                <small class="me-2"><i class="fas fa-save"></i></small>
                 <span>Save</span>
             </button>
         </div>

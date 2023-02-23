@@ -54,12 +54,12 @@
                     <th>Amt</th>
                     <th>Duration</th>
                     <th>Link</th>
-                    <th><i class="fas fa-border-style"></i></th>
+                    <th><i class="fas fa-ellipsis-vertical"></i></th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($discountypes as $discountype)
-                <tr id="tr-{{ $discountype->id }}">
+                <tr id="tr-{{ $discountype->id }}" class="align-middle">
                     <td>{{ $discountype->name }}</td>
                     <td>
                         @if($discountype->discounts()->count())
@@ -80,19 +80,19 @@
                         <?php /*
                         <span class="me-2 copy-text">{{ route('discounts', $discountype->slug) }}</span>
                         */ ?>
-                        <a href="#" class="copy-button btn btn-sm btn-dark">
+                        <a href="#" class="copy-button text-success">
                             <small><i class="fa fa-copy"></i></small>
                         </a>
                         <small class="text-muted d-none copied-text">Copied</small>
                     </td>
                     <td>
                         @if(auth()->user()->role->hasPermission('edit-discount-type'))
-                        <a href="{{ route('admin.discountypes.edit', $discountype->id) }}" class="btn btn-sm btn-primary me-2 mb-1">
+                        <a href="{{ route('admin.discountypes.edit', $discountype->id) }}" class="me-2 text-warning">
                             <small><i class="fa fa-pencil-alt"></i></small>
                         </a>
                         @endif
                         @if(auth()->user()->role->hasPermission('delete-discount-type'))
-                        <a href="#delete-modal-{{ $discountype->id }}" class="btn btn-sm btn-danger mb-1" data-bs-toggle="modal">
+                        <a href="#delete-modal-{{ $discountype->id }}" class="" data-bs-toggle="modal">
                             <small><i class="fas fa-trash"></i></small>
                         </a>
                         <x-admin.delete id="{{ $discountype->id }}" url="{{ route('admin.discountypes.destroy', $discountype->id) }}"></x-admin.delete>

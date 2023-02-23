@@ -110,17 +110,17 @@ if (request('brand')) {
                 <th>Stock</th>
                 <th>Price</th>
                 <th>Discount</th>
-                <th><i class="fa fa-border-style"></i></th>
+                <th><i class="fa fa-ellipsis-vertical"></i></th>
             </tr>
         </thead>
         <tbody>
             @forelse($items as $item)
-            <tr id="tr-{{ $item->id }}">
+            <tr id="tr-{{ $item->id }}" class="align-middle">
                 <td class="">{{ $item->name }}</td>
                 <td>
                     @if($item->skus->count() > 0)
-                    <a href="{{ route('admin.items.show', $item->id) }}" class="btn btn-sm btn-outline-primary mb-1">
-                        <span>{{ $item->skus->count() }}</span>
+                    <a href="{{ route('admin.items.show', $item->id) }}" class="badge bg-secondary p-2 text-decoration-none">
+                        {{ $item->skus->count() }}
                     </a>
                     @else
                     <span>{{ $item->skus->count() }}</span>
@@ -128,7 +128,7 @@ if (request('brand')) {
                 </td>
                 <td>{{ $item->type() ? $item->type()->name : '-' }}</td>
                 <td>
-                    <a href="#add-stock-modal-{{ $item->id }}" class="btn btn-sm btn-secondary" data-bs-toggle="modal">
+                    <a href="#add-stock-modal-{{ $item->id }}" class="badge bg-secondary text-decoration-none p-2" data-bs-toggle="modal">
                         <span class="">{{ $item->getStock() }}</span>
                     </a>
                     <stock :item="{{ $item }}" :suppliers="{{ $suppliers }}"></stock>
@@ -136,32 +136,29 @@ if (request('brand')) {
                 <td>{{ $item->price }}</td>
                 <td>{{ $item->discount }}</td>
                 <td>
-                    <div class="d-flex">
-                        @if(auth()->user()->role->hasPermission('edit-item') && !$item->trashed())
-                        <a href="{{ route('admin.items.edit', $item->id) }}" class="btn btn-sm btn-outline-primary me-2">
-                            <span><i class="fa fa-pencil-alt"></i></span>
+                    @if(auth()->user()->role->hasPermission('edit-item') && !$item->trashed())
+                        <a href="{{ route('admin.items.edit', $item->id) }}" class="me-2">
+                            <span><i class="fa fa-pencil-alt text-warning"></i></span>
                         </a>
-                        @endif
-
-                        @if(auth()->user()->role->hasPermission('delete-item') && !$item->trashed())
-                        <a href="#delete-modal-{{ $item->id }}" class="action-btn me-2 btn btn-sm btn-outline-danger" data-bs-toggle="modal">
+                    @endif
+                    @if(auth()->user()->role->hasPermission('delete-item') && !$item->trashed())
+                        <a href="#delete-modal-{{ $item->id }}" class="action-btn me-2" data-bs-toggle="modal">
                             <span><i class="fas fa-trash"></i></span>
                         </a>
                         <x-admin.delete id="{{ $item->id }}" url="{{ route('admin.items.destroy', $item->id) }}"></x-admin.delete>
-                        @endif
-                        @if($item->trashed() && auth()->user()->role->hasPermission('restore-item'))
-                        <a href="#restore-modal-{{ $item->id }}" class="action-btn btn btn-sm btn-info mr-2 mb-1" data-bs-toggle="modal">
+                    @endif
+                    @if($item->trashed() && auth()->user()->role->hasPermission('restore-item'))
+                        <a href="#restore-modal-{{ $item->id }}" class="action-btn me-2" data-bs-toggle="modal">
                             <small><i class="fas fa-sync-alt"></i></small>
                         </a>
                         <x-admin.restore id="{{ $item->id }}" url="{{ route('admin.items.restore', $item->id) }}"></x-admin.restore>
-                        @endif
-                        @if($item->trashed() && auth()->user()->role->hasPermission('permenent-delete-item'))
-                        <a href="#force-delete-modal-{{ $item->id }}" class="action-btn btn btn-sm btn-danger mb-1 mr-2" data-bs-toggle="modal">
+                    @endif
+                    @if($item->trashed() && auth()->user()->role->hasPermission('permenent-delete-item'))
+                        <a href="#force-delete-modal-{{ $item->id }}" class="action-btn me-2" data-bs-toggle="modal">
                             <small><i class="fas fa-trash"></i></small>
                         </a>
                         <x-admin.force-delete id="{{ $item->id }}" url="{{ route('admin.items.delete', $item->id) }}"></x-admin.force-delete>
-                        @endif
-                    </div>
+                    @endif
                 </td>
             </tr>
             @empty

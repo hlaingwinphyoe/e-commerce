@@ -37,7 +37,7 @@
                     <th>Supplier Name</th>
                     <th>Phone</th>
 
-                    <th><i class="fas fa-border-style"></i></th>
+                    <th><i class="fas fa-ellipsis-vertical"></i></th>
                 </tr>
             </thead>
             <tbody>
@@ -48,12 +48,12 @@
 
                     <td>
                         @if(auth()->user()->role->hasPermission('edit-supplier'))
-                        <a href="{{ route('admin.suppliers.edit', $supplier->id) }}" class="btn btn-sm btn-primary me-2 mb-1">
+                        <a href="{{ route('admin.suppliers.edit', $supplier->id) }}" class="me-2 text-warning">
                             <small><i class="fa fa-pencil-alt"></i></small>
                         </a>
                         @endif
                         @if(auth()->user()->role->hasPermission('delete-supplier'))
-                        <a href="#delete-modal-{{ $supplier->id }}" class="btn btn-sm btn-danger mb-1" data-bs-toggle="modal">
+                        <a href="#delete-modal-{{ $supplier->id }}" class="" data-bs-toggle="modal">
                             <small><i class="fas fa-trash"></i></small>
                         </a>
                         <x-admin.delete id="{{ $supplier->id }}" url="{{ route('admin.suppliers.destroy', $supplier->id) }}"></x-admin.delete>
@@ -62,7 +62,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center">There is no data still yet!</td>
+                    <td colspan="3" class="text-center">There is no data still yet!</td>
                 </tr>
                 @endforelse
             </tbody>

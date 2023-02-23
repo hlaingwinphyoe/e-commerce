@@ -14,6 +14,9 @@
 
 <div>
     <div class="d-flex mb-4">
+        <a href="{{ route('admin.suppliers.index') }}" class="btn btn-primary btn-sm me-2">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
         <h4 class="page-title mb-0 me-2">Supplier</h4>
         <span class="text-muted form-text">( Edit )</span>
     </div>

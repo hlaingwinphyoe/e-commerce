@@ -56,25 +56,25 @@
                     <th>Amt</th>
                     <th>Townships</th>
                     <th>User</th>
-                    <th><i class="fas fa-border-style"></i></th>
+                    <th><i class="fas fa-ellipsis-vertical"></i></th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($delifees as $delifee)
-                <tr id="tr-{{ $delifee->id }}">
+                <tr id="tr-{{ $delifee->id }}" class="align-middle">
                     <td>{{ $delifee->amt }}</td>
                     <td>{{ $delifee->townships()->count() }}</td>
                     <td>
                         User
-                    </td>                   
+                    </td>
                     <td>
                         @if(auth()->user()->role->hasPermission('edit-delifee'))
-                        <a href="{{ route('admin.delifees.edit', $delifee->id) }}" class="btn btn-sm btn-primary me-2 mb-1">
+                        <a href="{{ route('admin.delifees.edit', $delifee->id) }}" class="me-2 text-warning">
                             <small><i class="fa fa-pencil-alt"></i></small>
                         </a>
                         @endif
                         @if(auth()->user()->role->hasPermission('delete-delifee'))
-                        <a href="#delete-modal-{{ $delifee->id }}" class="btn btn-sm btn-danger mb-1" data-bs-toggle="modal">
+                        <a href="#delete-modal-{{ $delifee->id }}" class="" data-bs-toggle="modal">
                             <small><i class="fas fa-trash"></i></small>
                         </a>
                         <x-admin.delete id="{{ $delifee->id }}" url="{{ route('admin.delifees.destroy', $delifee->id) }}"></x-admin.delete>
@@ -83,7 +83,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center">There is no data still yet!</td>
+                    <td colspan="4" class="text-center">There is no data still yet!</td>
                 </tr>
                 @endforelse
             </tbody>

@@ -1,5 +1,5 @@
 <template>
-    <tr>
+    <tr class="align-middle">
         <td>{{ sku.item_name }} {{ sku.data ? '('+ sku.data + ')' : '' }}</td>
         <td>
             <input type="text" class="form-control form-control-sm" v-model="form.qty" />

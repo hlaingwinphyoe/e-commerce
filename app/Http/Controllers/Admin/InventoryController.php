@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class InventoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permissions:access-inventory')->only(['index', 'show']);
+        $this->middleware('permissions:create-inventory')->only(['create', 'store']);
+        $this->middleware('permissions:edit-inventory')->only(['edit', 'update']);
+        $this->middleware('permissions:delete-inventory')->only('destroy');
+    }
     public function index()
     {
         $inventories = Inventory::filterOn()->latest()->paginate(20);
@@ -19,7 +26,7 @@ class InventoryController extends Controller
         ]);
     }
 
-    public function create() 
+    public function create()
     {
         $suppliers = Supplier::orderBy('name')->get();
 

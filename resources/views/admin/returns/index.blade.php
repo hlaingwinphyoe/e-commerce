@@ -57,12 +57,12 @@ $query .= request('q') ? '?q=' . request('q') : '';
                     <th>Amount</th>
                     <th>Date</th>
                     <th>By</th>
-                    <th><i class="fa fa-border-style"></i></th>
+                    <th><i class="fa fa-ellipsis-vertical"></i></th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($returns as $return)
-                <tr id="tr-{{ $return->id }}">
+                <tr id="tr-{{ $return->id }}" class="align-middle">
                     <td class="">{{ $return->return_no }}</td>
                     <td>{{ $return->order && $return->order->customer ? $return->order->customer->name: '' }}</td>
                     <td>{{ $return->skus->count() }}</td>
@@ -71,18 +71,18 @@ $query .= request('q') ? '?q=' . request('q') : '';
                     <td>{{ $return->user ? $return->user->name : '' }}</td>
                     <td>
                         <div class="d-flex">
-                            @if(auth()->user()->role->hasPermission('edit-return') && Carbon\Carbon::parse($return->date)->format('Y-m-d') == Carbon\Carbon::now()->format('Y-m-d'))
-                            <a href="{{ route('admin.returns.edit', $return->id) }}" class="btn btn-sm btn-outline-primary me-2">
+                            @if(auth()->user()->role->hasPermission('edit-return'))
+                            <a href="{{ route('admin.returns.edit', $return->id) }}" class="me-2 text-warning">
                                 <i class="fa fa-pencil-alt"></i>
                             </a>
                             @endif
 
-                            <a href="{{ route('admin.returns.show', $return->id) }}" class="btn btn-sm btn-outline-primary me-2">
+                            <a href="{{ route('admin.returns.show', $return->id) }}" class="me-2 text-info">
                                 <i class="fa fa-eye"></i>
                             </a>
 
                             @if(auth()->user()->role->hasPermission('delete-return') && !$return->skus->count())
-                            <a href="#delete-modal-{{ $return->id }}" class="action-btn me-2 btn btn-sm btn-outline-danger" data-bs-toggle="modal">
+                            <a href="#delete-modal-{{ $return->id }}" class="action-btn" data-bs-toggle="modal">
                                 <span><i class="fas fa-trash"></i></span>
                             </a>
                             <x-admin.delete id="{{ $return->id }}" url="{{ route('admin.returns.destroy', $return->id) }}"></x-admin.delete>

@@ -6,16 +6,20 @@
     <input type="hidden" name="featured[]" :value="media.id" />
 
     <div class="d-flex mb-2">
-      <div v-if="priority" class="mr-2">
-         <input type="radio" id="check" name="check" class="check-radio position-absolute" @click="onChoose(media.id)" :value="media.id" :checked="media.is_check ? true : false">
-          <label for="check" :style="{'marginLeft': '25px'}">ရွေးချယ်မည်</label>
+      <div v-if="priority">
+          <div class="form-check">
+              <input class="form-check-input" name="check" type="radio" :id="'check-'+media.id" @click="onChoose(media.id)" :value="media.id" :checked="media.is_check ? true : false">
+              <label class="form-check-label" :for="'check-'+media.id">
+                  ရွေးချယ်မည်
+              </label>
+          </div>
       </div>
       <a
         :href="`#media-title-${media.id}`"
-        class="text-muted"
+        class="text-muted text-decoration-none"
         data-bs-toggle="modal"
       >
-        <span class="mr-2">{{ getTitle }}</span>
+        <span class="mx-2">{{ getTitle }}</span>
         <small><i class="fa fa-pencil-alt text-dark"></i></small>
       </a>
 
@@ -29,11 +33,11 @@
       </div>
     </div>
 
-    <div v-if="isImage" style="max-width: 300px"> 
+    <div v-if="isImage" style="max-width: 300px">
       <img
         :src="getSrc"
         :alt="media.name"
-        class="featured-img"
+        width="200"
       />
     </div>
 
@@ -146,8 +150,8 @@ export default {
         this.$emit("on-update-title", resp.data);
       });
     },
-    onChoose(id){        
-      axios.patch(`/wapi/medias/check/${id}`,this.form).then((resp) => {  
+    onChoose(id){
+      axios.patch(`/wapi/medias/check/${id}`,this.form).then((resp) => {
       });
     }
   },

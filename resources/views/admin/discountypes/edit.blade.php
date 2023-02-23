@@ -13,8 +13,11 @@
 @include('components.admin.errors')
 
 <div>
-    <div class="d-flex mb-4">
-        <h4 class="page-title mb-0 mr-2">Discountype</h4>
+    <div class="d-flex mb-4 align-items-center">
+        <a href="{{ route('admin.discountypes.index') }}" class="btn btn-primary btn-sm me-2">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <h4 class="page-title mb-0 me-2">Discountype</h4>
         <span class="text-muted form-text">( Edit )</span>
     </div>
 
@@ -40,7 +43,7 @@
                 <div class="form-group">
                     <label for="">Amount <span class="text-danger">**</span></label>
                     <small class="help-text text-muted">Discount Amt ထည့်ပါ။ မဖြစ်မနေထည့်ပေးပါ။</small>
-                    <div class="input-group mb-2 mr-sm-2">
+                    <div class="input-group mb-2 me-sm-2">
                         <input type="text" name="amt" class="form-control form-control-sm" placeholder="Amt" value="{{ old('amt') ?? $discountype->amt }}">
                         <div class="input-group-text bg-white">
                             <select name="status" class="form-select border-0">
@@ -93,7 +96,7 @@
 
         <div class="from-group">
             <button type="submit" class="btn btn-sm btn-secondary">
-                <small class="mr-2"><i class="fas fa-save"></i></small>
+                <small class="me-2"><i class="fas fa-save"></i></small>
                 <span>Save</span>
             </button>
         </div>

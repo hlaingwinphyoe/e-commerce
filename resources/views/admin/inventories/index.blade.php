@@ -19,17 +19,19 @@ $query = '';
 $query .= request('q') ? '?q=' . request('q') : '';
 ?>
 
-<div class="border bg-white rounded px-2 py-4">
+<div class="border bg-white rounded p-2">
     <p class="me-2"><span class="fw-bold h5">{{ $inventories->count() }}</span> of total <span class="">{{ $inventories->total() }}</span></p>
     <div class="d-flex mb-3">
         <!-- filter -->
-        <div class="d-flex flex-wrap mb-2">
-            @if(auth()->user()->role->hasPermission('create-inventory')) <div class="me-2 mb-1">
-                <a href="{{ route('admin.inventories.create') }}" class="btn btn-sm btn-primary">
-                    <small class="me-2"><i class="fa fa-plus"></i></small>
-                    <span>Add New</span>
-                </a>
-                @endif
+        <div class="d-flex flex-wrap">
+            @if(auth()->user()->role->hasPermission('create-inventory'))
+                <div class="me-2 mb-1">
+                    <a href="{{ route('admin.inventories.create') }}" class="btn btn-sm btn-primary">
+                        <small class="me-2"><i class="fa fa-plus"></i></small>
+                        <span>Add New</span>
+                    </a>
+                </div>
+            @endif
         </div>
 
         <form action="{{ route('admin.inventories.index') }}" class="d-flex responsive-flex">
@@ -53,7 +55,7 @@ $query .= request('q') ? '?q=' . request('q') : '';
 
 </div>
 
-<div class="table-responsive">
+<div class="table-responsive mt-3">
     <table class="table table-borderless">
         <thead>
             <tr>
@@ -63,29 +65,29 @@ $query .= request('q') ? '?q=' . request('q') : '';
                 <th>Amount</th>
                 <th>Date</th>
                 <th>By</th>
-                <th><i class="fa fa-border-style"></i></th>
+                <th><i class="fa fa-ellipsis-vertical"></i></th>
             </tr>
         </thead>
         <tbody>
             @forelse($inventories as $inventory)
-            <tr id="tr-{{ $inventory->id }}">
+            <tr id="tr-{{ $inventory->id }}" class="align-middle">
                 <td>{{ $inventory->inventory_no }}</td>
                 <td class="">{{ $inventory->supplier ? $inventory->supplier->name : '' }}</td>
-                <td><a href="{{ route('admin.inventories.show', $inventory->id) }}" class="btn btn-sm btn-outline-primary">{{ $inventory->skus->count() }}</a></td>
+                <td><a href="{{ route('admin.inventories.show', $inventory->id) }}" class="badge bg-secondary p-2 text-decoration-none">{{ $inventory->skus->count() }}</a></td>
                 <td>{{ number_format($inventory->getAmount()) }}</td>
                 <td>{{ \Carbon\Carbon::parse($inventory->date)->format('M d, Y') }}</td>
                 <td>{{ $inventory->user ? $inventory->user->name : '' }}</td>
                 <td>
                     <div class="d-flex">
-                        @if(auth()->user()->role->hasPermission('edit-inventory') && Carbon\Carbon::parse($inventory->date)->format('Y-m-d') == Carbon\Carbon::now()->format('Y-m-d'))
-                        <a href="{{ route('admin.inventories.edit', $inventory->id) }}" class="btn btn-sm btn-outline-primary me-2">
+                        @if(auth()->user()->role->hasPermission('edit-inventory'))
+                        <a href="{{ route('admin.inventories.edit', $inventory->id) }}" class="me-2 text-warning">
                             <span><i class="fa fa-pencil-alt"></i></span>
                         </a>
                         @endif
 
-                        <a href="{{ route('admin.inventories.show', $inventory->id) }}" class="btn btn-sm btn-outline-primary me-2"><i class="fa fa-eye"></i></a>
+                        <a href="{{ route('admin.inventories.show', $inventory->id) }}" class="me-2 text-info"><i class="fa fa-eye "></i></a>
 
-                        <a href="{{ route('admin.inventories.print', $inventory->id) }}" class="btn btn-sm btn-outline-primary me-2"><i class="fa fa-print"></i></a>
+                        <a href="{{ route('admin.inventories.print', $inventory->id) }}" class="me-2 text-success"><i class="fa fa-print"></i></a>
                     </div>
                 </td>
             </tr>
