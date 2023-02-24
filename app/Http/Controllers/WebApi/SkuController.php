@@ -15,7 +15,7 @@ class SkuController extends Controller
 {
     public function index()
     {
-        $skus = Sku::filterOn()->orderBy('stock')->get();
+        $skus = Sku::filterOn()->whereHas('item')->with('item')->inRandomOrder()->paginate(20);
 
         return response()->json($skus);
     }
