@@ -1,27 +1,45 @@
 <template>
-     <a href="#" class="d-block bg-white p-2 shadow-sm rounded mb-3 text-decoration-none" :class="data_stock > 0 ? '' : 'disabled'" @click.prevent="onSelectedSku(res.id, res.data ? res.data : res.item.name, res.discount ? res.discount : res.price)">
-        <div class="box-header text-center overflow-hidden">
-            <img
-                :src="
+<!--     <a href="#" class="d-block bg-white p-2 shadow-sm rounded mb-3 text-decoration-none">-->
+<!--        <div class="box-header text-center overflow-hidden">-->
+<!--            <img-->
+<!--                :src="-->
+<!--                    res.thumbnail.includes('default.png')-->
+<!--                        ? res.item.thumbnail-->
+<!--                        : res.thumbnail-->
+<!--                "-->
+<!--                class="sale-img me-2"-->
+<!--                :alt="`${res.item_name} - ${res.data}`"-->
+<!--            />-->
+<!--        </div>-->
+<!--        <div class="box-content bg-sidebar p-2 mt-1">-->
+<!--            <p class="mb-1 fw-bold text-truncate"></p>-->
+<!--            <div class="d-flex justify-content-between align-items-center">-->
+<!--                -->
+<!--                -->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </a>-->
+
+    <div class="card sale-card" :class="data_stock > 0 ? '' : 'disabled'" @click.prevent="onSelectedSku(res.id, res.data ? res.data : res.item.name, res.discount ? res.discount : res.price)" style="width: 14rem;">
+        <img :src="
                     res.thumbnail.includes('default.png')
                         ? res.item.thumbnail
                         : res.thumbnail
-                "
-                class="featured-img me-2"
-                :alt="`${res.item_name} - ${res.data}`"
-            />
+                " class="sale-img border-bottom"
+             :alt="`${res.item_name} - ${res.data}`"
+        >
+        <div class="card-body">
+            <p class="text-muted text-truncate">{{ res.item_name }} {{ res.data ? '('+ res.data +')' : '' }}</p>
+            <h6 class="fw-bold text-primary">{{ res.code }}</h6>
+            <p class="card-text fw-bold d-flex justify-content-between align-items-center text-success">
+                <span class="h6 mb-0">{{ res.discount ? res.discount : res.price }} Ks</span>
+
+                <span class="badge bg-success p-2">{{ data_stock }}</span>
+            </p>
+
         </div>
-        <div class="box-content bg-sidebar p-2 mt-1">
-            <p class="mb-1 fw-bold text-truncate">{{ res.item_name }} {{ res.data ? '('+ res.data +')' : '' }}</p>
-            <div class="d-flex justify-content-between align-items-center">
-                <p class="mb-0">
-                    <span>{{ res.code }}</span>
-                    <span class="badge bg-primary p-2">{{ data_stock }}</span>
-                </p>
-                <p class="fw-bold mb-0">{{ res.discount ? res.discount : res.price }} Ks</p>
-            </div>
-        </div>
-    </a>
+    </div>
+
 </template>
 
 <script>

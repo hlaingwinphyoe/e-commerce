@@ -21419,14 +21419,31 @@ body::-webkit-scrollbar-thumb, .smooth-scroll::-webkit-scrollbar-thumb {
   font-weight: bold;
 }
 
+.sale-card {
+  height: 280px;
+  overflow: hidden;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.sale-card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.sale-card:active {
+  background-color: #ced4da;
+}
+
 .featured-img {
   max-width: 150px;
   max-height: 75px;
-  transition: 0.4s;
 }
 
-.featured-img:hover {
-  transform: scale(1.5);
+.sale-img {
+  max-width: 100%;
+  max-height: 140px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .site-nav-tabs {
@@ -21584,7 +21601,8 @@ body::-webkit-scrollbar-thumb, .smooth-scroll::-webkit-scrollbar-thumb {
 }
 .btn-primary,
 .btn-secondary,
-.btn-outline-primary:hover {
+.btn-outline-primary:hover,
+.btn-outline-secondary:hover {
   color: #fff !important;
 }
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="search-bar-container search-bar bg-sidebar rounded border mb-3 px-2 py-3">
+        <div class="search-bar-container search-bar mb-2 p-2">
             <div class="row">
                 <div class="col-7 col-md-3 pe-1">
                     <div class="me-2 mb-2">
@@ -20,24 +20,24 @@
                         </select>
                     </div>
                 </div>
+
+                <!-- Search Bar -->
                 <div class="col-5 col-md-5 ps-1">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-search"></i></span>
+                        <span class="input-group-text bg-primary text-white" id="basic-addon1"><i class="fa-solid fa-search"></i></span>
                         <input
                             type="text"
                             class="form-control form-control-sm"
                             placeholder="Type here to search"
                             v-model="q"
-                            ref="search"
-                            @keydown="onSearch"
-                            @change="onChange"
-                            autofocus id="search"
+                            @keyup="onSearch"
                         />
                     </div>
                 </div>
+
                 <div class="col-8 col-md-2 d-none">
                     <div class="me-2 mb-2">
-                        <label for="" class="text-muted">Qty</label>
+                        <label class="text-muted">Qty</label>
                         <input
                             type="text"
                             class="form-control form-control-sm"
@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-4 col-md-2 d-none">
                     <div class="me-2 mb-2">
-                        <label for="" calss="text-muted">.</label>
+                        <label class="text-muted">.</label>
                         <div>
                             <a
                                 href="#"
@@ -73,7 +73,7 @@
             <!-- new design -->
             <div class="row mobile-scroll">
                 <div
-                    class="col-6 col-md-4"
+                    class="col-6 col-md-3"
                     v-for="res in data_skus.data"
                     :key="res.id"
                     :res="res"
@@ -113,7 +113,7 @@ export default {
             types: [],
             type: "",
             data_types: [],
-            // maintype: "",
+            maintype: [],
             q: "",
             isClose: false,
             form: {
@@ -138,12 +138,13 @@ export default {
             axios.get(`/wapi/popular-skus`).then((resp) => {
                 this.popular_data = resp.data;
                 this.data_skus = resp.data;
+                //console.log(this.data_skus.data[0].id)
                 this.loaded = true;
             });
         },
         onSelectCategory() {
             this.loaded = false;
-            if(this.type == ""){
+            if(this.type === ""){
                 axios.get(`/wapi/popular-skus`).then((resp) => {
                     this.popular_data = resp.data;
                     this.data_skus = resp.data;
@@ -179,11 +180,12 @@ export default {
         onChangeMainType(e) {
             this.data_types = this.types.filter((x) => {
                 let ary = x.maintypes.filter((maintype) => {
-                    return maintype.id == e.target.value;
+                    return maintype.id === e.target.value;
                 });
                 return ary.length ? x : "";
             });
         },
+
         onSearch() {
             if (this.q) {
                 clearTimeout(this.timeout);
@@ -195,8 +197,14 @@ export default {
                     };
                     this.loaded = false;
                     axios.get(`/wapi/skus`, { params: param }).then((resp) => {
-                        this.data_skus.data = resp.data;
+                        this.data_skus = resp.data;
+                        //console.log(this.data_skus)
                         this.loaded = true;
+                        this.data_skus.data.filter(sku => {
+                            //console.log(sku)
+                            console.log(sku.item_name.toLowerCase().includes(this.q.toLowerCase()))
+                            return sku.item_name.toLowerCase().includes(this.q.toLowerCase()) ? sku : '';
+                        })
                     });
                 }, 300);
             } else {
@@ -204,13 +212,14 @@ export default {
                 this.loaded = true;
             }
         },
+
         onChange() {
             if (this.isClose) {
                 axios
                     .get(`/wapi/skus`, { params: { q: this.q } })
                     .then((resp) => {
                         if (
-                            resp.data.length == 1 &&
+                            resp.data.length === 1 &&
                             resp.data.data[0].stock > 0
                         ) {
                             this.form.sku = resp.data[0].id;
@@ -237,13 +246,7 @@ export default {
                     });
             }
         },
-        // onSelectedSku(id, name, price) {
-        //     this.q = name;
-        //     this.form.sku = id;
-        //     this.form.price = price;
-        //     this.data_skus = this.popular_data;
-        //     this.onAddSku();
-        // },
+
         onSelectedSku(data) {
             // this.data_skus = this.popular_data;
             this.form.qty = 1;
