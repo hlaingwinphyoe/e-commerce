@@ -8,7 +8,6 @@
                 <th width="200px">Generate</th>
                 <th width="100px">Stock</th>
                 <th width="150px">Price</th>
-                <th width="150px">Pre Ordered</th>
             </thead>
             <tbody>
                  <generate v-for="sku in skus" :key="sku.id" :sku="sku"></generate>

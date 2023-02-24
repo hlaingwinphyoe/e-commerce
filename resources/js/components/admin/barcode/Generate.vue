@@ -41,9 +41,6 @@
         </td>
         <td class="text-center">{{ data_sku.stock }}</td>
         <td class="">{{ data_sku.price }}</td>
-        <td class="">
-            <a :href="`/admin/preorders?sku=${data_sku.id}`" :class="data_sku.preorder_count ? 'badge badge-danger' : '' ">{{ data_sku.preorder_count }}</a>
-        </td>
     </tr>
 </template>
 
