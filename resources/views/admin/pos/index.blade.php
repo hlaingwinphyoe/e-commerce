@@ -124,7 +124,8 @@
                             <small>Pay</small>
                         </a>
 
-                        @include('admin.pos.payment')
+                        <payment-form :order="{{ $order }}"></payment-form>
+
                         @endif
 
                         @endif

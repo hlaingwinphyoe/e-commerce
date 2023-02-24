@@ -21569,6 +21569,7 @@ body::-webkit-scrollbar-thumb, .smooth-scroll::-webkit-scrollbar-thumb {
 
 .feature-box {
   margin-right: 3px;
+  transition: all 0.3s ease-in-out;
 }
 .feature-box .feature-title {
   font-size: 0.65rem;
@@ -21584,6 +21585,9 @@ body::-webkit-scrollbar-thumb, .smooth-scroll::-webkit-scrollbar-thumb {
   background: linear-gradient(45deg, #e73918, #787a91);
   left: 15%;
   top: -7px;
+}
+.feature-box:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 .feature-box .feature-text {
   display: none;
@@ -21653,6 +21657,17 @@ body::-webkit-scrollbar-thumb, .smooth-scroll::-webkit-scrollbar-thumb {
   width: 30px;
   height: 30px;
   border-radius: 50%;
+}
+
+.paymentype-item {
+  margin-bottom: 10px;
+  margin-left: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.paymentype-item.selected {
+  border: 2px solid #000;
+  font-weight: bold;
 }
 
 /* toast */

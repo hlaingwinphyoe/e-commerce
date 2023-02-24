@@ -1,5 +1,6 @@
 .feature-box {
     margin-right: 3px;
+    transition: all 0.3s ease-in-out;
 
     .feature-title {
         font-size: .65rem;
@@ -15,6 +16,10 @@
             left: 15%;
             top: -7px;
         }
+    }
+
+    &:hover{
+        box-shadow: $box-shadow !important;
     }
 
     .feature-text {

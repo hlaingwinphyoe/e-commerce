@@ -93,19 +93,19 @@
         </a>
     </li>
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.types.*') ? 'active' : '' }}" href="{{ route('admin.types.index') }}" title="Dashboard">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.types.*') ? 'active' : '' }}" href="{{ route('admin.types.index') }}" title="Category">
             <i class="app-menu__icon fa-solid fa-layer-group mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label">{{__('menu.category')}}</span>
         </a>
     </li>
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->RouteIs('admin.brands.*') ? 'active' : '' }}" href="{{ route('admin.brands.index') }}" title="Dashboard">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->RouteIs('admin.brands.*') ? 'active' : '' }}" href="{{ route('admin.brands.index') }}" title="Brand">
             <i class="app-menu__icon fa fa-star mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label">{{__('menu.brand')}}</span>
         </a>
     </li>
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->RouteIs('admin.suppliers.*') ? 'active' : '' }}" href="{{ route('admin.suppliers.index') }}" title="Dashboard">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->RouteIs('admin.suppliers.*') ? 'active' : '' }}" href="{{ route('admin.suppliers.index') }}" title="Suppliers">
             <i class="app-menu__icon fa fa-users mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label">{{__('menu.suppliers')}}</span>
         </a>
@@ -219,7 +219,7 @@
 {{--        </a>--}}
 {{--    </li>--}}
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/countries','admin/countries/*']) ? 'active' : '' }}" href="{{ route('admin.countries.index') }}" title="Regions">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/countries','admin/countries/*']) ? 'active' : '' }}" href="{{ route('admin.countries.index') }}" title="Country">
             <i class="app-menu__icon fa fa-globe mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label">{{__('menu.country')}}</span>
         </a>
@@ -262,19 +262,19 @@
     @endif
 
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}" title="Item">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}" title="Staff">
             <i class="app-menu__icon fa fa-users-gear mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.staff')}}</span>
         </a>
     </li>
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}" href="{{ route('admin.roles.index') }}" title="Type">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}" href="{{ route('admin.roles.index') }}" title="Role">
             <i class="app-menu__icon fa fa-user-shield mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.role')}}</span>
         </a>
     </li>
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.profiles.*') ? 'active' : '' }}" href="{{ route('admin.profiles.index') }}" title="Unit">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.profiles.*') ? 'active' : '' }}" href="{{ route('admin.profiles.index') }}" title="Profile">
             <i class="app-menu__icon fa fa-user-cog mr-2"></i>
             <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.profile')}}</span>
         </a>
