@@ -197,17 +197,16 @@ export default {
         }
     },
     mounted() {
-        axios.get(`/wapi/item-discounts/${this.item.id}`).then(resp => {
+        axios.get(`/wapi/v1/item-discounts/${this.item.id}`).then(resp => {
             if(resp.data) {
                 this.onChooseDiscount(resp.data.discountype);
             }
             
         });
-         axios.get(`/wapi/colors`).then(resp => this.colors = resp.data);
     },
     methods: {
         onChangeSkuControl() {
-            axios.patch(`/wapi/items/${this.item.id}`, {sku_control : this.sku_control}).then(resp => {
+            axios.patch(`/wapi/v1/items/${this.item.id}`, {sku_control : this.sku_control}).then(resp => {
                 //
             });
         },
@@ -227,7 +226,7 @@ export default {
             this.has_sku = this.data_skus.length ? true : false;
         },
         onAddPricing() {
-            axios.post(`/wapi/item-pricings/${this.item.id}`, this.form).then(resp => {
+            axios.post(`/wapi/v1/item-pricings/${this.item.id}`, this.form).then(resp => {
                 this.data_skus = resp.data;
                 this.data_skus_key +=1;
             });
@@ -255,14 +254,14 @@ export default {
             
         },
         onAddDiscount() {
-            axios.post(`/wapi/item-discounts/${this.item.id}`, this.discount_form).then(resp => {
+            axios.post(`/wapi/v1/item-discounts/${this.item.id}`, this.discount_form).then(resp => {
                 this.discount_form.name = resp.data.discount.discountype.name;
                 this.discount_amount = resp.data.amount;
                 this.discount_id = resp.data.discount.id;
             })
         },
         onDeleteDiscount(){
-            axios.delete(`/wapi/item-discounts/${this.discount_id}`). then(resp => {
+            axios.delete(`/wapi/v1/item-discounts/${this.discount_id}`). then(resp => {
                 this.discount_form.discountype = "";
                 this.discount_form.name = "";
                 this.discount_form.amt = "";

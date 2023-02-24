@@ -30,6 +30,9 @@ use App\Http\Controllers\WebApi\GiftController;
 use App\Http\Controllers\WebApi\GiftInventoryController;
 use App\Http\Controllers\WebApi\OrderNotificationController;
 use App\Http\Controllers\WebApi\NotificationController;
+use App\Http\Controllers\WebApi\V1\ItemController as V1ItemController;
+use App\Http\Controllers\WebApi\V1\ItemDiscountController as V1ItemDiscountController;
+use App\Http\Controllers\WebApi\V1\ItemPricingController as V1ItemPricingController;
 use App\Http\Controllers\WebApi\WebPushNotiController;
 
 use Illuminate\Support\Facades\Route;
@@ -139,6 +142,20 @@ Route::patch('/gift-inventories-close/{inventory}', [GiftInventoryController::cl
 
 //noti
 Route::get('/get-order-noti', [OrderNotificationController::class, 'getOrderNoti']);
-Route::patch('/mark-as-read/{notification}',[NotificationController::class, 'markAsRead']);
+Route::patch('/mark-as-read/{notification}', [NotificationController::class, 'markAsRead']);
 
 // Route::post('/push-noti.js',[WebPushNotiController::class ,'store']);
+
+Route::prefix('v1')->group(function () {
+    //item-discounts
+    Route::get('/item-discounts/{item}', [V1ItemDiscountController::class, 'index']);
+    Route::post('/item-discounts/{item}', [V1ItemDiscountController::class, 'store']);
+    Route::patch('/item-discounts/{discount}', [V1ItemDiscountController::class, 'update']);
+    Route::delete('/item-discounts/{discount}', [V1ItemDiscountController::class, 'destroy']);
+
+    Route::patch('/items/{item}', [V1ItemController::class, 'update']);
+
+    //item-pricings
+    Route::get('/item-pricings/{item}', [V1ItemPricingController::class, 'index']);
+    Route::post('/item-pricings/{item}', [V1ItemPricingController::class, 'store']); //use in new
+});

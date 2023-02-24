@@ -53,7 +53,8 @@ export default {
         },
         onAddSku() {
             axios.post(`/wapi/single-skus`, this.form).then(resp => {
-                this.$emit("on-add-new-sku", resp.data);
+                console.log(resp.data);
+                // this.$emit("on-add-new-sku", resp.data);
             });
         },
         onDeleteSku(data) {

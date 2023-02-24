@@ -109,7 +109,7 @@ class ItemController extends Controller
 
     public function edit($id)
     {
-        $item = Item::findOrFail($id);
+        $item = Item::with('discounts')->findOrFail($id);
 
         $types = Type::orderBy('name')->get();
 
@@ -129,6 +129,8 @@ class ItemController extends Controller
 
         $suppliers = Supplier::orderBy('name')->get();
 
+        $item_attributes = $item->attributes()->with(['values'])->get();
+
         return view('admin.items.edit')->with([
             'item' => $item,
             'types' => $types,
@@ -139,7 +141,8 @@ class ItemController extends Controller
             'statuses' => $statuses,
             'discounts' => $discounts,
             'units' => $units,
-            'suppliers' => $suppliers
+            'suppliers' => $suppliers,
+            'item_attributes' => $item_attributes
         ]);
     }
 

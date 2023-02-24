@@ -79,7 +79,11 @@
                                 Category
                                 <span class="text-danger">**</span>
                             </label>
-                            <search-or-create url="types" name="type" :input_obj="{{ $item->type() ? $item->type() : '' }}"></search-or-create>
+                            @if($item->type())
+                            <search-or-create url="types" name="type" :input_obj="{{ $item->type() }}"></search-or-create>
+                            @else
+                            <search-or-create url="types" name="type" input_obj=""></search-or-create>
+                            @endif
 
                             @error('type')
                             <span class="text-danger">{{ $message }}</span>
@@ -98,13 +102,8 @@
                 </div>
             </div>
 
-            <div class="col-md-12 mb-4">
-                <!-- skus -->
-                <make-sku :item="{{ $item }}" :skus="{{ $item->skus }}" :item_attributes="{{ $item_attributes }}"></make-sku>
-            </div>
-
             <!-- Sku price -->
-            <div class="col-md-6 mb-4">
+            <div class="col-md-12 mb-4">
                 <div class="bg-white shadow rounded py-3 px-2 mb-4 h-100">
                     <h5 class="text-secondary fw-bold mb-4"><span class="btn btn-sm btn-outline-primary me-2"><i class="fa fa-tags"></i></span>Pricing Information</h5>
                     <sku-price :item_id="{{ $item->id }}" :statuses="{{ $attributes }}" :has_attribute="{{ $item->attributes()->count() }}" :has_sku="{{ $item->skus()->count() }}"></sku-price>

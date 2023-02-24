@@ -12,11 +12,14 @@ class SingleSkuController extends Controller
 {
     public function store(Request $request)
     {
+        dd($request);
         $item = Item::findOrFail($request->item_id);
 
         $currency = Currency::where('slug', 'mmk')->first();
 
         $status = Status::where('slug', 'fixed')->first();
+
+        $other_sku = $item->skus()->first();
 
         $sku = $item->skus()->firstOrCreate([
             'item_id' => $item->id
@@ -28,14 +31,18 @@ class SingleSkuController extends Controller
             'min_stock' => $item->min_stock
         ]);
 
-        $sku->pricings()->updateOrCreate([
-            'min_qty' => $request->min_qty
-        ], [
-            'amt' => $request->price,
-            'status_id' => $status ? $status->id : 10,
-            'min_qty' => $request->min_qty ?? 1,
-            'max_qty' => $request->max_qty ?? $request->min_qty,
-        ]);
+        if ($other_sku && $other_sku->pricings()->count()) {
+            foreach ($other_sku->pricings as $pricing) {
+                $sku->pricings()->updateOrCreate([
+                    'min_qty' => $pricing->min_qty
+                ], [
+                    'amt' => $pricing->amt,
+                    'status_id' => $pricing->status_id,
+                    'min_qty' => $pricing->min_qty,
+                    'max_qty' => $pricing->max_qty,
+                ]);
+            }
+        }
 
         $pricings = $sku->pricings()->get();
 

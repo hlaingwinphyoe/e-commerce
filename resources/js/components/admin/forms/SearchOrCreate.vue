@@ -17,7 +17,7 @@ export default {
     props: {
         url : {required: true},
         name: {required: true},
-        input_obj: {required: true,}
+        input_obj: {required: true, default: () => ''}
     },
     data() {
         return {
