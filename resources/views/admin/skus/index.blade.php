@@ -125,7 +125,7 @@
                             <a href="{{ route('admin.skus.reset-stock', $sku->id) }}" class="btn btn-outline-secondary">Reset</a>
 
                             @if(auth()->user()->role->hasPermission('create-item'))
-                                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#add-waste-{{ $sku->id }}">Add Waste</button>
+                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#add-waste-{{ $sku->id }}">Add Waste</button>
                                 @include('admin.skus.waste')
                             @endif
 

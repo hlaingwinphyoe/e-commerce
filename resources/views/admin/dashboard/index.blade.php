@@ -162,24 +162,24 @@
                 </div>
                 @endif
 
-                <!-- Delivery Information -->
-                @if($delivery)
-                <div>
-                    <h6 class="text-uppercase text-primary-dark mb-2">
-                        <span class="">Delivery Information</span>
-                    </h6>
+{{--                <!-- Delivery Information -->--}}
+{{--                @if($delivery)--}}
+{{--                <div>--}}
+{{--                    <h6 class="text-uppercase text-primary-dark mb-2">--}}
+{{--                        <span class="">Delivery Information</span>--}}
+{{--                    </h6>--}}
 
-                    <form action="{{ route('admin.change-hotline', $delivery->id) }}" class="row" method="post">
-                        @csrf
-                        <div class="form-group col-md-10">
-                            <input type="text" name="phone" value="{{ $delivery->name }}" class="form-control form-control-sm">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <button type="submit" class="btn btn-sm btn-outline-secondary"><i class="fa fa-check"></i></button>
-                        </div>
-                    </form>
-                </div>
-                @endif
+{{--                    <form action="{{ route('admin.change-hotline', $delivery->id) }}" class="row" method="post">--}}
+{{--                        @csrf--}}
+{{--                        <div class="form-group col-md-10">--}}
+{{--                            <input type="text" name="phone" value="{{ $delivery->name }}" class="form-control form-control-sm">--}}
+{{--                        </div>--}}
+{{--                        <div class="form-group col-md-2">--}}
+{{--                            <button type="submit" class="btn btn-sm btn-outline-secondary"><i class="fa fa-check"></i></button>--}}
+{{--                        </div>--}}
+{{--                    </form>--}}
+{{--                </div>--}}
+{{--                @endif--}}
 
 
             </div>

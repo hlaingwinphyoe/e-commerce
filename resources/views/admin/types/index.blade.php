@@ -79,7 +79,7 @@
             </thead>
             <tbody>
                 @forelse($types as $type)
-                <tr id="tr-{{ $type->id }}">
+                <tr id="tr-{{ $type->id }}" class="align-middle">
                     <td>{{ $type->name }}</td>
                     <td>{{ $type->parent_type ? $type->parent_type->name : ' - ' }}</td>
                     <td>

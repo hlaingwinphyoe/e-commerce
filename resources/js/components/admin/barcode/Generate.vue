@@ -1,5 +1,5 @@
 <template>
-    <tr>
+    <tr class="align-middle">
         <td>
             <img
                 :src="getThumbnail"
