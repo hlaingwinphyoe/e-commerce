@@ -1,7 +1,7 @@
 <template>
     <div class="row mb-1">
         <p class="col-4 col-md-3 mb-0">{{ attribute.name }}</p>
-        <div class="col-6 col-md-md-6">
+        <div class="col-6 col-md-3">
             <input
                 type="text"
                 class="form-control form-control-sm"

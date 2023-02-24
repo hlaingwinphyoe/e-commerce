@@ -94,7 +94,7 @@ class AttributeController extends Controller
                     $parent_id = $sub_attr->id;
                     $sub_attr->update(['parent_id' => 0]);
                 }else {
-                    $sub_attr->update(['parent_id' => $parent_id]);
+                    $sub_attr->update(['parent_id' => $attribute->id]);
                 }
             }
         }

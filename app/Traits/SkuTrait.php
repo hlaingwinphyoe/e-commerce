@@ -170,6 +170,19 @@ trait SkuTrait
         return $price;
     }
 
+    public function updateSkuData()
+    {
+        $name = '';
+        foreach ($this->variants()->orderBy('attribute_id')->get() as $variant) {
+            $name .= $name ? ', ' : '';
+            $name .= ucwords($variant->value->name);
+        }
+
+        $this->update([
+            'data' => $name
+        ]);
+    }
+
     //get attributes functions
     public function getThumbnailAttribute()
     {

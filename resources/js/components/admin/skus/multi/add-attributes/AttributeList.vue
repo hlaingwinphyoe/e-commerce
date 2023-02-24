@@ -1,6 +1,6 @@
 <template>
     <div class="attr_list-container">
-        <add-attribute-item v-for="attribute in attributes" :key="attribute.id" :attribute="attribute" @on-add-value="onAddValue"></add-attribute-item>
+        <add-attribute-item :sku_id="sku_id" v-for="attribute in attributes" :key="attribute.id" :attribute="attribute" @on-add-value="onAddValue"></add-attribute-item>
     </div>
 </template>
 
@@ -12,6 +12,7 @@ export default {
     },
     props: {
         attributes: { required: true, default: () => [] },
+        sku_id: {required: true}
     },
     data() {
         return {

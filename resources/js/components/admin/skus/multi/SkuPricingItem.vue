@@ -1,20 +1,20 @@
 <template>
-    <div class="pricing_item-container row">
-        <div class="form-group col-md-2">
+    <div class="pricing_item-container d-flex">
+        <div class="form-group me-2">
             <label for="" class="small text-muted">Min</label>
             <input type="text" class="qty-input form-control form-control-sm" v-model="form.min_qty" required>
         </div>
 
-        <div class="form-group col-md-2">
+        <div class="form-group me-2">
             <label for="" class="small text-muted">Max</label>
             <input type="text" class="qty-input form-control form-control-sm" v-model="form.max_qty">
         </div>
 
-        <div class="form-group col-md-4">
+        <div class="form-group me-2">
             <label for="" class="small text-muted">Price</label>
-            <input type="text" class="form-control form-control-sm form-control-price" v-model="form.price">
+            <input type="text" class="pricing-input form-control form-control-sm form-control-price" v-model="form.price">
         </div>        
-        <div class="form-group col-md-4 align-self-end">
+        <div class="form-group me-2 align-self-end">
             <a class="btn btn-sm btn-outline-primary me-2" @click.prevent="onUpdatePricing">
                 <i class="fa fa-check"></i>
             </a>

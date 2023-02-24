@@ -1,10 +1,10 @@
 <template>
     <div class="sku_item-container col-md-6 mb-3">
         <div class="bg-sidebar py-3 px-4 h-100 position-relative border rounded">
-            <p class="mb-2 fw-bold text-primary d-none">{{ sku_name }}</p>
-            <variant-list v-show="variants.length" :variants="variants" @on-delete-variant="onDeleteVariant"></variant-list>
+            <p class="mb-2 fw-bold text-primary text-capitalize">{{ sku.item_name }}{{ sku.data ? ' ('+ sku.data +')' : '' }}</p>
+            <variant-list class="d-none" v-show="variants.length && false" :variants="variants" @on-delete-variant="onDeleteVariant"></variant-list>
             <div class="mb-2 text-muted" v-show="attributes.length">
-                <add-attribute-list :attributes="attributes" @on-add-value="onAddValue"></add-attribute-list>
+                <add-attribute-list :sku_id="sku.id" :attributes="attributes" @on-add-value="onAddValue"></add-attribute-list>
             </div>            
             <div v-show="data_pricings.length" v-for="pricing in data_pricings" :key="pricing.id">
                 <sku-pricing-item :pricing="pricing" @on-delete-pricing="onDeletePricing"></sku-pricing-item>
@@ -83,6 +83,8 @@ export default {
             axios.get(`/wapi/sku-variants/${this.sku.id}`).then(resp => {
                 this.variants = resp.data;
             });
+
+            window.location.reload();
         },
         onDeletePricing(data) {
             this.data_pricings = this.data_pricings.filter(pricing => {

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\WebApi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Currency;
 use App\Models\Item;
 use App\Models\Sku;
+use App\Models\Value;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class SkuController extends Controller
 {
@@ -53,6 +56,77 @@ class SkuController extends Controller
         });
 
         return response()->json($sku);
+    }
+
+    public function store(Request $request)
+    {
+        $item = Item::findOrFail($request->item_id);
+
+        $other_sku = $item->skus()->first();
+
+        $currency = Currency::where('slug', 'mmk')->first();
+
+        $attrs = [];
+
+        foreach ($request->values as $val) {
+            $value  = Value::find($val);
+            if ($value) {
+                $data = [
+                    'attribute' => $value->attribute_id,
+                    'value' => $value->id,
+                ];
+                array_push($attrs, $data);
+            }
+        }
+
+        $sku = Sku::create([
+            'item_name' => $item->name,
+            'pure_price' => 0,
+            'currency_id' => $currency ? $currency->id : 1,
+            'min_stock' => $item->min_stock,
+            'item_id' => $item->id
+        ]);
+
+        //create skus
+        foreach ($attrs as $attr) {
+            if (count($attr) == count($attr, COUNT_RECURSIVE)) {
+                //single attributes
+                $variant = $sku->variants()->create([
+                    'item_id' => $item->id,
+                    'attribute_id' => $attr['attribute'],
+                    'value_id' => $attr['value']
+                ]);
+            } else {
+                foreach ($attr as $ind => $atr) {
+                    //multi attributes
+                    $variant = $sku->variants()->create([
+                        'item_id' => $item->id,
+                        'attribute_id' => $atr['attribute'],
+                        'value_id' => $atr['value']
+                    ]);
+                }
+            }
+        }
+        $sku->updateSkuData();
+
+        if ($other_sku && $other_sku->pricings()->count()) {
+            foreach ($other_sku->pricings as $pricing) {
+                $sku->pricings()->updateOrCreate([
+                    'min_qty' => $pricing->min_qty
+                ], [
+                    'amt' => $pricing->amt,
+                    'status_id' => $pricing->status_id,
+                    'min_qty' => $pricing->min_qty,
+                    'max_qty' => $pricing->max_qty,
+                ]);
+            }
+        }
+
+        $skus = $item->skus()->with(['pricings', 'medias', 'variants.attribute.values'])->get();
+
+        $attributes = $item->attributes()->with('values')->get();
+
+        return response()->json(['skus' => $skus, 'attributes' => $attributes]);
     }
 
     public function getPopular()

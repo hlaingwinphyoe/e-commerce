@@ -55,6 +55,7 @@ Route::post('/single-skus', [SingleSkuController::class, 'store']);
 Route::delete('/single-skus/{item}', [SingleSkuController::class, 'destroy']);
 
 Route::get('/skus', [SkuController::class, 'index']);
+Route::post('/skus', [SkuController::class, 'store']);
 Route::delete('/skus/{sku}', [SkuController::class, 'destroy']);
 Route::get('/sku-attributes/{sku}', [SkuController::class, 'getAttributes']);
 Route::get('/sku-variants/{sku}', [SkuController::class, 'getVariants']);

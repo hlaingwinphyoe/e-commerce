@@ -12,7 +12,6 @@ class SingleSkuController extends Controller
 {
     public function store(Request $request)
     {
-        dd($request);
         $item = Item::findOrFail($request->item_id);
 
         $currency = Currency::where('slug', 'mmk')->first();
