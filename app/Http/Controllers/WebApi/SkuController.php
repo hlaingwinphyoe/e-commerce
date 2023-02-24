@@ -12,7 +12,7 @@ class SkuController extends Controller
 {
     public function index()
     {
-        $skus = Sku::filterOn()->orderBy('stock')->paginate(20);
+        $skus = Sku::filterOn()->whereHas('item')->with('item')->inRandomOrder()->paginate(20);
 
         return response()->json($skus);
     }

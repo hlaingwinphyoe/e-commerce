@@ -30,7 +30,10 @@
                             class="form-control form-control-sm"
                             placeholder="Type here to search"
                             v-model="q"
+                            ref="search"
                             @keyup="onSearch"
+                            @change="onChange"
+                            autofocus id="search"
                         />
                     </div>
                 </div>
@@ -67,38 +70,51 @@
 
         <!-- Results -->
         <div class="rounded smooth-scroll px-2 py-3 position-relative">
-            <div v-show="!loaded" class="loading">
-                <span>Loading Data...</span>
+            <div class="text-center" v-show="!loaded">
+                <div class="spinner-border text-primary position-absolute" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
+<!--            <pre>{{ data_skus }}</pre>-->
             <!-- new design -->
-            <div class="row mobile-scroll">
-                <div
-                    class="col-6 col-md-3"
-                    v-for="res in data_skus.data"
-                    :key="res.id"
-                    :res="res"
-                >
-                   <result-item
-                        :res="res"
-                        :order_id="order.id"
-                        @on-selected-sku="onSelectedSku"
-                    ></result-item>
+            <transition name="switch" mode="out-in">
+                <div v-if="data_skus.total > 0">
+                    <transition-group tag="div" name="fade" appear class="row mobile-scroll">
+                        <div
+                            class="col-6 col-md-3"
+                            v-for="res in data_skus.data"
+                            :key="res.id"
+                            :res="res"
+                        >
+                            <result-item
+                                :res="res"
+                                :order_id="order.id"
+                                @on-selected-sku="onSelectedSku"
+                            ></result-item>
+                        </div>
+                        <div class="col-12 text-center" v-if="page < data_skus.last_page">
+                            <a
+                                href="#"
+                                class="btn btn-sm btn-outline-primary"
+                                @click.prevent="onLoadMore"
+                            >Load More
+                            </a>
+                        </div>
+                    </transition-group>
                 </div>
-                <div class="col-12 text-center" v-if="page < data_skus.last_page">
-                    <a
-                        href="#"
-                        class="btn btn-sm btn-outline-primary"
-                        @click.prevent="onLoadMore"
-                        >Load More</a
-                    >
+                 <div v-else>
+                    <div class="d-flex justify-content-center">
+                        <img src="../../../../../public/images/no-data-animate.svg" width="450" alt="">
+                    </div>
                 </div>
-            </div>
+            </transition>
         </div>
     </div>
 </template>
 
 <script>
 import ResultItem from "./ResultItem.vue";
+import {throttle} from "lodash";
 export default {
     components: {
         "result-item": ResultItem,
@@ -113,7 +129,7 @@ export default {
             types: [],
             type: "",
             data_types: [],
-            maintype: [],
+            maintype: "",
             q: "",
             isClose: false,
             form: {
@@ -186,7 +202,7 @@ export default {
             });
         },
 
-        onSearch() {
+        onSearch:throttle(function () {
             if (this.q) {
                 clearTimeout(this.timeout);
                 this.timeout = setTimeout(() => {
@@ -202,7 +218,9 @@ export default {
                         this.loaded = true;
                         this.data_skus.data.filter(sku => {
                             //console.log(sku)
-                            console.log(sku.item_name.toLowerCase().includes(this.q.toLowerCase()))
+                            //console.log(sku.item_name.toLowerCase().includes(this.q.toLowerCase()))
+
+                            // return မပြန်လည်းအဆင်ပြေတယ်
                             return sku.item_name.toLowerCase().includes(this.q.toLowerCase()) ? sku : '';
                         })
                     });
@@ -211,7 +229,7 @@ export default {
                 this.data_skus = this.popular_data;
                 this.loaded = true;
             }
-        },
+        },500),
 
         onChange() {
             if (this.isClose) {
@@ -279,19 +297,6 @@ export default {
 </script>
 
 <style>
-.loading {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-weight: bold;
-    background-color: rgba(0, 0, 0, 0.3);
-}
 .result-data {
     max-height: 400px;
     overflow: auto;
