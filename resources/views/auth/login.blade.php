@@ -80,7 +80,7 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <button class="btn btn-secondary w-100" type="submit">အကောင့်သို့ဝင်မည်</button>
+                            <button class="btn btn-primary text-white w-100" type="submit">အကောင့်သို့ဝင်မည်</button>
                         </div>
 
                         <p class="text-center text-uppercase mb-2 fw-bold d-none">Or</p>

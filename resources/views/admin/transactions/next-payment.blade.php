@@ -4,27 +4,32 @@
 
 @section('classes', 'admin admin-transactions admin-transactions-index')
 
-@section('content-header')
-<div class="d-flex content-header">
-    <x-content-header :navs="['transactions']"></x-content-header>
-    <form action="{{ route('admin.transaction.next-payment') }}" class="d-flex align-items-center px-2">
-        <div class="input-group mb-2">
-            <input type="text" name="order_no" class="form-control form-control-sm" placeholder="Search with order no." value="{{ request('order_no') }}">
-            <div class="input-group-prepend">
-                <button type="submit" class="btn btn-sm btn-primary">
-                    <small><i class="fa fa-search"></i></small>
-                </button>
-            </div>
-        </div>
-    </form>
-</div>
+{{--@section('content-header')--}}
+{{--<div class="d-flex content-header">--}}
+{{--    <x-content-header :navs="['transactions']"></x-content-header>--}}
+{{--    <form action="{{ route('admin.transaction.next-payment') }}" class="d-flex align-items-center px-2">--}}
+{{--        <div class="input-group mb-2">--}}
+{{--            <input type="text" name="order_no" class="form-control form-control-sm" placeholder="Search with order no." value="{{ request('order_no') }}">--}}
+{{--            <div class="input-group-prepend">--}}
+{{--                <button type="submit" class="btn btn-sm btn-primary">--}}
+{{--                    <small><i class="fa fa-search"></i></small>--}}
+{{--                </button>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </form>--}}
+{{--</div>--}}
 
-@endsection
+{{--@endsection--}}
 
 @section('content')
 
+    <x-admin.search-box url="{{ route('admin.transactions.index') }}"></x-admin.search-box>
+
 <div>
-    <div class="d-flex mb-2">
+    <div class="d-flex mb-4 align-items-center">
+        <a href="{{ route('admin.brands.index') }}" class="btn btn-primary btn-sm me-2">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
         <h4 class="page-title mb-0 me-2">Transaction</h4>
         <span class="text-muted form-text">( Showing {{ $trans->count() }} of total {{ $trans->total() }} records )</span>
     </div>
@@ -117,7 +122,7 @@
             </thead>
             <tbody>
                 @forelse($trans as $tran)
-                <?php 
+                <?php
                     $order = $tran->orders()->first();
                     $inven = $tran->inventories()->first();
                 ?>
@@ -159,7 +164,7 @@
         </table>
     </div>
     <div class="paginate">
-        {{ $trans->appends(request()->query->all())->links('vendor.pagination.bootstrap-4') }}
+        {{ $trans->appends(request()->query->all())->links('components.pagination') }}
     </div>
 </div>
 

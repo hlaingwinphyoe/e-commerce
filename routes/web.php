@@ -18,8 +18,8 @@ use App\Models\Order;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+    return redirect()->route('admin.dashboard');
+});
 
 Route::get('/category/{category?}/{type?}', [TypeController::class, 'category'])->name('category');
 //save-invoice

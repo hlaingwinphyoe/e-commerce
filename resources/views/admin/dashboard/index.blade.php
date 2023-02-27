@@ -33,7 +33,7 @@
     <div class="col-md-10">
         <div class="p-4 rounded rounded-4 bg-primary-light text-center">
             <h5 class="text-uppercase text-primary-dark font-weight-bold" style="letter-spacing:3px;">Gifts</h5>
-            <p>We have speical plan for you. You can redeem your points with Our Special Gifts.</p>
+            <p>We have special plan for you. You can redeem your points with Our Special Gifts.</p>
             <a href="{{ route('admin.user-gifts.index') }}" class="btn btn-sm btn-secondary"><i class="fa fa-gift mr-2"></i> Show All</a>
         </div>
     </div>
@@ -42,17 +42,17 @@
 
 <div class="row">
 
-    @if(auth()->user()->role->hasPermission('access-order'))
-    <div class="col-6 col-md-3 col-lg-3 mb-4">
-        <a href="{{ route('admin.orders.index') }}" class="d-block px-1 py-2 bg-sidebar shadow-sm text-center rounded feature-box h-100 text-decoration-none">
-            <div class="feature-icon py-3 text-primary-dark pb-2">
-                <i class="fa fa-clipboard-list"></i>
-            </div>
-            <span class="feature-title">Today Order</span>
-            <p class="text-muted h4">{{ \App\Models\Order::where('type', 'order')->todayFilter()->count() }}</p>
-        </a>
-    </div>
-    @endif
+{{--    @if(auth()->user()->role->hasPermission('access-order'))--}}
+{{--    <div class="col-6 col-md-3 col-lg-3 mb-4">--}}
+{{--        <a href="{{ route('admin.orders.index') }}" class="d-block px-1 py-2 bg-sidebar shadow-sm text-center rounded feature-box h-100 text-decoration-none">--}}
+{{--            <div class="feature-icon py-3 text-primary-dark pb-2">--}}
+{{--                <i class="fa fa-clipboard-list"></i>--}}
+{{--            </div>--}}
+{{--            <span class="feature-title">Today Order</span>--}}
+{{--            <p class="text-muted h4">{{ \App\Models\Order::where('type', 'order')->todayFilter()->count() }}</p>--}}
+{{--        </a>--}}
+{{--    </div>--}}
+{{--    @endif--}}
 
     @if(auth()->user()->role->hasPermission('access-sale'))
     <div class="col-6 col-md-3 col-lg-3 mb-4">
@@ -82,12 +82,24 @@
     <div class="col-6 col-md-3 col-lg-3 mb-4">
         <a href="{{ route('admin.types.index') }}" class="d-block px-1 py-2 bg-sidebar shadow-sm text-center rounded feature-box h-100 text-decoration-none">
             <div class="feature-icon py-3 text-primary-dark pb-2">
-                <i class="fa fa-tint"></i>
+                <i class="fa fa-layer-group"></i>
             </div>
             <span class="feature-title">Total Categories</span>
             <p class="text-muted h4">{{ \App\Models\Type::count() }}</p>
         </a>
     </div>
+    @endif
+
+    @if(auth()->user()->role->hasPermission('access-customer'))
+        <div class="col-6 col-md-3 col-lg-3 mb-4">
+            <a href="{{ route('admin.customers.index') }}" class="d-block px-1 py-2 bg-sidebar shadow-sm text-center rounded feature-box h-100 text-decoration-none">
+                <div class="feature-icon py-3 text-primary-dark pb-2">
+                    <i class="fa fa-users"></i>
+                </div>
+                <span class="feature-title">Total Customers</span>
+                <p class="text-muted h4">{{ \App\Models\User::where('role_id',4)->count() }}</p>
+            </a>
+        </div>
     @endif
 </div>
 

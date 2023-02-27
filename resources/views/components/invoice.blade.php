@@ -4,17 +4,17 @@
 @section('content')
 
 
-<header id="site-header" class="sticky-top">
-    @include('components.site.home-header')
-</header>
+{{--<header id="site-header" class="sticky-top">--}}
+{{--    @include('components.site.home-header')--}}
+{{--</header>--}}
 
-<x-app-sidebar></x-app-sidebar>
+{{--<x-app-sidebar></x-app-sidebar>--}}
 
-<div class="app-overlay sidebar-toggle"></div>
+{{--<div class="app-overlay sidebar-toggle"></div>--}}
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6 py-4">
+        <div class="col-12 py-4">
 
             <h3 class="alert alert-warning d-none">Invoice အား Download လုပ်ဆောင်နေပါသည်။ ကျေးဇူးပြု၍ ခေတ္တ စောင့်ဆိုင်းပေးပါ။</h3>
 
@@ -104,9 +104,4 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 @endsection

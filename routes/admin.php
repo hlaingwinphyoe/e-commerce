@@ -41,10 +41,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/upload-logo', [DashboardController::class, 'uploadLogo'])->name('upload-logo');
-    
+
     Route::post('/change-hotline/{group}', [DashboardController::class, 'changeHotline'])->name('change-hotline');
     Route::post('/change-general', [DashboardController::class, 'changeGeneral'])->name('change-general');
-    
+
     Route::resource('/slides', SlideController::class);
     Route::resource('/mainfeatures', MainFeatureController::class);
     Route::get('/mainfeatures-toggle/{mainfeature}', [MainFeatureController::class, 'toggle'])->name('mainfeatures.toggle');
@@ -65,7 +65,7 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
 
     Route::resource('/types', TypeController::class);
     Route::patch('/type-priority/{type}', [TypeController::class, 'changePriority'])->name('types.change-priority');
-    
+
     Route::resource('/units', UnitController::class);
 
     Route::resource('/brands', BrandController::class);
@@ -80,11 +80,14 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     Route::post('/add-stock/{sku}', [SkuController::class, 'addStock'])->name('skus.add-stock');
     Route::get('/reset-stock/{sku}', [SkuController::class, 'resetStock'])->name('skus.reset-stock');
 
+    // export
+    Route::get('/stocks/export', [SkuController::class, 'export'])->name('stock.export');
+
     //wastes
     Route::post('/sku-wastes', [SkuWasteController::class, 'store'])->name('sku-wastes.store');
     Route::post('/sku-gifts', [SkuWasteController::class, 'addGift'])->name('sku-gifts.store');
 
-    //return 
+    //return
     Route::resource('/returns', ReturnController::class);
 
     Route::resource('/inventories', InventoryController::class);
@@ -135,8 +138,8 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     Route::post('/update-order-delivery/{order}', [OrderController::class, 'updateDelivery'])->name('update-order-delivery');
     Route::resource('/pos', POSController::class);
     Route::get('/pos-print/{pos}', [POSController::class, 'print'])->name('pos.print');
-    
-   
+
+
 
     //sales
     Route::resource('/sales', SaleController::class);
@@ -154,4 +157,5 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
 
     //bonuspoint
     Route::resource('/bonuspoints', BonusPointController::class);
+
 });
