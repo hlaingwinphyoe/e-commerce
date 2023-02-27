@@ -10,7 +10,7 @@
 
 <div>
     <div class="d-flex mb-4 align-items-center">
-        <a href="{{ route('admin.brands.index') }}" class="btn btn-primary btn-sm me-2">
+        <a href="{{ request()->session()->get('prev_route') }}" class="btn btn-primary btn-sm me-2">
             <i class="fa-solid fa-arrow-left"></i>
         </a>
         <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.transactions')}}</h4>

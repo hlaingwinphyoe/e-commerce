@@ -56,9 +56,9 @@
 
     @if(auth()->user()->role->hasPermission('access-sale'))
     <div class="col-6 col-md-3 col-lg-3 mb-4">
-        <a href="{{ route('admin.pos.index') }}?from_date={{ now()->format('Y-m-d') }}&to_date={{ now()->format('Y-m-d') }}&status=3" class="d-block px-1 py-2 bg-sidebar shadow-sm text-center rounded feature-box h-100 text-decoration-none">
-            <div class="feature-icon py-3 text-primary-dark pb-2">
-                <i class="fa fa-receipt"></i>
+        <a href="{{ route('admin.pos.index') }}?from_date={{ now()->format('Y-m-d') }}&to_date={{ now()->format('Y-m-d') }}&status=3" class="d-block px-1 py-2 bg-sidebar border-primary border-start border-4 shadow-sm text-center rounded feature-box h-100 text-decoration-none">
+            <div class="feature-icon py-3 text-primary pb-2">
+                <i class="fa-solid fa-chart-column"></i>
             </div>
             <span class="feature-title">Today Sale</span>
             <p class="text-muted h4">{{ \App\Models\Order::saleOrder()->todayFilter()->count() }}</p>
@@ -68,8 +68,8 @@
 
     @if(auth()->user()->role->hasPermission('access-item'))
     <div class="col-6 col-md-3 col-lg-3 mb-4">
-        <a href="{{ route('admin.items.index') }}" class="d-block px-1 py-2 bg-sidebar shadow-sm text-center rounded feature-box h-100 text-decoration-none">
-            <div class="feature-icon py-3 text-primary-dark pb-2">
+        <a href="{{ route('admin.items.index') }}" class="d-block px-1 py-2 bg-sidebar border-secondary border-start border-4 shadow-sm text-center rounded feature-box h-100 text-decoration-none">
+            <div class="feature-icon py-3 text-secondary pb-2">
                 <i class="fa fa-box-open"></i>
             </div>
             <span class="feature-title">Total Items</span>
@@ -80,8 +80,8 @@
 
     @if(auth()->user()->role->hasPermission('access-type'))
     <div class="col-6 col-md-3 col-lg-3 mb-4">
-        <a href="{{ route('admin.types.index') }}" class="d-block px-1 py-2 bg-sidebar shadow-sm text-center rounded feature-box h-100 text-decoration-none">
-            <div class="feature-icon py-3 text-primary-dark pb-2">
+        <a href="{{ route('admin.types.index') }}" class="d-block px-1 py-2 bg-sidebar border-success border-start border-4 shadow-sm text-center rounded feature-box h-100 text-decoration-none">
+            <div class="feature-icon py-3 text-success pb-2">
                 <i class="fa fa-layer-group"></i>
             </div>
             <span class="feature-title">Total Categories</span>
@@ -92,9 +92,9 @@
 
     @if(auth()->user()->role->hasPermission('access-customer'))
         <div class="col-6 col-md-3 col-lg-3 mb-4">
-            <a href="{{ route('admin.customers.index') }}" class="d-block px-1 py-2 bg-sidebar shadow-sm text-center rounded feature-box h-100 text-decoration-none">
-                <div class="feature-icon py-3 text-primary-dark pb-2">
-                    <i class="fa fa-users"></i>
+            <a href="{{ route('admin.customers.index') }}" class="d-block px-1 py-2 bg-sidebar border-warning border-start border-4 shadow-sm text-center rounded feature-box h-100 text-decoration-none">
+                <div class="feature-icon py-3 text-warning pb-2">
+                    <i class="fa fa-people-group"></i>
                 </div>
                 <span class="feature-title">Total Customers</span>
                 <p class="text-muted h4">{{ \App\Models\User::where('role_id',4)->count() }}</p>
