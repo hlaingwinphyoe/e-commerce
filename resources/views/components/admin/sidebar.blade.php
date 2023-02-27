@@ -196,11 +196,11 @@
 {{--    @endif--}}
 
     <!-- Delivery -->
-    @if(auth()->user()->role->hasPermissions(['access-delivery', 'access-region']))
-    <li class="nav-item w-100">
-        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.region')}}</span>
-    </li>
-    @endif
+{{--    @if(auth()->user()->role->hasPermissions(['access-delivery', 'access-region']))--}}
+{{--    <li class="nav-item w-100">--}}
+{{--        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.region')}}</span>--}}
+{{--    </li>--}}
+{{--    @endif--}}
 
 {{--    @if(auth()->user()->role->hasPermission('access-delivery'))--}}
 {{--    <li class="nav-item w-100">--}}
