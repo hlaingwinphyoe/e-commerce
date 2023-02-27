@@ -211,32 +211,32 @@
 {{--    </li>--}}
 {{--    @endif--}}
 
-    @if(auth()->user()->role->hasPermission('access-region'))
+{{--    @if(auth()->user()->role->hasPermission('access-region'))--}}
 {{--    <li class="nav-item w-100">--}}
 {{--        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/delifees','admin/delifees/*']) ? 'active' : '' }}" href="{{ route('admin.delifees.index') }}">--}}
 {{--            <i class="app-menu__icon fa fa-hand-holding-dollar mr-2"></i>--}}
 {{--            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.deli_fees')}}</span>--}}
 {{--        </a>--}}
 {{--    </li>--}}
-    <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/countries','admin/countries/*']) ? 'active' : '' }}" href="{{ route('admin.countries.index') }}" title="Country">
-            <i class="app-menu__icon fa fa-globe mr-2"></i>
-            <span class="app-menu__label ms-1 sidebar-label">{{__('menu.country')}}</span>
-        </a>
-    </li>
-    <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/regions','admin/regions/*']) ? 'active' : '' }}" href="{{ route('admin.regions.index') }}" title="Regions">
-            <i class="app-menu__icon fa fa-arrows-alt mr-2"></i>
-            <span class="app-menu__label ms-1 sidebar-label">{{__('menu.region')}}</span>
-        </a>
-    </li>
-    <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/townships','admin/townships/*']) ? 'active' : '' }}" href="{{ route('admin.townships.index') }}" title="Townships">
-            <i class="app-menu__icon fa fa-at mr-2"></i>
-            <span class="app-menu__label ms-1 sidebar-label">{{__('menu.township')}}</span>
-        </a>
-    </li>
-    @endif
+{{--    <li class="nav-item w-100">--}}
+{{--        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/countries','admin/countries/*']) ? 'active' : '' }}" href="{{ route('admin.countries.index') }}" title="Country">--}}
+{{--            <i class="app-menu__icon fa fa-globe mr-2"></i>--}}
+{{--            <span class="app-menu__label ms-1 sidebar-label">{{__('menu.country')}}</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--    <li class="nav-item w-100">--}}
+{{--        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/regions','admin/regions/*']) ? 'active' : '' }}" href="{{ route('admin.regions.index') }}" title="Regions">--}}
+{{--            <i class="app-menu__icon fa fa-arrows-alt mr-2"></i>--}}
+{{--            <span class="app-menu__label ms-1 sidebar-label">{{__('menu.region')}}</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--    <li class="nav-item w-100">--}}
+{{--        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/townships','admin/townships/*']) ? 'active' : '' }}" href="{{ route('admin.townships.index') }}" title="Townships">--}}
+{{--            <i class="app-menu__icon fa fa-at mr-2"></i>--}}
+{{--            <span class="app-menu__label ms-1 sidebar-label">{{__('menu.township')}}</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--    @endif--}}
 
     <!-- User Control -->
     @if(auth()->user()->role->hasPermissions(['access-user', 'access-customer']))

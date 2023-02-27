@@ -205,9 +205,7 @@ class SkuController extends Controller
 
     public function export()
     {
-        $type = \request()->type;
-
-        return Excel::download(new StocksExport($type), 'stocks.xlsx');
+        return Excel::download(new StocksExport, 'stocks.xlsx');
     }
 
 }

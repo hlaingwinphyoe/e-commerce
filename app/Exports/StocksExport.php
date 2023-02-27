@@ -15,13 +15,6 @@ class StocksExport implements FromCollection,WithHeadings,WithColumnWidths,WithM
     * @return \Illuminate\Support\Collection
     */
 
-    protected $type;
-
-    public function __construct($type)
-    {
-        $this->type = $type;
-    }
-
     public function headings():array{
         return[
             'Name',
@@ -45,15 +38,7 @@ class StocksExport implements FromCollection,WithHeadings,WithColumnWidths,WithM
 
     public function collection()
     {
-        if ($this->type != null){
-            return Sku::whereHas('item',function ($q){
-                $q->whereHas('type',function ($q){
-                   $q->where('id',$this->type);
-                });
-            })->get();
-        }else{
-            return Sku::all();
-        }
+        return Sku::all();
     }
 
     // export relationship data with looping
