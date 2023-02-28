@@ -46,15 +46,15 @@
                             </a>
                         </div>
                     @endif
-                    <div class="form-group me-2">
-                        <select name="delivery" class="form-select">
-                            <option value="">Select Delivery</option>
-                            @foreach($deliveries as $delivery)
-                            <option value="{{ $delivery->id }}" {{ request()->delivery == $delivery->id ? 'selected' : '' }}>
-                                {{ $delivery->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+{{--                    <div class="form-group me-2">--}}
+{{--                        <select name="delivery" class="form-select">--}}
+{{--                            <option value="">Select Delivery</option>--}}
+{{--                            @foreach($deliveries as $delivery)--}}
+{{--                            <option value="{{ $delivery->id }}" {{ request()->delivery == $delivery->id ? 'selected' : '' }}>--}}
+{{--                                {{ $delivery->name }}</option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
                     <div class="form-group me-2">
                         <input type="date" name="from_date" class="form-control form-control-sm"
                             value="{{ request('from_date') }}">
@@ -124,7 +124,8 @@
                             <small>Pay</small>
                         </a>
 
-                        @include('admin.pos.payment')
+                        <payment-form :order="{{ $order }}"></payment-form>
+
                         @endif
 
                         @endif

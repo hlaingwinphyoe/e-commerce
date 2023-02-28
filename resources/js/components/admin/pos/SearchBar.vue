@@ -33,7 +33,7 @@
                             ref="search"
                             @keyup="onSearch"
                             @change="onChange"
-                            autofocus id="search"
+                            id="search"
                         />
                     </div>
                 </div>
@@ -302,10 +302,6 @@ export default {
     overflow: auto;
     position: absolute;
     z-index: 1;
-}
-.featured-img {
-    max-width: 100%;
-    max-height: 100px;
 }
 .nav-link.disabled {
     background-color: #c9c9c9 !important;

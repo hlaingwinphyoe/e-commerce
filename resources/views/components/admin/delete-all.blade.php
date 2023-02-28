@@ -2,9 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header justify-content-end border-0 pb-0">
-                <button type="button" class="close btn btn-sm btn-danger" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="fa fa-times"></i>
-                </button>
+                <button type="button" class="btn-closer" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
                 <div class="text-center">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\StocksExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,7 @@ use App\Models\Order;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SkuController extends Controller
 {
@@ -32,15 +34,23 @@ class SkuController extends Controller
     {
         $skus = Sku::whereHas('item')->filteron();
 
-        if (request('sort') && request('sort') == 'asc') {
-            $skus = $skus->get()->sortBy(function ($sku) {
-                return $sku->item()->withTrashed()->first() ? $sku->item()->withTrashed()->first()->name : $sku->data;
-            })->values()->paginate(20);
-        } else if (request('sort') && request('sort') == 'desc') {
-            $skus = $skus->get()->sortByDesc(function ($sku) {
-                return $sku->item()->withTrashed()->first() ? $sku->item()->withTrashed()->first()->name : $sku->data;
-            })->values()->paginate(20);
-        } else {
+//        if (request('sort') && request('sort') == 'asc') {
+//            $skus = $skus->get()->sortBy(function ($sku) {
+//                return $sku->item()->withTrashed()->first() ? $sku->item()->withTrashed()->first()->name : $sku->data;
+//            })->values()->paginate(20);
+//        } else if (request('sort') && request('sort') == 'desc') {
+//            $skus = $skus->get()->sortByDesc(function ($sku) {
+//                return $sku->item()->withTrashed()->first() ? $sku->item()->withTrashed()->first()->name : $sku->data;
+//            })->values()->paginate(20);
+//        } else {
+//            $skus = $skus->paginate(20);
+//        }
+
+        if (\request('sort') && \request('sort') === 'asc'){
+            $skus = $skus->orderBy('item_name','asc')->paginate(20);
+        }elseif(\request('sort') && \request('sort') === 'desc'){
+            $skus = $skus->orderBy('item_name','desc')->paginate(20);
+        }else{
             $skus = $skus->paginate(20);
         }
 
@@ -162,7 +172,7 @@ class SkuController extends Controller
         return redirect()->back();
     }
 
-    public function resetStock($id) 
+    public function resetStock($id)
     {
         $sku = Sku::findOrFail($id);
 
@@ -192,4 +202,10 @@ class SkuController extends Controller
 
         return redirect()->back();
     }
+
+    public function export()
+    {
+        return Excel::download(new StocksExport, 'stocks.xlsx');
+    }
+
 }

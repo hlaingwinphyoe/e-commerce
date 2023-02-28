@@ -21,9 +21,14 @@
 
     <p class="mb-4 small px-1 pb-2">အနီရောင်ပြထားသော items များမှာ ရှိရမည့်လက်ကျန်ပမာဏထက် နည်းနေသော / stock ထပ်ဖြည့်ရန်လိုအပ်သော items များဖြစ်ပါသည်။</p>
 
-    <div class="d-flex mb-3">
+    <div class="d-flex mb-2">
         <div class="d-flex flex-wrap mb-2">
             <form action="{{ route('admin.skus.index') }}" class="d-flex responsive-flex">
+                <div class="form-group me-2">
+                    <a href="{{ route('admin.stock.export') }}" class="btn btn-sm btn-success">
+                        <i class="fa-solid fa-file-excel"></i> Export
+                    </a>
+                </div>
                 <div class="form-group me-2">
                     <select name="type" class="form-select">
                         <option value="">Select Category</option>
@@ -73,7 +78,7 @@
 
     <nav class="d-flex align-items-center mb-2">
         <div class="dropdown">
-            <a class="text-dark dropdown-toggle" href="#" data-bs-toggle="dropdown">
+            <a class="text-dark dropdown-toggle btn btn-primary btn-sm" href="#" data-bs-toggle="dropdown">
                 Sort By
             </a>
             <ul class="dropdown-menu">
@@ -125,7 +130,7 @@
                             <a href="{{ route('admin.skus.reset-stock', $sku->id) }}" class="btn btn-outline-secondary">Reset</a>
 
                             @if(auth()->user()->role->hasPermission('create-item'))
-                                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#add-waste-{{ $sku->id }}">Add Waste</button>
+                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#add-waste-{{ $sku->id }}">Add Waste</button>
                                 @include('admin.skus.waste')
                             @endif
 

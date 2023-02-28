@@ -107,7 +107,7 @@
 
 
                         <div class="form-group mt-3 mb-4">
-                            <button class="btn btn-secondary w-100" type="submit">အကောင့်ပြုလုပ်မည်</button>
+                            <button class="btn btn-primary text-white w-100" type="submit">အကောင့်ပြုလုပ်မည်</button>
                         </div>
 
                         <p class="text-center text-uppercase mb-2 fw-bold d-none">Or</p>

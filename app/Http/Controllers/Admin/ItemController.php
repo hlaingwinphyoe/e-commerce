@@ -19,10 +19,10 @@ class ItemController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('permissions:access-item')->only(['index', 'show']);
-        // $this->middleware('permissions:create-item')->only(['create', 'store']);
-        // $this->middleware('permissions:edit-item')->only(['edit', 'update']);
-        // $this->middleware('permissions:delete-item')->only('destroy');
+         $this->middleware('permissions:access-item')->only(['index', 'show']);
+         $this->middleware('permissions:create-item')->only(['create', 'store']);
+         $this->middleware('permissions:edit-item')->only(['edit', 'update']);
+         $this->middleware('permissions:delete-item')->only('destroy');
     }
 
     public function index()
@@ -222,5 +222,5 @@ class ItemController extends Controller
         return redirect(request()->session()->get('prev_route'))->with('message', 'Item was permently deleted');
     }
 
-    
+
 }
