@@ -12,70 +12,24 @@ trait ItemTrait
 
     public function getPriceAttribute()
     {
-        $role = $this->getPriceRole();
+        $prices = [];
+        $prices = $this->skus->map(function ($sku) {
+            return $sku->price;
+        });
 
-        $pricing_rate = $role->pricings()->whereHas('items', function ($q) {
-            $q->where('id', $this->id);
-        })->latest()->first();
-
-        if ($pricing_rate) {
-
-            $purecost = $this->getPureCost();
-
-            $profit = $pricing_rate->status->slug == 'percent' ? ($purecost * $pricing_rate->amt) / 100 : $pricing_rate->amt;
-
-            $price = $purecost + $profit;
-
-            if ($role->slug == 'level-1') {
-                $price = ceil($price / 10) * 10;
-            } else if ($role->slug == 'level-2') {
-                $price = round($price / 100) * 100;
-            } else {
-                $divide = $price % 1000;
-                $price = round($price / 1000) * 1000;
-                if ($divide <= 500 && $divide != 0) {
-                    $price += 500;
-                }
-                // ရာစွန်း
-                // $price = ceil($price / 100) * 100;
+        if (count($prices) > 1) {
+            $ary = [];
+            foreach ($prices as $price) {
+                array_push($ary, $price);
             }
-
-            return $price;
+            $max = max($ary);
+            $min = min($ary);
+            return $max > $min ? number_format($min) . ' - ' . number_format($max) : number_format($max);
+        } elseif (count($prices) == 1) {
+            return number_format($prices[0]);
+        } else {
+            return 0;
         }
-
-        return $this->getPureCost();
-    }
-
-    public function getPurePrice()
-    {
-        $exchange_rate = $this->currency->exchangerates()->latest()->first()->mmk;
-
-        return ($this->pure_price * $exchange_rate);
-    }
-
-    public function getRawCost()
-    {
-        $costs = $this->costs->sum(function ($cost) {
-            return $cost->amt * $cost->currency->exchangerates()->latest()->first()->mmk;
-        });
-
-        return $this->getPurePrice() + $costs;
-    }
-
-    public function getWastes()
-    {
-        $wastes = 0;
-
-        $wastes = $this->wastes->sum(function ($waste) {
-            return $waste->status->slug == 'percent' ? ($this->getRawCost() * $waste->amt) / 100 : $waste->amt;
-        });
-
-        return $wastes;
-    }
-
-    public function getPureCost()
-    {
-        return $this->getRawCost() + $this->getWastes();
     }
 
     public function getMinPriceAttribute()
@@ -121,14 +75,36 @@ trait ItemTrait
                 $q->where('item_id', $this->id);
             })->latest()->first();
 
-//        $discount = $role->discounts()->where('item_id', $this->id)->latest()->first();
 
-        if ($discount) {
-            $discount_amt = $discount->status->slug == 'percent' ? ($this->price * $discount->amt) / 100 : $discount->amt;
+        $discount = $discount && ($discount->expired == null || \Carbon\Carbon::parse($discount->expired) >= \Carbon\Carbon::now()) ? $discount : null;
 
-            $discount_amt = $this->price - $discount_amt;
 
-            return round($discount_amt / 100) * 100;
+        if ($discount !== null) {
+            $many_prices = strpos($this->price, ' - ');
+            if ($many_prices > 1) {
+                //10000 - 14000 to  9000 - 12600 discount (10%)
+                $exp_prices = explode(" - ", $this->price);
+
+                $discount_price = "";
+                foreach ($exp_prices as $index => $exp_price) {
+
+                    $discount_amt = $discount->status->slug == 'percent' ? (filter_var($exp_price, FILTER_SANITIZE_NUMBER_INT) * $discount->amt) / 100 : $discount->amt;
+
+                    $discount_amt = filter_var($exp_price, FILTER_SANITIZE_NUMBER_INT) - $discount_amt;
+
+                    $discount_price .= $index !== 0 ? ' - ' : '';
+
+                    $discount_price .= number_format($discount_amt);
+                }
+                return $discount_price;
+            } else {
+                //40000 to 36000 discount (10%)
+                $discount_amt = $discount->status->slug == 'percent' ? (filter_var($this->price, FILTER_SANITIZE_NUMBER_INT) * $discount->amt) / 100 : $discount->amt;
+
+                $discount_amt = filter_var($this->price, FILTER_SANITIZE_NUMBER_INT) - $discount_amt;
+
+                return number_format($discount_amt);
+            }
         }
         return 0;
     }
@@ -400,11 +376,11 @@ trait ItemTrait
         if(request('status')) {
             switch(request('status')) {
                 case 'disabled':
-                $query->where('disabled', 1);
-                break;
+                    $query->where('disabled', 1);
+                    break;
                 case 'trashed':
-                $query->whereNotNull('deleted_at');
-                break;
+                    $query->whereNotNull('deleted_at');
+                    break;
             }
         }
 

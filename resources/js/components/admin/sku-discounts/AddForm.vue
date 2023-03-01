@@ -1,6 +1,6 @@
 <template>
     <div class="discount_add_form-container mb-2">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-md-2 d-none mb-2">
                 <select class="form-select form-select-sm" v-model="form.role_id">
                     <option v-for="role in roles" :key="role.id" :value="role.id">{{ role.name }}</option>
@@ -11,13 +11,15 @@
                     <option v-for="discountype in discountypes" :key="discountype.id" :value="discountype.id">{{ discountype.name }}</option>
                 </select>
             </div>
-            <div class="col-md-2 mb-2">
+            <div class="col-md-4 mb-2">
                 <div class="input-group">
                     <input type="text" placeholder="Amount" class="form-control form-control-sm" v-model="form.amt">
-                    <select class="form-select form-select-sm" v-model="form.status_id">
-                        <option v-for="status in statuses" :key="status.id" :value="status.id">{{ status.name }}</option>
-                    </select>
-                </div>                
+                    <div>
+                        <select class="form-select form-select-sm" v-model="form.status_id">
+                            <option v-for="status in statuses" :key="status.id" :value="status.id">{{ status.name }}</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="col-md-2 mb-2">
                 <input type="date" placeholder="End Date" class="form-control form-control-sm" v-model="form.end_date">
@@ -52,7 +54,7 @@ export default {
             axios.post(`/wapi/item-discounts`, this.form).then(resp => {
                 this.$emit('on-add-discount', resp.data);
             });
-        
+
         },
         onChangeDiscount(event) {
             let discount = this.discountypes.filter(x => {
