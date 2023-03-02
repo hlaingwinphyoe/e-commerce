@@ -121,14 +121,36 @@ trait ItemTrait
                 $q->where('item_id', $this->id);
             })->latest()->first();
 
-//        $discount = $role->discounts()->where('item_id', $this->id)->latest()->first();
 
-        if ($discount) {
-            $discount_amt = $discount->status->slug == 'percent' ? ($this->price * $discount->amt) / 100 : $discount->amt;
+        $discount = $discount && ($discount->expired == null || \Carbon\Carbon::parse($discount->expired) >= \Carbon\Carbon::now()) ? $discount : null;
 
-            $discount_amt = $this->price - $discount_amt;
 
-            return round($discount_amt / 100) * 100;
+        if ($discount !== null) {
+            $many_prices = strpos($this->price, ' - ');
+            if ($many_prices > 1) {
+                //10000 - 14000 to  9000 - 12600 discount (10%)
+                $exp_prices = explode(" - ", $this->price);
+
+                $discount_price = "";
+                foreach ($exp_prices as $index => $exp_price) {
+
+                    $discount_amt = $discount->status->slug == 'percent' ? (filter_var($exp_price, FILTER_SANITIZE_NUMBER_INT) * $discount->amt) / 100 : $discount->amt;
+
+                    $discount_amt = filter_var($exp_price, FILTER_SANITIZE_NUMBER_INT) - $discount_amt;
+
+                    $discount_price .= $index !== 0 ? ' - ' : '';
+
+                    $discount_price .= number_format($discount_amt);
+                }
+                return $discount_price;
+            } else {
+                //40000 to 36000 discount (10%)
+                $discount_amt = $discount->status->slug == 'percent' ? (filter_var($this->price, FILTER_SANITIZE_NUMBER_INT) * $discount->amt) / 100 : $discount->amt;
+
+                $discount_amt = filter_var($this->price, FILTER_SANITIZE_NUMBER_INT) - $discount_amt;
+
+                return number_format($discount_amt);
+            }
         }
         return 0;
     }

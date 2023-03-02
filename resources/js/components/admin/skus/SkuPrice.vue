@@ -100,7 +100,7 @@ export default {
     props: {
         statuses: {required: true, default: () =>[]},
         exchange_rates: { required: true, default: () => [] },
-        item: {required: true},
+        item: {required: true, default: () => []},
         roles: { required: true, default: () => [] },
     },
     data() {
@@ -114,15 +114,28 @@ export default {
                 waste_status: this.statuses[0].slug,
             },
 
+            waste: this.isEditing() && this.item.wastes.length ? this.item.wastes[0].amt : "",
+            status_id: this.isEditing() && this.item.wastes.length ? this.item.wastes[0].status_id : this.statuses[0].id,
+
             currency_id: this.isEditing() ? this.item.currency_id : this.exchange_rates[0].currency_id,
+            pur_price: this.isEditing() ? this.item.pure_price : 0,
             costs: this.isEditing() ? this.item.costs : [],
             wastes: this.isEditing() ? this.item.wastes : [],
             pricings: this.isEditing() ? this.item.pricings : [],
         }
     },
+    created() {
+        this.calculatePrice();
+    },
     methods: {
         isEditing() {
             return Object.keys(this.item).length;
+        },
+
+        getExchangeRate(currency_id) {
+            return this.exchange_rates.filter((ex_rate) => {
+                return ex_rate.currency_id == currency_id;
+            });
         },
 
         onPurPriceChange() {
@@ -141,6 +154,35 @@ export default {
             }
         },
 
+        onChangeStatus(event) {
+            let status = this.statuses.filter((status) => {
+                return status.id == event.target.value;
+            });
+            this.form.waste_status = status[0].slug;
+        },
+
+        getRawCost() {
+            let costs = 0;
+            if (this.costs.length) {
+                costs = this.costs.reduce((acc, cost) => {
+                    let ex_rate = this.exchange_rates.find((rate) => {
+                        return rate.currency_id === cost.currency_id;
+                    });
+                    return acc + cost.amt * ex_rate.mmk;
+                }, 0);
+            }
+            return this.getPurePrice() + costs;
+        },
+        getWastes() {
+            let wastes = 0;
+            if (this.waste) {
+                wastes = this.form.waste_status == "percent"
+                        ? (this.getRawCost() * this.waste) / 100
+                        : this.waste;
+            }
+            return wastes;
+        },
+
         getPurePrice() {
             return this.pur_price * this.form.ex_rate;
         },
@@ -151,6 +193,10 @@ export default {
 
         onUpdateWaste(data) {
             this.wastes = data;
+        },
+
+        getPureCost() {
+            return this.getRawCost() + this.getWastes();
         },
 
         calculatePrice() {

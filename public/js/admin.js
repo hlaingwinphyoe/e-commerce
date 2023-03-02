@@ -26042,7 +26042,10 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     item: {
-      required: true
+      required: true,
+      "default": function _default() {
+        return [];
+      }
     },
     roles: {
       required: true,
@@ -26061,15 +26064,26 @@ __webpack_require__.r(__webpack_exports__);
         pure_price: 0,
         waste_status: this.statuses[0].slug
       },
+      waste: this.isEditing() && this.item.wastes.length ? this.item.wastes[0].amt : "",
+      status_id: this.isEditing() && this.item.wastes.length ? this.item.wastes[0].status_id : this.statuses[0].id,
       currency_id: this.isEditing() ? this.item.currency_id : this.exchange_rates[0].currency_id,
+      pur_price: this.isEditing() ? this.item.pure_price : 0,
       costs: this.isEditing() ? this.item.costs : [],
       wastes: this.isEditing() ? this.item.wastes : [],
       pricings: this.isEditing() ? this.item.pricings : []
     };
   },
+  created: function created() {
+    this.calculatePrice();
+  },
   methods: {
     isEditing: function isEditing() {
       return Object.keys(this.item).length;
+    },
+    getExchangeRate: function getExchangeRate(currency_id) {
+      return this.exchange_rates.filter(function (ex_rate) {
+        return ex_rate.currency_id == currency_id;
+      });
     },
     onPurPriceChange: function onPurPriceChange() {
       this.form.buy_price = this.pur_price * this.form.ex_rate;
@@ -26085,6 +26099,32 @@ __webpack_require__.r(__webpack_exports__);
         this.form.buy_price = this.getPurePrice();
       }
     },
+    onChangeStatus: function onChangeStatus(event) {
+      var status = this.statuses.filter(function (status) {
+        return status.id == event.target.value;
+      });
+      this.form.waste_status = status[0].slug;
+    },
+    getRawCost: function getRawCost() {
+      var _this = this;
+      var costs = 0;
+      if (this.costs.length) {
+        costs = this.costs.reduce(function (acc, cost) {
+          var ex_rate = _this.exchange_rates.find(function (rate) {
+            return rate.currency_id === cost.currency_id;
+          });
+          return acc + cost.amt * ex_rate.mmk;
+        }, 0);
+      }
+      return this.getPurePrice() + costs;
+    },
+    getWastes: function getWastes() {
+      var wastes = 0;
+      if (this.waste) {
+        wastes = this.form.waste_status == "percent" ? this.getRawCost() * this.waste / 100 : this.waste;
+      }
+      return wastes;
+    },
     getPurePrice: function getPurePrice() {
       return this.pur_price * this.form.ex_rate;
     },
@@ -26093,6 +26133,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     onUpdateWaste: function onUpdateWaste(data) {
       this.wastes = data;
+    },
+    getPureCost: function getPureCost() {
+      return this.getRawCost() + this.getWastes();
     },
     calculatePrice: function calculatePrice() {
       this.form.pure_price = 0;
@@ -26160,10 +26203,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     waste: {
-      required: true,
-      "default": function _default() {
-        return [];
-      }
+      required: true
     },
     index: {
       required: true
@@ -26283,7 +26323,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     onUpdateWaste: function onUpdateWaste(data) {
       this.data_wastes = this.data_wastes.map(function (x) {
-        return x.id == data.id ? data : x;
+        return x.id === data.id ? data : x;
       });
       this.$emit("on-update-waste", this.data_wastes);
     },
@@ -30603,12 +30643,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "form-control form-control-sm",
     placeholder: "Pure Price",
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return _ctx.pur_price = $event;
+      return $data.pur_price = $event;
     }),
     onChange: _cache[4] || (_cache[4] = function () {
       return $options.onPurPriceChange && $options.onPurPriceChange.apply($options, arguments);
     })
-  }, null, 544 /* HYDRATE_EVENTS, NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.pur_price]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  }, null, 544 /* HYDRATE_EVENTS, NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.pur_price]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     "class": "form-select",
     name: "currency",
     onChange: _cache[5] || (_cache[5] = function ($event) {
@@ -30637,7 +30677,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     disabled: ""
   }, null, 8 /* PROPS */, _hoisted_15)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-sm btn-danger",
-    disabled: _ctx.pur_price === '',
+    disabled: $data.pur_price === '',
     onClick: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.calculatePrice && $options.calculatePrice.apply($options, arguments);
     }, ["prevent"]))
@@ -30689,7 +30729,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     id: "waste",
-    name: "waste",
     "class": "form-control form-control-sm",
     placeholder: "Waste",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
@@ -30769,7 +30808,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8 /* PROPS */, _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_3, "Waste-" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.index), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     id: "waste",
-    name: "waste",
     "class": "form-control form-control-sm",
     placeholder: "Waste",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
@@ -30777,7 +30815,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.amt]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     "class": "form-select",
-    name: "status_id",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.form.status_id = $event;
     })
@@ -30820,10 +30857,11 @@ var _hoisted_1 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.wastes, function (waste, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {
+      key: waste.id,
       waste: waste,
       index: index + 1
     });
-  }), 256 /* UNKEYED_FRAGMENT */))]);
+  }), 128 /* KEYED_FRAGMENT */))]);
 }
 
 /***/ }),

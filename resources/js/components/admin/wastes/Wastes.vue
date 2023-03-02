@@ -46,7 +46,7 @@ export default {
         },
         onUpdateWaste(data) {
             this.data_wastes = this.data_wastes.map((x) => {
-                return x.id == data.id ? data : x;
+                return x.id === data.id ? data : x;
             });
             this.$emit("on-update-waste", this.data_wastes);
         },

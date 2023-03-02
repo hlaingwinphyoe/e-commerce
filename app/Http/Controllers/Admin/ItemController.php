@@ -181,6 +181,12 @@ class ItemController extends Controller
                 'brand_id' => $request->brand,
             ]);
 
+            $item->costs()->sync($request->costs);
+
+            $item->pricings()->sync($request->pricings);
+
+            $item->wastes()->sync($request->wastes);
+
             if ($request->type) {
                 $item->types()->sync($request->type);
             }
