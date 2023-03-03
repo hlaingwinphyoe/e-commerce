@@ -30,6 +30,7 @@
                 <div class="input-group">
                     <input
                         type="text"
+                        name="pure_price"
                         class="form-control form-control-sm"
                         placeholder="Pure Price"
                         v-model="pur_price"
@@ -57,21 +58,22 @@
 
         <Cost :costs="costs" :exchange_rates="exchange_rates" @on-update-cost="onUpdateCost" />
 
-        <Wastes :wastes="wastes" :statuses="statuses" @on-update-waste="onUpdateWaste" />
+        <Wastes :wastes="wastes" :statuses="statuses" @on-updates-waste="onUpdateWaste" />
 
-        <div class="row align-items-center" v-if="form.pure_price">
-            <div class="form-group col-md-8 mb-4">
+        <div class="row align-items-center">
+            <div class="form-group col-md-8 mb-4" v-if="form.pure_price">
                 <label>Pure Price</label>
                 <input
                     type="text"
                     :value="form.pure_price"
-                    class="form-control form-control-sm disabled"
-                    disabled
+                    v-model="form.pure_price"
+                    class="form-control form-control-sm"
+                    id="pure_price"
                 />
             </div>
             <div class="form-group col-md-4">
                 <button
-                    class="btn btn-sm btn-danger"
+                    class="btn btn-sm btn-secondary"
                     :disabled="pur_price === ''"
                     @click.prevent="calculatePrice"
                 >
@@ -90,6 +92,7 @@
 import Cost from "../costs/Cost";
 import Wastes from "../wastes/Wastes";
 import PricingBox from "../pricings/PricingBox";
+import {isProxy, toRaw} from "vue";
 
 export default {
     components: {
@@ -110,7 +113,8 @@ export default {
                 ex_rate: this.isEditing() ? this.getExchangeRate(this.item.currency_id)[0].mmk : this.exchange_rates[0].mmk,
                 div_rate: this.isEditing() ? this.getExchangeRate(this.item.currency_id)[0].rate : this.exchange_rates[0].rate,
                 buy_price: 0,
-                pure_price: 0,
+                // pure_price: 0,
+                pure_price: this.isEditing() ? this.item.price : 0,
                 waste_status: this.statuses[0].slug,
             },
 
@@ -126,6 +130,7 @@ export default {
     },
     created() {
         this.calculatePrice();
+        console.log(this.getPureCost())
     },
     methods: {
         isEditing() {
@@ -192,7 +197,9 @@ export default {
         },
 
         onUpdateWaste(data) {
-            this.wastes = data;
+            if(isProxy(data)){
+                this.wastes = toRaw(data)
+            }
         },
 
         getPureCost() {
@@ -205,6 +212,8 @@ export default {
                 ? this.getPurePrice()
                 : this.form.buy_price;
             this.form.pure_price = this.getPureCost();
+
+            // console.log($("#pure_price").val())
         },
     }
 }

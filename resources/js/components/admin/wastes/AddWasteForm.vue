@@ -30,7 +30,7 @@
             </div>
             <div class="form-group col-md-4 mb-2">
                 <button
-                    class="btn btn-sm btn-primary"
+                    class="btn btn-sm btn-secondary"
                     :disabled="form.waste === '' || form.status_id === ''"
                     @click.prevent="onAddWaste"
                 >

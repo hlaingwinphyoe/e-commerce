@@ -1,15 +1,13 @@
 <template>
     <div class="wastes-container mb-2">
-        <waste-list :wastes="data_wastes">
-            <waste-item
-                slot-scope="{ waste, index }"
-                :waste="waste"
-                :index="index"
-                :statuses="statuses"
-                @on-update-waste="onUpdateWaste"
-                @on-destroy-waste="onDestroyWaste"
-            ></waste-item>
-        </waste-list>
+        <waste-item
+            v-for="(waste,index) in data_wastes"
+            :waste="waste"
+            :index="index"
+            :statuses="statuses"
+            @on-update-waste="onUpdateWaste"
+            @on-destroy-waste="onDestroyWaste"
+        ></waste-item>
 
         <add-waste-form
             :statuses="statuses"
@@ -45,6 +43,7 @@ export default {
             this.$emit("on-update-waste", this.data_wastes);
         },
         onUpdateWaste(data) {
+            //console.log(data)
             this.data_wastes = this.data_wastes.map((x) => {
                 return x.id === data.id ? data : x;
             });

@@ -89,7 +89,7 @@
 
                 <div class="bg-white shadow rounded py-3 px-2 mb-4">
                     <h5 class="text-secondary fw-bold mb-4"><span class="btn btn-sm btn-outline-primary me-2"><i class="fa fa-tags"></i></span>Pricing Information</h5>
-                    <sku-price :exchange_rates="{{ $exchange_rates }}" :item="{{ $item->id }}" :roles="{{ $roles }}" :statuses="{{ $statuses }}"></sku-price>
+                    <sku-price :exchange_rates="{{ $exchange_rates }}" :item="{{ $item }}" :roles="{{ $roles }}" :statuses="{{ $statuses }}"></sku-price>
                 </div>
 
                 <div class="bg-white shadow rounded py-3 px-2 mb-4">

@@ -92,8 +92,8 @@
 
     @if(auth()->user()->role->hasPermission('access-customer'))
         <div class="col-6 col-md-3 col-lg-3 mb-4">
-            <a href="{{ route('admin.customers.index') }}" class="d-block px-1 py-2 bg-sidebar border-warning border-start border-4 shadow-sm text-center rounded feature-box h-100 text-decoration-none">
-                <div class="feature-icon py-3 text-warning pb-2">
+            <a href="{{ route('admin.customers.index') }}" class="d-block px-1 py-2 bg-sidebar border-info border-start border-4 shadow-sm text-center rounded feature-box h-100 text-decoration-none">
+                <div class="feature-icon py-3 text-info pb-2">
                     <i class="fa fa-people-group"></i>
                 </div>
                 <span class="feature-title">Total Customers</span>
@@ -219,7 +219,7 @@
                             ဓာတ်ပုံပြောင်းရန်
                         </label>
                         @if(public_path('images/logo.png'))
-                        <img src="{{ Storage::url('public/images/logo.png') }}" alt="{{ config('app.name') }}" class="user-profile rounded mb-3" width="100" height="100">
+                        <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }}" class="user-profile rounded mb-3" width="100" height="100">
                         @endif
                         <div class="py-2 w-100">
                             <input type="file" name="image" id="profile">
@@ -229,7 +229,7 @@
                         @enderror
                     </div>
 
-                    <button type="submit" class="btn btn-sm btn-primary">Upload</button>
+                    <button type="submit" class="btn btn-sm btn-secondary">Upload</button>
                 </form>
             </div>
         </div>

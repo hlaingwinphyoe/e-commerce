@@ -21,7 +21,7 @@
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-brand'))
             <div class="me-2 mb-3">
-                <a href="{{ route('admin.brands.create') }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('admin.brands.create') }}" class="btn btn-sm btn-secondary">
                     <small><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
@@ -83,7 +83,7 @@
                         @endif
 
                         @if(auth()->user()->role->hasPermission('delete-brand'))
-                        <a href="#delete-modal-{{ $brand->id }}" data-bs-toggle="modal">
+                        <a href="#delete-modal-{{ $brand->id }}" data-bs-toggle="modal" class="text-danger">
                             <i class="fas fa-trash"></i>
                         </a>
                         <x-admin.delete id="{{ $brand->id }}" url="{{ route('admin.brands.destroy', $brand->id) }}"></x-admin.delete>

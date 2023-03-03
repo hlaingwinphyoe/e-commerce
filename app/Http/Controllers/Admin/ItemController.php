@@ -203,7 +203,7 @@ class ItemController extends Controller
             $attrs = $item->attributes()->whereDoesntHave('values')->delete();
         });
 
-        return redirect()->route('admin.items.edit', $item->id)->with('message', 'Item was successfully updated.');
+        return redirect()->route('admin.items.index')->with('message', 'Item was successfully updated.');
 
         // return redirect($request->session()->get('prev_route'))->with('message', 'Item was successfully updated.');
     }

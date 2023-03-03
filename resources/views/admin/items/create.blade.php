@@ -89,7 +89,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-sm btn-primary">
+                    <button type="submit" class="btn btn-sm btn-secondary">
                         <small class="me-2"><i class="fas fa-save"></i></small>
                         <span>Add Pricing</span>
                     </button>

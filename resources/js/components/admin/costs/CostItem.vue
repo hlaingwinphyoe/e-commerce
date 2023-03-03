@@ -28,7 +28,7 @@
                 </select>
             </div>
             <div class="col-md-4">
-                <button class="btn btn-sm btn-dark" @click.prevent="onUpdateCost">
+                <button class="btn btn-sm btn-secondary" @click.prevent="onUpdateCost">
                     <small>
                         <i class="fa fa-check"></i>
                     </small>
@@ -47,7 +47,7 @@
 export default {
     props: {
         cost: { required: true, default: () => [] },
-        index: { required: true },
+        index: { required: true, default: () => [] },
     },
     data() {
         return {

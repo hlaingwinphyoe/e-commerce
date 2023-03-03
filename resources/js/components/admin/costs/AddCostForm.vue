@@ -26,7 +26,7 @@
             </div>
             <div class="col-md-4">
                 <button
-                    class="btn btn-sm btn-primary"
+                    class="btn btn-sm btn-secondary"
                     :disabled="form.amt === '' || form.currency_id === ''"
                     @click.prevent="onAddCost"
                 >

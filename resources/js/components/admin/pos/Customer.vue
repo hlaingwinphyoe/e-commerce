@@ -9,7 +9,7 @@
                 v-model="form.name"
                 @keyup="onSearchCustomer"
             />
-            <button class="btn btn-sm btn-primary" @click.prevent="onToggleBox">
+            <button class="btn btn-sm btn-secondary" @click.prevent="onToggleBox">
                 <i class="fa fa-plus"></i>
             </button>
         </div>
@@ -63,7 +63,7 @@
 
                 <div class="from-group col-md-6">
                     <button
-                        class="btn btn-sm btn-primary"
+                        class="btn btn-sm btn-secondary"
                         :class="isSave ? '' : 'disabled'"
                         @click.prevent="onSaveCustomer"
                     >

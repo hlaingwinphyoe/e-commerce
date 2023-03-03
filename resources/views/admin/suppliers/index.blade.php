@@ -21,7 +21,7 @@
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-supplier'))
             <div class="me-2 mb-3">
-                <a href="{{ route('admin.suppliers.create') }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('admin.suppliers.create') }}" class="btn btn-sm btn-secondary">
                     <small><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
@@ -53,7 +53,7 @@
                         </a>
                         @endif
                         @if(auth()->user()->role->hasPermission('delete-supplier'))
-                        <a href="#delete-modal-{{ $supplier->id }}" class="" data-bs-toggle="modal">
+                        <a href="#delete-modal-{{ $supplier->id }}" class="text-danger" data-bs-toggle="modal">
                             <small><i class="fas fa-trash"></i></small>
                         </a>
                         <x-admin.delete id="{{ $supplier->id }}" url="{{ route('admin.suppliers.destroy', $supplier->id) }}"></x-admin.delete>

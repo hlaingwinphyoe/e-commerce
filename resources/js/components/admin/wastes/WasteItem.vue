@@ -10,11 +10,12 @@
                     <input
                         type="text"
                         id="waste"
+                        name="waste"
                         class="form-control form-control-sm"
                         placeholder="Waste"
                         v-model="form.amt"
                     />
-                    <div class="input-group-append">
+                    <div>
                         <select
                             class="form-select"
                             v-model="form.status_id"
@@ -49,8 +50,8 @@
 <script>
 export default {
     props: {
-        waste: { required: true },
-        index: { required: true },
+        waste: { required: true, default: () => [] },
+        index: { required: true, default: () => [] },
         statuses: { required: true, default: () => [] },
     },
     data() {

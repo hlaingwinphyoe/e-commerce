@@ -43,7 +43,7 @@ if (request('brand')) {
         <!-- filter -->
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-item')) <div class="me-2 mb-1">
-                <a href="{{ route('admin.items.create') }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('admin.items.create') }}" class="btn btn-sm btn-secondary">
                     <small class="me-2"><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
@@ -90,8 +90,8 @@ if (request('brand')) {
             </div>
 
             <div class="form-group">
-                <button class="btn btn-sm btn-outline-primary me-2 mb-1">Filter</button>
-                <a href="{{ route('admin.items.index') }}" class="btn btn-sm btn-primary mb-1">
+                <button class="btn btn-sm btn-outline-secondary me-2 mb-1">Filter</button>
+                <a href="{{ route('admin.items.index') }}" class="btn btn-sm btn-danger mb-1">
                     <small><i class="fa fa-redo m-0"></i></small>
                 </a>
             </div>
@@ -142,7 +142,7 @@ if (request('brand')) {
                         </a>
                     @endif
                     @if(auth()->user()->role->hasPermission('delete-item') && !$item->trashed())
-                        <a href="#delete-modal-{{ $item->id }}" class="action-btn me-2" data-bs-toggle="modal">
+                        <a href="#delete-modal-{{ $item->id }}" class="action-btn me-2 text-danger" data-bs-toggle="modal">
                             <span><i class="fas fa-trash"></i></span>
                         </a>
                         <x-admin.delete id="{{ $item->id }}" url="{{ route('admin.items.destroy', $item->id) }}"></x-admin.delete>
@@ -154,7 +154,7 @@ if (request('brand')) {
                         <x-admin.restore id="{{ $item->id }}" url="{{ route('admin.items.restore', $item->id) }}"></x-admin.restore>
                     @endif
                     @if($item->trashed() && auth()->user()->role->hasPermission('permenent-delete-item'))
-                        <a href="#force-delete-modal-{{ $item->id }}" class="action-btn me-2" data-bs-toggle="modal">
+                        <a href="#force-delete-modal-{{ $item->id }}" class="action-btn me-2 text-danger" data-bs-toggle="modal">
                             <small><i class="fas fa-trash"></i></small>
                         </a>
                         <x-admin.force-delete id="{{ $item->id }}" url="{{ route('admin.items.delete', $item->id) }}"></x-admin.force-delete>
