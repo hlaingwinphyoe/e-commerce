@@ -7,9 +7,6 @@
 </div>
 <ul class="app-menu nav">
     <!-- General -->
-    <li class="nav-item w-100">
-        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark">{{__('menu.website_create')}}</span>
-    </li>
 
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is('admin') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}" title="Dashboard">

@@ -66,7 +66,6 @@
                 <input
                     type="text"
                     :value="form.pure_price"
-                    v-model="form.pure_price"
                     class="form-control form-control-sm"
                     id="pure_price"
                 />
@@ -130,7 +129,6 @@ export default {
     },
     created() {
         this.calculatePrice();
-        console.log(this.getPureCost())
     },
     methods: {
         isEditing() {

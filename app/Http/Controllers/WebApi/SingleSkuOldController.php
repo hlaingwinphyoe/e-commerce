@@ -8,7 +8,7 @@ use App\Models\Item;
 use App\Models\Status;
 use Illuminate\Http\Request;
 
-class SingleSkuController extends Controller
+class SingleSkuOldController extends Controller
 {
     public function store(Request $request)
     {
@@ -23,7 +23,7 @@ class SingleSkuController extends Controller
         ], [
             // 'code' => uniqid(),
             'item_name' => $item->name,
-            'pure_price' => $item->pure_price,
+            'pure_price' => 0,
             'currency_id' => $currency ? $currency->id : 1,
             'min_stock' => $item->min_stock
         ]);

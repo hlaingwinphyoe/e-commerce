@@ -23062,6 +23062,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
     axios.get("/wapi/item-skus/".concat(this.item.id)).then(function (resp) {
+      console.log(resp.data);
       _this.data_skus = resp.data ? resp.data : [];
     });
     axios.get("/wapi/inventories/create").then(function (resp) {
@@ -26081,7 +26082,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.calculatePrice();
-    console.log(this.getPureCost());
   },
   methods: {
     isEditing: function isEditing() {
@@ -29418,24 +29418,18 @@ var _hoisted_1 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_pricing_item = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("pricing-item");
-  var _component_pricing_list = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("pricing-list");
   var _component_add_pricing = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("add-pricing");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_pricing_list, {
-    pricings: $data.data_pricings
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_pricing_item, {
-        "slot-scope": "{ pricing }",
-        pricing: _ctx.pricing,
-        statuses: $props.statuses,
-        roles: $props.roles,
-        pure_price: $props.pure_price,
-        onOnUpdatePricing: $options.onUpdatePricing,
-        onOnDeletePricing: $options.onDeletePricing
-      }, null, 8 /* PROPS */, ["pricing", "statuses", "roles", "pure_price", "onOnUpdatePricing", "onOnDeletePricing"])];
-    }),
-    _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["pricings"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_add_pricing, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.data_pricings, function (pricing) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_pricing_item, {
+      key: pricing.id,
+      pricing: pricing,
+      statuses: $props.statuses,
+      roles: $props.roles,
+      pure_price: $props.pure_price,
+      onOnUpdatePricing: $options.onUpdatePricing,
+      onOnDeletePricing: $options.onDeletePricing
+    }, null, 8 /* PROPS */, ["pricing", "statuses", "roles", "pure_price", "onOnUpdatePricing", "onOnDeletePricing"]);
+  }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_add_pricing, {
     statuses: $props.statuses,
     roles: $props.roles,
     onOnAddPricing: $options.onAddPricing
@@ -30689,18 +30683,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     wastes: $data.wastes,
     statuses: $props.statuses,
     onOnUpdatesWaste: $options.onUpdateWaste
-  }, null, 8 /* PROPS */, ["wastes", "statuses", "onOnUpdatesWaste"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [$data.form.pure_price ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 8 /* PROPS */, ["wastes", "statuses", "onOnUpdatesWaste"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [$data.form.pure_price ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     value: $data.form.pure_price,
-    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
-      return $data.form.pure_price = $event;
-    }),
     "class": "form-control form-control-sm",
     id: "pure_price"
-  }, null, 8 /* PROPS */, _hoisted_15), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.pure_price]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, null, 8 /* PROPS */, _hoisted_15)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-sm btn-secondary",
     disabled: $data.pur_price === '',
-    onClick: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onClick: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.calculatePrice && $options.calculatePrice.apply($options, arguments);
     }, ["prevent"]))
   }, " Calculate Price ", 8 /* PROPS */, _hoisted_17)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_PricingBox, {

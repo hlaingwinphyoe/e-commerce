@@ -1,16 +1,15 @@
 <template>
   <div class="pricing_box-container">
-    <pricing-list :pricings="data_pricings">
       <pricing-item
-        slot-scope="{ pricing }"
-        :pricing="pricing"
-        :statuses="statuses"
-        :roles="roles"
-        :pure_price="pure_price"
-        @on-update-pricing="onUpdatePricing"
-        @on-delete-pricing="onDeletePricing"
+          v-for="pricing in data_pricings"
+          :key="pricing.id"
+          :pricing="pricing"
+          :statuses="statuses"
+          :roles="roles"
+          :pure_price="pure_price"
+          @on-update-pricing="onUpdatePricing"
+          @on-delete-pricing="onDeletePricing"
       ></pricing-item>
-    </pricing-list>
     <add-pricing
       :statuses="statuses"
       :roles="roles"

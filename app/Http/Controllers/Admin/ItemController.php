@@ -98,6 +98,13 @@ class ItemController extends Controller
                 'brand_id' => $request->brand
             ]);
 
+            $item->skus()->create([
+                "code" => $request->code ?? $item->code,
+                "item_name" => $item->name,
+                "item_id" => $item->id,
+                "pure_price" => 0,
+            ]);
+
             if ($request->type) {
                 $item->types()->sync($request->type);
             }
@@ -181,6 +188,14 @@ class ItemController extends Controller
                 'brand_id' => $request->brand,
             ]);
 
+            $item->skus()->update([
+                "code" => $request->code ?? $item->code,
+                "item_name" => $item->name,
+                "pure_price" => $item->price,
+                "buy_price" => $item->price,
+                "currency_id" => $item->currency_id
+            ]);
+
             $item->costs()->sync($request->costs);
 
             $item->pricings()->sync($request->pricings);
@@ -238,7 +253,7 @@ class ItemController extends Controller
         });
 
 
-        return redirect(request()->session()->get('prev_route'))->with('message', 'Item was permently deleted');
+        return redirect(request()->session()->get('prev_route'))->with('message', 'Item was permanently deleted');
     }
 
 

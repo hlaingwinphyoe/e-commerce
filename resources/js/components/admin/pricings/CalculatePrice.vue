@@ -91,12 +91,12 @@
 
 <script>
 import PricingBox from "./PricingBox.vue";
-import Costs from "../costs/Costs.vue";
 import Wastes from '../wastes/Wastes.vue';
+import Cost from "../costs/Cost";
 export default {
   components: {
     "pricing-box": PricingBox,
-    "costs": Costs,
+    "costs": Cost,
     "wastes": Wastes
   },
   props: {

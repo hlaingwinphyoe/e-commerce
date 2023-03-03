@@ -86,8 +86,7 @@ export default {
   },
   computed: {
     getProfit() {
-      let profit =
-        this.pricing.status.slug == "percent"
+      let profit = this.pricing.status.slug == "percent"
           ? (this.pure_price * this.pricing.amt) / 100
           : this.pricing.amt;
       let amount = this.pure_price + profit;

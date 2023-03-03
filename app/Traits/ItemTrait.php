@@ -102,7 +102,7 @@ trait ItemTrait
 
     public function getPriceRole()
     {
-        return  auth()->check() && !in_array(auth()->user()->role->slug, ['admin', 'technician', 'manager', 'operator', 'owner']) ? auth()->user()->role : Role::where('slug', 'customer')->first();
+        return  auth()->check() && !in_array(auth()->user()->role->slug, ['admin', 'technician', 'manager', 'operator', 'owner','developer']) ? auth()->user()->role : Role::where('slug', 'customer')->first();
     }
 
     public function getDiscount()

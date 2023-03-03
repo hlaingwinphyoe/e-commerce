@@ -13,6 +13,8 @@ class PricingController extends Controller
         $pricing = Pricing::create([
             'amt' => (float) $request->waste,
             'status_id' => $request->status_id,
+            'min_qty' => 1,
+            'max_qty' => 1,
             'role_id' => $request->role_id
         ]);
 
@@ -28,6 +30,8 @@ class PricingController extends Controller
         $pricing->update([
             'amt' => (float) $request->waste,
             'status_id' => $request->status_id,
+            'min_qty' => 1,
+            'max_qty' => 1,
             'role_id' => $request->role_id
 
         ]);
