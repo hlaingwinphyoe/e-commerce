@@ -66,7 +66,7 @@
                     <td>{{ $region->country->name }}</td>
                     <td>
                         @if($region->townships()->count())
-                        <a href="{{ route('admin.townships.index') }}?region_id={{ $region->id }}" class="badge bg-primary">{{ $region->townships()->count() }}</a>
+                        <a href="{{ route('admin.townships.index') }}?region_id={{ $region->id }}" class="badge bg-primary text-decoration-none">{{ $region->townships()->count() }}</a>
                         @else
                         <span>0</span>
                         @endif

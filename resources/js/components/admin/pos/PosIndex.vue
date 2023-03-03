@@ -198,7 +198,7 @@
                             <div class="modal fade" id="payment-form">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-                                        <div class="modal-header bg-sidebar">
+                                        <div class="modal-header">
                                             <h5
                                                 class="modal-title"
                                                 id="exampleModalLabel"
@@ -207,7 +207,7 @@
                                             </h5>
                                             <button
                                                 type="button"
-                                                class="btn btn-sm btn-outline-danger"
+                                                class="btn-close"
                                                 data-bs-dismiss="modal"
                                             ><i class="fa fa-times"></i></button>
                                         </div>
@@ -233,7 +233,7 @@
                                                 >
                                                     <a
                                                         href="#"
-                                                        class="nav-link text-dark"
+                                                        class="nav-link text-dark bg-white rounded"
                                                         @click.prevent="
                                                             onSelectPayment(
                                                                 paymentype.id
@@ -241,15 +241,15 @@
                                                         "
                                                         >{{
                                                             paymentype.name
-                                                        }}</a
-                                                    >
+                                                        }}
+                                                    </a>
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="modal-footer bg-sidebar">
+                                        <div class="modal-footer">
                                             <button
                                                 type="button"
-                                                class="btn btn-sm btn-outline-secondary"
+                                                class="btn btn-sm btn-danger"
                                                 data-bs-dismiss="modal"
                                             >
                                                 Close
@@ -506,15 +506,6 @@ export default {
 </script>
 
 <style>
-.paymentype-item {
-    margin-bottom: 10px;
-    margin-left: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-}
-.paymentype-item.selected {
-    border: 2px solid #000;
-    font-weight: bold;
-}
 .pos-container {
     font-size: 0.85rem;
 }
@@ -528,10 +519,10 @@ export default {
     height: 100%;
     top: 0;
     left: 0;
-    /*background: rgba(0, 0, 0, 0.1);*/
     z-index: -1;
 }
 .disabled-container.disabled::after {
+    background: rgba(0, 0, 0, 0.1);
     z-index: 1;
 }
 .result-data {
@@ -559,7 +550,6 @@ export default {
         transition: all 0.3s ease;
         min-height: calc(100vh - 50px);
         background-color: #fff;
-        transition: all 0.3s ease;
     }
     .right-sidebar {
         left: -100%;

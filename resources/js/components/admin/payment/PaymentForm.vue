@@ -8,10 +8,9 @@
                     </h5>
                     <button
                         type="button"
-                        class="btn btn-sm btn-outline-danger"
+                        class="btn-close"
                         data-bs-dismiss="modal"
                     >
-                        <i class="fa fa-times"></i>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -43,7 +42,7 @@
                         >
                             <a
                                 href="#"
-                                class="nav-link text-dark"
+                                class="nav-link text-dark bg-white rounded"
                                 @click.prevent="onSelectPayment(paymentype.id)"
                                 >{{ paymentype.name }}</a
                             >
@@ -53,7 +52,7 @@
                 <div class="modal-footer bg-sidebar">
                     <button
                         type="button"
-                        class="btn btn-sm btn-outline-secondary"
+                        class="btn btn-sm btn-primary"
                         data-bs-dismiss="modal"
                     >
                         Close
