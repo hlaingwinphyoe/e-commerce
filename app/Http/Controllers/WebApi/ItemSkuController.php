@@ -64,7 +64,7 @@ class ItemSkuController extends Controller
                 $sku = Sku::create([
                     // 'code' => uniqid(),
                     'item_name' => $item->name,
-                    'pure_price' => 0,
+                    'pure_price' => $item->getPureCost(),
                     'currency_id' => $currency ? $currency->id : 1,
                     'min_stock' => $item->min_stock,
                     'item_id' => $item->id

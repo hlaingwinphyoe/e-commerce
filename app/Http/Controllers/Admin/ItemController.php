@@ -20,10 +20,10 @@ class ItemController extends Controller
 {
     public function __construct()
     {
-         $this->middleware('permissions:access-item')->only(['index', 'show']);
-         $this->middleware('permissions:create-item')->only(['create', 'store']);
-         $this->middleware('permissions:edit-item')->only(['edit', 'update']);
-         $this->middleware('permissions:delete-item')->only('destroy');
+        $this->middleware('permissions:access-item')->only(['index', 'show']);
+        $this->middleware('permissions:create-item')->only(['create', 'store']);
+        $this->middleware('permissions:edit-item')->only(['edit', 'update']);
+        $this->middleware('permissions:delete-item')->only('destroy');
     }
 
     public function index()
@@ -129,7 +129,7 @@ class ItemController extends Controller
 
         $discountypes = DiscountType::get();
 
-//        $attributes = Status::isType('attribute')->pluck('name');
+        //        $attributes = Status::isType('attribute')->pluck('name');
 
         $statuses = Status::isType('price')->get();
 
@@ -188,21 +188,21 @@ class ItemController extends Controller
                 'currency_id' => $request->currency ?? $item->currency_id,
                 'unit_id' => $request->unit,
                 'brand_id' => $request->brand,
-            ]);
-
-            $item->skus()->update([
-                "code" => $request->code ?? $item->code,
-                "item_name" => $item->name,
-                "pure_price" => $item->price,
-                "buy_price" => $item->price,
-                "currency_id" => $item->currency_id
-            ]);
+            ]);    
 
             $item->costs()->sync($request->costs);
 
             $item->pricings()->sync($request->pricings);
 
             $item->wastes()->sync($request->wastes);
+
+            $item->skus()->update([
+                "code" => $request->code ?? $item->code,
+                "item_name" => $item->name,
+                "pure_price" => $item->getPureCost(),
+                "buy_price" => $item->getRawCost(),
+                "currency_id" => $item->currency_id
+            ]);
 
             if ($request->type) {
                 $item->types()->sync($request->type);
@@ -257,6 +257,4 @@ class ItemController extends Controller
 
         return redirect(request()->session()->get('prev_route'))->with('message', 'Item was permanently deleted');
     }
-
-
 }
