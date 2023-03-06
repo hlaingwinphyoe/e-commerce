@@ -36,9 +36,9 @@ trait SkuTrait
     {
         $wastes = 0;
 
-        // $wastes = $this->wastes->sum(function ($waste) {
-        //     return $waste->status->slug == 'percent' ? ($this->getRawCost() * $waste->amt) / 100 : $waste->amt;
-        // });
+         $wastes = $this->wastes->sum(function ($waste) {
+             return $waste->status->slug == 'percent' ? ($this->getRawCost() * $waste->amt) / 100 : $waste->amt;
+         });
 
         return $wastes;
 
@@ -52,21 +52,55 @@ trait SkuTrait
 
     public function getPriceRole()
     {
-        return  auth()->check() && !in_array(auth()->user()->role->slug, ['admin', 'technician', 'manager', 'operator', 'owner']) ? auth()->user()->role : Role::where('slug', 'customer')->first();
+        return  auth()->check() && !in_array(auth()->user()->role->slug, ['admin', 'technician', 'manager', 'operator', 'owner','developer']) ? auth()->user()->role : Role::where('slug', 'customer')->first();
     }
+
+//    public function getPriceAttribute()
+//    {
+//        /* NO NEED FOR QTY PRICING
+//        *  ENABLED THIS RELATION FOR MUTLI LEVEL PRICIING
+//        */
+//        // $role = $this->getPriceRole();
+//
+//        // $pricing_rate = $role->pricings()->whereHas('skus', function ($q) {
+//        //     $q->where('id', $this->id);
+//        // })->latest()->first();
+//
+//        $pricing_rate = $this->pricings()->orderby('min_qty')->first();
+//
+//        if ($pricing_rate) {
+//
+//            $purecost = $this->getPureCost();
+//
+//            $profit = $pricing_rate->status->slug == 'percent' ? ($purecost * $pricing_rate->amt) / 100 : $pricing_rate->amt;
+//
+//            $price = $purecost + $profit;
+//
+//            if ($this->pure_price == 0 && $this->currency_id !== 1) {
+//                $price = $price * $this->getExchangeRate();
+//            }
+//
+//            // $mod = $price % 1000;
+//
+//            // if ($price > 1000 && ($mod > 500 || $mod < 500)) {
+//            //     $price = round($price / 1000) * 1000;
+//            // }
+//            return $price;
+//        }
+//
+//        return $this->getPureCost();
+//    }
 
     public function getPriceAttribute()
     {
-        /* NO NEED FOR QTY PRICING
-        *  ENABLED THIS RELATION FOR MUTLI LEVEL PRICIING 
-        */
-        // $role = $this->getPriceRole();
+//        $price = $this->item->price;
+//        return $price;
 
-        // $pricing_rate = $role->pricings()->whereHas('skus', function ($q) {
-        //     $q->where('id', $this->id);
-        // })->latest()->first();
+        $role = $this->getPriceRole();
 
-        $pricing_rate = $this->pricings()->orderby('min_qty')->first();
+        $pricing_rate = $role->pricings()->whereHas('items', function ($q) {
+            $q->where('id', $this->id);
+        })->latest()->first();
 
         if ($pricing_rate) {
 
@@ -76,15 +110,20 @@ trait SkuTrait
 
             $price = $purecost + $profit;
 
-            if ($this->pure_price == 0 && $this->currency_id !== 1) {
-                $price = $price * $this->getExchangeRate();
+            if ($role->slug == 'level-1') {
+                $price = ceil($price / 10) * 10;
+            } else if ($role->slug == 'level-2') {
+                $price = round($price / 100) * 100;
+            } else {
+                $divide = $price % 1000;
+                $price = round($price / 1000) * 1000;
+                if ($divide <= 500 && $divide != 0) {
+                    $price += 500;
+                }
+                // ရာစွန်း
+                // $price = ceil($price / 100) * 100;
             }
 
-            // $mod = $price % 1000;
-
-            // if ($price > 1000 && ($mod > 500 || $mod < 500)) {
-            //     $price = round($price / 1000) * 1000;
-            // }
             return $price;
         }
 

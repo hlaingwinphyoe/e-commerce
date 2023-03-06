@@ -24,9 +24,9 @@
     &:focus,
     &.active {
         //background: $primary-dark;
-        background: $primary-light;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to right, $primary-dark, $primary-light);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to right, $primary-dark, $primary-light); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: $primary;  /* fallback for old browsers */
+        //background: -webkit-linear-gradient(to right, $primary-dark, $primary-light);  /* Chrome 10-25, Safari 5.1-6 */
+        //background: linear-gradient(to right, $primary-dark, $primary-light); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
         border-left-color: $primary-dark;
         color: $white;

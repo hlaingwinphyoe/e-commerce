@@ -5,15 +5,15 @@
     top: 0;
     width: 100%;
     display: flex;
-    background-color: $primary-dark;
+    background-color: $primary;
     z-index: 1030;
     padding: 10px;
-    @include media-breakpoint-up(md) { 
+    @include media-breakpoint-up(md) {
         .app-header-left {
             width: 230px;
         }
     }
-   
+
     .app-header-left-label {
         display: none;
     }

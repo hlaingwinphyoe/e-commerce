@@ -22,7 +22,7 @@
 
             @if(auth()->user()->role->hasPermission('create-user'))
             <div class="me-2 mb-3">
-                <a href="{{ route('admin.customers.create') }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('admin.customers.create') }}" class="btn btn-sm btn-secondary">
                     <small><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
@@ -39,8 +39,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
-                    <a href="{{ route('admin.customers.index') }}" class="btn btn-sm btn-primary">
+                    <button class="btn btn-sm btn-outline-secondary me-2">Filter</button>
+                    <a href="{{ route('admin.customers.index') }}" class="btn btn-sm btn-danger">
                         <small><i class="fa fa-redo"></i></small>
                     </a>
                 </div>
@@ -93,7 +93,7 @@
                             <i class="fa fa-pencil-alt"></i>
                         </a>
                         @include('admin.users.edit')
-                        <a href="#delete-modal-{{ $user->id }}" class="" data-bs-toggle="modal">
+                        <a href="#delete-modal-{{ $user->id }}" class="text-danger" data-bs-toggle="modal">
                             <i class="fas fa-trash"></i>
                         </a>
                         <x-admin.delete id="{{ $user->id }}" url="{{ route('admin.users.destroy', $user->id) }}"></x-admin.delete>

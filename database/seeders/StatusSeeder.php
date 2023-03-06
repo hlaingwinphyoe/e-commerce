@@ -35,14 +35,14 @@ class StatusSeeder extends Seeder
         }
 
         $status = Status::create([
-            'slug' => 'fixed',
-            'name' => 'Ks',
+            'slug' => 'percent',
+            'name' => '%',
             'type' => 'price',
         ]);
 
         $status = Status::create([
-            'slug' => 'percent',
-            'name' => '%',
+            'slug' => 'fixed',
+            'name' => 'Ks',
             'type' => 'price',
         ]);
 

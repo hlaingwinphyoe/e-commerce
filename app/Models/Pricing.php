@@ -21,13 +21,18 @@ class Pricing extends Model
     }
 
     /* NO NEED FOR QTY PRICING
-    *  ENABLED THIS RELATION FOR MUTLI LEVEL PRICIING 
+    *  ENABLED THIS RELATION FOR MUTLI LEVEL PRICIING
     */
 
-    // public function role()
-    // {
-    //     return $this->belongsTo(Role::class, 'role_id');
-    // }
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'item_pricing', 'pricing_id', 'item_id');
+    }
+
+     public function role()
+     {
+         return $this->belongsTo(Role::class, 'role_id');
+     }
 
     public function status()
     {

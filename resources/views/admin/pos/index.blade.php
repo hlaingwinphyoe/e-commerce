@@ -11,7 +11,7 @@
     <form action="{{ route('admin.pos.index') }}" class="col-md-8 col-10 d-flex align-items-center px-2">
         <div class="input-group mb-2">
             <input type="text" name="q" class="form-control form-control-sm" placeholder="Search with code or name" value="{{ request('q') }}">
-            <div class="input-group-text bg-primary">
+            <div class="input-group-text bg-secondary">
                 <button type="submit" class="p-0 border-0 bg-transparent">
                     <small class="text-white"><i class="fa fa-search"></i></small>
                 </button>
@@ -40,7 +40,7 @@
                 <form action="{{ route('admin.pos.index') }}" class="d-flex flex-wrap align-items-end">
                     @if(auth()->user()->role->hasPermission('create-order'))
                         <div class="form-group me-2">
-                            <a href="{{ route('admin.pos.create') }}" class="btn btn-sm btn-primary">
+                            <a href="{{ route('admin.pos.create') }}" class="btn btn-sm btn-secondary">
                                 <small><i class="fa fa-plus"></i></small>
                                 <span>Add New</span>
                             </a>
@@ -63,8 +63,8 @@
                         <input type="date" name="to_date" class="form-control form-control-sm" value="{{ request('to_date') }}">
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
-                        <a href="{{ route('admin.pos.index') }}" class="btn btn-sm btn-primary">
+                        <button class="btn btn-sm btn-outline-secondary me-2">Filter</button>
+                        <a href="{{ route('admin.pos.index') }}" class="btn btn-sm btn-danger">
                             <small><i class="fa fa-redo"></i></small>
                         </a>
                     </div>

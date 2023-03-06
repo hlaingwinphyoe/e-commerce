@@ -38,7 +38,7 @@ class Role extends Model
         return $this->hasMany(Bonuspoint::class, 'role_id', 'id');
     }
 
-    //helper functions   
+    //helper functions
 
     public function hasPermission($permis)
     {
@@ -69,17 +69,17 @@ class Role extends Model
 
     public function scopeNotSeller($query)
     {
-        $query->whereNotIn('name', ['Admin', 'Operator', 'Manager', 'Owner', 'Technician']);
+        $query->whereNotIn('name', ['Admin', 'Operator', 'Manager', 'Owner', 'Technician','Developer']);
     }
 
     public function scopeNotDeveloper($query)
     {
-        $query->whereNotIn('name', ['technician']);
+        $query->whereNotIn('name', ['Developer']);
     }
 
     public function scopeNotAdmin($query)
     {
-        $query->whereNotIn('name', ['technician', 'admin']);
+        $query->whereNotIn('name', ['Technician', 'Admin']);
     }
 
     public function scopeNotMyself($query)
