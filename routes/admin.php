@@ -51,8 +51,8 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     Route::resource('/faqs', FaqController::class);
 
     //switch lang
-    Route::get('/langs/{lang}', [LanguageController::class, 'switchLang'])->name('langs.switch');
-    //user profile
+    // Route::get('/langs/{lang}', [LanguageController::class, 'switchLang'])->name('langs.switch');
+    // //user profile
     Route::resource('/profiles', UserProfileController::class);
     Route::patch('/profiles/upload/{id}', [UserProfileController::class, 'upload'])->name('profiles.upload');
     Route::patch('/profiles/changepassword/{id}', [UserProfileController::class, 'changePassword'])->name('profiles.changepassword');
