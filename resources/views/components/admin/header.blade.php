@@ -17,11 +17,7 @@
 
     <li class="dropdown">
         <a class="app-nav__item p-1 text-white dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-label="Open Profile Menu">
-            @if(auth()->check() && auth()->user()->medias()->first())
-            <img class="header-profile" width="25" src="{{ auth()->user()->getImage() }}">
-            @else
-            <i class="fa-solid fa-user"></i>
-            @endif
+            <img class="header-profile" src="{{ auth()->check() ? auth()->user()->getImage() : '' }}">
         </a>
         <ul class="dropdown-menu settings-menu dropdown-menu-right navbar-menu shadow py-0">
             <li>

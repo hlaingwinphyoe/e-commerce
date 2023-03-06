@@ -12,24 +12,70 @@ trait ItemTrait
 
     public function getPriceAttribute()
     {
-        $prices = [];
-        $prices = $this->skus->map(function ($sku) {
-            return $sku->price;
+        $role = $this->getPriceRole();
+
+        $pricing_rate = $role->pricings()->whereHas('items', function ($q) {
+            $q->where('id', $this->id);
+        })->latest()->first();
+
+        if ($pricing_rate) {
+
+            $purecost = $this->getPureCost();
+
+            $profit = $pricing_rate->status->slug == 'percent' ? ($purecost * $pricing_rate->amt) / 100 : $pricing_rate->amt;
+
+            $price = $purecost + $profit;
+
+            if ($role->slug == 'level-1') {
+                $price = ceil($price / 10) * 10;
+            } else if ($role->slug == 'level-2') {
+                $price = round($price / 100) * 100;
+            } else {
+                $divide = $price % 1000;
+                $price = round($price / 1000) * 1000;
+                if ($divide <= 500 && $divide != 0) {
+                    $price += 500;
+                }
+                // ရာစွန်း
+                // $price = ceil($price / 100) * 100;
+            }
+
+            return $price;
+        }
+
+        return $this->getPureCost();
+    }
+
+    public function getPurePrice()
+    {
+        $exchange_rate = $this->currency->exchangerates()->latest()->first()->mmk;
+
+        return ($this->pure_price * $exchange_rate);
+    }
+
+    public function getRawCost()
+    {
+        $costs = $this->costs->sum(function ($cost) {
+            return $cost->amt * $cost->currency->exchangerates()->latest()->first()->mmk;
         });
 
-        if (count($prices) > 1) {
-            $ary = [];
-            foreach ($prices as $price) {
-                array_push($ary, $price);
-            }
-            $max = max($ary);
-            $min = min($ary);
-            return $max > $min ? number_format($min) . ' - ' . number_format($max) : number_format($max);
-        } elseif (count($prices) == 1) {
-            return number_format($prices[0]);
-        } else {
-            return 0;
-        }
+        return $this->getPurePrice() + $costs;
+    }
+
+    public function getWastes()
+    {
+        $wastes = 0;
+
+        $wastes = $this->wastes->sum(function ($waste) {
+            return $waste->status->slug == 'percent' ? ($this->getRawCost() * $waste->amt) / 100 : $waste->amt;
+        });
+
+        return $wastes;
+    }
+
+    public function getPureCost()
+    {
+        return $this->getRawCost() + $this->getWastes();
     }
 
     public function getMinPriceAttribute()
@@ -56,7 +102,7 @@ trait ItemTrait
 
     public function getPriceRole()
     {
-        return  auth()->check() && !in_array(auth()->user()->role->slug, ['admin', 'technician', 'manager', 'operator', 'owner']) ? auth()->user()->role : Role::where('slug', 'customer')->first();
+        return  auth()->check() && !in_array(auth()->user()->role->slug, ['admin', 'technician', 'manager', 'operator', 'owner','developer']) ? auth()->user()->role : Role::where('slug', 'customer')->first();
     }
 
     public function getDiscount()

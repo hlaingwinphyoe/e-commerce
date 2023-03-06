@@ -188,7 +188,7 @@ class User extends Authenticatable
             // $img = $image->url;
             $img = Storage::url('public/thumbnail/' . $image->slug);
         } else {
-            $img = '<i class="fa-solid fa-user"></i>';
+            $img = asset('images/user.png');
         }
 
         return $img;

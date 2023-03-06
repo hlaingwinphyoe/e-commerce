@@ -28,7 +28,7 @@
                         <label for="phone" class="mb-2">ဖုန်းနံပါတ်</label>
                         <input type="text" name="phone" class="form-control form-control-sm" placeholder="Update Your Phones" value="{{ auth()->user()->phone }}">
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-secondary">Update</button>
                 </form>
             </div>
         </div>
@@ -52,7 +52,7 @@
                         @enderror
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Upload</button>
+                    <button type="submit" class="btn btn-secondary">Upload</button>
                 </form>
             </div>
         </div>
@@ -88,7 +88,7 @@
                         <input type="password" id="confirm" name="new_password_confirmation" class="form-control form-control-sm" placeholder="Confirm New Password" required autocomplete="new-password">
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Change</button>
+                    <button type="submit" class="btn btn-secondary">Change</button>
                 </form>
             </div>
         </div>

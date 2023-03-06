@@ -51,7 +51,7 @@
                             @enderror
                         </div>
                         <div class="form-group me-2 w-sm-100 align-self-end">
-                            <button type="submit" class="btn btn-sm btn-primary">
+                            <button type="submit" class="btn btn-sm btn-secondary">
                                 <small class="me-2"><i class="fas fa-save"></i></small>
                                 <span>Add Items</span>
                             </button>

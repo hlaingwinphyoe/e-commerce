@@ -21,7 +21,7 @@
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-role'))
             <div class="me-2 mb-3">
-                <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-secondary">
                     <small><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
@@ -37,8 +37,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
-                    <a href="{{ route('admin.roles.index') }}" class="btn btn-sm btn-primary">
+                    <button class="btn btn-sm btn-outline-secondary me-2">Filter</button>
+                    <a href="{{ route('admin.roles.index') }}" class="btn btn-sm btn-danger">
                         <small><i class="fa fa-redo"></i></small>
                     </a>
                 </div>
@@ -69,7 +69,7 @@
                         </a>
                         @endif
                         @if(auth()->user()->role->hasPermission('delete-role'))
-                        <a href="#delete-modal-{{ $role->id }}" data-bs-toggle="modal">
+                        <a href="#delete-modal-{{ $role->id }}" data-bs-toggle="modal" class="text-danger">
                             <small><i class="fas fa-trash"></i></small>
                         </a>
                         <x-admin.delete id="{{ $role->id }}" url="{{ route('admin.roles.destroy', $role->id) }}"></x-admin.delete>

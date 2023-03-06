@@ -9,6 +9,7 @@ use App\Http\Controllers\WebApi\ItemDiscountController;
 use App\Http\Controllers\WebApi\ItemPricingController;
 use App\Http\Controllers\WebApi\ItemSkuController;
 use App\Http\Controllers\WebApi\MediaController;
+use App\Http\Controllers\WebApi\PricingController;
 use App\Http\Controllers\WebApi\ReturnController;
 use App\Http\Controllers\WebApi\ReturnSkuController;
 use App\Http\Controllers\WebApi\SingleSkuController;
@@ -33,6 +34,7 @@ use App\Http\Controllers\WebApi\NotificationController;
 use App\Http\Controllers\WebApi\V1\ItemController as V1ItemController;
 use App\Http\Controllers\WebApi\V1\ItemDiscountController as V1ItemDiscountController;
 use App\Http\Controllers\WebApi\V1\ItemPricingController as V1ItemPricingController;
+use App\Http\Controllers\WebApi\WasteController;
 use App\Http\Controllers\WebApi\WebPushNotiController;
 
 use Illuminate\Support\Facades\Route;
@@ -131,6 +133,15 @@ Route::get('/type-skus/{type}', [TypeController::class, 'getSkus']);
 Route::post('/order-skus/{order}', [OrderSkuController::class, 'store']);
 Route::patch('/order-skus/{order}/{sku}', [OrderSkuController::class, 'update']);
 Route::delete('/order-skus/{order}/{sku}', [OrderSkuController::class, 'destroy']);
+
+// cost
+Route::resource('/costs', CostController::class);
+
+// waste
+Route::resource('/wastes', WasteController::class);
+
+// pricing
+Route::resource('/pricings', PricingController::class);
 
 //users
 Route::get('/users', [UserController::class, 'index']);

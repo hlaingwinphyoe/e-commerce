@@ -1,9 +1,9 @@
 <template>
     <div class="single_sku-container">
-        <div class="">            
+        <div class="">
             <a href="#" class="small" @click.prevent="changeAttribute">အမျိုးအစားကွဲရှိပါသလား ?</a>
             <p class="small mb-2 py-3 fw-bold">အရေအတွက်ပေါ်မူတည်၍ ဈေးအမျိုးမျိုး ထည့်နိုင်ပါသည်။</p>
-        </div>        
+        </div>
         <pricing-list v-if="pricings.length" :pricings="pricings"></pricing-list>
         <sku-form :item_id="item_id" @on-add-pricing="onAddPricing"></sku-form>
     </div>
@@ -48,7 +48,7 @@ export default {
         changeAttribute() {
             axios.delete(`/wapi/single-skus/${this.item_id}`).then(resp => {
                 this.$emit('change-attribute', true);
-            });            
+            });
         }
     }
 }

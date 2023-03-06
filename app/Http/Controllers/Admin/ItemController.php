@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\Currency;
 use App\Models\DiscountType;
 use App\Models\Item;
 use App\Models\Media;
@@ -97,6 +98,13 @@ class ItemController extends Controller
                 'brand_id' => $request->brand
             ]);
 
+            $item->skus()->create([
+                "code" => $request->code ?? $item->code,
+                "item_name" => $item->name,
+                "item_id" => $item->id,
+                "pure_price" => 0,
+            ]);
+
             if ($request->type) {
                 $item->types()->sync($request->type);
             }
@@ -109,7 +117,9 @@ class ItemController extends Controller
 
     public function edit($id)
     {
-        $item = Item::with('discounts')->findOrFail($id);
+        $item = Item::with([
+            'wastes', 'costs', 'pricings.role', 'pricings.status'
+        ])->findOrFail($id);
 
         $types = Type::orderBy('name')->get();
 
@@ -119,7 +129,7 @@ class ItemController extends Controller
 
         $discountypes = DiscountType::get();
 
-        $attributes = Status::isType('attribute')->pluck('name');
+//        $attributes = Status::isType('attribute')->pluck('name');
 
         $statuses = Status::isType('price')->get();
 
@@ -130,6 +140,14 @@ class ItemController extends Controller
         $suppliers = Supplier::orderBy('name')->get();
 
         $item_attributes = $item->attributes()->with(['values'])->get();
+        $currencies = Currency::all();
+
+        $exchange_rates = $currencies;
+
+        $exchange_rates = $exchange_rates->map(function ($currency) {
+            return $currency->exchangerates()->with('currency')->latest()->first();
+        });
+
 
         return view('admin.items.edit')->with([
             'item' => $item,
@@ -137,12 +155,12 @@ class ItemController extends Controller
             'brands' => $brands,
             'roles' => $roles,
             'discountypes' => $discountypes,
-            'attributes' => $attributes,
             'statuses' => $statuses,
             'discounts' => $discounts,
             'units' => $units,
             'suppliers' => $suppliers,
-            'item_attributes' => $item_attributes
+            'item_attributes' => $item_attributes,
+            'exchange_rates' => $exchange_rates
         ]);
     }
 
@@ -152,6 +170,8 @@ class ItemController extends Controller
 
         $request->validate([
             'name' => 'required|unique:items,name,' . $item->id,
+            'pure_price' => 'required_with:currency',
+            'currency' => 'required_with:pure_price'
         ]);
 
         DB::transaction(function () use ($request, $item) {
@@ -164,9 +184,25 @@ class ItemController extends Controller
                 'stock' => $request->stock ?? $item->stock,
                 'user_id' => auth()->user()->role->type == 'technician' ? $item->user_id : auth()->user()->id,
                 'per_unit' => $request->per_unit,
+                'pure_price' => $request->pure_price ?? $item->pure_price,
+                'currency_id' => $request->currency ?? $item->currency_id,
                 'unit_id' => $request->unit,
                 'brand_id' => $request->brand,
             ]);
+
+            $item->skus()->update([
+                "code" => $request->code ?? $item->code,
+                "item_name" => $item->name,
+                "pure_price" => $item->price,
+                "buy_price" => $item->price,
+                "currency_id" => $item->currency_id
+            ]);
+
+            $item->costs()->sync($request->costs);
+
+            $item->pricings()->sync($request->pricings);
+
+            $item->wastes()->sync($request->wastes);
 
             if ($request->type) {
                 $item->types()->sync($request->type);
@@ -184,7 +220,7 @@ class ItemController extends Controller
             $attrs = $item->attributes()->whereDoesntHave('values')->delete();
         });
 
-        return redirect()->route('admin.items.edit', $item->id)->with('message', 'Item was successfully updated.');
+        return redirect()->route('admin.items.index')->with('message', 'Item was successfully updated.');
 
         // return redirect($request->session()->get('prev_route'))->with('message', 'Item was successfully updated.');
     }
@@ -219,7 +255,7 @@ class ItemController extends Controller
         });
 
 
-        return redirect(request()->session()->get('prev_route'))->with('message', 'Item was permently deleted');
+        return redirect(request()->session()->get('prev_route'))->with('message', 'Item was permanently deleted');
     }
 
 

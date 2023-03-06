@@ -22,6 +22,25 @@ class Item extends Model
     {
         return $this->hasMany(Sku::class, 'item_id', 'id');
     }
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class, 'currency_id');
+    }
+
+    public function pricings()
+    {
+        return $this->belongsToMany(Pricing::class, 'item_pricing', 'item_id', 'pricing_id');
+    }
+
+    public function costs()
+    {
+        return $this->belongsToMany(Cost::class, 'item_cost', 'item_id', 'cost_id');
+    }
+
+    public function wastes()
+    {
+        return $this->belongsToMany(Waste::class, 'item_waste', 'item_id', 'waste_id');
+    }
 
     public function attributes()
     {

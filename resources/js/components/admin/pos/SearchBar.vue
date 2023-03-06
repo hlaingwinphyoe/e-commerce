@@ -55,7 +55,7 @@
                         <div>
                             <a
                                 href="#"
-                                class="btn btn-sm btn-primary"
+                                class="btn btn-sm btn-secondary"
                                 :class="getButtonClass"
                                 @click.prevent="onAddSku"
                             >
@@ -71,7 +71,7 @@
         <!-- Results -->
         <div class="rounded smooth-scroll px-2 py-3 position-relative">
             <div class="text-center" v-show="!loaded">
-                <div class="spinner-border text-primary position-absolute" role="status">
+                <div class="spinner-border text-secondary position-absolute" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>

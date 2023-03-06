@@ -56,6 +56,7 @@ export default {
     },
     mounted() {
         axios.get(`/wapi/item-skus/${this.item.id}`).then(resp=> {
+            console.log(resp.data)
             this.data_skus = resp.data ? resp.data : [];
         });
         axios.get(`/wapi/inventories/create`).then(resp => {

@@ -13,6 +13,11 @@ class Cost extends Model
 
     protected $guarded = [];
 
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'item_cost', 'cost_id', 'item_id');
+    }
+
     public function skus()
     {
         return $this->belongsToMany(Sku::class, 'sku_cost', 'cost_id', 'sku_id');

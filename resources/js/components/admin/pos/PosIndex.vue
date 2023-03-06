@@ -4,7 +4,7 @@
             <!-- Find and add items -->
             <div class="col-md-7 col-lg-7 left-sidebar">
                 <div class="px-2 py-3">
-                    <a href="/admin/pos" class="btn btn-sm btn-primary">
+                    <a href="/admin/pos" class="btn btn-sm btn-secondary">
                         <i class="fa fa-arrow-left"></i>
                         <span>Return to Sale Lists</span>
                     </a>
