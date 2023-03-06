@@ -22,14 +22,7 @@
                 @csrf
                 @method('patch')
 
-<<<<<<< HEAD
-        <div class="row">
-            <!-- items-information -->
-            <div class="col-md-6 mb-4">
-                <div class="bg-white shadow rounded py-3 px-2 mb-4 h-100">
-=======
                 <div class="bg-white shadow rounded py-3 px-2 mb-4">
->>>>>>> hwp
                     <h5 class="text-secondary fw-bold mb-4"><span class="me-2 btn btn-sm btn-outline-primary"><i class="fa fa-info"></i></span> Item Information</h5>
 
                     <div class="d-flex flex-wrap pb-3">
