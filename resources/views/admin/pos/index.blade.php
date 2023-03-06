@@ -120,7 +120,7 @@
                         <span class="text-danger me-1">{{ number_format($order->getPayAmount() - $order->getReturnAmount() - $order->getChange()  == $total && abs($order->getBalance()) == 0 ? 0 : $order->getBalance() + $order->getChange()) }}</span>
 
                         @if($order->getPayAmount() - $order->getReturnAmount() - $order->getChange() != $total && abs($order->getBalance()) != 0 && $order->status->slug != 'cancel')
-                        <a href="#" class="btn btn-sm btn-primary mb-1" data-bs-toggle="modal" data-bs-target="#payment-modal-{{ $order->id }}">
+                        <a href="#" class="btn btn-sm btn-danger mb-1" data-bs-toggle="modal" data-bs-target="#payment-modal-{{ $order->id }}">
                             <small>Pay</small>
                         </a>
 

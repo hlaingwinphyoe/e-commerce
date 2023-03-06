@@ -1,7 +1,7 @@
 <template>
     <div class="search-or-create position-relative">
         <input type="hidden" :name="name" v-model="input_id">
-        <input type="text" class="form-control form-control-sm" placeholder="Search" v-model="q" @keyup="onKeySearch" @change="onChangeKeyWord">
+        <input type="text" class="form-control form-control-sm" placeholder="Search" v-model="q" @keyup="onKeySearch" @change="onChangeKeyWord" required>
         <div class="results absolute-box bg-white shadow rounded mt-1" v-if="results.length">
             <ul class="nav flex-column">
                 <li class="nav-item" v-for="result in results" :key="result.id">

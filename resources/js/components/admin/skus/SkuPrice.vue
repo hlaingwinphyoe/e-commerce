@@ -80,7 +80,6 @@
                 </button>
             </div>
         </div>
-
         <PricingBox :pricings="pricings" :statuses="statuses" :roles="roles" :pure_price="form.pure_price" />
 
     </div>

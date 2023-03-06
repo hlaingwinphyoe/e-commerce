@@ -133,7 +133,7 @@ if (request('brand')) {
                     </a>
                     <stock :item="{{ $item }}" :suppliers="{{ $suppliers }}"></stock>
                 </td>
-                <td>{{ number_format($item->price) }}</td>
+                <td>{{ $item->price }}</td>
                 <td>{{ $item->discount }}</td>
                 <td>
                     @if(auth()->user()->role->hasPermission('edit-item') && !$item->trashed())

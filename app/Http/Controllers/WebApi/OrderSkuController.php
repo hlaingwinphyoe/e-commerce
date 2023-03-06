@@ -30,8 +30,8 @@ class OrderSkuController extends Controller
             $sku = $order->skus()->attach([$request->sku => [
                 'status_id' => $sku_status ? $sku_status->id : 1,
                 'qty' => $qty,
-                'price' => $sku->getQtyPrice($qty),
-                'customized_price' => $sku->getQtyPrice($qty),
+                'price' => $sku->price,
+                'customized_price' => $sku->price,
                 'margin' => 0
             ]]);
 
@@ -54,8 +54,8 @@ class OrderSkuController extends Controller
         } else if ($sku && $org_sku->stock >= $qty) {
             $sku->pivot->update([
                 'qty' => $sku->pivot->qty + $qty,
-                'price' => $sku->getQtyPrice($qty),
-                'customized_price' => $sku->getQtyPrice($qty),
+                'price' => $sku->price,
+                'customized_price' => $sku->price,
             ]);
             $sku->update(['stock' => $sku->stock - $qty]);
         } else {
@@ -90,8 +90,8 @@ class OrderSkuController extends Controller
 
             $sku->pivot->update([
                 'qty' => $request->qty,
-                'price' => $sku->getQtyPrice($request->qty),
-                'customized_price' => $sku->getQtyPrice($request->qty),
+                'price' => $sku->price,
+                'customized_price' => $sku->price,
             ]);
         });
 
@@ -125,5 +125,5 @@ class OrderSkuController extends Controller
         return response()->json($skus);
     }
 
-    
+
 }

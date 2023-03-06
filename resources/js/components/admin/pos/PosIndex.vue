@@ -473,7 +473,7 @@ export default {
         },
         getTotal() {
             let total = this.data_skus.reduce((total, x) => {
-                return total + x.pivot.qty * x.pivot.price;
+                return total + x.pivot.qty * x.price;
             }, 0);
             return total;
         },
