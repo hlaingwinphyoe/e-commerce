@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Currency;
+use Illuminate\Support\Str;
 
 class CurrencyController extends Controller
 {
@@ -24,7 +26,7 @@ class CurrencyController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique',
+            'name' => 'required|unique:currencies,name',
         ]);
 
         $currency = Currency::create([
@@ -49,7 +51,7 @@ class CurrencyController extends Controller
         $currency = Currency::findOrFail($id);
 
         $request->validate([
-            'name' => 'required|unique',
+            'name' => 'required|unique:currencies,name,'.$id,
         ]);
 
         $currency = $currency->update([

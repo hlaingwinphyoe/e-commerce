@@ -14,6 +14,14 @@
 @import './bootstrap';
 @import './admin/feature-area.scss';
 
+// bootstrap 5 select 2
+@import "select2/dist/css/select2.min.css";
+@import "select2-bootstrap-5-theme/src/include-all";
+
+.select2-container--bootstrap-5 .select2-dropdown .select2-search .select2-search__field{
+    padding: 0.175rem 0.75rem !important;
+}
+
 @media (max-width: 576px){
     .d-mobile-none {
         display: none !important;

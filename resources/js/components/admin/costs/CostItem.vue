@@ -28,7 +28,7 @@
                 </select>
             </div>
             <div class="col-md-4">
-                <button class="btn btn-sm btn-secondary me-1" @click.prevent="onUpdateCost">
+                <button class="btn btn-sm btn-secondary me-2" @click.prevent="onUpdateCost">
                     <small>
                         <i class="fa fa-check"></i>
                     </small>

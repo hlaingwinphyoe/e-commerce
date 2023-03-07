@@ -68,6 +68,7 @@
                     :value="form.pure_price"
                     class="form-control form-control-sm"
                     id="pure_price"
+                    disabled="disabled"
                 />
             </div>
             <div class="form-group col-md-4">

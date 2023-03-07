@@ -26,9 +26,9 @@
                 <div class="bg-white shadow rounded py-3 px-2 mb-4">
                     <h5 class="text-primary mb-3">Item Information</h5>
 
-                    <div class="d-flex flex-wrap pb-3">
+                    <div class="row flex-wrap pb-3">
 
-                        <div class="form-group me-2 w-sm-100">
+                        <div class="col-md-3 form-group me-2 w-sm-100">
                             <label for="">
                                 Name
                                 <span class="text-danger">**</span>
@@ -40,7 +40,7 @@
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="form-group me-2 w-sm-100">
+                        <div class="col-md-2 form-group me-2 w-sm-100">
                             <label for="">
                                 Unit
                             </label>
@@ -57,7 +57,7 @@
                             @enderror
                         </div>
 
-                        <div class="form-group me-2 w-sm-100">
+                        <div class="col-md-2 form-group me-2 w-sm-100">
                             <label for="">
                                 Brand
                             </label>
@@ -74,12 +74,22 @@
                             @enderror
                         </div>
 
-                        <div class="form-group me-2 w-sm-100">
+                        <div class="col-md-3 form-group me-2 w-sm-100">
                             <label for="">
                                 Category
                                 <span class="text-danger">**</span>
                             </label>
-                            <search-or-create url="types" name="type"></search-or-create>
+                            {{-- <search-or-create url="types" name="type"></search-or-create> --}}
+
+                            <select class="form-select" name="type" id="custom-select" data-placeholder="Choose Category">
+                                <option></option>
+                                @forelse ($types as $type)
+                                    <option value="{{ $type->id }}" {{ old('type') == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
+                                @empty
+                                    <option value="0">No Category</option>
+                                @endforelse
+                            </select>
+
                             <div class="py-1"><small class="help-text mm-font text-muted">အမျိုးအစား ထည့်ပါ။</small></div>
                             @error('type')
                             <span class="text-danger">{{ $message }}</span>

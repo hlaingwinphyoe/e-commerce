@@ -28,6 +28,8 @@ class Currency extends Model
     //scope functions here
     public function scopeFilterOn($query)
     {
-        //
+        if(request('currency')){
+            $query->where('name','like','%'.request('currency').'%');
+        }
     }
 }

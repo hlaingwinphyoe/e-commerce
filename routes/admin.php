@@ -28,7 +28,8 @@ use App\Http\Controllers\Admin\GiftInventoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\BonusPointController;
 use App\Http\Controllers\Admin\SaleController;
-
+use App\Http\Controllers\Admin\ExchangeRateController;
+use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
@@ -157,5 +158,10 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
 
     //bonuspoint
     Route::resource('/bonuspoints', BonusPointController::class);
+
+
+    //exchange
+    Route::resource('/exchangerates', ExchangeRateController::class);
+    Route::resource('/currencies', CurrencyController::class);
 
 });
