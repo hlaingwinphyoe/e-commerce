@@ -1,7 +1,7 @@
 <template>
     <div class="wastes-container mb-2">
         <waste-item
-            v-for="(waste,index) in data_wastes"
+            v-for="(waste,index) in data_wastes" :key="waste.id"
             :waste="waste"
             :index="index"
             :statuses="statuses"

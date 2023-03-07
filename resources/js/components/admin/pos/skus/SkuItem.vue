@@ -14,7 +14,7 @@
             </div>
             <p class="small text-danger alert-message fw-bold" v-show="out_of_stock">Out of stock</p>
         </td>
-        <td class="text-end">{{ Number(sku.pivot.qty * sku.pivot.price).toLocaleString() }}</td>
+        <td class="text-end">{{ Number(sku.pivot.qty * sku.price).toLocaleString() }}</td>
         <td>
             <a href="#" @click.prevent="onDeleteSku"><small class="btn btn-sm btn-outline-danger"><i class="fa fa-times"></i></small></a>
         </td>

@@ -1,14 +1,12 @@
 <template>
     <div class="costs-container mb-3">
-        <cost-list :costs="data_costs">
-            <cost-item
-                slot-scope="{ cost, index }"
+        <cost-item
+                v-for="(cost,index) in data_costs" :key="cost.id"
                 :cost="cost"
                 :index="index"
                 @on-update-cost="onUpdateCost"
                 @on-destroy-cost="onDestroyCost"
             ></cost-item>
-        </cost-list>
 
         <add-cost-form
             :exchange_rates="exchange_rates"

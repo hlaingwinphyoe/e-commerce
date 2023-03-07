@@ -24,9 +24,10 @@ use App\Http\Controllers\WebApi\VariantController;
 use App\Http\Controllers\WebApi\StatusController;
 use App\Http\Controllers\WebApi\OrderController;
 use App\Http\Controllers\WebApi\TransactionController;
-use App\Http\Controllers\WebApi\MaintypeController;
+use App\Http\Controllers\WebApi\CurrencyController;
 use App\Http\Controllers\WebApi\UserController;
 use App\Http\Controllers\WebApi\OrderSkuController;
+use App\Http\Controllers\WebApi\CostController;
 use App\Http\Controllers\WebApi\GiftController;
 use App\Http\Controllers\WebApi\GiftInventoryController;
 use App\Http\Controllers\WebApi\OrderNotificationController;
@@ -142,6 +143,9 @@ Route::resource('/wastes', WasteController::class);
 
 // pricing
 Route::resource('/pricings', PricingController::class);
+
+//currencies
+Route::get('/currencies', [CurrencyController::class, 'index']);
 
 //users
 Route::get('/users', [UserController::class, 'index']);

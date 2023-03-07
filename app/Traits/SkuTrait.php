@@ -115,13 +115,13 @@ trait SkuTrait
             } else if ($role->slug == 'level-2') {
                 $price = round($price / 100) * 100;
             } else {
-                $divide = $price % 1000;
-                $price = round($price / 1000) * 1000;
-                if ($divide <= 500 && $divide != 0) {
-                    $price += 500;
-                }
+                // $divide = $price % 1000;
+                // $price = round($price / 1000) * 1000;
+                // if ($divide <= 500 && $divide != 0) {
+                //     $price += 500;
+                // }
                 // ရာစွန်း
-                // $price = ceil($price / 100) * 100;
+                $price = ceil($price / 100) * 100;
             }
 
             return $price;

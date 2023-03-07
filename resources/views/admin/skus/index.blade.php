@@ -111,18 +111,20 @@
                     </td>
                     <td>
                         @if ($sku->buy_price >= $sku->price)
-                        <span class="text-danger">{{ number_format($sku->price) }}</span>
+                        <span class="text-danger">{{ $sku->price }}</span>
                         <div><a href="{{ route('admin.items.edit', $sku->item_id) }}" class="small">ရောင်းဈေးပြင်မည်</a></div>
                         @else
-                        <span>{{ number_format($sku->price) }}</span>
+                        <span>{{ $sku->price }}</span>
                         @endif
                     </td>
-                    <td>{{ number_format($sku->buy_price) }}</td>
+                    <td>{{ $sku->buy_price }}</td>
                     <td><span title="Stock" class="badge bg-secondary p-2 rounded text-white">{{ $sku->stock }}</span></td>
                     <td>{{ $sku->min_stock }}</td>
                     <td>
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+
                             <a href="#add-stock-{{ $sku->id }}" class="btn btn-outline-secondary " data-bs-toggle="modal"><i class="fa fa-plus"></i></a>
+
                             @include('admin.skus.add-stock')
 
                             <a href="{{ route('admin.skus.show', $sku->id) }}" class="btn btn-sm btn-outline-secondary">Details</a>
@@ -143,7 +145,7 @@
                             @endif
 
                             @if(auth()->user()->role->hasPermission('delete-item'))
-                                <a href="#delete-modal-{{ $sku->id }}" class="btn btn-outline-danger" data-bs-toggle="modal">
+                                <a href="#delete-modal-{{ $sku->id }}" class="btn btn-outline-secondary" data-bs-toggle="modal">
                                     <span><i class="fas fa-trash"></i></span>
                                 </a>
                                 <x-admin.delete id="{{ $sku->id }}" url="{{ route('admin.skus.destroy', $sku->id) }}"></x-admin.delete>
