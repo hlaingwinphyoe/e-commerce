@@ -131,7 +131,7 @@
                         @endif
                     </td>
                     <td>
-                        <small>{{ $order->updated_at ? $order->updated_at->format('m/d/Y') : $order->created_at->format('m/d/Y') }}</small>
+                        {{ $order->updated_at ? $order->updated_at->format('m/d/Y') : $order->created_at->format('m/d/Y') }}
                     </td>
                     <td>
                         @if(auth()->user()->role->hasPermission('edit-order') && $order->status->slug != 'cancel')

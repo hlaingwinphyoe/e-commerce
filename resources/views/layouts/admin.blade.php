@@ -45,6 +45,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
             var vapid_key ="{{ Config::get('app.vapid_key') }}";
+
+            $( '#custom-select' ).select2( {
+                theme: "bootstrap-5",
+                width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
+                placeholder: $( this ).data( 'placeholder' ),
+            });
     </script>
 {{--    <script src="{{ asset('js/push-noti.js') }}"></script>--}}
     @yield('scripts')

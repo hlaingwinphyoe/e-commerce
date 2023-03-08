@@ -23,6 +23,10 @@ class ExchangeRate extends Model
     //scope functions here
     public function scopeFilterOn($query)
     {
-        //
+        if(request('currency')){
+            $query->whereHas('currency',function($q){
+                $q->where('name','like','%'.request('currency').'%');
+            });
+        }
     }
 }

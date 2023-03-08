@@ -49,7 +49,7 @@
                                     :key="res.id"
                                     :id="res.id"
                                 >
-                                    
+
                                         <a
                                             href="#"
                                             class="small nav-link text-dark"
@@ -60,7 +60,7 @@
                                             "
                                             >{{ res.item_name }} {{ res.data ? '('+ res.data +')' : '' }}</a
                                         >
-                                    
+
                                 </li>
                             </ul>
                         </div>
@@ -144,8 +144,9 @@ export default {
                             params: { q: this.name, order: null },
                         })
                         .then((resp) => {
+                            //console.log(resp.data)
                             // this.results = resp.data;
-                            this.results = resp.data.filter(res => {
+                            this.results = resp.data.data.filter(res => {
                                 let sku = this.skus.some(s => s.id === res.id);
                                 return sku ? '' : res;
                             });

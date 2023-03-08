@@ -7,6 +7,8 @@ require('./popper-min.js');
 require('bootstrap');
 window.htmlToImage = require('html-to-image');
 
+window.select2 = require('select2');
+
 require('./components/admin/index.js');
 
 require('./admin/sidebar.js');
