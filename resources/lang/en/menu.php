@@ -57,4 +57,6 @@ return [
     'role' => 'Role',
     'staff' => 'Staff',
     'profile' => 'Profile',
+
+    'general_forms' => 'General Forms',
 ];

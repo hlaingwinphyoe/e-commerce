@@ -17,6 +17,7 @@ import WebOrder from './web-order/WebOrder.vue';
 import GiftInventory from  "./gift-inventory/GiftInventory.vue";
 import NotificationList from "./notification/NotificationList.vue";
 import MakeSku from './make-sku/MakeSku.vue';
+import Index from './generals/Index.vue'
 
 import VueMobileDetection from "vue-mobile-detection";
 
@@ -40,6 +41,8 @@ app.component('web-order', WebOrder);
 app.component("gift-inventory", GiftInventory);
 app.component("notification-list", NotificationList);
 app.component('make-sku', MakeSku);
+
+app.component('general-index', Index);
 
 app.use(VueMobileDetection);
 app.mount('#fse-admin');

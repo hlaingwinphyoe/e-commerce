@@ -37,6 +37,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\POSController;
 use App\Http\Controllers\Admin\ReturnController;
 use App\Http\Controllers\Admin\SkuWasteController;
+use App\Http\Controllers\Admin\GeneralController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
@@ -163,5 +164,10 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     //exchange
     Route::resource('/exchangerates', ExchangeRateController::class);
     Route::resource('/currencies', CurrencyController::class);
+
+
+    // general form
+    Route::resource('/generals',GeneralController::class);
+    Route::get('/generals/print/{$id}',[GeneralController::class,'print'])->name('generals.print');
 
 });
