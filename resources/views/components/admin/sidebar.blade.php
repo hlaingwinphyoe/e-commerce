@@ -138,6 +138,14 @@
         </a>
     </li>
     @endif
+    @if(auth()->user()->role->hasPermission('access-stock'))
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.generals.*') ? 'active' : '' }}" href="{{ route('admin.generals.index') }}" title="Low Stock Generals">
+            <i class="app-menu__icon fa fa-pen-to-square me-1"></i>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{ __('menu.general_forms') }}</span>
+        </a>
+    </li>
+    @endif
     @if(auth()->user()->role->hasPermission('access-return'))
     <li class="nav-item w-100">
         <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.returns.*') ? 'active' : '' }}" href="{{ route('admin.returns.index') }}" title="Returns">

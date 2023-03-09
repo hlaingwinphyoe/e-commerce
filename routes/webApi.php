@@ -36,6 +36,8 @@ use App\Http\Controllers\WebApi\V1\ItemController as V1ItemController;
 use App\Http\Controllers\WebApi\V1\ItemDiscountController as V1ItemDiscountController;
 use App\Http\Controllers\WebApi\V1\ItemPricingController as V1ItemPricingController;
 use App\Http\Controllers\WebApi\WasteController;
+use App\Http\Controllers\WebApi\GeneralController;
+use App\Http\Controllers\WebApi\GeneralInventoryController;
 use App\Http\Controllers\WebApi\WebPushNotiController;
 
 use Illuminate\Support\Facades\Route;
@@ -102,6 +104,9 @@ Route::patch('/inventories/{inventory}', [InventoryController::class, 'update'])
 //sku-inventory
 Route::post('/sku-inventories/{inventory}', [SkuInventoryController::class, 'store']);
 Route::delete('/sku-inventories/{inventory}/{sku}', [SkuInventoryController::class, 'destroy']);
+
+// general
+Route::post('/general-skus/{sku}', [GeneralController::class, 'store']);
 
 //returns
 Route::patch('/returns/{return}', [ReturnController::class, 'update']);
@@ -175,3 +180,5 @@ Route::prefix('v1')->group(function () {
     Route::get('/item-pricings/{item}', [V1ItemPricingController::class, 'index']);
     Route::post('/item-pricings/{item}', [V1ItemPricingController::class, 'store']); //use in new
 });
+
+Route::patch('/inventory-publish/{inventory}', [GeneralInventoryController::class, 'publish']);

@@ -36,7 +36,7 @@ class Inventory extends Model
     }
 
     //helper functions
-    
+
     public function stockUpdate($type = 'add')
     {
         if ($type == 'add') {
@@ -154,7 +154,7 @@ class Inventory extends Model
         // }else{
         //     if(!request('buy_price')) {
         //         $query->where('is_published', 0);
-        //     }            
+        //     }
         // }
 
 
@@ -168,4 +168,10 @@ class Inventory extends Model
 
         $query->whereDate('updated_at', '>=', $start_date)->whereDate('updated_at', '<=', $end_date);
     }
+
+    public function scopeIsType($query, $type)
+    {
+        $query->where('type', $type);
+    }
+
 }
