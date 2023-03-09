@@ -28,6 +28,7 @@ use App\Http\Controllers\WebApi\CurrencyController;
 use App\Http\Controllers\WebApi\UserController;
 use App\Http\Controllers\WebApi\OrderSkuController;
 use App\Http\Controllers\WebApi\CostController;
+use App\Http\Controllers\WebApi\ExpenseController;
 use App\Http\Controllers\WebApi\GiftController;
 use App\Http\Controllers\WebApi\GiftInventoryController;
 use App\Http\Controllers\WebApi\OrderNotificationController;
@@ -182,3 +183,8 @@ Route::prefix('v1')->group(function () {
 });
 
 Route::patch('/inventory-publish/{inventory}', [GeneralInventoryController::class, 'publish']);
+
+Route::get('/expenses', [ExpenseController::class, 'index']);
+Route::post('/expenses', [ExpenseController::class, 'store']);
+Route::patch('/expenses/{expense}', [ExpenseController::class, 'update']);
+Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy']);

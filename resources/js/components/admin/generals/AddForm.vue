@@ -170,6 +170,7 @@ export default {
         },
 
         clearForm() {
+            this.name = "";
             this.form.sku = '';
             this.form.amount = '';
             this.form.qty = '';
