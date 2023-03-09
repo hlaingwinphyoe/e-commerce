@@ -15,7 +15,7 @@ class Type extends Model
     protected $guarded = [];
 
     protected $appends = ['thumbnail'];
-   
+
     public function parent_type()
     {
         return $this->belongsTo(Type::class, 'parent_id', 'id');
@@ -77,6 +77,12 @@ class Type extends Model
 
 
     //scope functions
+
+    public function scopeIsType($query, $type)
+    {
+        $query->where('type', $type);
+    }
+
     public function scopeFilterOn($query)
     {
 

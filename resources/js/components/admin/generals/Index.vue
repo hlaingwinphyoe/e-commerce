@@ -12,7 +12,7 @@
                     <p class="mb-2">Form No. {{ data_inventory.inventory_no }}</p>
                     <h5 class="text-primary mb-3">Item Lists</h5>
 
-                    <GeneralList :skus="data_skus" @on-update-sku="onUpdateSku" @on-delete-sku="onDeleteSku" />
+                    <GeneralList :skus="data_skus" :inventory="data_inventory" @on-update-sku="onUpdateSku" @on-delete-sku="onDeleteSku" />
                 </div>
             </div>
 

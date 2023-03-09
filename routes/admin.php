@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\ExchangeRateController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\OrderController;
@@ -38,6 +39,7 @@ use App\Http\Controllers\Admin\POSController;
 use App\Http\Controllers\Admin\ReturnController;
 use App\Http\Controllers\Admin\SkuWasteController;
 use App\Http\Controllers\Admin\GeneralController;
+use App\Http\Controllers\Admin\ExpenseTypeController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
@@ -169,5 +171,11 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     // general form
     Route::resource('/generals',GeneralController::class);
     Route::get('/generals/print/{$id}',[GeneralController::class,'print'])->name('generals.print');
+
+
+    // expense
+    Route::resource('/expenses',ExpenseController::class);
+    Route::resource('/expensetypes',ExpenseTypeController::class);
+    Route::patch('/type-priority/{type}', [ExpenseTypeController::class, 'changePriority'])->name('expensetypes.change-priority');
 
 });

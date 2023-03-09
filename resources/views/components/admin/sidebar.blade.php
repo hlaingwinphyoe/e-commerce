@@ -138,11 +138,25 @@
         </a>
     </li>
     @endif
-    @if(auth()->user()->role->hasPermission('access-stock'))
+    @if(auth()->user()->role->hasPermission('access-inventory'))
     <li class="nav-item w-100">
-        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.generals.*') ? 'active' : '' }}" href="{{ route('admin.generals.index') }}" title="Low Stock Generals">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.generals.*') ? 'active' : '' }}" href="{{ route('admin.generals.index') }}" title="Generals Form">
             <i class="app-menu__icon fa fa-pen-to-square me-1"></i>
             <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{ __('menu.general_forms') }}</span>
+        </a>
+    </li>
+    @endif
+    @if(auth()->user()->role->hasPermission('access-expense'))
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.expenses.*') ? 'active' : '' }}" href="{{ route('admin.expenses.index') }}" title="Expense Forms">
+            <i class="app-menu__icon fa fa-file-invoice me-1"></i>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{ __('menu.expenses') }}</span>
+        </a>
+    </li>
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.expensetypes.*') ? 'active' : '' }}" href="{{ route('admin.expensetypes.index') }}" title="Expense Types">
+            <i class="app-menu__icon fa fa-clone me-1"></i>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{ __('menu.expensetypes') }}</span>
         </a>
     </li>
     @endif

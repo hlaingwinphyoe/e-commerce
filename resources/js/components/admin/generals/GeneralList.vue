@@ -9,7 +9,7 @@
                 </tr>
             </thead>
             <tbody>
-                <general-item v-for="sku in skus" :key="sku.id" :sku="sku" @on-update-sku="onUpdateSku" @on-delete-sku="onDeleteSku"></general-item>
+                <general-item v-for="sku in skus" :key="sku.id" :sku="sku" :inventory="inventory" @on-update-sku="onUpdateSku" @on-delete-sku="onDeleteSku"></general-item>
             </tbody>
         </table>
     </div>
@@ -22,7 +22,8 @@ export default {
         'general-item' : GeneralItem
     },
     props: {
-        skus: {required: true, default: ()=>[]}
+        skus: {required: true, default: ()=>[]},
+        inventory: { required: true, default: () => []}
     },
     data() {
         return {

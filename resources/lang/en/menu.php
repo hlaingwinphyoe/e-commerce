@@ -59,4 +59,6 @@ return [
     'profile' => 'Profile',
 
     'general_forms' => 'General Forms',
+    'expensetypes' => 'Expense Types',
+    'expenses' => 'Expenses'
 ];
