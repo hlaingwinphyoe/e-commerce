@@ -3,7 +3,6 @@
         <td>{{ sku.item_name }} {{ sku.data ? '('+ sku.data + ')' : '' }}</td>
         <td>
             <input type="text" class="form-control form-control-sm" v-model="form.qty"
-            :disabled="inventory.type !== 'general' || !inventory.is_published ? '' : 'disabled'"
             @change="onUpdateSkuInventory"
             />
         </td>
@@ -29,14 +28,20 @@ export default {
         }
     },
     methods: {
+        showAlert(message) {
+            toastr.options.closeButton = true;
+            toastr.success(message);
+        },
         onUpdateSkuInventory() {
             axios.post(`/wapi/sku-inventories/${this.sku.pivot.inventory_id}`, this.form).then(resp => {
                 this.$emit('on-update-sku', resp.data);
+                this.showAlert('Successfully Updated')
             });
         },
         onDeleteSkuInventory() {
             axios.delete(`/wapi/sku-inventories/${this.sku.pivot.inventory_id}/${this.sku.id}`).then(resp => {
                 this.$emit('on-delete-sku', resp.data);
+                this.showAlert('Successfully Deleted')
             });
         },
     }
