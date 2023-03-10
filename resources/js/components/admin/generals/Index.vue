@@ -1,12 +1,12 @@
 <template>
     <div class="row">
-       <div class="col-md-4">
+       <div class="col-md-6">
             <add-form :inventory="data_inventory" :skus="data_skus" @on-add-sku="onAddSku" />
        </div>
 
 
         <!-- Sku Lists -->
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
                     <p class="mb-2">Form No. {{ data_inventory.inventory_no }}</p>
@@ -20,7 +20,7 @@
             <div v-if="data_skus.length && data_inventory && !data_inventory.is_published" class="text-end py-3">
                 <a :href="url" class="btn btn-sm btn-outline-secondary me-2">Save as Draft</a>
 
-                <button type="button" class="btn btn-sm btn-danger fw-bold" @click.prevent="onPublish">Confirm and close</button>
+                <button type="button" class="btn btn-sm btn-primary fw-bold" @click.prevent="onPublish">Confirm and close</button>
             </div>
         </div>
     </div>

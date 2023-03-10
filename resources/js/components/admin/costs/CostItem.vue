@@ -2,7 +2,7 @@
     <div class="cost_item-container mb-2">
         <input type="hidden" name="costs[]" :value="cost.id" />
         <div>
-            <span class="text-capitalize">{{ cost.type }}-{{ index }}</span>
+            <span class="text-capitalize">{{ cost.type }}</span>
         </div>
         <div class="row">
             <div class="col-md-4">

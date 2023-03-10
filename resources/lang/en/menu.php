@@ -60,5 +60,6 @@ return [
 
     'general_forms' => 'General Forms',
     'expensetypes' => 'Expense Types',
-    'expenses' => 'Expenses'
+    'expenses' => 'Expenses',
+    'expense_report' => 'Expense Report'
 ];

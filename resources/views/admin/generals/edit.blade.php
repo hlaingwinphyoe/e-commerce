@@ -15,11 +15,11 @@
         <span class="text-muted form-text">( Edit )</span>
     </div>
 
-    <form action="{{ route('admin.generals.update',$general->id) }}" method="post">
-        @csrf
-        @method('patch')
-        <div class="row">
-            <div class="col-md-4 mb-4">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <form action="{{ route('admin.generals.update',$general->id) }}" method="post">
+                @csrf
+                @method('patch')
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group mb-3">
@@ -54,15 +54,17 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
-    </form>
 
-    @if($general)
-    <general-index :general="{{ $general }}" type="{{ $general->type }}" :skus="{{ $general->skus }}"></general-index>
-    @else
-    <general-index general="" type="general" :skus="{{ $general->skus }}"></general-index>
-    @endif
+       <div class="col-md-8 mb-4">
+        @if($general)
+        <general-index :general="{{ $general }}" type="{{ $general->type }}" :skus="{{ $general->skus }}"></general-index>
+        @else
+        <general-index general="" type="general" :skus="{{ $general->skus }}"></general-index>
+        @endif
+       </div>
+    </div>
 
 </div>
 

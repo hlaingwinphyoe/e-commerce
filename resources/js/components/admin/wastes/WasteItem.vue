@@ -2,7 +2,7 @@
     <div class="waste_item-container mb-2">
         <input type="hidden" name="wastes[]" :value="waste.id" />
         <div>
-            <span class="text-capitalize text-label">Waste-{{ index }}</span>
+            <span class="text-capitalize text-label">Waste</span>
         </div>
         <div class="row">
             <div class="form-group col-md-8 mb-2">
@@ -67,6 +67,7 @@ export default {
         onUpdateWaste() {
             if (this.form.amt) {
                 axios.put(`/wapi/wastes/${this.waste.id}`, this.form).then((resp) => {
+                    //console.log(resp.data)
                     this.$emit("on-update-waste", resp.data);
                 });
             } else {

@@ -14,6 +14,15 @@
             <span class="app-menu__label ms-1 sidebar-label">{{__('menu.dashboard')}}</span>
         </a>
     </li>
+
+    @if(auth()->user()->role->hasPermission('access-expense'))
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.expense.total') ? 'active' : '' }}" href="{{ route('admin.expense.total') }}?month={{ now()->format('M, Y') }}"  title="Expense Report">
+            <i class="app-menu__icon fa-solid fa-file-circle-check me-1"></i>
+            <span class="app-menu__label ms-1 sidebar-label">{{__('menu.expense_report')}}</span>
+        </a>
+    </li>
+    @endif
 {{--    <li class="nav-item w-100">--}}
 {{--        <a class="app-menu__item d-flex align-items-center nav-link" href="{{ route('home') }}" title="Home Page">--}}
 {{--            <i class="app-menu__icon fa fa-home me-1"></i>--}}

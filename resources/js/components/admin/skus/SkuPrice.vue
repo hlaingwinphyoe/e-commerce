@@ -58,14 +58,14 @@
 
         <Cost :costs="costs" :exchange_rates="exchange_rates" @on-update-cost="onUpdateCost" />
 
-        <Wastes :wastes="wastes" :statuses="statuses" @on-updates-waste="onUpdateWaste" />
+        <Wastes :wastes="wastes" :statuses="statuses" @on-update-waste="onUpdateWaste" />
 
         <div class="row align-items-center">
             <div class="form-group col-md-8 mb-4" v-if="form.pure_price">
                 <label>Pure Price</label>
                 <input
                     type="text"
-                    :value="form.pure_price"
+                    v-model="form.pure_price"
                     class="form-control form-control-sm"
                     id="pure_price"
                     disabled="disabled"
@@ -177,13 +177,15 @@ export default {
             return this.getPurePrice() + costs;
         },
         getWastes() {
-            let wastes = 0;
-            if (this.waste) {
-                wastes = this.form.waste_status == "percent"
-                        ? (this.getRawCost() * this.waste) / 100
-                        : this.waste;
+            let waste_cost = 0;
+
+            if(this.wastes.length){
+                this.wastes.map(waste => {
+                    waste_cost = waste.status.slug == 'fixed' ? this.waste : (this.getRawCost() * this.waste) / 100
+                })
+
             }
-            return wastes;
+            return waste_cost;
         },
 
         getPurePrice() {
@@ -195,8 +197,12 @@ export default {
         },
 
         onUpdateWaste(data) {
+
             if(isProxy(data)){
-                this.wastes = toRaw(data)
+                this.wastes = toRaw(data);
+                toRaw(this.wastes.map(x => {
+                    this.waste = Number(x.amt)
+                }))
             }
         },
 
@@ -206,12 +212,11 @@ export default {
 
         calculatePrice() {
             this.form.pure_price = 0;
-            this.form.pure_price += this.isEditing()
-                ? this.getPurePrice()
-                : this.form.buy_price;
-            this.form.pure_price = this.getPureCost();
+            this.form.pure_price = this.isEditing() ? this.getPureCost() : this.form.buy_price;
+            // this.form.pure_price = this.getPureCost();
 
-            // console.log($("#pure_price").val())
+            // console.log(this.form.pure_price)
+            // console.log(this.getWastes())
         },
     }
 }

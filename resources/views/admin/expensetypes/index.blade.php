@@ -89,7 +89,7 @@
                     <td><input type="checkbox" id="check-{{ $expensetype->id }}" value="{{ $expensetype->id }}"></td>
                     <td>{{ $expensetype->name }}</td>
                     <td>
-                        <form action="{{ route('admin.expensetypes.change-priority', $expensetype->id) }}" method="post">
+                        <form action="{{ route('admin.types.change-priority', $expensetype->id) }}" method="post">
                             @csrf
                             @method('patch')
                             <div>

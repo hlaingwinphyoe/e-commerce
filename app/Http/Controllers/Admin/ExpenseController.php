@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Expense;
 use App\Models\Supplier;
 use App\Models\Type;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
@@ -76,4 +78,43 @@ class ExpenseController extends Controller
         return redirect()->back()->with('message', 'Deleted Successfully');
 
     }
+
+    public function total()
+    {
+        $earliest = Expense::orderBy('created_at')->first();
+
+        $min_month = Carbon::parse($earliest->created_at);
+
+        $period = CarbonPeriod::create($min_month, '1 month', now()->addMonth())->toArray();
+
+        $start = request('month') ? Carbon::parse(request('month'))->startOfMonth() : now()->startOfMonth();
+
+        $end = request('month') ? Carbon::parse(request('month'))->endOfMonth() : now()->endOfMonth();
+
+        $types = Type::isType('expense')->whereHas('expenses')->get()->sortByDesc(function($type) use($start, $end){
+            return $type->getExpenseTotal($start, $end);
+        });
+
+        return view('admin.expenses.total', [
+            'start' => $start,
+            'end' => $end,
+            'period' => $period,
+            'types' => $types,
+        ]);
+
+        return response()->json($types);
+    }
+
+    public function totalPrint()
+    {
+        $data = json_decode(request('data'), true);
+
+        return view('admin.expenses.print', [
+            'data' => $data,
+            'start' => request('start'),
+            'end' => request('end'),
+            'month' => Carbon::parse(request('month'))
+        ]);
+    }
+
 }

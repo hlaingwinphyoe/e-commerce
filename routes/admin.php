@@ -174,8 +174,8 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
 
 
     // expense
+    Route::get('/expenses-total', [ExpenseController::class, 'total'])->name('expense.total');
+    Route::get('/expenses-total-print', [ExpenseController::class, 'totalPrint'])->name('expense.total.print');
     Route::resource('/expenses',ExpenseController::class);
     Route::resource('/expensetypes',ExpenseTypeController::class);
-    Route::patch('/type-priority/{type}', [ExpenseTypeController::class, 'changePriority'])->name('expensetypes.change-priority');
-
 });
