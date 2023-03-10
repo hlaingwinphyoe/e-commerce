@@ -25,10 +25,12 @@ $query .= request('q') ? '?q=' . request('q') : '';
         <!-- filter -->
         <div class="d-flex flex-wrap">
             <div class="me-2 mt-4">
+                @if(auth()->user()->role->hasPermission('create-inventory'))
                 <a href="{{ route('admin.generals.create') }}" class="btn btn-sm btn-secondary">
                     <small class="me-2"><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
+                @endif
             </div>
         </div>
 
@@ -74,9 +76,30 @@ $query .= request('q') ? '?q=' . request('q') : '';
                     <td>{{ $general->inventory_no }}</td>
                     <td class="">{{ $general->supplier ? $general->supplier->name : '' }}</td>
                     <td>
-                        <a href="{{ route('admin.generals.show', $general->id) }}" class="badge bg-secondary p-2 text-decoration-none">
+                        <!-- Button trigger modal -->
+                        <a href="#" class="badge bg-secondary text-decoration-none" data-bs-toggle="modal" data-bs-target="#general_item-{{ $general->id }}">
                             {{ $general->skus->count() }}
                         </a>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="general_item-{{ $general->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fa-solid fa-list-1-2"></i> Items List</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <ol class="list-group list-group-numbered">
+                                            @foreach ($general->skus as $sku)
+                                                <li class="list-group-item">{{ $sku->item_name }}</li>
+                                            @endforeach
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </td>
                     <td>
                         <small class="{{ $general->is_published == 1 ? 'text-success' : 'text-info' }}">{{ $general->is_published == 1 ? 'Confirmed' : 'Draft' }}</small>
@@ -85,15 +108,18 @@ $query .= request('q') ? '?q=' . request('q') : '';
                     <td>{{ $general->user ? $general->user->name : '' }}</td>
                     <td>
                         <div class="d-flex">
-                            {{-- @if(auth()->user()->role->hasPermission('edit-general')) --}}
+                            @if(auth()->user()->role->hasPermission('edit-inventory'))
                             <a href="{{ route('admin.generals.edit', $general->id) }}" class="me-2 text-warning">
                                 <span><i class="fa fa-pencil-alt"></i></span>
                             </a>
-                            {{-- @endif --}}
+                            @endif
 
-                            <a href="{{ route('admin.generals.show', $general->id) }}" class="me-2 text-info"><i class="fa fa-eye "></i></a>
-
-                            <a href="{{ route('admin.generals.print', $general->id) }}" class="me-2 text-success"><i class="fa fa-print"></i></a>
+                            @if((auth()->user()->role->hasPermission('delete-inventory') && ($general->skus->count() == 0 || !$general->is_published || Carbon\Carbon::parse($general->date)->format('Ymd') >= now()->format('Ymd'))) || auth()->user()->role->type == 'Developer')
+                            <a href="#delete-modal-{{ $general->id }}" class="text-danger" data-bs-toggle="modal">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            <x-admin.delete id="{{ $general->id }}" url="{{ route('admin.inventories.destroy', $general->id) }}"></x-admin.delete>
+                            @endif
                         </div>
                     </td>
                 </tr>

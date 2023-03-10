@@ -83,26 +83,30 @@ class ExpenseController extends Controller
     {
         $earliest = Expense::orderBy('created_at')->first();
 
-        $min_month = Carbon::parse($earliest->created_at);
+        if($earliest){
+            $min_month = Carbon::parse($earliest->created_at);
 
-        $period = CarbonPeriod::create($min_month, '1 month', now()->addMonth())->toArray();
+            $period = CarbonPeriod::create($min_month, '1 month', now()->addMonth())->toArray();
 
-        $start = request('month') ? Carbon::parse(request('month'))->startOfMonth() : now()->startOfMonth();
+            $start = request('month') ? Carbon::parse(request('month'))->startOfMonth() : now()->startOfMonth();
 
-        $end = request('month') ? Carbon::parse(request('month'))->endOfMonth() : now()->endOfMonth();
+            $end = request('month') ? Carbon::parse(request('month'))->endOfMonth() : now()->endOfMonth();
 
-        $types = Type::isType('expense')->whereHas('expenses')->get()->sortByDesc(function($type) use($start, $end){
-            return $type->getExpenseTotal($start, $end);
-        });
+            $types = Type::isType('expense')->whereHas('expenses')->get()->sortByDesc(function($type) use($start, $end){
+                return $type->getExpenseTotal($start, $end);
+            });
 
-        return view('admin.expenses.total', [
-            'start' => $start,
-            'end' => $end,
-            'period' => $period,
-            'types' => $types,
-        ]);
-
-        return response()->json($types);
+            return view('admin.expenses.total', [
+                'start' => $start,
+                'end' => $end,
+                'period' => $period,
+                'types' => $types,
+            ]);
+        }else{
+            return view('admin.expenses.noexpense', [
+                'message' => "Expense များမရှိသေးပါ။"
+            ]);
+        }
     }
 
     public function totalPrint()

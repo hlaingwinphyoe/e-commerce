@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
                 StatusSeeder::class,
                 TypeSeeder::class,
                 FAQTypeSeeder::class,
+                ExpenseSeeder::class,
         ]);
 
     }

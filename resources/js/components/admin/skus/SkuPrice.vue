@@ -213,10 +213,6 @@ export default {
         calculatePrice() {
             this.form.pure_price = 0;
             this.form.pure_price = this.isEditing() ? this.getPureCost() : this.form.buy_price;
-            // this.form.pure_price = this.getPureCost();
-
-            // console.log(this.form.pure_price)
-            // console.log(this.getWastes())
         },
     }
 }

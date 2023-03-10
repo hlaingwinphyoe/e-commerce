@@ -75,6 +75,7 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     Route::resource('/brands', BrandController::class);
     Route::resource('/suppliers', SupplierController::class);
     Route::resource('/inventories', InventoryController::class);
+    Route::get('/inventories-print/{inventory}', [InventoryController::class, 'print'])->name('inventories.print');
 
     //sku-history
     Route::get('/skus', [SkuController::class, 'index'])->name('skus.index');
@@ -93,9 +94,6 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
 
     //return
     Route::resource('/returns', ReturnController::class);
-
-    Route::resource('/inventories', InventoryController::class);
-    Route::get('/inventories-print/{inventory}', [InventoryController::class, 'print'])->name('inventories.print');
 
     //discount
     Route::resource('/discountypes', DiscountypeController::class);

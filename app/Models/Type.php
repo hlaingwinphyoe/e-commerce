@@ -88,6 +88,12 @@ class Type extends Model
         $query->where('type', $type);
     }
 
+    public function scopeIsNotType($query, $type)
+    {
+        $query->where('type','!=', $type);
+    }
+
+
     public function scopeFilterOn($query)
     {
 

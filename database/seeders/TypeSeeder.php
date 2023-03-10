@@ -16,8 +16,8 @@ class TypeSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'Baking Soda', 'BB Cream', 'Bode Wash', 'Coffee', 'Cosmetic', 
-            'Cream', 'Cotton Pad', 'Dryer', 
+            'Baking Soda', 'BB Cream', 'Bode Wash', 'Coffee', 'Cosmetic',
+            'Cream', 'Cotton Pad', 'Dryer',
             'Eye Cream', 'Face Mask', 'Facial Wash', 'Hair Care'
         ];
 
@@ -25,7 +25,8 @@ class TypeSeeder extends Seeder
             $type = Type::create([
                 'slug' => Str::slug($perm),
                 'name' => $perm,
-                'user_id' => 1
+                'user_id' => 1,
+                'type' => 'cate'
             ]);
         }
     }

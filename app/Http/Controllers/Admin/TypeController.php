@@ -17,7 +17,7 @@ class TypeController extends Controller
         $this->middleware('permissions:edit-type')->only(['edit', 'update']);
         $this->middleware('permissions:delete-type')->only('destroy');
     }
-    
+
     public function index()
     {
         $types = Type::filterOn()->orderBy('priority')->orderBy('name')->paginate(20);
@@ -50,7 +50,8 @@ class TypeController extends Controller
             'name' => $request->name,
             'desc' => $request->desc,
             'parent_id' => $request->parent_id ?? 0,
-            'user_id' => auth()->user()->id
+            'user_id' => auth()->user()->id,
+            'type' => 'cate'
         ]);
 
         if ($request->featured) {
@@ -93,7 +94,8 @@ class TypeController extends Controller
             'name' => $request->name,
             'desc' => $request->desc,
             'parent_id' => $request->parent_id ?? $type->parent_id,
-            'user_id' => auth()->user()->id
+            'user_id' => auth()->user()->id,
+            'type' => 'cate'
         ]);
 
         if ($request->featured) {
