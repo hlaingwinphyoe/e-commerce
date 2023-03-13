@@ -147,8 +147,9 @@ export default {
 
         onChangeCurrency(event) {
             this.form.rate = this.exchange_rates.filter((rate) => {
-                return rate.id === event.target.value;
+                return rate.id == event.target.value;
             });
+
             this.form.ex_rate = this.form.rate[0].mmk;
             this.form.div_rate = this.form.rate[0].rate;
             this.currency_id = this.form.rate[0].currency_id;
