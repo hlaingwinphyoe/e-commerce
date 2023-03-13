@@ -11,7 +11,7 @@ class GeneralController extends Controller
 {
     public function index()
     {
-        $generals = Inventory::isType('general')->latest()->paginate(20);
+        $generals = Inventory::isType('general')->orwhere('type','waste')->latest()->paginate(20);
         return view('admin.generals.index',compact('generals'));
     }
 

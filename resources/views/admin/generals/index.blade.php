@@ -62,6 +62,7 @@ $query .= request('q') ? '?q=' . request('q') : '';
                 <tr>
                     <th>Form No.</th>
                     <th>Description</th>
+                    <th>Type</th>
                     <th>Items</th>
                     <th>Status</th>
                     <th>Date</th>
@@ -74,7 +75,10 @@ $query .= request('q') ? '?q=' . request('q') : '';
                 @forelse($generals as $general)
                 <tr id="tr-{{ $general->id }}" class="align-middle">
                     <td>{{ $general->inventory_no }}</td>
-                    <td class="">{{ $general->supplier ? $general->supplier->name : '' }}</td>
+                    <td>{{ Str::limit($general->desc, 30) }}</td>
+                    <td>
+                        {{ $general->type }}
+                    </td>
                     <td>
                         <!-- Button trigger modal -->
                         <a href="#" class="badge bg-secondary text-decoration-none" data-bs-toggle="modal" data-bs-target="#general_item-{{ $general->id }}">

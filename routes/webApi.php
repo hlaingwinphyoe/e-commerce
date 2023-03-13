@@ -108,6 +108,7 @@ Route::delete('/sku-inventories/{inventory}/{sku}', [SkuInventoryController::cla
 
 // general
 Route::post('/general-skus/{sku}', [GeneralController::class, 'store']);
+Route::patch('/generals/{id}',[GeneralController::class,'update']);
 
 //returns
 Route::patch('/returns/{return}', [ReturnController::class, 'update']);

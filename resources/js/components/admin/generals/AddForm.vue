@@ -145,12 +145,6 @@ export default {
         onInputChange() {
             //for barcode input
         },
-        // onSelectData(data) {
-        //     this.form.item = data.id;
-        //     this.name = data.name;
-        //     this.results = [];
-        //     this.form.amount = this.inventory.type == 'return' ? data.price : this.form.amount;
-        // },
 
         onSelectData(sku) {
             this.form.sku = sku.id;
