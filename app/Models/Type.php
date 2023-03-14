@@ -31,6 +31,11 @@ class Type extends Model
         return $this->morphToMany(Media::class, 'mediabble');
     }
 
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class, 'type_id', 'id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -82,6 +87,12 @@ class Type extends Model
     {
         $query->where('type', $type);
     }
+
+    public function scopeIsNotType($query, $type)
+    {
+        $query->where('type','!=', $type);
+    }
+
 
     public function scopeFilterOn($query)
     {
@@ -159,4 +170,15 @@ class Type extends Model
         }
         return $path;
     }
+
+
+    public function getExpenseTotal($start, $end)
+    {
+        $expenses = $this->expenses()->whereDate('created_at', '>=', $start)->whereDate('created_at', '<=', $end)->get();
+
+        return $expenses->reduce(function($total, $expense) {
+            return $total + $expense->amount;
+        }, 0);
+    }
+
 }

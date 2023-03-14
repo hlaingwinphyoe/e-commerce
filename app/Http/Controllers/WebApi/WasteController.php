@@ -10,18 +10,20 @@ class WasteController extends Controller
 {
     public function store(Request $request)
     {
-        $waste = Waste::create([
+        $waste = Waste::with('status')->create([
             'amt' => $request->amt,
             'status_id' => $request->status_id,
             'type' => 'waste'
         ]);
+
+        $waste = Waste::with('status')->find($waste->id);
 
         return response()->json($waste);
     }
 
     public function update(Request $request, $id)
     {
-        $waste = Waste::findOrFail($id);
+        $waste = Waste::with('status')->findOrFail($id);
 
         $waste->update([
             'amt' => $request->amt,
@@ -34,7 +36,7 @@ class WasteController extends Controller
 
     public function destroy($id)
     {
-        $waste = Waste::findOrFail($id);
+        $waste = Waste::with('status')->findOrFail($id);
 
         $waste->delete();
 

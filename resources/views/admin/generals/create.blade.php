@@ -43,8 +43,8 @@
                             <label class="form-check-label" for="general">General Use</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type" id="return" value="return" {{ old('type') == 'return' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="return">Waste / Damage / Expired</label>
+                            <input class="form-check-input" type="radio" name="type" id="waste" value="waste" {{ old('type') == 'waste' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="waste">Waste / Damage / Expired</label>
                         </div>
 
                         <div class="from-group mt-3">

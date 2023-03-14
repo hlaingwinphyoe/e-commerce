@@ -65,7 +65,7 @@ class ItemController extends Controller
 
     public function create()
     {
-        $types = Type::orderBy('name')->get();
+        $types = Type::isType('cate')->orderBy('name')->get();
 
         $brands = Brand::orderBy('name')->get();
 
@@ -121,7 +121,7 @@ class ItemController extends Controller
             'wastes', 'costs', 'pricings.role', 'pricings.status'
         ])->findOrFail($id);
 
-        $types = Type::orderBy('name')->get();
+        $types = Type::isType('cate')->orderBy('name')->get();
 
         $brands = Brand::orderBy('name')->get();
 

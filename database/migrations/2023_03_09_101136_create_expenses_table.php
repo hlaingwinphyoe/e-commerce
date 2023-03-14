@@ -26,7 +26,7 @@ class CreateExpensesTable extends Migration
         });
 
         Schema::table('types', function (Blueprint $table) {
-            $table->string('type')->nullable();
+            $table->string('type')->dafault('cate');
         });
     }
 

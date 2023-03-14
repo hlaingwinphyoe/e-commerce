@@ -86,10 +86,10 @@ export default {
   },
   computed: {
     getProfit() {
-      let profit = this.pricing.status.slug == "percent"
-          ? (this.pure_price * this.pricing.amt) / 100
-          : this.pricing.amt;
-      let amount = this.pure_price + profit;
+      let profit = this.pricing.status.slug == "percent" ? (this.pure_price * this.pricing.amt) / 100 : this.pricing.amt;
+
+      let amount = Number(this.pure_price) + Number(profit);
+
       if (this.pricing.role.slug == "level-1") {
         amount = Math.ceil(amount / 10) * 10;
       } else if (this.pricing.role.slug == "level-2") {

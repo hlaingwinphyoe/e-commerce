@@ -58,6 +58,7 @@ export default {
     methods: {
         onAddWaste() {
             axios.post(`/wapi/wastes`, this.form).then((resp) => {
+                //console.log(resp.data)
                 this.form.amt = "";
                 this.form.status_id = this.statuses[0].id;
                 this.$emit("on-add-waste", resp.data);

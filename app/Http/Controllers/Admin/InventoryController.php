@@ -7,6 +7,7 @@ use App\Models\Inventory;
 use App\Models\Supplier;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InventoryController extends Controller
 {
@@ -87,6 +88,21 @@ class InventoryController extends Controller
             'inventory' => $inventory,
         ]);
 
+    }
+
+    public function destroy($id)
+    {
+        $inventory = Inventory::findOrFail($id);
+
+        DB::transaction(function () use ($inventory) {
+            if ($inventory->is_published) {
+                $inventory->stockUpdate('remove');
+            }
+        });
+
+        $inventory->delete();
+
+        return redirect(request()->session()->get('prev_route'))->with('message', 'Deleted successfully.');
     }
 
     public function print($id)

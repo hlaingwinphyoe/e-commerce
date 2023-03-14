@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row align-items-end">
                 <div class="col-6">
                     <div class="form-group">
                         <label for="">
@@ -68,12 +68,13 @@
                             class="form-control form-control-sm"
                             placeholder="Quantity"
                             v-model="form.qty"
+                            id="qty"
                         />
                     </div>
                 </div>
 
-                <div class="col-6" v-if="inventory.type !== 'general'">
-                     <div class="form-group">
+                <div class="col-6">
+                     <div class="form-group d-none">
                         <label for="">{{ inventory.type == 'return' ? 'Price' : 'Buy Price' }}</label>
                         <input
                             type="text"
@@ -82,22 +83,21 @@
                             v-model="form.amount"
                         />
                     </div>
+
+                    <div class="from-group mb-3" >
+                        <button
+                            type="submit"
+                            class="btn btn-sm btn-secondary"
+                            :class="canSave ? '' : 'disabled'"
+                            @click.prevent="onAddSku"
+                        >
+                            <small class="me-2"><i class="fas fa-save"></i></small>
+                            <span>Add</span>
+                        </button>
+                    </div>
                 </div>
             </div>
 
-
-
-            <div class="from-group" >
-                <button
-                    type="submit"
-                    class="btn btn-sm btn-secondary"
-                    :class="canSave ? '' : 'disabled'"
-                    @click.prevent="onAddSku"
-                >
-                    <small class="me-2"><i class="fas fa-save"></i></small>
-                    <span>Add</span>
-                </button>
-            </div>
         </div>
     </div>
 </template>
@@ -145,12 +145,6 @@ export default {
         onInputChange() {
             //for barcode input
         },
-        // onSelectData(data) {
-        //     this.form.item = data.id;
-        //     this.name = data.name;
-        //     this.results = [];
-        //     this.form.amount = this.inventory.type == 'return' ? data.price : this.form.amount;
-        // },
 
         onSelectData(sku) {
             this.form.sku = sku.id;
@@ -159,6 +153,7 @@ export default {
                 : sku.item_name;
             this.results = [];
             this.form.amount = this.inventory.type == 'return' ? data.price : this.form.amount;
+            $('#qty').focus();
         },
 
         onAddSku() {

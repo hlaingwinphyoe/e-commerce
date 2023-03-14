@@ -25,7 +25,8 @@ class GeneralInventoryController extends Controller
             'is_published' => 1,
         ]);
 
-        $inventory->stockUpdate($inventory->type == 'general' ? 'remove' : 'add', $inventory->is_published);
+        // $inventory->stockUpdate($inventory->type == 'general' ? 'remove' : 'add', $inventory->is_published);
+        $inventory->stockUpdate('remove', $inventory->is_published);
 
         return response()->json($inventory);
     }

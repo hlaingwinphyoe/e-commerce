@@ -106,9 +106,11 @@ class Inventory extends Model
     public function scopeFilterOn($query)
     {
         if (request('q')) {
-            $query->whereHas('supplier', function ($query) {
-                $query->where('name', 'like', '%'. request('q'). '%');
-            });
+            // $query->whereHas('supplier', function ($query) {
+            //     $query->where('name', 'like', '%'. request('q'). '%');
+            // });
+
+            $query->where('inventory_no', 'like', '%'. request('q'). '%');
         }
 
         if (request('item')) {
