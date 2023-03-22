@@ -20,9 +20,9 @@ class TypeController extends Controller
 
     public function index()
     {
-        $types = Type::filterOn()->orderBy('priority')->orderBy('name')->paginate(20);
+        $types = Type::filterOn()->isType('cate')->orderBy('priority')->orderBy('name')->paginate(20);
 
-        $categories = Type::where('parent_id', 0)->orderBy('name')->get();
+        $categories = Type::isType('cate')->where('parent_id', 0)->orderBy('name')->get();
 
         return view('admin.types.index')->with([
             'types' => $types,
@@ -32,7 +32,7 @@ class TypeController extends Controller
 
     public function create()
     {
-        $types = Type::where('parent_id', 0)->orderBy('name')->get();
+        $types = Type::isType('cate')->where('parent_id', 0)->orderBy('name')->get();
 
         return view('admin.types.create')->with([
             'types' => $types
@@ -73,7 +73,7 @@ class TypeController extends Controller
 
     public function edit(Type $type)
     {
-        $types = Type::where('id', '!=', $type->id)->where('parent_id', 0)->orderBy('name')->get();
+        $types = Type::isType('cate')->where('id', '!=', $type->id)->where('parent_id', 0)->orderBy('name')->get();
 
         return view('admin.types.edit')->with([
             'type' => $type,

@@ -12,7 +12,7 @@ class TypeController extends Controller
 {
     public function index()
     {
-        $types = Type::filterOn()->get();
+        $types = Type::isType('cate')->filterOn()->get();
 
         return response()->json($types);
     }

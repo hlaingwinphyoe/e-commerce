@@ -34,7 +34,7 @@ class ItemController extends Controller
             $items = Item::filterOn()->latest()->paginate(20);
         }
 
-        $types = Type::orderBy('name')->get();
+        $types = Type::isType('cate')->orderBy('name')->get();
 
         $discountypes = DiscountType::orderBy('name')->get();
 
