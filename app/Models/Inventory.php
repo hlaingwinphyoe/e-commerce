@@ -73,7 +73,9 @@ class Inventory extends Model
         $amount = 0;
 
         foreach ($this->skus as $sku) {
-            $amount += $sku->pivot->qty * $sku->pivot->amount;
+            $buy_price = $sku->pivot->amount > 0 ? $sku->pivot->amount : $sku->buy_price;
+
+            $amount += $sku->pivot->qty * $buy_price;
         }
 
         return $amount;

@@ -65,4 +65,13 @@ class Expense extends Model
         }
     }
 
+    public function scopeFromTo($query)
+    {
+        $start_date = request()->from_date ? Carbon::parse(request()->from_date) : now()->startOfMonth();
+
+        $end_date = request()->to_date ? Carbon::parse(request()->to_date) : now()->endOfMonth();
+
+        $query->whereDate('date', '>=', $start_date)->whereDate('date', '<=', $end_date);
+    }
+
 }

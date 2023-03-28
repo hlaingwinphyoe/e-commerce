@@ -22,6 +22,18 @@
             <span class="app-menu__label ms-1 sidebar-label">{{__('menu.expense_report')}}</span>
         </a>
     </li>
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.reports.summary') ? 'active' : '' }}" href="{{ route('admin.reports.summary') }}?month={{ now()->format('M, Y') }}"  title="Report Summary">
+            <i class="app-menu__icon fa-solid fa-file me-1"></i>
+            <span class="app-menu__label ms-1 sidebar-label">Summary</span>
+        </a>
+    </li>
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->routeIs('admin.reports.monthly') ? 'active' : '' }}" href="{{ route('admin.reports.monthly') }}?month={{ now()->format('M, Y') }}"  title="Monthly Report">
+            <i class="app-menu__icon fa fa-chart-bar me-1"></i>
+            <span class="app-menu__label ms-1 sidebar-label">Monthly Sales Report</span>
+        </a>
+    </li>
     @endif
 {{--    <li class="nav-item w-100">--}}
 {{--        <a class="app-menu__item d-flex align-items-center nav-link" href="{{ route('home') }}" title="Home Page">--}}

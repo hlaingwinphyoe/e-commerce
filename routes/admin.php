@@ -40,6 +40,7 @@ use App\Http\Controllers\Admin\ReturnController;
 use App\Http\Controllers\Admin\SkuWasteController;
 use App\Http\Controllers\Admin\GeneralController;
 use App\Http\Controllers\Admin\ExpenseTypeController;
+use App\Http\Controllers\Admin\ReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
@@ -176,4 +177,8 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     Route::get('/expenses-total-print', [ExpenseController::class, 'totalPrint'])->name('expense.total.print');
     Route::resource('/expenses',ExpenseController::class);
     Route::resource('/expensetypes',ExpenseTypeController::class);
+
+    //reports
+    Route::get('/reports-summary', [ReportController::class, 'summary'])->name('reports.summary');
+    Route::get('/monthly-reports', [ReportController::class, 'monthly'])->name('reports.monthly');
 });

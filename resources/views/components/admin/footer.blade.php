@@ -7,7 +7,7 @@
     <div class="text-muted">
         <p class="mb-0">If you need to get in touch with us, please give us a call.</p>
         <div>
-            <span class="text-primary small"><i class="fa fa-phone-alt"></i></span>
+            <span class="text-primary small"><i class="fa fa-phone"></i></span>
             <a href="tel:09940812192">+959 940 812 192</a>
             <span>( Monday-Friday, 9:00AM-5:00PM )</span>
         </div>
