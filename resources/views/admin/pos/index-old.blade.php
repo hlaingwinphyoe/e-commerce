@@ -22,7 +22,7 @@
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-order'))
             <div class="me-2 mb-1">
-                <a href="{{ route('admin.pos.create') }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('admin.pos.create') }}" class="btn btn-primary">
                     <small><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
@@ -65,8 +65,8 @@
                     <input type="date" name="to_date" class="form-control form-control-sm" value="{{ request('to_date') }}">
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-sm btn-dark me-2">Filter</button>
-                    <a href="{{ route('admin.pos.index') }}" class="btn btn-sm btn-primary">
+                    <button class="btn btn-dark me-2">Filter</button>
+                    <a href="{{ route('admin.pos.index') }}" class="btn btn-primary">
                         <small><i class="fa fa-redo"></i></small>
                     </a>
                 </div>

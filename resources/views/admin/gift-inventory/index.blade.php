@@ -17,7 +17,7 @@
     <div class="d-flex flex-wrap mb-2">
         @if(auth()->user()->role->hasPermission('access-gift'))
          <div class="me-2 mb-3">
-            <a href="{{ route('admin.gifts.index') }}" class="btn btn-sm btn-outline-primary mb-4">
+            <a href="{{ route('admin.gifts.index') }}" class="btn btn-outline-primary mb-4">
                 <i class="fa fa-arrow-left"></i>
                 <span>Back to Gifts</span>
             </a>
@@ -26,12 +26,12 @@
 
         @if(auth()->user()->role->hasPermission('create-gift-inventory'))
         <div class="me-2 mb-3">
-            <a href="{{ route('admin.gift-inventories.create') }}" class="btn btn-sm btn-primary">
+            <a href="{{ route('admin.gift-inventories.create') }}" class="btn btn-primary">
                 <small><i class="fa fa-plus"></i></small>
                 <span>Add New</span>
             </a>
         </div>
-       
+
         @endif
 
     </div>

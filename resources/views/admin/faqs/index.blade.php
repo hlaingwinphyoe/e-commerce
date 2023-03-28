@@ -21,7 +21,7 @@
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-faq'))
             <div class="me-2 mb-1">
-                <a href="{{ route('admin.faqs.create') }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('admin.faqs.create') }}" class="btn btn-primary">
                     <small><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
@@ -40,8 +40,8 @@
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-sm btn-outline-primary me-2 mb-1">Filter</button>
-                    <a href="{{ route('admin.faqs.index') }}" class="btn btn-sm btn-primary mb-1">
+                    <button class="btn btn-outline-primary me-2 mb-1">Filter</button>
+                    <a href="{{ route('admin.faqs.index') }}" class="btn btn-primary mb-1">
                         <small><i class="fa fa-redo m-0"></i></small>
                     </a>
                 </div>

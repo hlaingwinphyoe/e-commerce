@@ -25,7 +25,7 @@
         <div class="d-flex flex-wrap mb-2">
             <form action="{{ route('admin.skus.index') }}" class="d-flex responsive-flex">
                 <div class="form-group me-2">
-                    <a href="{{ route('admin.stock.export') }}" class="btn btn-sm btn-success">
+                    <a href="{{ route('admin.stock.export') }}" class="btn btn-success">
                         <i class="fa-solid fa-file-excel"></i> Export
                     </a>
                 </div>
@@ -54,8 +54,8 @@
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-sm btn-outline-secondary me-2">Filter</button>
-                    <a href="{{ route('admin.skus.index') }}" class="btn btn-sm btn-danger">
+                    <button class="btn btn-outline-secondary me-2">Filter</button>
+                    <a href="{{ route('admin.skus.index') }}" class="btn btn-danger">
                         <small><i class="fa fa-redo"></i></small>
                     </a>
                 </div>

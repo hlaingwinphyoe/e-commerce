@@ -21,7 +21,7 @@
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-delivery'))
             <div class="me-2 mb-3">
-                <a href="{{ route('admin.deliveries.create') }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('admin.deliveries.create') }}" class="btn btn-primary">
                     <small><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>

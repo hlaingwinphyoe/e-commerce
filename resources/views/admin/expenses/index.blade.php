@@ -17,7 +17,7 @@
     <div class="d-flex flex-wrap mb-1">
         @if(auth()->user()->role->hasPermission('create-expense'))
         <div class="me-2 mb-3">
-            <a href="{{ route('admin.expenses.create') }}" class="btn btn-sm btn-primary">
+            <a href="{{ route('admin.expenses.create') }}" class="btn btn-primary">
                 <small><i class="fa fa-plus"></i></small>
                 <span>Add New</span>
             </a>
@@ -39,8 +39,8 @@
                 <input type="date" name="date" value="{{ request('date') }}" placeholder="Search Date" class="form-control form-control-sm">
             </div>
             <div class="form-group">
-                <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
-                <a href="{{ route('admin.expenses.index') }}" class="btn btn-sm btn-primary">
+                <button class="btn btn-outline-primary me-2">Filter</button>
+                <a href="{{ route('admin.expenses.index') }}" class="btn btn-primary">
                     <small><i class="fa fa-redo"></i></small>
                 </a>
             </div>

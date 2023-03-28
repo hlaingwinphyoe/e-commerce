@@ -20,8 +20,8 @@
             </select>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-sm btn-primary me-2">Apply</button>
-            <a href="{{ route('admin.expense.total.print') }}?month={{ request('month') }}&data={{ $types }}&start={{ $start }}&end={{ $end }}" class="btn btn-sm btn-secondary">
+            <button type="submit" class="btn btn-primary me-2">Apply</button>
+            <a href="{{ route('admin.expense.total.print') }}?month={{ request('month') }}&data={{ $types }}&start={{ $start }}&end={{ $end }}" class="btn btn-secondary">
                 <i class="fa-solid fa-print"></i> Print
             </a>
         </div>

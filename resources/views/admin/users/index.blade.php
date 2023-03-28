@@ -33,7 +33,7 @@
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-user') && $user_count < config('app.max_user'))
             <div class="me-2 mb-3">
-                <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-secondary">
+                <a href="{{ route('admin.users.create') }}" class="btn btn-secondary">
                     <small><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
@@ -44,7 +44,7 @@
                 <form action="{{ route('admin.users.import') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="upload-btn-wrapper">
-                        <button class="btn btn-sm btn-success">
+                        <button class="btn btn-success">
                             <small class="me-1"><i class="far fa-file-excel"></i></small>
                             <span>Import</span>
                         </button>
@@ -62,8 +62,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-sm btn-outline-secondary me-2">Filter</button>
-                    <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-danger">
+                    <button class="btn btn-outline-secondary me-2">Filter</button>
+                    <a href="{{ route('admin.users.index') }}" class="btn btn-danger">
                         <small><i class="fa fa-redo"></i></small>
                     </a>
                 </div>

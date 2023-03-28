@@ -21,7 +21,7 @@
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-discount-type'))
             <div class="me-2 mb-3">
-                <a href="{{ route('admin.discountypes.create') }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('admin.discountypes.create') }}" class="btn btn-primary">
                     <small><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
@@ -36,8 +36,8 @@
                     <input type="date" name="end_date" class="form-control form-control-sm" value="{{ request('end_date') }}">
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
-                    <a href="{{ route('admin.discountypes.index') }}" class="btn btn-sm btn-primary">
+                    <button class="btn btn-outline-primary me-2">Filter</button>
+                    <a href="{{ route('admin.discountypes.index') }}" class="btn btn-primary">
                         <small><i class="fa fa-redo"></i></small>
                     </a>
                 </div>

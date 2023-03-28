@@ -14,7 +14,7 @@
         <span class="text-muted form-text">( Showing {{ $user_gifts->count() }} of total {{ $user_gifts->total() }} records )</span>
     </div>
 
-    <a href="{{ route('admin.gifts.index') }}" class="btn btn-sm btn-outline-primary mb-4">
+    <a href="{{ route('admin.gifts.index') }}" class="btn btn-outline-primary mb-4">
         <i class="fa fa-arrow-left"></i>
         <span>Back to Gifts</span>
     </a>

@@ -20,8 +20,6 @@ import MakeSku from './make-sku/MakeSku.vue';
 import Index from './generals/Index.vue';
 import ExpenseIndex from './expense/Index.vue';
 import MonthlyReport from './reports/Monthly.vue';
-import { MonthPicker } from "vue-month-picker";
-import { MonthPickerInput } from "vue-month-picker";
 
 import VueMobileDetection from "vue-mobile-detection";
 
@@ -49,7 +47,7 @@ app.component('general-index', Index);
 app.component('expense-index',ExpenseIndex);
 app.component('monthly-report', MonthlyReport);
 
-app.use(MonthPicker);
-app.use(MonthPickerInput);
+// app.use(MonthPicker);
+// app.use(MonthPickerInput);
 app.use(VueMobileDetection);
 app.mount('#fse-admin');

@@ -26,7 +26,7 @@ $query .= request('q') ? '?q=' . request('q') : '';
         <div class="d-flex flex-wrap">
             <div class="me-2 mt-4">
                 @if(auth()->user()->role->hasPermission('create-inventory'))
-                <a href="{{ route('admin.generals.create') }}" class="btn btn-sm btn-secondary">
+                <a href="{{ route('admin.generals.create') }}" class="btn btn-secondary">
                     <small class="me-2"><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
@@ -48,8 +48,8 @@ $query .= request('q') ? '?q=' . request('q') : '';
                 <input type="date" name="to_date" class="form-control form-control-sm" value="{{ request('to_date') }}">
             </div>
             <div class="form-group">
-                <button class="btn btn-sm btn-outline-secondary me-2 mb-1">Filter</button>
-                <a href="{{ route('admin.generals.index') }}" class="btn btn-sm btn-danger mb-1">
+                <button class="btn btn-outline-secondary me-2 mb-1">Filter</button>
+                <a href="{{ route('admin.generals.index') }}" class="btn btn-danger mb-1">
                     <small><i class="fa fa-redo m-0"></i></small>
                 </a>
             </div>

@@ -23,7 +23,7 @@
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-gift'))
             <div class="me-2 mb-3">
-                <a href="{{ route('admin.gifts.create') }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('admin.gifts.create') }}" class="btn btn-primary">
                     <small><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
@@ -32,7 +32,7 @@
 
             @if(auth()->user()->role->hasPermission('access-gift-log'))
             <div class="me-2 mb-3">
-                <a href="{{ route('admin.gift-logs.index') }}" class="btn btn-sm btn-outline-primary">
+                <a href="{{ route('admin.gift-logs.index') }}" class="btn btn-outline-primary">
                     <span>Gift Log</span>
                 </a>
             </div>
@@ -40,7 +40,7 @@
 
             @if(auth()->user()->role->hasPermission('access-gift-inventory'))
             <div class="me-2 mb-3">
-                <a href="{{ route('admin.gift-inventories.index') }}" class="btn btn-sm btn-secondary">
+                <a href="{{ route('admin.gift-inventories.index') }}" class="btn btn-secondary">
                     <span>Inventory</span>
                 </a>
             </div>
@@ -85,7 +85,7 @@
 					<td>{{ $gift->points }}</td>
 					<td>{{ $gift->stock }}</td>
                     <td><a href="{{ route('admin.gifts.show', $gift->id) }}" class="badge badge-success">{{ $gift->getTotalInventoriesCount() }}</a></td>
-					<?php 
+					<?php
 						$user_gifts_count = $gift->userGifts()->whereHas('status', function($q) {
 							$q->where('slug', '!=', 'cancel');
 						})->count();
@@ -111,7 +111,7 @@
                         <a href="{{ route('admin.gifts.edit', $gift->id) }}" class="btn btn-sm btn-primary me-2 mb-1">
                             <small><i class="fa fa-pencil-alt"></i></small>
                         </a>
-                        @endif                        
+                        @endif
 
                         @if(auth()->user()->role->hasPermission('delete-gift'))
                         <a href="#delete-modal-{{ $gift->id }}" class="btn btn-sm btn-danger mb-1" data-bs-toggle="modal">

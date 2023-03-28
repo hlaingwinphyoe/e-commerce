@@ -21,7 +21,7 @@
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-role'))
             <div class="me-2 mb-3">
-                <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-secondary">
+                <a href="{{ route('admin.roles.create') }}" class="btn btn-secondary">
                     <small><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
@@ -37,8 +37,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-sm btn-outline-secondary me-2">Filter</button>
-                    <a href="{{ route('admin.roles.index') }}" class="btn btn-sm btn-danger">
+                    <button class="btn btn-outline-secondary me-2">Filter</button>
+                    <a href="{{ route('admin.roles.index') }}" class="btn btn-danger">
                         <small><i class="fa fa-redo"></i></small>
                     </a>
                 </div>

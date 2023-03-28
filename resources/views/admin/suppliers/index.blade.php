@@ -21,7 +21,7 @@
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-supplier'))
             <div class="me-2 mb-3">
-                <a href="{{ route('admin.suppliers.create') }}" class="btn btn-sm btn-secondary">
+                <a href="{{ route('admin.suppliers.create') }}" class="btn btn-secondary">
                     <small><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>

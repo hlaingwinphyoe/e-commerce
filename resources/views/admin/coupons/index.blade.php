@@ -28,52 +28,52 @@
         <div class="d-flex flex-warp mb-2">
             @if(auth()->user()->role->hasPermission('create-coupon'))
             <div class="me-2 mb-1">
-                <a href="{{ route('admin.coupons.create') }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('admin.coupons.create') }}" class="btn btn-primary">
                     <small><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
             </div>
             <div class="me-2 mb-1">
-                <a href="#generate-coupon-form" data-bs-toggle="modal" class="btn btn-sm btn-outline-primary">
+                <a href="#generate-coupon-form" data-bs-toggle="modal" class="btn btn-outline-primary">
                     <small><i class="fa fa-plus"></i></small>
                     <span>Genearate</span>
                 </a>
                 <x-generate-coupon></x-generate-coupon>
             </div>
             @endif
-            
+
             <div class="me-2 mb-1">
                 <form action="{{ route('admin.coupons.import') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="upload-btn-wrapper d-none">
-                        <button class="btn btn-sm btn-danger">
+                        <button class="btn btn-danger">
                             <small class="me-1"><i class="far fa-file-excel"></i></small>
                             <span>Import</span>
                         </button>
-                        <input type="file" name="files" id="excel-input">              
-                    </div>                
-                </form>            
+                        <input type="file" name="files" id="excel-input">
+                    </div>
+                </form>
             </div>
 
             <form action="{{ route('admin.coupons.index') }}" class="d-flex responsive-flex">
                 <div class="form-group me-2">
                     <select name="type_id" class="form-select">
                         <option value="">Select Type</option>
-                        @foreach($maintypes as $maintype)                    
-                        <option value="{{ $maintype->id }}" {{ request('type_id') == $maintype->id ? 'selected' : '' }}>{{ $maintype->name }}</option>                    
+                        @foreach($maintypes as $maintype)
+                        <option value="{{ $maintype->id }}" {{ request('type_id') == $maintype->id ? 'selected' : '' }}>{{ $maintype->name }}</option>
                         @endforeach
                     </select>
-                </div>    
+                </div>
                 <div class="form-group me-2">
                     <select name="type" class="form-select">
                         <option value="">Select Fixed or Percent</option>
                         <option value="fixed" {{ request('type') == 'fixed' ? 'selected' : '' }}>Fixed</option>
                         <option value="percent" {{ request('type') == 'percent' ? 'selected' : '' }}>Percent</option>
                     </select>
-                </div>                 
+                </div>
                 <div class="form-group">
-                    <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
-                    <a href="{{ route('admin.coupons.index') }}" class="btn btn-sm btn-primary">
+                    <button class="btn btn-outline-primary me-2">Filter</button>
+                    <a href="{{ route('admin.coupons.index') }}" class="btn btn-primary">
                         <small><i class="fa fa-redo"></i></small>
                     </a>
                 </div>
@@ -89,7 +89,7 @@
                     <th>Amount</th>
                     <th>Expired</th>
                     <th>By</th>
-                    <th>Active</th>                    
+                    <th>Active</th>
                     <th><i class="fas fa-border-style"></i></th>
                 </tr>
             </thead>
@@ -101,7 +101,7 @@
                     <td>{{ $coupon->expired ? Carbon\Carbon::parse($coupon->expired)->format('d M, Y') : ' - ' }}</td>                                        <td>{{ $coupon->user ? $coupon->user->name : ' - ' }}</td>
                     <td>
                         <a href="{{ route('admin.coupons.index') }}?is_used={{ $coupon->is_used ? 'used' : 'active' }}" class="badge badge-{{ $coupon->is_used ? 'secondary' : 'success' }}">{{ $coupon->is_used ? 'Used' : 'Active' }}</a>
-                    </td>                    
+                    </td>
                     <td>
                         @if(auth()->user()->role->hasPermission('edit-coupon'))
                         <a href="{{ route('admin.coupons.edit', $coupon->id) }}" class="btn btn-sm btn-primary me-2 mb-1">

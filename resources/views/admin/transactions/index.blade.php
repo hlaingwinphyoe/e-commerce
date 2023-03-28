@@ -10,7 +10,7 @@
 
 <div>
     <div class="d-flex mb-4 align-items-center">
-        <a href="{{ request()->session()->get('prev_route') }}" class="btn btn-primary btn-sm me-2">
+        <a href="{{ request()->session()->get('prev_route') }}" class="btn btn-primary me-2">
             <i class="fa-solid fa-arrow-left"></i>
         </a>
         <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.transactions')}}</h4>
@@ -26,7 +26,7 @@
             </select>
         </div>
         <div class="me-2">
-            <button id="apply-actions" class="btn btn-sm btn-outline-secondary">
+            <button id="apply-actions" class="btn btn-outline-secondary">
                 <i class="fa fa-check me-2"></i>
                 <span>Apply</span>
             </button>
@@ -56,8 +56,8 @@
                 <input type="date" name="to_date" class="form-control form-control-sm" value="{{ request('to_date') }}">
             </div>
             <div class="form-group">
-                <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
-                <a href="{{ route('admin.transactions.index') }}" class="btn btn-sm btn-primary">
+                <button class="btn btn-outline-primary me-2">Filter</button>
+                <a href="{{ route('admin.transactions.index') }}" class="btn btn-primary">
                     <small><i class="fa fa-redo"></i></small>
                 </a>
             </div>
