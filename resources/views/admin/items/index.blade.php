@@ -42,8 +42,8 @@ if (request('brand')) {
     <div class="d-flex mb-3">
         <!-- filter -->
         <div class="d-flex flex-wrap mb-2">
-            @if(auth()->user()->role->hasPermission('create-item')) <div class="me-2 mb-1">
-                <a href="{{ route('admin.items.create') }}" class="btn btn-sm btn-secondary">
+            @if(auth()->user()->role->hasPermission('create-item')) <div class="me-2">
+                <a href="{{ route('admin.items.create') }}" class="btn btn-secondary">
                     <small class="me-2"><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
@@ -52,7 +52,7 @@ if (request('brand')) {
 
 
         <form action="{{ route('admin.items.index') }}" method="get" class="d-flex">
-            <div class="me-2 mb-1">
+            <div class="me-2">
                 <select name="status" class="form-select form-select-sm">
                     <option value="">Select Status</option>
                     <option value="all">All</option>
@@ -60,8 +60,8 @@ if (request('brand')) {
                     <option value="trashed">Trashed</option>
                 </select>
             </div>
-            <div class="me-2 mb-1">
-                <button id="apply-actions" class="btn btn-sm btn-outline-secondary" data-route="item">
+            <div class="me-2">
+                <button id="apply-actions" class="btn btn-outline-secondary" data-route="item">
                     <i class="fa fa-check me-2"></i>
                     <span>Apply</span>
                 </button>
@@ -90,8 +90,8 @@ if (request('brand')) {
             </div>
 
             <div class="form-group">
-                <button class="btn btn-sm btn-outline-secondary me-2 mb-1">Filter</button>
-                <a href="{{ route('admin.items.index') }}" class="btn btn-sm btn-danger mb-1">
+                <button class="btn btn-outline-secondary me-2">Filter</button>
+                <a href="{{ route('admin.items.index') }}" class="btn btn-danger">
                     <small><i class="fa fa-redo m-0"></i></small>
                 </a>
             </div>
@@ -120,7 +120,11 @@ if (request('brand')) {
                 <td>
                     @if($item->skus->count() > 0)
                     <a href="{{ route('admin.items.show', $item->id) }}" class="badge bg-secondary p-2 text-decoration-none">
-                        {{ $item->skus->count() }}
+                        @foreach($item->skus as $sku)
+                            <span>
+                                {{ $sku->code ?? 'Get Code' }}
+                            </span>
+                        @endforeach
                     </a>
                     @else
                     <span>{{ $item->skus->count() }}</span>
@@ -174,8 +178,4 @@ if (request('brand')) {
     {{ $items->appends(request()->query->all())->links('components.pagination') }}
 </div>
 </div>
-
-
-
-
 @endsection
