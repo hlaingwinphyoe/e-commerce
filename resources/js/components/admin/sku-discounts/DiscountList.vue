@@ -1,6 +1,6 @@
 <template>
     <div class="discount_list-container">
-        <discount-item v-for="discount in discounts" :key="discount.id" :discount="discount" @on-update-discount="onUpdateDiscount" @on-destroy-discount="onDestroyDiscount"></discount-item>
+        <discount-item v-for="discount in discounts" :key="discount.id" :statuses="statuses" :discount="discount" @on-update-discount="onUpdateDiscount" @on-destroy-discount="onDestroyDiscount"></discount-item>
     </div>
 </template>
 
@@ -11,7 +11,8 @@ export default {
         'discount-item' : DiscountItem
     },
     props: {
-        discounts: {required: true}
+        discounts: {required: true},
+        statuses: {required: true, default: () => []},
     },
     methods: {
         onUpdateDiscount(data) {

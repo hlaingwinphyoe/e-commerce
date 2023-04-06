@@ -193,20 +193,20 @@
     @endif
 
     <!-- Discounts & Coupons -->
-{{--    @if(auth()->user()->role->hasPermissions(['access-discount-type', 'access-gift', 'access-coupon', 'access-bonus-point']))--}}
-{{--    <li class="nav-item w-100">--}}
-{{--        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.discount_setting')}}</span>--}}
-{{--    </li>--}}
-{{--    @endif--}}
-
-{{--    @if(auth()->user()->role->hasPermission('access-discount-type'))--}}
-{{--    <li class="nav-item w-100">--}}
-{{--        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/discountypes','admin/discountypes/*']) ? 'active' : '' }}" href="{{ route('admin.discountypes.index') }}" title="Discount Type">--}}
-{{--            <i class="app-menu__icon fa fa-tags me-1"></i>--}}
-{{--            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.discounts')}}</span>--}}
-{{--        </a>--}}
-{{--    </li>--}}
-{{--    @endif--}}
+    @if(auth()->user()->role->hasPermissions(['access-discount-type', 'access-gift', 'access-coupon', 'access-bonus-point']))
+    <li class="nav-item w-100">
+        <span class="app-menu__label nav-link sidebar-label text-dark text-uppercase bg-sidebar-dark {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.discount_setting')}}</span>
+    </li>
+    @endif
+ 
+    @if(auth()->user()->role->hasPermission('access-discount-type'))
+    <li class="nav-item w-100">
+        <a class="app-menu__item d-flex align-items-center nav-link {{ request()->is(['admin/discountypes','admin/discountypes/*']) ? 'active' : '' }}" href="{{ route('admin.discountypes.index') }}" title="Discount Type">
+            <i class="app-menu__icon fa fa-tags me-1"></i>
+            <span class="app-menu__label ms-1 sidebar-label {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.discounts')}}</span>
+        </a>
+    </li>
+    @endif
 
 {{--    @if(auth()->user()->role->hasPermission('access-gift'))--}}
 {{--    <li class="nav-item w-100">--}}
