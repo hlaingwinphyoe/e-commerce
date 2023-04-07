@@ -8,19 +8,20 @@
 
 <x-admin.search-box url="{{ route('admin.items.index') }}"></x-admin.search-box>
 
-<div>
-    <h2 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.item')}}</h2>
+<div class="d-flex align-items-center mb-2">
+    <h3 class="page-title mb-0 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.item')}}</h3>
+    <span class="ms-2"><span class="fw-bold">{{ $items->count() }}</span> of total <span class="">{{ $items->total() }}</span></span>
 </div>
 
 @include('components.admin.message')
 
 <?php $item_count =  \App\Models\Item::withTrashed()->count(); ?>
 
-@if($item_count >= config('app.max_data'))
+{{-- @if($item_count >= config('app.max_data'))
 <div class="">
     <p class="alert alert-danger py-1">You have already <span class="fw-bold h5">{{ config('app.max_data') }}</span> items (Including in Trash and Disabled) and can't add anymore.</p>
 </div>
-@endif
+@endif --}}
 
 
 <?php
@@ -37,9 +38,7 @@ if (request('brand')) {
 ?>
 
 <div class="border bg-white rounded px-2 py-4">
-    <p class="me-2"><span class="fw-bold h5">{{ $items->count() }}</span> of total <span class="">{{ $items->total() }}</span></p>
-
-    <div class="d-flex mb-3">
+    <div class="d-flex">
         <!-- filter -->
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-item')) <div class="me-2">
@@ -106,6 +105,7 @@ if (request('brand')) {
             <tr>
                 <th width="250px">Name</th>
                 <th>Skus</th>
+                <th>Photo</th>
                 <th>Category</th>
                 <th>Stock</th>
                 <th>Price</th>
@@ -129,6 +129,12 @@ if (request('brand')) {
                     @else
                     <span>{{ $item->skus->count() }}</span>
                     @endif
+                </td>
+                <td>
+                    @php
+                        $img = $item->medias()->first();
+                    @endphp
+                    <img src="{{ asset('storage/thumbnail/'.$img->slug) }}" width="65" alt="item_image">
                 </td>
                 <td>{{ $item->type() ? $item->type()->name : '-' }}</td>
                 <td>

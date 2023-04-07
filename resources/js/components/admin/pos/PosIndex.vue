@@ -387,7 +387,7 @@ export default {
             this.order.price = this.getTotal;
         },
         onUpdateSku(data) {
-            console.log("here");
+            //console.log("here");
             this.data_skus = data;
             this.order.price = this.getTotal;
         },
@@ -417,7 +417,7 @@ export default {
             axios
                 .post(`/wapi/order-discount/${this.order.id}`, data)
                 .then((resp) => {
-                    console.log(resp.data);
+                    //console.log(resp.data);
                     this.data_order = resp.data;
                     this.form.amount = this.getBalance;
                 });
@@ -473,7 +473,7 @@ export default {
         },
         getTotal() {
             let total = this.data_skus.reduce((total, x) => {
-                return total + x.pivot.qty * x.price;
+                return total + x.pivot.qty * x.pivot.price;
             }, 0);
             return total;
         },
