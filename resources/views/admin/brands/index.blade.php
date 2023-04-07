@@ -61,11 +61,9 @@
                     <td>{{ $brand->name }}</td>
                     <td>
                         @if($brand->items()->count())
-                        <a href="{{ route('admin.items.index') }}?brand={{ $brand->slug }}" class="badge badge-primary">
+                        <a href="{{ route('admin.items.index') }}?brand={{ $brand->slug }}" class="badge bg-primary">
                             {{ $brand->items()->count() }}
                         </a>
-                        @else
-                        <span>{{ $brand->items()->count() }}</span>
                         @endif
                     </td>
                     <td>

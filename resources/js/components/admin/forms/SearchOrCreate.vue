@@ -21,9 +21,6 @@ export default {
     },
     data() {
         return {
-            form: {
-
-            },
             q: this.input_obj ? this.input_obj.name : '',
             timeout: '',
             results: [],

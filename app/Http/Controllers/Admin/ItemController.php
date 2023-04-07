@@ -119,7 +119,7 @@ class ItemController extends Controller
     public function edit($id)
     {
         $item = Item::with([
-            'wastes', 'costs', 'pricings.role', 'pricings.status'
+            'wastes', 'costs', 'pricings.role', 'pricings.status',
         ])->findOrFail($id);
 
         $types = Type::isType('cate')->orderBy('name')->get();
@@ -167,6 +167,7 @@ class ItemController extends Controller
 
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $item = Item::findOrFail($id);
 
         $request->validate([

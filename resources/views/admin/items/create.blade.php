@@ -65,13 +65,16 @@
                                 Brand
                             </label>
 
-                            <select name="brand" class="form-select form-select-sm">
+                            {{-- <select name="brand" class="form-select form-select-sm">
                                 <option value="">Choose Brand</option>
                                 @foreach($brands as $brand)
                                     <option value="{{ $brand->id }}" {{ old('brand') == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
                                 @endforeach
                             </select>
-                            <div class="py-1"><small class="help-text mm-font text-muted">Brand ရှိလျှင်ထည့်ပါ။</small></div>
+                            <div class="py-1"><small class="help-text mm-font text-muted">Brand ရှိလျှင်ထည့်ပါ။</small></div> --}}
+
+                            <search-or-create url="brands" name="brand" input_obj="" ></search-or-create>
+
                             @error('brand')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror

@@ -3,6 +3,7 @@
 //media
 
 use App\Http\Controllers\WebApi\AttributeController;
+use App\Http\Controllers\WebApi\BrandController;
 use App\Http\Controllers\WebApi\InventoryController;
 use App\Http\Controllers\WebApi\ItemAttributeController;
 use App\Http\Controllers\WebApi\ItemDiscountController;
@@ -50,8 +51,14 @@ Route::patch('/medias/check/{id}', [MediaController::class, 'check']);
 Route::get('/get-icons', [MediaController::class, 'getIcons']);
 Route::get('/types', [TypeController::class, 'index']);
 Route::post('/types/create', [TypeController::class, 'store']);
+
+// unit
 Route::get('/units', [UnitController::class,'index']);
 Route::post('/units/create', [UnitController::class,'store']);
+
+// brand
+Route::get('/brands', [BrandController::class,'index']);
+Route::post('/brands/create', [BrandController::class,'store']);
 
 //skus
 Route::get('/item-skus/{item}', [ItemSkuController::class, 'index']);

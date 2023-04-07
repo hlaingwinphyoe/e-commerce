@@ -63,12 +63,14 @@
                                 Brand
                             </label>
 
-                            <select name="brand" class="form-select form-select-sm">
+                            {{-- <select name="brand" class="form-select form-select-sm">
                                 <option value="">Choose Brand</option>
                                 @foreach($brands as $brand)
                                     <option value="{{ $brand->id }}" {{ $item->brand_id == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
+
+                            <search-or-create url="brands" name="brand" :input_obj="{{ $item->brand }}" ></search-or-create>
 
                             @error('brand')
                             <span class="text-danger">{{ $message }}</span>
