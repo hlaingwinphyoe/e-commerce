@@ -19,7 +19,7 @@ class BrandController extends Controller
     public function store(Request $request)
     {
 
-        $brand = Brand::updateOrCreate(
+        $brand = Brand::firstOrCreate(
         [
             'name' => ucwords($request->q)
         ],
