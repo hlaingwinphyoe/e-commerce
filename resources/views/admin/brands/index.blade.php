@@ -61,7 +61,7 @@
                     <td>{{ $brand->name }}</td>
                     <td>
                         @if($brand->items()->count())
-                        <a href="{{ route('admin.items.index') }}?brand={{ $brand->slug }}" class="badge bg-primary">
+                        <a href="{{ route('admin.items.index') }}?brand={{ $brand->slug }}" class="badge bg-success text-decoration-none">
                             {{ $brand->items()->count() }}
                         </a>
                         @endif

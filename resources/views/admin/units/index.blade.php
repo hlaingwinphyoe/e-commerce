@@ -69,7 +69,7 @@
                     <td>{{ $unit->name }}</td>
                     <td>
                         @if($unit->items->count())
-                        <a href="{{ route('admin.items.index') }}?unit={{ $unit->id }}" class="badge bg-success">{{ $unit->items->count() }}</a>
+                        <a href="{{ route('admin.items.index') }}?unit={{ $unit->id }}" class="badge bg-success text-decoration-none">{{ $unit->items->count() }}</a>
                         @else
                         <span>{{ $unit->items->count() }}</span>
                         @endif

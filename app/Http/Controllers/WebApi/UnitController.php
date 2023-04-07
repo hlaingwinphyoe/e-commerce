@@ -18,26 +18,13 @@ class UnitController extends Controller
 
     public function store(Request $request)
     {
-
-        $unit = Unit::where('name', $request->q)->first();
-
-        if($unit){
-            $request->validate([
-                'q' => 'required|unique:units,name,'.$unit->id,
-            ]);
-        }else{
-            $request->validate([
-                'q' => 'required|unique:units,name',
-            ]);
-        }
-
-        $unit = Unit::updateOrCreate(
+        $unit = Unit::firstOrCreate(
         [
-            'name' => $request->q
+            'name' => ucwords($request->q)
         ],
         [
             'slug' => Str::slug($request->q),
-            'name' => $request->q,
+            'name' => ucwords($request->q),
         ]);
 
         return response()->json($unit);

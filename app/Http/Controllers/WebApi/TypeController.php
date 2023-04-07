@@ -25,6 +25,7 @@ class TypeController extends Controller
             'slug' => Str::slug($request->q),
             'name' => ucwords($request->q),
             'user_id' => auth()->user()->id,
+            'type' => 'cate'
         ]);
 
         return response()->json($type);

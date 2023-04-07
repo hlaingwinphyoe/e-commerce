@@ -51,7 +51,7 @@
                                 @endforeach
                             </select> --}}
 
-                            <search-or-create url="units" name="unit" :input_obj="{{ $item->unit }}" ></search-or-create>
+                            <search-or-create url="units" name="unit" :input_obj="{{ $item->unit ? $item->unit : '' }}" ></search-or-create>
 
                             @error('unit')
                             <span class="text-danger">{{ $message }}</span>
@@ -70,7 +70,7 @@
                                 @endforeach
                             </select> --}}
 
-                            <search-or-create url="brands" name="brand" :input_obj="{{ $item->brand }}" ></search-or-create>
+                            <search-or-create url="brands" name="brand" :input_obj="{{ $item->brand ? $item->brand : '' }}" ></search-or-create>
 
                             @error('brand')
                             <span class="text-danger">{{ $message }}</span>
@@ -82,15 +82,17 @@
                                 Category
                                 <span class="text-danger">**</span>
                             </label>
-                            {{-- <search-or-create url="types" name="type" :input_obj="{{ $item->type() ? $item->type() : '' }}"></search-or-create> --}}
-                            <select class="form-select" name="type" id="custom-select" data-placeholder="Choose Category">
+                            <search-or-create url="types" name="type" :input_obj="{{ $item->type() ? $item->type() : '' }}"></search-or-create>
+
+                            {{-- <select class="form-select" name="type" id="custom-select" data-placeholder="Choose Category">
                                 <option></option>
                                 @forelse ($types as $type)
                                     <option value="{{ $type->id }}" {{ $item->type()->id == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
                                 @empty
                                     <option value="0">No Category</option>
                                 @endforelse
-                            </select>
+                            </select> --}}
+
                             @error('type')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror

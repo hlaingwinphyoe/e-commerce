@@ -85,9 +85,10 @@
                                 Category
                                 <span class="text-danger">**</span>
                             </label>
-                            {{-- <search-or-create url="types" name="type"></search-or-create> --}}
+                            
+                            <search-or-create url="types" name="type"></search-or-create>
 
-                            <select class="form-select" name="type" id="custom-select" data-placeholder="Choose Category">
+                            {{-- <select class="form-select" name="type" id="custom-select" data-placeholder="Choose Category">
                                 <option></option>
                                 @forelse ($types as $type)
                                     <option value="{{ $type->id }}" {{ old('type') == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
@@ -96,7 +97,8 @@
                                 @endforelse
                             </select>
 
-                            <div class="py-1"><small class="help-text mm-font text-muted">အမျိုးအစား ထည့်ပါ။</small></div>
+                            <div class="py-1"><small class="help-text mm-font text-muted">အမျိုးအစား ထည့်ပါ။</small></div> --}}
+
                             @error('type')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror

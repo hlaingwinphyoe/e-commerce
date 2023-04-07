@@ -18,25 +18,14 @@ class BrandController extends Controller
 
     public function store(Request $request)
     {
-        $brand = Brand::where('name', $request->q)->first();
-
-        if($brand){
-            $request->validate([
-                'q' => 'required|unique:brands,name,'.$brand->id,
-            ]);
-        }else{
-            $request->validate([
-                'q' => 'required|unique:brands,name',
-            ]);
-        }
 
         $brand = Brand::updateOrCreate(
         [
-            'name' => $request->q
+            'name' => ucwords($request->q)
         ],
         [
             'slug' => Str::slug($request->q),
-            'name' => $request->q,
+            'name' => ucwords($request->q),
             'user_id' => auth()->user()->id
         ]);
 
