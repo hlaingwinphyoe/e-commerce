@@ -40,6 +40,7 @@ use App\Http\Controllers\WebApi\WasteController;
 use App\Http\Controllers\WebApi\GeneralController;
 use App\Http\Controllers\WebApi\GeneralInventoryController;
 use App\Http\Controllers\WebApi\ReportController;
+use App\Http\Controllers\WebApi\UnitController;
 use App\Http\Controllers\WebApi\WebPushNotiController;
 
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,8 @@ Route::patch('/medias/check/{id}', [MediaController::class, 'check']);
 Route::get('/get-icons', [MediaController::class, 'getIcons']);
 Route::get('/types', [TypeController::class, 'index']);
 Route::post('/types/create', [TypeController::class, 'store']);
+Route::get('/units', [UnitController::class,'index']);
+Route::post('/units/create', [UnitController::class,'store']);
 
 //skus
 Route::get('/item-skus/{item}', [ItemSkuController::class, 'index']);

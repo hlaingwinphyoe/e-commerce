@@ -44,12 +44,14 @@
                                 Unit
                             </label>
 
-                            <select name="unit" class="form-select form-select-sm">
+                            {{-- <select name="unit" class="form-select form-select-sm">
                                 <option value="">Choose Unit</option>
                                 @foreach($units as $unit)
                                     <option value="{{ $unit->id }}" {{ $item->unit_id == $unit->id ? 'selected' : '' }}>{{ $unit->name }}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
+
+                            <search-or-create url="units" name="unit" :input_obj="{{ $item->unit }}" ></search-or-create>
 
                             @error('unit')
                             <span class="text-danger">{{ $message }}</span>

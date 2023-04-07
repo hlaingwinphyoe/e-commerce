@@ -29,9 +29,7 @@ class UnitController extends Controller
 
     public function create()
     {
-        return view('admin.units.create')->with([
-            //
-        ]);
+        return view('admin.units.create');
     }
 
     public function store(Request $request)

@@ -44,17 +44,20 @@
                             <label for="">
                                 Unit
                             </label>
-
-                            <select name="unit" class="form-select form-select-sm">
+                            
+                            {{-- <select name="unit" class="form-select form-select-sm">
                                 <option value="">Choose Unit</option>
                                 @foreach($units as $unit)
                                     <option value="{{ $unit->id }}" {{ old('unit') == $unit->id ? 'selected' : '' }}>{{ $unit->name }}</option>
                                 @endforeach
                             </select>
-                            <div class="py-1"><small class="help-text mm-font text-muted">Unit ရှိလျှင်ထည့်ပါ။</small></div>
+                            <div class="py-1"><small class="help-text mm-font text-muted">Unit ရှိလျှင်ထည့်ပါ။</small></div> --}}
+
+                            <search-or-create url="units" name="unit" input_obj="" ></search-or-create>
+
                             @error('unit')
                             <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                            @enderror 
                         </div>
 
                         <div class="col-md-2 form-group me-2 w-sm-100">

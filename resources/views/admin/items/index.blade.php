@@ -134,7 +134,11 @@ if (request('brand')) {
                     @php
                         $img = $item->medias()->first();
                     @endphp
-                    <img src="{{ asset('storage/thumbnail/'.$img->slug) }}" width="65" alt="item_image">
+                    @if ($img)
+                        <img src="{{ asset('storage/thumbnail/'.$img->slug) }}" width="65" alt="item_image">
+                        @else
+                        <img src="{{ asset('images/featured/default.png') }}"  width="50" alt="">
+                    @endif
                 </td>
                 <td>{{ $item->type() ? $item->type()->name : '-' }}</td>
                 <td>

@@ -60,8 +60,7 @@
                     </th>
                     <th>Name</th>
                     <th>Items</th>
-                    <th><i class="fas fa-border-style"></i></th>
-                </tr>
+                    <th><i class="fa fa-ellipsis-vertical"></i></th>
             </thead>
             <tbody>
                 @forelse($units as $unit)

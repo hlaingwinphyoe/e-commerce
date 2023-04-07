@@ -1,7 +1,7 @@
 <template>
     <div class="search-or-create position-relative">
         <input type="hidden" :name="name" v-model="input_id">
-        <input type="text" class="form-control form-control-sm" placeholder="Search" v-model="q" @keyup="onKeySearch" @change="onChangeKeyWord" required>
+        <input type="text" class="form-control form-control-sm" placeholder="Search or Create" v-model="q" @keyup="onKeySearch" @change="onChangeKeyWord" required>
         <div class="results absolute-box bg-white shadow rounded mt-1" v-if="results.length">
             <ul class="nav flex-column">
                 <li class="nav-item" v-for="result in results" :key="result.id">
@@ -21,6 +21,9 @@ export default {
     },
     data() {
         return {
+            form: {
+
+            },
             q: this.input_obj ? this.input_obj.name : '',
             timeout: '',
             results: [],
@@ -33,6 +36,7 @@ export default {
                 clearTimeout(this.timeout);
                 this.timeout = setTimeout(() => {
                     axios.get(`/wapi/${this.url}`, {params: {q : this.q}}).then(resp => {
+                        // console.log(resp.data);
                         this.results = resp.data ? resp.data : [];
                     });
                 }, 100);
@@ -46,6 +50,7 @@ export default {
         onChangeKeyWord() {
             if(this.q && this.q !== ' ') {
                 axios.post(`/wapi/${this.url}/create`, {q : this.q}).then(resp => {
+                    //console.log(resp.data);
                     this.input_id = resp.data ? resp.data.id : '';
                 });
             }
