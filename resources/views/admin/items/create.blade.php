@@ -28,7 +28,7 @@
 
                     <div class="row flex-wrap pb-3">
 
-                        <div class="col-md-3 form-group me-2 w-sm-100">
+                        <div class="col-md-3">
                             <label for="">
                                 Name
                                 <span class="text-danger">**</span>
@@ -40,7 +40,7 @@
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="col-md-2 form-group me-2 w-sm-100">
+                        <div class="col-md-2">
                             <label for="">
                                 Unit
                             </label>
@@ -60,7 +60,7 @@
                             @enderror 
                         </div>
 
-                        <div class="col-md-2 form-group me-2 w-sm-100">
+                        <div class="col-md-3">
                             <label for="">
                                 Brand
                             </label>
@@ -80,7 +80,7 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-3 form-group me-2 w-sm-100">
+                        <div class="col-md-3">
                             <label for="">
                                 Category
                                 <span class="text-danger">**</span>
