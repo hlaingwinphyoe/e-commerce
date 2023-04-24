@@ -9,8 +9,8 @@
 <x-admin.search-box url="{{ route('admin.items.index') }}"></x-admin.search-box>
 
 <div class="d-flex align-items-center mb-2">
-    <h3 class="page-title mb-0 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.item')}}</h3>
-    <span class="ms-2"><span class="fw-bold">{{ $items->count() }}</span> of total <span class="">{{ $items->total() }}</span></span>
+    <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.item')}}</h4>
+    <span class="text-muted form-text">( Showing {{ $items->count() }} of total {{ $items->total() }} records )</span>
 </div>
 
 @include('components.admin.message')
@@ -119,7 +119,7 @@ if (request('brand')) {
                 <td class="">{{ $item->name }}</td>
                 <td>
                     @if($item->skus->count() > 0)
-                    <a href="{{ route('admin.items.show', $item->id) }}" class="badge bg-secondary p-2 text-decoration-none">
+                    <a href="{{ route('admin.items.show', $item->id) }}" class="p-2 text-decoration-none" style="letter-spacing: 0.6px">
                         @foreach($item->skus as $sku)
                             <span>
                                 {{ $sku->code ?? 'Get Code' }}

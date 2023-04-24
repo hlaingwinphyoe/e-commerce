@@ -8,18 +8,17 @@
 
 <x-admin.search-box url="{{ route('admin.types.index') }}"></x-admin.search-box>
 
-<div>
-    <h3 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.category')}}</h3>
+<div class="d-flex align-items-center mb-2">
+    <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.category')}}</h4>
+    <span class="text-muted form-text">( Showing {{ $types->count() }} of total {{ $types->total() }} records )</span>
 </div>
 
 @include('components.admin.message')
 
 <div class="border bg-white rounded px-2 py-4">
-    <p class="me-2"><span class="fw-bold h5">{{ $types->count() }}</span> of total <span class="">{{ $types->total() }}</span></p>
+    <p class="small text-secondary">Priority စီလျှင် ငယ်ရာမှကြီးရာသို့ စီထားပါသည်။ (Eg. 0,1,2,3,4,... )</p>
 
-    <p class="small text-secondary py-2">Priority စီလျှင် ငယ်ရာမှကြီးရာသို့ စီထားပါသည်။ (Eg. 0,1,2,3,4,... )</p>
-
-    <div class="d-flex mb-3">
+    <div class="d-flex">
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-type'))
             <div class="me-2 mb-3">

@@ -24,17 +24,15 @@
         </a>
     </div>
 </div>
-<div>
-    <h3 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.sale_lists')}}</h3>
+<div class="d-flex align-items-center mb-2">
+    <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.sale_lists')}}</h4>
+    <span class="text-muted form-text">( Showing {{ $orders->count() }} of total {{ $orders->total() }} records )</span>
 </div>
 
 @include('components.admin.message')
 
 <div class="border bg-white rounded px-2 py-4">
-    <p class="me-2"><span class="fw-bold h5">{{ $orders->count() }}</span> of total <span
-            class="">{{ $orders->total() }}</span></p>
-
-    <div class="d-flex mb-3 align-items-end">
+    <div class="d-flex align-items-end">
         <div class="d-flex flex-wrap mb-2">
             <div class="filter-content">
                 <form action="{{ route('admin.pos.index') }}" class="d-flex flex-wrap align-items-end">
