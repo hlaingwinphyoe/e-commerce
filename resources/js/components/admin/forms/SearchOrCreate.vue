@@ -5,7 +5,7 @@
             <input type="text" class="form-control" placeholder="Search or Create" v-model="q" @keyup="onKeySearch">
             <button class="btn btn-primary" @click.prevent="onChangeKeyWord"><i class="fa-solid fa-plus"></i></button>
         </div> -->
-        <input type="text" class="form-control" placeholder="Search or Create" v-model="q" @keyup="onKeySearch" @change="onChangeKeyWord">
+        <input type="text" class="form-control form-control-sm" placeholder="Search or Create" v-model="q" @keyup="onKeySearch" @change="onChangeKeyWord">
         <div class="results absolute-box bg-white shadow rounded mt-1" v-if="results.length">
             <ul class="nav flex-column">
                 <li class="nav-item" v-for="result in results" :key="result.id">
@@ -33,17 +33,16 @@ export default {
         }
     },
     methods: {
-        onKeySearch() {
+        onKeySearch:throttle(function () {
             if(this.q && this.q !== ' ') {
                 clearTimeout(this.timeout);
                 this.timeout = setTimeout(() => {
                     axios.get(`/wapi/${this.url}`, {params: {q : this.q}}).then(resp => {
-                        // console.log(resp.data);
                         this.results = resp.data ? resp.data : [];
                     });
                 }, 100);
             }
-        },
+        },500),
         onChooseResult(data) {
             this.input_id = data.id;
             this.results = [];
