@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Currency;
 use App\Models\Inventory;
 use App\Models\Sku;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,6 +15,22 @@ class SkuInventoryController extends Controller
     public function store(Request $request, $id)
     {
         $inventory = Inventory::find($id);
+
+        if (!$inventory) {
+            $inventory_month = Carbon::now()->format('ym');
+
+            $latest_inventory = Inventory::where('inventory_month', intval($inventory_month))->orderBy('inventory_no', 'desc')->first();
+
+            $inventory_no = $latest_inventory ? $latest_inventory->inventory_no + 1 : intval($inventory_month . '00001');
+
+            $inventory = Inventory::create([
+                'inventory_month' => $inventory_month,
+                'inventory_no' => $inventory_no,
+                'date' => now(),
+                'user_id' => auth()->user()->id,
+                'is_published' => 1
+            ]);
+        }
 
         $sku = DB::transaction(function () use ($request, $inventory) {
 
@@ -37,7 +54,7 @@ class SkuInventoryController extends Controller
                     'qty' => $request->qty,
                     'amount' => $request->amount,
                     'rate' => 1,
-                    'currency_id' => $currency ? $currency->id : 1
+                    'currency_id' => $sku ? $sku->currency_id : 1
                 ]]);
                 $new_qty = $request->qty;
             }

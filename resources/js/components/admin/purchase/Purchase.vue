@@ -27,7 +27,7 @@
                         <input
                             type="date"
                             class="form-control form-control-sm"
-                            v-model="supplier_form.supplier"
+                            v-model="supplier_form.date"
                         />
                     </div>
                     <div class="form-group me-2 w-sm-100 align-self-end">
