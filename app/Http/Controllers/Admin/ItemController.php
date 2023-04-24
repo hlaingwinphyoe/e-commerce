@@ -231,7 +231,14 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($id);
 
-        $item->delete();
+        // $item->delete();
+        DB::transaction(function () use ($item) {
+            foreach ($item->skus as $sku) {
+                $sku->delete();
+            }
+
+            $item->forceDelete();
+        });
 
         return redirect(request()->session()->get('prev_route'))->with('message', 'Item was successfully deleted');
     }
@@ -255,7 +262,6 @@ class ItemController extends Controller
             }
             $item->forceDelete();
         });
-
 
         return redirect(request()->session()->get('prev_route'))->with('message', 'Item was permanently deleted');
     }
