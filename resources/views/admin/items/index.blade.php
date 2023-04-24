@@ -142,7 +142,7 @@ if (request('brand')) {
                 </td>
                 <td>{{ $item->type() ? $item->type()->name : '-' }}</td>
                 <td>
-                    <a href="#add-stock-modal-{{ $item->id }}" class="badge bg-secondary text-decoration-none p-2" data-bs-toggle="modal">
+                    <a href="#add-stock-modal-{{ $item->id }}" class="badge stock bg-secondary text-decoration-none p-2" data-bs-toggle="modal">
                         <span class="">{{ $item->getStock() }}</span>
                     </a>
                     <stock :item="{{ $item }}" :suppliers="{{ $suppliers }}"></stock>

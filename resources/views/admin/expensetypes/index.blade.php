@@ -21,7 +21,7 @@
             @if(auth()->user()->role->hasPermission('create-expense'))
             <div class="me-2 mb-3">
                 <a href="{{ route('admin.expensetypes.create') }}" class="btn btn-secondary">
-                    <small><i class="fa fa-plus"></i></small>
+                    <small class="me-2"><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
             </div>
@@ -37,7 +37,7 @@
                 </select>
             </div>
             <div class="me-2 mb-3">
-                <button id="apply-actions" class="btn btn-sm btn-outline-secondary" data-route="type">
+                <button id="apply-actions" class="btn btn-outline-secondary" data-route="type">
                     <i class="fa fa-check me-2"></i>
                     <span>Apply</span>
                 </button>
@@ -46,8 +46,8 @@
             <form action="{{ route('admin.expensetypes.index') }}" class="d-flex responsive-flex d-none">
                 <input type="hidden" name="disabled" value="{{ request('disabled') }}">
                 <div class="form-group">
-                    <button class="btn btn-sm btn-outline-primary me-2">Filter</button>
-                    <a href="{{ route('admin.expensetypes.index') }}" class="btn btn-sm btn-danger">
+                    <button class="btn btn-outline-primary me-2">Filter</button>
+                    <a href="{{ route('admin.expensetypes.index') }}" class="btn btn-danger">
                         <small><i class="fa fa-redo"></i></small>
                     </a>
                 </div>

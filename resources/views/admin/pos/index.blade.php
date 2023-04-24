@@ -39,7 +39,7 @@
                     @if(auth()->user()->role->hasPermission('create-order'))
                         <div class="form-group me-2">
                             <a href="{{ route('admin.pos.create') }}" class="btn btn-secondary">
-                                <small><i class="fa fa-plus"></i></small>
+                                <small class="me-2"><i class="fa fa-plus"></i></small>
                                 <span>Add New</span>
                             </a>
                         </div>

@@ -22,7 +22,7 @@
             @if(auth()->user()->role->hasPermission('create-role'))
             <div class="me-2 mb-3">
                 <a href="{{ route('admin.roles.create') }}" class="btn btn-secondary">
-                    <small><i class="fa fa-plus"></i></small>
+                    <small class="me-2"><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
             </div>

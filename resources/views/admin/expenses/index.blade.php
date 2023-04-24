@@ -18,8 +18,8 @@
         <div class="d-flex flex-wrap mb-1">
             @if(auth()->user()->role->hasPermission('create-expense'))
             <div class="me-2 mb-3">
-                <a href="{{ route('admin.expenses.create') }}" class="btn btn-primary">
-                    <small><i class="fa fa-plus"></i></small>
+                <a href="{{ route('admin.expenses.create') }}" class="btn btn-secondary">
+                    <small class="me-2"><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
             </div>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="form-group">
                     <button class="btn btn-outline-primary me-2">Filter</button>
-                    <a href="{{ route('admin.expenses.index') }}" class="btn btn-primary">
+                    <a href="{{ route('admin.expenses.index') }}" class="btn btn-danger">
                         <small><i class="fa fa-redo"></i></small>
                     </a>
                 </div>

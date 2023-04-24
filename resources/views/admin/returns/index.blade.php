@@ -27,7 +27,7 @@ $query .= request('q') ? '?q=' . request('q') : '';
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-return'))
             <div class="me-2 mb-1">
-                <a href="{{ route('admin.returns.create') }}" class="btn btn-sm btn-secondary">
+                <a href="{{ route('admin.returns.create') }}" class="btn btn-secondary">
                     <small class="me-2"><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>

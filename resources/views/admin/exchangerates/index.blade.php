@@ -19,7 +19,7 @@
         <div class="d-flex flex-wrap mb-2">
             <div class="me-2 mt-2">
                 <a href="{{ route('admin.exchangerates.create') }}" class="btn btn-secondary">
-                    <small><i class="fa fa-plus"></i></small>
+                    <small class="me-2"><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
             </div>

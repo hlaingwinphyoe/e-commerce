@@ -22,7 +22,7 @@
             @if(auth()->user()->role->hasPermission('create-supplier'))
             <div class="me-2 mb-3">
                 <a href="{{ route('admin.suppliers.create') }}" class="btn btn-secondary">
-                    <small><i class="fa fa-plus"></i></small>
+                    <small class="me-2"><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
             </div>
