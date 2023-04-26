@@ -75,6 +75,40 @@ class SkuInventoryController extends Controller
         ]);
     }
 
+    public function update(Request $request,$inventory,$sku_id)
+    {
+        $inventory = Inventory::find($inventory);
+
+        $sku = DB::transaction(function () use ($request, $inventory,$sku_id) {
+            $sku = $inventory->skus()->where('sku_id', $sku_id)->first();
+
+            $new_qty = 0;
+
+            $old_qty = $sku->pivot->qty;
+
+            $sku = $sku->pivot->update([
+                'qty' => $request->qty,
+                'amount' => $request->amount
+            ]);
+
+            $new_qty = $request->qty;
+
+            $org_sku = Sku::find($request->sku);
+
+            //update sku->stock
+            $org_sku->update(['stock' => $org_sku->stock + $new_qty - $old_qty]);
+
+            return $sku;
+        });
+
+        $sku = Sku::find($request->sku);
+
+        return response()->json([
+            'sku' => $sku,
+            'skus' => $inventory->skus
+        ]);
+    }
+
     public function destroy($inventory, $sku_id)
     {
         $inventory = Inventory::find($inventory);

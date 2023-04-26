@@ -27,6 +27,19 @@ class InventoryController extends Controller
         return response()->json($inventory);
     }
 
+    public function inventoryUpdate(Request $request,$id)
+    {
+        $inventory = Inventory::with('skus')->findOrFail($id);
+        $inventory->update([
+            'date' => $request->date ?? now(),
+            'type' => $request->type,
+            'desc' => $request->desc,
+            'user_id' => auth()->user()->id
+        ]);
+
+        return response()->json($inventory);
+    }
+
     public function update(Request $request,$id)
     {
         $inventory = Inventory::find($id);

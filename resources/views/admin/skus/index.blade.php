@@ -122,7 +122,7 @@
                     <td>
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
 
-                            <a href="#add-stock-{{ $sku->id }}" class="btn btn-outline-secondary " data-bs-toggle="modal"><i class="fa fa-plus"></i></a>
+                            <a href="#add-stock-{{ $sku->id }}" class="btn btn-outline-success " data-bs-toggle="modal"><i class="fa fa-plus"></i></a>
 
                             @include('admin.skus.add-stock')
 
@@ -144,7 +144,7 @@
                             @endif
 
                             @if(auth()->user()->role->hasPermission('delete-item'))
-                                <a href="#delete-modal-{{ $sku->id }}" class="btn btn-outline-secondary" data-bs-toggle="modal">
+                                <a href="#delete-modal-{{ $sku->id }}" class="btn btn-outline-danger" data-bs-toggle="modal">
                                     <span><i class="fas fa-trash"></i></span>
                                 </a>
                                 <x-admin.delete id="{{ $sku->id }}" url="{{ route('admin.skus.destroy', $sku->id) }}"></x-admin.delete>

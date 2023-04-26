@@ -115,9 +115,9 @@
                     <media-upload :images="{{ $item->medias()->pluck('id') }}" type="item" priority="check"></media-upload>
                 </div>
 
-                <div class="py-3 px-2 d-flex">
+                <div class="d-flex">
                     <div class="form-group me-2">
-                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-save me-2"></i>Save</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save me-2"></i>Save</button>
                     </div>
                     {{-- <div class="form-group me-2">
                         <a href="#add-stock-modal-{{ $item->id }}" class="btn btn-sm btn-secondary" data-bs-toggle="modal"><i class="fa fa-plus me-2"></i>Add Stock</a>

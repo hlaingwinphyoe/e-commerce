@@ -29,14 +29,20 @@ export default {
         }
     },
     methods: {
+        showAlert(message) {
+            toastr.options.closeButton = true;
+            toastr.success(message);
+        },
         onUpdateSkuInventory() {
-            axios.post(`/wapi/sku-inventories/${this.sku.pivot.inventory_id}`, this.form).then(resp => {
+            axios.patch(`/wapi/sku-inventories/${this.sku.pivot.inventory_id}/${this.sku.id}`, this.form).then(resp => {
                 this.$emit('on-update-sku', resp.data);
+                this.showAlert('Successfully Updated')
             });
         },
         onDeleteSkuInventory() {
             axios.delete(`/wapi/sku-inventories/${this.sku.pivot.inventory_id}/${this.sku.id}`).then(resp => {
                 this.$emit('on-delete-sku', resp.data);
+                this.showAlert('Successfully Deleted')
             });
         },
     }

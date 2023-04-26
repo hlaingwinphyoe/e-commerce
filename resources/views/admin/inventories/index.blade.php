@@ -65,6 +65,7 @@ $query .= request('q') ? '?q=' . request('q') : '';
                     <th width="250px">Supplier</th>
                     <th>Items</th>
                     <th>Amount</th>
+                    <th>Status</th>
                     <th>Date</th>
                     <th>By</th>
                     <th><i class="fa fa-ellipsis-vertical"></i></th>
@@ -78,6 +79,9 @@ $query .= request('q') ? '?q=' . request('q') : '';
                     <td class="">{{ $inventory->supplier ? $inventory->supplier->name : '' }}</td>
                     <td><a href="{{ route('admin.inventories.show', $inventory->id) }}" class="badge bg-secondary p-2 text-decoration-none">{{ $inventory->skus->count() }}</a></td>
                     <td>{{ number_format($inventory->getAmount()) }}</td>
+                    <td>
+                        <small class="{{ $inventory->is_published == 1 ? 'text-success' : 'text-info' }}">{{ $inventory->is_published == 1 ? 'Confirmed' : 'Draft' }}</small>
+                    </td>
                     <td>{{ \Carbon\Carbon::parse($inventory->date)->format('M d, Y') }}</td>
                     <td>{{ $inventory->user ? $inventory->user->name : '' }}</td>
                     <td>

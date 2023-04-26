@@ -44,7 +44,7 @@
                         <label for="">Main Category</label>
                         <small class="help-text">အထက်တွင် level တဆင့် ရှိပါက ထည့်ပါ။</small>
                         <select name="parent_id" class="form-select">
-                            <option value="">Select Sub Category</option>
+                            <option value="">Select Main Category</option>
                             @foreach($types as $type)
                             <option value="{{ $type->id }}" {{ old('parent_id') == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
                             @endforeach

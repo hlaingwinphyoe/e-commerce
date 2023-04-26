@@ -112,11 +112,12 @@ Route::patch('/sku-barcodes/{sku}', [SkuBarcodeController::class, 'update']);
 //inventory
 Route::get('/inventories/create', [InventoryController::class, 'create']);
 Route::patch('/inventories/{inventory}', [InventoryController::class, 'update']);
-
+Route::patch('/inventories/update/{inventory}', [InventoryController::class, 'inventoryUpdate']);
 
 
 //sku-inventory
 Route::post('/sku-inventories/{inventory}', [SkuInventoryController::class, 'store']);
+Route::patch('/sku-inventories/{inventory}/{sku}', [SkuInventoryController::class, 'update']);
 Route::delete('/sku-inventories/{inventory}/{sku}', [SkuInventoryController::class, 'destroy']);
 
 // general

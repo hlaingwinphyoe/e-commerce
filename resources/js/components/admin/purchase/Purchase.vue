@@ -45,15 +45,21 @@
                 </div>
             </div>
 
-            <add-form :inventory="inventory" :skus="data_skus" @on-add-sku="onAddSku"></add-form>
+            <add-form :inventory="data_inventory" :skus="data_skus" @on-add-sku="onAddSku"></add-form>
         </div>
 
         <!-- Sku Lists -->
         <div class="col-md-6">
-            <div class="bg-white shadow rounded px-2 py-3">
-               <p class="mb-2">Form No. {{ inventory.inventory_no }}</p>
+            <div class="bg-white shadow rounded px-2 py-3" v-if="this.data_skus.length">
+               <p class="mb-2">Form No. {{ data_inventory.inventory_no }}</p>
                 <h5 class="text-primary mb-3">Item Lists</h5>
                 <purchase-list :skus="data_skus" @on-update-sku="onUpdateSku" @on-delete-sku="onDeleteSku"></purchase-list>
+            </div>
+            <!-- buttons -->
+            <div v-if="data_skus.length && data_inventory && !data_inventory.is_published" class="text-end py-3">
+                <a :href="url" class="btn btn-sm btn-outline-secondary me-2">Save as Draft</a>
+
+                <button type="button" class="btn btn-sm btn-primary fw-bold" @click.prevent="onPublish">Confirm and close</button>
             </div>
         </div>
     </div>
@@ -75,17 +81,19 @@ export default {
     data() {
         return {
             data_skus: this.skus,
+            data_inventory: this.inventory ? this.inventory : '',
             supplier_form: {
                 supplier: this.inventory.supplier_id,
                 date: this.inventory.date,
             },
+            url: '/admin/inventories',
         };
     },
     methods: {
         onUpdateInventory() {
             axios
                 .patch(
-                    `/wapi/inventories/${this.inventory.id}`,
+                    `/wapi/inventories/update/${this.data_inventory.id}`,
                     this.supplier_form
                 )
                 .then((resp) => {
@@ -100,6 +108,11 @@ export default {
         },
         onDeleteSku(data) {
             this.data_skus = data.skus;
+        },
+        onPublish() {
+            axios.patch(`/wapi/inventory-publish/${this.data_inventory.id}`).then(resp => {
+                window.location.href = this.url;
+            });
         }
     },
 };

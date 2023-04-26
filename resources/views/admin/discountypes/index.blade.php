@@ -92,7 +92,7 @@
                         </a>
                         @endif
                         @if(auth()->user()->role->hasPermission('delete-discount-type'))
-                        <a href="#delete-modal-{{ $discountype->id }}" class="" data-bs-toggle="modal">
+                        <a href="#delete-modal-{{ $discountype->id }}" class="text-danger" data-bs-toggle="modal">
                             <i class="fas fa-trash"></i>
                         </a>
                         <x-admin.delete id="{{ $discountype->id }}" url="{{ route('admin.discountypes.destroy', $discountype->id) }}"></x-admin.delete>
