@@ -44,12 +44,14 @@
                                 Unit
                             </label>
 
-                            <select name="unit" class="form-select form-select-sm">
+                            {{-- <select name="unit" class="form-select form-select-sm">
                                 <option value="">Choose Unit</option>
                                 @foreach($units as $unit)
                                     <option value="{{ $unit->id }}" {{ $item->unit_id == $unit->id ? 'selected' : '' }}>{{ $unit->name }}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
+
+                            <search-or-create url="units" name="unit" :input_obj="{{ $item->unit ? $item->unit : '' }}" ></search-or-create>
 
                             @error('unit')
                             <span class="text-danger">{{ $message }}</span>
@@ -61,12 +63,14 @@
                                 Brand
                             </label>
 
-                            <select name="brand" class="form-select form-select-sm">
+                            {{-- <select name="brand" class="form-select form-select-sm">
                                 <option value="">Choose Brand</option>
                                 @foreach($brands as $brand)
                                     <option value="{{ $brand->id }}" {{ $item->brand_id == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
+
+                            <search-or-create url="brands" name="brand" :input_obj="{{ $item->brand ? $item->brand : '' }}" ></search-or-create>
 
                             @error('brand')
                             <span class="text-danger">{{ $message }}</span>
@@ -78,15 +82,17 @@
                                 Category
                                 <span class="text-danger">**</span>
                             </label>
-                            {{-- <search-or-create url="types" name="type" :input_obj="{{ $item->type() ? $item->type() : '' }}"></search-or-create> --}}
-                            <select class="form-select" name="type" id="custom-select" data-placeholder="Choose Category">
+                            <search-or-create url="types" name="type" :input_obj="{{ $item->type() ? $item->type() : '' }}"></search-or-create>
+
+                            {{-- <select class="form-select" name="type" id="custom-select" data-placeholder="Choose Category">
                                 <option></option>
                                 @forelse ($types as $type)
                                     <option value="{{ $type->id }}" {{ $item->type()->id == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
                                 @empty
                                     <option value="0">No Category</option>
                                 @endforelse
-                            </select>
+                            </select> --}}
+
                             @error('type')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -109,9 +115,9 @@
                     <media-upload :images="{{ $item->medias()->pluck('id') }}" type="item" priority="check"></media-upload>
                 </div>
 
-                <div class="py-3 px-2 d-flex">
+                <div class="d-flex">
                     <div class="form-group me-2">
-                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-save me-2"></i>Save</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save me-2"></i>Save</button>
                     </div>
                     {{-- <div class="form-group me-2">
                         <a href="#add-stock-modal-{{ $item->id }}" class="btn btn-sm btn-secondary" data-bs-toggle="modal"><i class="fa fa-plus me-2"></i>Add Stock</a>

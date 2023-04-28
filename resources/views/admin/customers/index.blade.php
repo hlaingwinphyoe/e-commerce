@@ -8,22 +8,22 @@
 
 <x-admin.search-box url="{{ route('admin.customers.index') }}"></x-admin.search-box>
 
-<div>
-    <h3 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('Customers')}}</h3>
+<div class="d-flex align-items-center mb-2">
+    <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('Customers')}}</h4>
+    <span class="text-muted form-text">( Showing {{ $users->count() }} of total {{ $users->total() }} records )</span>
 </div>
 
 @include('components.admin.message')
 
 <div class="border bg-white rounded px-2 py-4">
-    <p class="me-2"><span class="fw-bold h5">{{ $users->count() }}</span> of total <span class="">{{ $users->total() }}</span></p>
-
-    <div class="d-flex mb-3">
+   
+    <div class="d-flex">
         <div class="d-flex flex-wrap mb-2">
 
             @if(auth()->user()->role->hasPermission('create-user'))
             <div class="me-2 mb-3">
                 <a href="{{ route('admin.customers.create') }}" class="btn btn-secondary">
-                    <small><i class="fa fa-plus"></i></small>
+                    <small class="me-2"><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
             </div>

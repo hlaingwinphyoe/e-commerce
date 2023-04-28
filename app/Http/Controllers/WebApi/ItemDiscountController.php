@@ -10,7 +10,9 @@ class ItemDiscountController extends Controller
 {
     public function store(Request $request)
     {
-        $discount = Discount::create([
+        $discount = Discount::updateOrCreate([
+            'discountype_id' => $request->discountype_id
+        ],[
             'amt' => $request->amt,
             'status_id' => $request->status_id,
             'discountype_id' => $request->discountype_id,

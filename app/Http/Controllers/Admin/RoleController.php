@@ -33,7 +33,7 @@ class RoleController extends Controller
 
     public function create()
     {
-        $permissions = Permission::get()->groupBy('type');
+        $permissions = Permission::whereNotIn('type',['coupon','bonus-point','delifee','delivery','gift','user-gift','gift-inventory','gift-log','faq','faq-type','country','region','township'])->get()->groupBy('type');
 
         $roles = Role::notAdmin()->get();
 
@@ -66,7 +66,7 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
 
-        $permissions = Permission::get()->groupBy('type');
+        $permissions = Permission::whereNotIn('type',['coupon','bonus-point','delifee','delivery','gift','user-gift','gift-inventory','gift-log','faq','faq-type','country','region','township'])->get()->groupBy('type');
 
         $roles = Role::notAdmin()->get();
 

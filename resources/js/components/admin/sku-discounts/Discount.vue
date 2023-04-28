@@ -1,6 +1,6 @@
 <template>
     <div class="sku_discount-container">
-        <discount-list v-show="data_discounts.length" :discounts="data_discounts" @on-update-discount="onUpdateDiscount" @on-destroy-discount="onDestroyDiscount"></discount-list>
+        <discount-list v-show="data_discounts.length" :statuses="statuses" :discounts="data_discounts" @on-update-discount="onUpdateDiscount" @on-destroy-discount="onDestroyDiscount"></discount-list>
         <add-form v-show="data_discounts.length == 0" :discountypes="discountypes" :roles="roles" :statuses="statuses" @on-add-discount="onAddDiscount"></add-form>
     </div>
 </template>

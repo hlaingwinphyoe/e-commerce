@@ -15,6 +15,7 @@ class OrderSkuController extends Controller
 {
     public function store(Request $request, $id)
     {
+        // dd($request->all());
         $order = Order::find($id);
 
         $org_sku = Sku::findOrFail($request->sku);
@@ -30,8 +31,9 @@ class OrderSkuController extends Controller
             $sku = $order->skus()->attach([$request->sku => [
                 'status_id' => $sku_status ? $sku_status->id : 1,
                 'qty' => $qty,
-                'price' => $sku->price,
-                'customized_price' => $sku->price,
+                // 'price' => $sku->price,
+                'price' => $request->price,
+                'customized_price' => $request->price,
                 'margin' => 0
             ]]);
 
@@ -54,8 +56,10 @@ class OrderSkuController extends Controller
         } else if ($sku && $org_sku->stock >= $qty) {
             $sku->pivot->update([
                 'qty' => $sku->pivot->qty + $qty,
-                'price' => $sku->price,
-                'customized_price' => $sku->price,
+                // 'price' => $sku->price,
+                // 'customized_price' => $sku->price,
+                'price' => $request->price,
+                'customized_price' => $request->price,
             ]);
             $sku->update(['stock' => $sku->stock - $qty]);
         } else {
@@ -76,7 +80,7 @@ class OrderSkuController extends Controller
         $order = Order::find($order);
 
         $sku = $order->skus()->where('sku_id', $sku)->first();
-
+        
         DB::transaction(function () use ($sku, $request, $order) {
 
             $status = Status::where('slug', 'order-accepted')->first();
@@ -90,8 +94,10 @@ class OrderSkuController extends Controller
 
             $sku->pivot->update([
                 'qty' => $request->qty,
-                'price' => $sku->price,
-                'customized_price' => $sku->price,
+                'price' => $sku->pivot->price,
+                'customized_price' => $sku->pivot->price,
+                // 'price' => $request->price,
+                // 'customized_price' => $request->price,
             ]);
         });
 

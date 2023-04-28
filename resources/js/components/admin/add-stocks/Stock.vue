@@ -15,16 +15,16 @@
                         <h6>Supplier Information</h6>
                         <div class="d-flex">
                             <div class="form-group me-2">
-                                <select class="form-select form-select-sm" v-model="supplier_form.supplier">
+                                <select class="form-select" v-model="supplier_form.supplier">
                                     <option value="">Choose Supplier</option>
                                     <option v-for="supplier in suppliers" :key="supplier.id" :value="supplier.id">{{ supplier.name }}</option>
                                 </select>
                             </div>
                             <div class="form-group me-2">
-                                <input type="date" class="form-control form-control-sm" v-model="supplier_form.date">
+                                <input type="date" class="form-control" v-model="supplier_form.date">
                             </div>
                             <div class="form-group">
-                                <button type="button" class="btn btn-sm btn-primary" @click.prevent="onSaveSupplier"><i class="fa fa-save me-2"></i> Save</button>
+                                <button type="button" class="btn btn-primary" @click.prevent="onSaveSupplier"><i class="fa fa-save me-2"></i> Save</button>
                             </div>
                         </div>
                     </div>

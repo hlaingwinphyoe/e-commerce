@@ -38,7 +38,7 @@
             <input type="date" class="form-control" name="to_date" placeholder="From Date" value="{{ $to_date->format('Y-m-d') }}">
         </div>
         <div class="mb-2 align-self-end">
-            <button type="submit" class="btn btn-sm btn-primary">Apply</button>
+            <button type="submit" class="btn btn-primary">Apply</button>
         </div>
     </form>
 

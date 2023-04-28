@@ -3,6 +3,7 @@
 //media
 
 use App\Http\Controllers\WebApi\AttributeController;
+use App\Http\Controllers\WebApi\BrandController;
 use App\Http\Controllers\WebApi\InventoryController;
 use App\Http\Controllers\WebApi\ItemAttributeController;
 use App\Http\Controllers\WebApi\ItemDiscountController;
@@ -40,6 +41,7 @@ use App\Http\Controllers\WebApi\WasteController;
 use App\Http\Controllers\WebApi\GeneralController;
 use App\Http\Controllers\WebApi\GeneralInventoryController;
 use App\Http\Controllers\WebApi\ReportController;
+use App\Http\Controllers\WebApi\UnitController;
 use App\Http\Controllers\WebApi\WebPushNotiController;
 
 use Illuminate\Support\Facades\Route;
@@ -47,8 +49,18 @@ use Illuminate\Support\Facades\Route;
 Route::resource('/medias', MediaController::class);
 Route::patch('/medias/check/{id}', [MediaController::class, 'check']);
 Route::get('/get-icons', [MediaController::class, 'getIcons']);
+
+// type
 Route::get('/types', [TypeController::class, 'index']);
 Route::post('/types/create', [TypeController::class, 'store']);
+
+// unit
+Route::get('/units', [UnitController::class,'index']);
+Route::post('/units/create', [UnitController::class,'store']);
+
+// brand
+Route::get('/brands', [BrandController::class,'index']);
+Route::post('/brands/create', [BrandController::class,'store']);
 
 //skus
 Route::get('/item-skus/{item}', [ItemSkuController::class, 'index']);
@@ -100,11 +112,12 @@ Route::patch('/sku-barcodes/{sku}', [SkuBarcodeController::class, 'update']);
 //inventory
 Route::get('/inventories/create', [InventoryController::class, 'create']);
 Route::patch('/inventories/{inventory}', [InventoryController::class, 'update']);
-
+Route::patch('/inventories/update/{inventory}', [InventoryController::class, 'inventoryUpdate']);
 
 
 //sku-inventory
 Route::post('/sku-inventories/{inventory}', [SkuInventoryController::class, 'store']);
+Route::patch('/sku-inventories/{inventory}/{sku}', [SkuInventoryController::class, 'update']);
 Route::delete('/sku-inventories/{inventory}/{sku}', [SkuInventoryController::class, 'destroy']);
 
 // general

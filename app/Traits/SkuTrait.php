@@ -199,6 +199,10 @@ trait SkuTrait
                 $price = $max_pricing ? $max_pricing->amt : 0;
             }
 
+            if ($this->currency->slug !== 'mmk') {
+                $price = $price * $this->getExchangeRate();
+            }
+
             if ($discount) {
                 $discount_amt = $is_percent ? ($price * $discount->amt) / 100  : $discount->amt;
             } else {

@@ -8,8 +8,9 @@
 
 <x-admin.search-box url="{{ route('admin.generals.index') }}"></x-admin.search-box>
 
-<div>
-    <h2 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">General Usage</h2>
+<div class="d-flex align-items-center mb-2">
+    <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">General</h4>
+    <span class="text-muted form-text">( Showing {{ $generals->count() }} of total {{ $generals->total() }} records )</span>
 </div>
 
 @include('components.admin.message')
@@ -19,9 +20,9 @@ $query = '';
 $query .= request('q') ? '?q=' . request('q') : '';
 ?>
 
-<div class="border bg-white rounded p-2">
-    <p class="me-2"><span class="fw-bold h5">{{ $generals->count() }}</span> of total <span class="">{{ $generals->total() }}</span></p>
-    <div class="d-flex mb-3">
+<div class="border bg-white rounded px-2 py-4">
+
+    <div class="d-flex">
         <!-- filter -->
         <div class="d-flex flex-wrap">
             <div class="me-2 mt-4">

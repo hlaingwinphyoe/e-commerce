@@ -22245,6 +22245,10 @@ select + .select2-container--bootstrap-5 {
   color: #fff !important;
 }
 
+.stock:hover {
+  color: white !important;
+}
+
 .table tr:hover {
   box-shadow: none !important;
 }

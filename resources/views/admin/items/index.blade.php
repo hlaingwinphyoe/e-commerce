@@ -8,19 +8,20 @@
 
 <x-admin.search-box url="{{ route('admin.items.index') }}"></x-admin.search-box>
 
-<div>
-    <h2 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.item')}}</h2>
+<div class="d-flex align-items-center mb-2">
+    <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.item')}}</h4>
+    <span class="text-muted form-text">( Showing {{ $items->count() }} of total {{ $items->total() }} records )</span>
 </div>
 
 @include('components.admin.message')
 
 <?php $item_count =  \App\Models\Item::withTrashed()->count(); ?>
 
-@if($item_count >= config('app.max_data'))
+{{-- @if($item_count >= config('app.max_data'))
 <div class="">
     <p class="alert alert-danger py-1">You have already <span class="fw-bold h5">{{ config('app.max_data') }}</span> items (Including in Trash and Disabled) and can't add anymore.</p>
 </div>
-@endif
+@endif --}}
 
 
 <?php
@@ -37,9 +38,7 @@ if (request('brand')) {
 ?>
 
 <div class="border bg-white rounded px-2 py-4">
-    <p class="me-2"><span class="fw-bold h5">{{ $items->count() }}</span> of total <span class="">{{ $items->total() }}</span></p>
-
-    <div class="d-flex mb-3">
+    <div class="d-flex">
         <!-- filter -->
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-item')) <div class="me-2">
@@ -106,6 +105,7 @@ if (request('brand')) {
             <tr>
                 <th width="250px">Name</th>
                 <th>Skus</th>
+                <th>Photo</th>
                 <th>Category</th>
                 <th>Stock</th>
                 <th>Price</th>
@@ -119,7 +119,7 @@ if (request('brand')) {
                 <td class="">{{ $item->name }}</td>
                 <td>
                     @if($item->skus->count() > 0)
-                    <a href="{{ route('admin.items.show', $item->id) }}" class="badge bg-secondary p-2 text-decoration-none">
+                    <a href="{{ route('admin.items.show', $item->id) }}" class="p-2 text-decoration-none" style="letter-spacing: 0.6px">
                         @foreach($item->skus as $sku)
                             <span>
                                 {{ $sku->code ?? 'Get Code' }}
@@ -130,9 +130,19 @@ if (request('brand')) {
                     <span>{{ $item->skus->count() }}</span>
                     @endif
                 </td>
+                <td>
+                    @php
+                        $img = $item->medias()->first();
+                    @endphp
+                    @if ($img)
+                        <img src="{{ asset('storage/thumbnail/'.$img->slug) }}" width="65" alt="item_image">
+                        @else
+                        <img src="{{ asset('images/featured/default.png') }}"  width="50" alt="">
+                    @endif
+                </td>
                 <td>{{ $item->type() ? $item->type()->name : '-' }}</td>
                 <td>
-                    <a href="#add-stock-modal-{{ $item->id }}" class="badge bg-secondary text-decoration-none p-2" data-bs-toggle="modal">
+                    <a href="#add-stock-modal-{{ $item->id }}" class="badge stock bg-secondary text-decoration-none p-2" data-bs-toggle="modal">
                         <span class="">{{ $item->getStock() }}</span>
                     </a>
                     <stock :item="{{ $item }}" :suppliers="{{ $suppliers }}"></stock>

@@ -375,6 +375,13 @@ class Order extends Model
         });
     }
 
+    public function scopeWaitOrder($query)
+    {
+        $query->whereHas('status', function ($q) {
+            $q->where('slug', 'order-confirmed');
+        });
+    }
+
     public function scopeNotSale($query)
     {
         $query->whereHas('status', function ($q) {

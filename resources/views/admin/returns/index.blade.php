@@ -8,8 +8,9 @@
 
 <x-admin.search-box url="{{ route('admin.returns.index') }}"></x-admin.search-box>
 
-<div>
-    <h2 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.return')}}</h2>
+<div class="d-flex align-items-center mb-2">
+    <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{ __('menu.return') }}</h4>
+    <span class="text-muted form-text">( Showing {{ $returns->count() }} of total {{ $returns->total() }} records )</span>
 </div>
 
 @include('components.admin.message')
@@ -21,28 +22,17 @@ $query .= request('q') ? '?q=' . request('q') : '';
 ?>
 
 <div class="border bg-white rounded px-2 py-4">
-    <p class="me-2"><span class="fw-bold h5">{{ $returns->count() }}</span> of total <span class="">{{ $returns->total() }}</span></p>
-    <div class="d-flex mb-3">
+    <div class="d-flex">
         <!-- filter -->
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-return'))
             <div class="me-2 mb-1">
-                <a href="{{ route('admin.returns.create') }}" class="btn btn-sm btn-secondary">
+                <a href="{{ route('admin.returns.create') }}" class="btn btn-secondary">
                     <small class="me-2"><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
             </div>
             @endif
-
-            <form action="{{ route('admin.returns.index') }}" class="d-flex responsive-flex">
-
-                <div class="form-group">
-{{--                    <button class="btn btn-sm btn-outline-secondary me-2 mb-1">Filter</button>--}}
-                    <a href="{{ route('admin.returns.index') }}" class="btn btn-sm btn-danger mb-1">
-                        <small><i class="fa fa-redo m-0"></i></small>
-                    </a>
-                </div>
-            </form>
         </div>
 
     </div>

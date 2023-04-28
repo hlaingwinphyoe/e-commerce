@@ -180,7 +180,7 @@ export default {
     methods: {
         newFunc() {
             axios.get(`/wapi/sales`, { params: {month: this.selectedMonth} }).then(resp => {
-                console.log(resp.data);
+                // console.log(resp.data);
                 // console.log(this.sales_chart);
                 let data = {
                     labels: resp.data.sales.labels,

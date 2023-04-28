@@ -230,7 +230,7 @@ export default {
             }
         },
         onRemoveAttr(id) {
-            console.log(id);
+            //console.log(id);
             axios.delete(`/wapi/attributes/${id}`).then(resp => {
                  window.location = `/admin/items/${this.item_id}/edit`;
             });
@@ -254,7 +254,7 @@ export default {
             // this.skus = data;
         },
         onAddPricing(data) {
-            console.log(data);
+            //console.log(data);
             this.skus = data;
         },
         onAddNewSku(data) {

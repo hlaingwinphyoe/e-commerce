@@ -8,8 +8,9 @@
 
 <x-admin.search-box url="{{ route('admin.inventories.index') }}"></x-admin.search-box>
 
-<div>
-    <h2 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.purchase')}}</h2>
+<div class="d-flex align-items-center mb-2">
+    <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.purchase')}}</h4>
+    <span class="text-muted form-text">( Showing {{ $inventories->count() }} of total {{ $inventories->total() }} records )</span>
 </div>
 
 @include('components.admin.message')
@@ -19,9 +20,9 @@ $query = '';
 $query .= request('q') ? '?q=' . request('q') : '';
 ?>
 
-<div class="border bg-white rounded p-2">
-    <p class="me-2"><span class="fw-bold h5">{{ $inventories->count() }}</span> of total <span class="">{{ $inventories->total() }}</span></p>
-    <div class="d-flex mb-3">
+<div class="border bg-white rounded px-2 py-4">
+    
+    <div class="d-flex ">
         <!-- filter -->
         <div class="d-flex flex-wrap">
             @if(auth()->user()->role->hasPermission('create-inventory'))
@@ -64,6 +65,7 @@ $query .= request('q') ? '?q=' . request('q') : '';
                     <th width="250px">Supplier</th>
                     <th>Items</th>
                     <th>Amount</th>
+                    <th>Status</th>
                     <th>Date</th>
                     <th>By</th>
                     <th><i class="fa fa-ellipsis-vertical"></i></th>
@@ -77,6 +79,9 @@ $query .= request('q') ? '?q=' . request('q') : '';
                     <td class="">{{ $inventory->supplier ? $inventory->supplier->name : '' }}</td>
                     <td><a href="{{ route('admin.inventories.show', $inventory->id) }}" class="badge bg-secondary p-2 text-decoration-none">{{ $inventory->skus->count() }}</a></td>
                     <td>{{ number_format($inventory->getAmount()) }}</td>
+                    <td>
+                        <small class="{{ $inventory->is_published == 1 ? 'text-success' : 'text-info' }}">{{ $inventory->is_published == 1 ? 'Confirmed' : 'Draft' }}</small>
+                    </td>
                     <td>{{ \Carbon\Carbon::parse($inventory->date)->format('M d, Y') }}</td>
                     <td>{{ $inventory->user ? $inventory->user->name : '' }}</td>
                     <td>

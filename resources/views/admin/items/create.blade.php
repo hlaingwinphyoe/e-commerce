@@ -28,7 +28,7 @@
 
                     <div class="row flex-wrap pb-3">
 
-                        <div class="col-md-3 form-group me-2 w-sm-100">
+                        <div class="col-md-3">
                             <label for="">
                                 Name
                                 <span class="text-danger">**</span>
@@ -40,48 +40,55 @@
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="col-md-2 form-group me-2 w-sm-100">
+                        <div class="col-md-2">
                             <label for="">
                                 Unit
                             </label>
-
-                            <select name="unit" class="form-select form-select-sm">
+                            
+                            {{-- <select name="unit" class="form-select form-select-sm">
                                 <option value="">Choose Unit</option>
                                 @foreach($units as $unit)
                                     <option value="{{ $unit->id }}" {{ old('unit') == $unit->id ? 'selected' : '' }}>{{ $unit->name }}</option>
                                 @endforeach
                             </select>
-                            <div class="py-1"><small class="help-text mm-font text-muted">Unit ရှိလျှင်ထည့်ပါ။</small></div>
+                            <div class="py-1"><small class="help-text mm-font text-muted">Unit ရှိလျှင်ထည့်ပါ။</small></div> --}}
+
+                            <search-or-create url="units" name="unit" input_obj="" ></search-or-create>
+
                             @error('unit')
                             <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                            @enderror 
                         </div>
 
-                        <div class="col-md-2 form-group me-2 w-sm-100">
+                        <div class="col-md-3">
                             <label for="">
                                 Brand
                             </label>
 
-                            <select name="brand" class="form-select form-select-sm">
+                            {{-- <select name="brand" class="form-select form-select-sm">
                                 <option value="">Choose Brand</option>
                                 @foreach($brands as $brand)
                                     <option value="{{ $brand->id }}" {{ old('brand') == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
                                 @endforeach
                             </select>
-                            <div class="py-1"><small class="help-text mm-font text-muted">Brand ရှိလျှင်ထည့်ပါ။</small></div>
+                            <div class="py-1"><small class="help-text mm-font text-muted">Brand ရှိလျှင်ထည့်ပါ။</small></div> --}}
+
+                            <search-or-create url="brands" name="brand" input_obj="" ></search-or-create>
+
                             @error('brand')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
 
-                        <div class="col-md-3 form-group me-2 w-sm-100">
+                        <div class="col-md-3">
                             <label for="">
                                 Category
                                 <span class="text-danger">**</span>
                             </label>
-                            {{-- <search-or-create url="types" name="type"></search-or-create> --}}
+                            
+                            <search-or-create url="types" name="type"></search-or-create>
 
-                            <select class="form-select" name="type" id="custom-select" data-placeholder="Choose Category">
+                            {{-- <select class="form-select" name="type" id="custom-select" data-placeholder="Choose Category">
                                 <option></option>
                                 @forelse ($types as $type)
                                     <option value="{{ $type->id }}" {{ old('type') == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
@@ -90,7 +97,8 @@
                                 @endforelse
                             </select>
 
-                            <div class="py-1"><small class="help-text mm-font text-muted">အမျိုးအစား ထည့်ပါ။</small></div>
+                            <div class="py-1"><small class="help-text mm-font text-muted">အမျိုးအစား ထည့်ပါ။</small></div> --}}
+
                             @error('type')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror

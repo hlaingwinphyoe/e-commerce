@@ -45,7 +45,7 @@
                         <label for="">Main Category</label>
                         <small class="help-text">အထက်တွင် level တဆင့် ရှိပါက ထည့်ပါ။</small>
                         <select name="parent_id" class="form-select">
-                            <option value="">Select Sub Category</option>
+                            <option value="">Select Main Category</option>
                             @foreach($types as $t)
                             <option value="{{ $t->id }}" {{ $type->hasParent($t->id) ? 'selected' : '' }}>{{ $t->name }}</option>
                             @endforeach
@@ -75,8 +75,6 @@
             </button>
         </div>
     </form>
-
-
 
 </div>
 

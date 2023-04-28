@@ -80,6 +80,7 @@ class ItemController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'name' => 'required|unique:items',
         ]);
@@ -118,7 +119,7 @@ class ItemController extends Controller
     public function edit($id)
     {
         $item = Item::with([
-            'wastes', 'costs', 'pricings.role', 'pricings.status'
+            'wastes', 'costs', 'pricings.role', 'pricings.status',
         ])->findOrFail($id);
 
         $types = Type::isType('cate')->orderBy('name')->get();
@@ -166,6 +167,7 @@ class ItemController extends Controller
 
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $item = Item::findOrFail($id);
 
         $request->validate([
@@ -229,7 +231,14 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($id);
 
-        $item->delete();
+        // $item->delete();
+        DB::transaction(function () use ($item) {
+            foreach ($item->skus as $sku) {
+                $sku->delete();
+            }
+
+            $item->forceDelete();
+        });
 
         return redirect(request()->session()->get('prev_route'))->with('message', 'Item was successfully deleted');
     }
@@ -253,7 +262,6 @@ class ItemController extends Controller
             }
             $item->forceDelete();
         });
-
 
         return redirect(request()->session()->get('prev_route'))->with('message', 'Item was permanently deleted');
     }

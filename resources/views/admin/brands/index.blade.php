@@ -8,21 +8,21 @@
 
 <x-admin.search-box url="{{ route('admin.brands.index') }}"></x-admin.search-box>
 
-<div>
-    <h3 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.brand')}}</h3>
+<div class="d-flex align-items-center mb-2">
+    <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.brand')}}</h4>
+    <span class="text-muted form-text">( Showing {{ $brands->count() }} of total {{ $brands->total() }} records )</span>
 </div>
 
 @include('components.admin.message')
 
 <div class="border bg-white rounded px-2 py-4">
-    <p class="me-2"><span class="fw-bold h5">{{ $brands->count() }}</span> of total <span class="">{{ $brands->total() }}</span></p>
-
-    <div class="d-flex mb-3">
+   
+    <div class="d-flex">
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-brand'))
-            <div class="me-2 mb-3">
+            <div class="me-2">
                 <a href="{{ route('admin.brands.create') }}" class="btn btn-secondary">
-                    <small><i class="fa fa-plus"></i></small>
+                    <small class="me-2"><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
             </div>
@@ -61,11 +61,9 @@
                     <td>{{ $brand->name }}</td>
                     <td>
                         @if($brand->items()->count())
-                        <a href="{{ route('admin.items.index') }}?brand={{ $brand->slug }}" class="badge badge-primary">
+                        <a href="{{ route('admin.items.index') }}?brand={{ $brand->slug }}" class="badge bg-success text-decoration-none">
                             {{ $brand->items()->count() }}
                         </a>
-                        @else
-                        <span>{{ $brand->items()->count() }}</span>
                         @endif
                     </td>
                     <td>

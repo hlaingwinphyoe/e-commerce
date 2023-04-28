@@ -8,21 +8,21 @@
 
 <x-admin.search-box url="{{ route('admin.discountypes.index') }}"></x-admin.search-box>
 
-<div>
-    <h3 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.discounts')}}</h3>
+<div class="d-flex align-items-center mb-2">
+    <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.discounts')}}</h4>
+    <span class="text-muted form-text">( Showing {{ $discountypes->count() }} of total {{ $discountypes->total() }} records )</span>
 </div>
 
 @include('components.admin.message')
 
 <div class="border bg-white rounded px-2 py-4">
-    <p class="me-2"><span class="fw-bold h5">{{ $discountypes->count() }}</span> of total <span class="">{{ $discountypes->total() }}</span></p>
-
-    <div class="d-flex mb-3">
+   
+    <div class="d-flex">
         <div class="d-flex flex-wrap mb-2">
             @if(auth()->user()->role->hasPermission('create-discount-type'))
             <div class="me-2 mb-3">
-                <a href="{{ route('admin.discountypes.create') }}" class="btn btn-primary">
-                    <small><i class="fa fa-plus"></i></small>
+                <a href="{{ route('admin.discountypes.create') }}" class="btn btn-secondary">
+                    <small class="me-2"><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
             </div>
@@ -36,8 +36,8 @@
                     <input type="date" name="end_date" class="form-control form-control-sm" value="{{ request('end_date') }}">
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-outline-primary me-2">Filter</button>
-                    <a href="{{ route('admin.discountypes.index') }}" class="btn btn-primary">
+                    <button class="btn btn-outline-secondary me-2">Filter</button>
+                    <a href="{{ route('admin.discountypes.index') }}" class="btn btn-danger">
                         <small><i class="fa fa-redo"></i></small>
                     </a>
                 </div>
@@ -92,7 +92,7 @@
                         </a>
                         @endif
                         @if(auth()->user()->role->hasPermission('delete-discount-type'))
-                        <a href="#delete-modal-{{ $discountype->id }}" class="" data-bs-toggle="modal">
+                        <a href="#delete-modal-{{ $discountype->id }}" class="text-danger" data-bs-toggle="modal">
                             <i class="fas fa-trash"></i>
                         </a>
                         <x-admin.delete id="{{ $discountype->id }}" url="{{ route('admin.discountypes.destroy', $discountype->id) }}"></x-admin.delete>

@@ -94,7 +94,7 @@
                 <div class="col-md-2" v-if="sale_price">
                     <div class="form-group mb-3">
                         <label for=""> Sale Price </label>
-                        <div><small class="text-white bg-secondary rounded px-1 py-0">{{ sale_price }}</small></div>
+                        <p class="text-white bg-secondary rounded px-3 py-2">{{ sale_price }}</p>
                     </div>
                 </div>
                 <div class="form-group mb-3" v-show="canSave">
@@ -144,7 +144,7 @@ export default {
                             params: { q: this.name, order: null },
                         })
                         .then((resp) => {
-                            //console.log(resp.data)
+                            // console.log(resp.data)
                             // this.results = resp.data;
                             this.results = resp.data.data.filter(res => {
                                 let sku = this.skus.some(s => s.id === res.id);
@@ -174,8 +174,8 @@ export default {
                 ? sku.item_name + " (" + sku.data + ")"
                 : sku.item_name;
             this.results = [];
-            this.form.amount = sku.buy_price;
-            this.sale_price = sku.price;
+            this.form.amount = sku.buy_price.toFixed(2);
+            this.sale_price = sku.item.price;
         },
         onAddSku() {
             axios

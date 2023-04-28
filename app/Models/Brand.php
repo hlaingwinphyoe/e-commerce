@@ -13,9 +13,14 @@ class Brand extends Model
 
     protected $guarded = [];
 
+    // public function items()
+    // {
+    //     return $this->belongsToMany(Item::class, 'item_brand', 'brand_id', 'item_id');
+    // }
+
     public function items()
     {
-        return $this->belongsToMany(Item::class, 'item_brand', 'brand_id', 'item_id');
+        return $this->hasMany(Item::class, 'brand_id', 'id');
     }
 
     public function medias()

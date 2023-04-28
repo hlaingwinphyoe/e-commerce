@@ -20,24 +20,24 @@
 <!--        </div>-->
 <!--    </a>-->
 
-        <div class="card sale-card mb-3" :class="data_stock > 0 ? '' : 'disabled'" @click.prevent="onSelectedSku(res.id, res.data ? res.data : res.item.name, res.discount ? res.discount : res.price)" style="width: 14rem;">
-            <img :src="
-                    res.thumbnail.includes('default.png')
-                        ? res.item.thumbnail
-                        : res.thumbnail
-                " class="sale-img border-bottom"
-                 :alt="`${res.item_name} - ${res.data}`"
-            >
-            <div class="card-body">
-                <p class="text-muted text-truncate">{{ res.item_name }} {{ res.data ? '('+ res.data +')' : '' }}</p>
-                <p class="card-text fw-bold d-flex justify-content-between align-items-center text-success">
-                    <span class="h6 mb-0">{{ res.discount ? res.discount : res.price }} Ks</span>
+    <div class="card sale-card mb-3" :class="data_stock > 0 ? '' : 'disabled'" @click.prevent="onSelectedSku(res.id, res.data ? res.data : res.item.name, res.discount ? res.discount : res.item.price)" style="width: 14rem;">
+        <img :src="
+                res.thumbnail.includes('default.png')
+                    ? res.item.thumbnail
+                    : res.thumbnail
+            " class="sale-img border-bottom"
+                :alt="`${res.item_name} - ${res.data}`"
+        >
+        <div class="card-body">
+            <p class="text-muted text-truncate">{{ res.item_name }} {{ res.data ? '('+ res.data +')' : '' }}</p>
+            <p class="card-text fw-bold d-flex justify-content-between align-items-center text-success">
+                <span class="h6 mb-0">{{ res.discount ? res.discount : res.item.price }} Ks</span>
 
-                    <span class="badge bg-success p-2">{{ data_stock }}</span>
-                </p>
-                <h6 class="fw-bold text-primary">{{ res.code }}</h6>
-            </div>
+                <span class="badge bg-success p-2">{{ data_stock }}</span>
+            </p>
+            <h6 class="fw-bold text-primary">{{ res.code }}</h6>
         </div>
+    </div>
 
 </template>
 

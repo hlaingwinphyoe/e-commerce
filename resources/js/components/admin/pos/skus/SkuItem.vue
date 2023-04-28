@@ -2,7 +2,7 @@
     <tr>
         <td>
             <span class="no-overflow">{{ sku.item_name }} {{ sku.data ? '('+ sku.data +')' : '' }}</span>
-            <p class="mb-0 small">{{ Number(sku.price).toLocaleString() }}</p>
+            <p class="mb-0 small">{{ Number(sku.pivot.price).toLocaleString() }}</p>
         </td>
         <td class="">
             <div class="d-flex align-items-center">
@@ -14,7 +14,7 @@
             </div>
             <p class="small text-danger alert-message fw-bold" v-show="out_of_stock">Out of stock</p>
         </td>
-        <td class="text-end">{{ Number(sku.pivot.qty * sku.price).toLocaleString() }}</td>
+        <td class="text-end">{{ Number(sku.pivot.qty * sku.pivot.price).toLocaleString() }}</td>
         <td>
             <a href="#" @click.prevent="onDeleteSku"><small class="btn btn-sm btn-outline-danger"><i class="fa fa-times"></i></small></a>
         </td>

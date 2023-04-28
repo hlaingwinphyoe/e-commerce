@@ -7,20 +7,20 @@
 
 <x-admin.search-box url="{{ route('admin.currencies.index') }}"></x-admin.search-box>
 
-<div>
-    <h3 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">Currency</h3>
+<div class="d-flex align-items-center mb-2">
+    <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('Currency')}}</h4>
+    <span class="text-muted form-text">( Showing {{ $currencies->count() }} of total {{ $currencies->total() }} records )</span>
 </div>
 
 @include('components.admin.message')
 
 <div class="border bg-white rounded px-2 py-4">
-    <p class="me-2"><span class="fw-bold h5">{{ $currencies->count() }}</span> of total <span class="">{{ $currencies->total() }}</span></p>
-
-    <div class="d-flex mb-3">
+    
+    <div class="d-flex ">
         <div class="d-flex flex-wrap mb-2">
             <div class="me-2 mt-2">
                 <a href="{{ route('admin.currencies.create') }}" class="btn btn-secondary">
-                    <small><i class="fa fa-plus"></i></small>
+                    <small class="me-2"><i class="fa fa-plus"></i></small>
                     <span>Add New</span>
                 </a>
             </div>

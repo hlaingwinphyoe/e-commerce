@@ -1,7 +1,7 @@
 <template>
     <div class="search-or-create position-relative">
         <input type="hidden" :name="name" v-model="input_id">
-        <input type="text" class="form-control form-control-sm" placeholder="Search" v-model="q" @keyup="onKeySearch" @change="onChangeKeyWord" required>
+        <input type="text" class="form-control form-control-sm" placeholder="Search Or Create" v-model="q" @keyup="onKeySearch" @change="onChangeKeyWord">
         <div class="results absolute-box bg-white shadow rounded mt-1" v-if="results.length">
             <ul class="nav flex-column">
                 <li class="nav-item" v-for="result in results" :key="result.id">
@@ -10,9 +10,15 @@
             </ul>
         </div>
     </div>
+
+    <!-- <div class="input-group input-group-sm mb-3">
+            <input type="text" class="form-control" placeholder="Search or Create" v-model="q" @keyup="onKeySearch">
+            <button class="btn btn-primary" @click.prevent="onChangeKeyWord"><i class="fa-solid fa-plus"></i></button>
+        </div> -->
 </template>
 
 <script>
+import {throttle,debounce} from 'lodash';
 export default {
     props: {
         url : {required: true},
@@ -28,7 +34,7 @@ export default {
         }
     },
     methods: {
-        onKeySearch() {
+        onKeySearch:throttle(function () {
             if(this.q && this.q !== ' ') {
                 clearTimeout(this.timeout);
                 this.timeout = setTimeout(() => {
@@ -37,19 +43,21 @@ export default {
                     });
                 }, 100);
             }
-        },
+        },500),
+
         onChooseResult(data) {
             this.input_id = data.id;
             this.results = [];
             this.q = this.url == 'orders' ? data.order_no : data.name;
         },
-        onChangeKeyWord() {
+
+        onChangeKeyWord:debounce(function () {
             if(this.q && this.q !== ' ') {
                 axios.post(`/wapi/${this.url}/create`, {q : this.q}).then(resp => {
                     this.input_id = resp.data ? resp.data.id : '';
                 });
             }
-        }
+        },1000)
     }
 }
 </script>

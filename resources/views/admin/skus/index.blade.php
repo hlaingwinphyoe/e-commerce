@@ -8,8 +8,9 @@
 
 <x-admin.search-box url="{{ route('admin.skus.index') }}"></x-admin.search-box>
 
-<div>
-    <h3 class="page-title {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.stocks')}}</h3>
+<div class="d-flex align-items-center mb-2">
+    <h4 class="page-title mb-0 me-2 {{App::getLocale() == 'mm' ? 'mm-font' : ''}}">{{__('menu.stocks')}}</h4>
+    <span class="text-muted form-text">( Showing {{ $skus->count() }} of total {{ $skus->total() }} records )</span>
 </div>
 
 @include('components.admin.message')
@@ -17,11 +18,9 @@
 @include('components.admin.errors')
 
 <div class="border bg-white rounded px-2 py-4">
-    <p class="me-2"><span class="fw-bold h5">{{ $skus->count() }}</span> of total <span class="">{{ $skus->total() }}</span></p>
+    <p class="mb-4 small">အနီရောင်ပြထားသော items များမှာ ရှိရမည့်လက်ကျန်ပမာဏထက် နည်းနေသော / stock ထပ်ဖြည့်ရန်လိုအပ်သော items များဖြစ်ပါသည်။</p>
 
-    <p class="mb-4 small px-1 pb-2">အနီရောင်ပြထားသော items များမှာ ရှိရမည့်လက်ကျန်ပမာဏထက် နည်းနေသော / stock ထပ်ဖြည့်ရန်လိုအပ်သော items များဖြစ်ပါသည်။</p>
-
-    <div class="d-flex mb-2">
+    <div class="d-flex">
         <div class="d-flex flex-wrap mb-2">
             <form action="{{ route('admin.skus.index') }}" class="d-flex responsive-flex">
                 <div class="form-group me-2">
@@ -123,7 +122,7 @@
                     <td>
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
 
-                            <a href="#add-stock-{{ $sku->id }}" class="btn btn-outline-secondary " data-bs-toggle="modal"><i class="fa fa-plus"></i></a>
+                            <a href="#add-stock-{{ $sku->id }}" class="btn btn-outline-success " data-bs-toggle="modal"><i class="fa fa-plus"></i></a>
 
                             @include('admin.skus.add-stock')
 
@@ -145,7 +144,7 @@
                             @endif
 
                             @if(auth()->user()->role->hasPermission('delete-item'))
-                                <a href="#delete-modal-{{ $sku->id }}" class="btn btn-outline-secondary" data-bs-toggle="modal">
+                                <a href="#delete-modal-{{ $sku->id }}" class="btn btn-outline-danger" data-bs-toggle="modal">
                                     <span><i class="fas fa-trash"></i></span>
                                 </a>
                                 <x-admin.delete id="{{ $sku->id }}" url="{{ route('admin.skus.destroy', $sku->id) }}"></x-admin.delete>

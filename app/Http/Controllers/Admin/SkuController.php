@@ -84,13 +84,19 @@ class SkuController extends Controller
         //     })->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date);
         // })->latest()->get();
 
-        $orders = Order::saleOrder()->filterOn()->fromTo()->orderBy('order_no', 'desc')->paginate(20);
+        $orders = Order::saleOrder()->filterOn()->fromTo()->latest()->paginate(20)->filter(function ($q) use ($sku){
+            return $q->where('sku_id', $sku->id);
+        });
 
-        $wait_orders = $sku->whereHas('orders', function ($query) use ($from_date, $to_date) {
-            $query->whereHas('status', function ($query) {
-                $query->where('slug', 'order-confirmed');
-            })->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date);
-        })->latest()->get();
+        // $wait_orders = $sku->whereHas('orders', function ($query) use ($from_date, $to_date) {
+        //     $query->whereHas('status', function ($query) {
+        //         $query->where('slug', 'order-confirmed');
+        //     })->whereDate('created_at', '>=', $from_date)->whereDate('created_at', '<=', $to_date);
+        // })->latest()->get();
+
+        $wait_orders = Order::waitOrder()->filterOn()->fromTo()->latest()->paginate(20)->filter(function ($q) use ($sku){
+            return $q->where('sku_id', $sku->id);
+        });
 
         $returns = $sku->returns()->whereDate('date', '>=', $from_date)->whereDate('date', '<=', $to_date)->latest()->get();
 
