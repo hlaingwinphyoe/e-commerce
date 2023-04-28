@@ -96,7 +96,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Price</th>
-                    <th>Cost</th>
+                    <th>Buy Price</th>
                     <th>Current Stock</th>
                     <th>Min Stock</th>
                     <th><i class="fas fa-ellipsis-vertical"></i></th>

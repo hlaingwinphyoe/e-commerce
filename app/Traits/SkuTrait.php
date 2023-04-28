@@ -20,7 +20,8 @@ trait SkuTrait
 
     public function getPurePrice()
     {
-        return ($this->pure_price * $this->getExchangeRate());
+        $pure_price = $this->buy_price ? $this->buy_price : $this->pure_price;
+        return ($pure_price * $this->getExchangeRate());
     }
 
     public function getRawCost()
