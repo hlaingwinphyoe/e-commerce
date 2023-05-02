@@ -10,7 +10,7 @@ class StatusController extends Controller
 {
     public function index()
     {
-        $statuses = Status::isType(request()->type)->orderBy('priority')->orderBy('name')->get();
+        $statuses = Status::isType(request()->type)->orderBy('priority','desc')->orderBy('name')->get();
 
         return response()->json($statuses);
     }

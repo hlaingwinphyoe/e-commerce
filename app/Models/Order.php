@@ -294,6 +294,11 @@ class Order extends Model
         return $this->getSubTotal() - $this->getPayAmount();
     }
 
+    public function getChangeBalance()
+    {
+        return $this->getPayAmount() - $this->getSubTotal();
+    }
+
     public function getReturnAmount()
     {
         if ($this->return()) {

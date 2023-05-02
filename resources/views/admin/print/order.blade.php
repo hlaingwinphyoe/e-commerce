@@ -81,8 +81,15 @@
                 <th width="600px"></th>
                 <th></th>
                 <th width="200px" style="text-align:right">Pay Amount</th>
-                <th width="200px" style="text-align:right"><span>{{ $sale->getBalance() <= 0 ? '(Paid) ' : '' }}</span>{{ number_format($sale->getPayAmount()) }}</th>
+                <th width="200px" style="text-align:right"><span class="text-success">{{ $sale->getBalance() <= 0 ? '(Paid) ' : '' }}</span>{{ number_format($sale->getPayAmount()) }}</th>
             </tr>
+
+            {{-- <tr class="small" style="text-align:right">
+                <th width="600px"></th>
+                <th></th>
+                <th width="200px" style="text-align:right">Change</th>
+                <th width="200px" style="text-align:right">{{ number_format($sale->getChangeBalance()) }}</th>
+            </tr> --}}
             @endif
         </table>
     </div>

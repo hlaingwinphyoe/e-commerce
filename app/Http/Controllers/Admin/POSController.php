@@ -25,7 +25,7 @@ class POSController extends Controller
 
         $roles = Role::isType('Customer')->orderBy('name')->get();
 
-        $paymentypes = Status::isType('payment-type')->get();
+        $paymentypes = Status::isType('payment-type')->orderBy('priority','desc')->get();
 
         return view('admin.pos.index')->with([
             'orders' => $orders,

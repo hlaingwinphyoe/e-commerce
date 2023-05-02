@@ -49,10 +49,16 @@
                         </li>
                     </ul>
                 </div>
-                <div class="modal-footer bg-sidebar">
+                <div class="modal-footer">
+                    <button
+                        @click.prevent="onMakePayment"
+                        class="btn btn-sm btn-primary"
+                    >
+                        Pay
+                    </button>
                     <button
                         type="button"
-                        class="btn btn-sm btn-primary"
+                        class="btn btn-sm btn-secondary"
                         data-bs-dismiss="modal"
                     >
                         Close
@@ -104,7 +110,7 @@ export default {
         },
         onSelectPayment(id) {
             this.form.paymentype_id = id;
-            this.onMakePayment();
+            // this.onMakePayment();
         },
         onMakePayment() {
             axios.post(`/wapi/transactions`, this.form).then((resp) => {

@@ -207,9 +207,9 @@
                                             </h5>
                                             <button
                                                 type="button"
-                                                class="btn-close"
+                                                class="btn btn-close"
                                                 data-bs-dismiss="modal"
-                                            ><i class="fa fa-times"></i></button>
+                                            ></button>
                                         </div>
                                         <div class="modal-body">
                                             <h5 class="text-primary mb-3">Pay Amount - <span class="fw-bold">{{ getPayAmount }}</span></h5>
@@ -248,8 +248,14 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button
+                                                @click.prevent="onMakePayment"
+                                                class="btn btn-sm btn-primary"
+                                            >
+                                                Pay
+                                            </button>
+                                            <button
                                                 type="button"
-                                                class="btn btn-sm btn-danger"
+                                                class="btn btn-sm btn-secondary"
                                                 data-bs-dismiss="modal"
                                             >
                                                 Close
@@ -373,12 +379,13 @@ export default {
         axios
             .get(`/wapi/statuses`, { params: { type: "payment-type" } })
             .then((resp) => {
+                // console.log(resp.data)
                 this.paymentypes = resp.data;
                 this.form.paymentype_id = this.paymentypes.length
                     ? this.paymentypes[0].id
                     : "";
             });
-        this.form.amount = this.getBalance;
+        // this.form.amount = this.getBalance ? this.getBalance : 0;
     },
     methods: {
         onAddSku(data) {
@@ -447,7 +454,7 @@ export default {
         },
         onSelectPayment(id) {
             this.form.paymentype_id = id;
-            this.onMakePayment();
+            // this.onMakePayment();
         },
         onMakePayment() {
             axios.post(`/wapi/transactions`, this.form).then((resp) => {

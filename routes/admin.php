@@ -41,6 +41,7 @@ use App\Http\Controllers\Admin\SkuWasteController;
 use App\Http\Controllers\Admin\GeneralController;
 use App\Http\Controllers\Admin\ExpenseTypeController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Models\Status;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
@@ -181,4 +182,18 @@ Route::middleware(['auth', 'prev_route'])->as('admin.')->group(function(){
     //reports
     Route::get('/reports-summary', [ReportController::class, 'summary'])->name('reports.summary');
     Route::get('/monthly-reports', [ReportController::class, 'monthly'])->name('reports.monthly');
+
+
+
+    // test
+    Route::get('/change-priority',function () {
+        $statuses = Status::where('slug',['cash','kpay'])->get();
+        foreach($statuses as $status){
+            $status->update([
+                'priority' => 99
+            ]);
+        }
+
+        echo "Update Successful";
+    });
 });

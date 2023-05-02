@@ -48,9 +48,16 @@ class TransactionController extends Controller
                 $order->updateStatus('completed');
             }
 
+            // $order->updateStatus('completed');
+
             $order->update([
                 'debt' => $order->getBalance()
             ]);
+
+            // $order->update([
+            //     'debt' => 0
+            // ]);
+
         });
 
         $order = Order::with(['transactions.status'])->find($request->order_id);
@@ -63,6 +70,7 @@ class TransactionController extends Controller
     public function update(Request $request, $id)
     {
         $transaction = Transaction::findOrFail($id);
+        dd($transaction);
 
         $transaction->updte([
             'paymentype_id' => $request->paymentype_id,
