@@ -385,13 +385,14 @@ export default {
                     ? this.paymentypes[0].id
                     : "";
             });
-        // this.form.amount = this.getBalance ? this.getBalance : 0;
+            this.form.amount = this.getBalance;
     },
     methods: {
         onAddSku(data) {
             this.data_skus = data;
             this.price_by_add_sku = this.getTotal;
             this.order.price = this.getTotal;
+            this.form.amount = this.getBalance;
         },
         onUpdateSku(data) {
             //console.log("here");
