@@ -80,9 +80,9 @@ class ItemController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'name' => 'required|unique:items',
+            'type' => 'required'
         ]);
 
         $item = DB::transaction(function () use ($request) {
@@ -197,6 +197,10 @@ class ItemController extends Controller
             $item->pricings()->sync($request->pricings);
 
             $item->wastes()->sync($request->wastes);
+
+            $sku = $item->skus()->first();
+            $sku->costs()->sync($request->costs);
+            $sku->wastes()->sync($request->wastes);
 
             $item->skus()->update([
                 "code" => $request->code ?? $item->code,

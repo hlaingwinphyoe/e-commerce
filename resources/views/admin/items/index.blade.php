@@ -54,13 +54,13 @@ if (request('brand')) {
             <div class="me-2">
                 <select name="status" class="form-select form-select-sm">
                     <option value="">Select Status</option>
-                    <option value="all">All</option>
-                    <option value="disabled">Disabled</option>
-                    <option value="trashed">Trashed</option>
+                    <option value="all" {{ request('status') == 'all' ? 'selected' : '' }}>All</option>
+                    <option value="disabled" {{ request('status') == 'disabled' ? 'selected' : '' }}>Disabled</option>
+                    <option value="trashed" {{ request('status') == 'trashed' ? 'selected' : '' }}>Trashed</option>
                 </select>
             </div>
             <div class="me-2">
-                <button id="apply-actions" class="btn btn-outline-secondary" data-route="item">
+                <button id="apply-actions" class="btn btn-secondary" data-route="item">
                     <i class="fa fa-check me-2"></i>
                     <span>Apply</span>
                 </button>

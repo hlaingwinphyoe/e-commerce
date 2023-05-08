@@ -49,8 +49,9 @@ trait ItemTrait
     public function getPurePrice()
     {
         $exchange_rate = $this->currency->exchangerates()->latest()->first()->mmk;
-
-        return ($this->pure_price * $exchange_rate);
+        $sku = $this->skus()->first();
+        $pure_price = $sku && $sku->buy_price ? $sku->buy_price : $this->pure_price;
+        return ($pure_price * $exchange_rate);
     }
 
     public function getRawCost()
