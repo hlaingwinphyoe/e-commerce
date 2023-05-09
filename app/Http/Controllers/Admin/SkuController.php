@@ -173,6 +173,12 @@ class SkuController extends Controller
                 'stock' => $sku->stock + $request->qty,
                 'buy_price' => $request->buy_price ?? $sku->buy_price
             ]);
+
+
+            $sku->item->update([
+                'pure_price' => $request->buy_price ?? $sku->item->pure_price
+            ]);
+
         });
 
         return redirect()->back();
